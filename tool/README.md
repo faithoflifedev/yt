@@ -32,7 +32,7 @@ To use this package, add the dependency to your pubspec.yaml file:
 ```yaml
 dependencies:
   ...
-  yt: ^0.0.1
+  yt: ^{{ version }}
 ```
 
 ## Obtaining authorization credentials
