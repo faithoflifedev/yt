@@ -1,12 +1,12 @@
 # Youtube API
 
-Native dart interface to multiple YouTube REST APIs, including:
+Native [Dart](https://dart.dev/) interface to multiple YouTube REST APIs, including:
 
 - [YouTube Data API](https://developers.google.com/youtube/v3/docs)
 - [YouTube Live Streaming API](https://developers.google.com/youtube/v3/live/docs)
 - [YouTube Cloud Vision API](https://cloud.google.com/vision/docs/reference/rest)
 
-## API's supported
+## API Commands Supported
 
 ### Data API:
 
@@ -32,10 +32,10 @@ To use this package, add the dependency to your pubspec.yaml file:
 ```yaml
 dependencies:
   ...
-  yt: ^0.0.1
+  yt: ^0.0.2
 ```
 
-## Obtaining authorization credentials
+## Obtaining Authorization Credentials
 
 Youtube API access requires an authentication token or API key depending on the API. The yt library supports three mechanisms for authentication which are described in a little more detail later in this document. Overall, all of the authentication schemes require some configuration in the [Google API console](https://developers.google.com/youtube/v3/live/registering_an_application). The document [Obtaining authorization credentials](https://developers.google.com/youtube/v3/live/registering_an_application) covers authentication with [OAuth 2.0](https://developers.google.com/identity/protocols/OAuth2) which works with both the Data API and the Live Streaming API as well as authenticating with API keys which works only with the Data API. [Authenticating to the Cloud Vision API](https://cloud.google.com/vision/product-search/docs/auth) requires a JSON file with the JWT token information.
 
@@ -58,7 +58,7 @@ final yt = Yt.withOAuth(OAuthCredentials.fromYaml('example/youtube.yaml'));
 final playlists = await yt.playlist;
 
 // List of videos from playlist
-final playlistResponse = await playlists.list(
+var playlistResponse = await playlists.list(
       channelId: '[youtube channel id]', maxResults: 25);
 
 playlistResponse.items
@@ -66,7 +66,7 @@ playlistResponse.items
 
 // List the next page of videos
 playlistResponse = await playlists.list(
-    mine: true, pageToken: playlistResponse.nextPageToken);
+    channelId: '[youtube channel id]', pageToken: playlistResponse.nextPageToken);
 
 playlistResponse.items
     .forEach((playlist) => print('${playlist.snippet?.title}'));
@@ -194,9 +194,9 @@ await cropped.writeAsJpeg('resulting_image.jpg');
 
 ## Usage within Flutter
 
-Since this library does not include any Flutter dependencies, it can be easily integrated with any Flutter code using any of the authentication mechanisms described above. However, for some applications there may be a desire to use the user's own YouTube credentials for authentication. The library uses the concept of a [TokenGenerator] to allow for this. [TokenGenerator] is an abstract class that is extended within the library through the [JwtGenerator] and [OAuthGenerator] classes, and generates the authentication token used in API calls to YouTube.
+This library does not include any Flutter dependencies but it can be easily integrated with Flutter code using any of the authentication mechanisms described above. In addition, for some applications there may be a desire to use the user's own YouTube credentials for authentication. The library uses the concept of a [TokenGenerator](https://pub.dev/documentation/yt/latest/yt/util_tokenGenerator/TokenGenerator-class.html) to allow for this. [TokenGenerator](https://pub.dev/documentation/yt/latest/yt/util_tokenGenerator/TokenGenerator-class.html) is an abstract class that is extended within the library through the [JwtGenerator](https://pub.dev/documentation/yt/latest/yt/util_tokenGenerator/JwtGenerator-class.html) and [OAuthGenerator](https://pub.dev/documentation/yt/latest/yt/util_tokenGenerator//OAuthGenerator-class.html) classes, and generates the authentication token used in API calls to YouTube.
 
-For a Flutter app the [TokenGenerator] can be extended to allow for auth tokens to be generated through the [google_sign_in](https://pub.dev/packages/google_sign_in) pacakge provided by the [flutter.dev](https://pub.dev/publishers/flutter.dev/packages) team. The code to do this looks like this:
+For a Flutter app the [TokenGenerator](https://pub.dev/documentation/yt/latest/yt/util_tokenGenerator/TokenGenerator-class.html) can be extended to allow for auth tokens to be generated through the [google_sign_in](https://pub.dev/packages/google_sign_in) pacakge provided by the [flutter.dev](https://pub.dev/publishers/flutter.dev/packages) team. The code to do this looks like this:
 
 ```dart
 import 'package:google_sign_in/google_sign_in.dart';
@@ -257,3 +257,9 @@ Future<LiveBroadcastItem> getBroadcast(String broadcastStatus) async {
       : <LiveBroadcastItem>[];
 }
 ```
+
+## What's Next?
+
+- A working sample Flutter app
+- Expanded API Commands
+- Improved documentation
