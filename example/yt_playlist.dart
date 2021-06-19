@@ -10,7 +10,7 @@ void main() async {
   // var playlistResponse = await playlists.list(mine: true);
 
   var playlistResponse = await playlists.list(
-      channelId: '[youtube channle id]', maxResults: 25);
+      channelId: '[youtube channel id]', maxResults: 25);
 
   playlistResponse.items.forEach((playlist) => print(
       'title: ${playlist.snippet?.title}, ${playlist.snippet?.thumbnails.thumbnailsDefault.url}'));
