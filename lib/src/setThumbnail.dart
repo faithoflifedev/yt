@@ -1,9 +1,10 @@
 import 'dart:io';
 
 import 'package:dio/dio.dart';
-import 'package:yt/provider/data/setThumbnail.dart';
 import 'package:yt/src/help.dart';
 import 'package:yt/yt.dart';
+
+import 'provider/data/setThumbnail.dart';
 
 class SetThumbnail with YouTubeHelper {
   final String token;

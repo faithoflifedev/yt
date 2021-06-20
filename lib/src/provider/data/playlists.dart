@@ -2,7 +2,7 @@ import 'package:dio/dio.dart';
 import 'package:retrofit/retrofit.dart';
 import 'package:yt/yt.dart';
 
-part 'playlist.g.dart';
+part 'playlists.g.dart';
 
 @RestApi(baseUrl: 'https://www.googleapis.com/youtube/v3')
 abstract class PlaylistClient {

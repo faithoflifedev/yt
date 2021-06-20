@@ -1,9 +1,10 @@
 import 'dart:io';
 
 import 'package:dio/dio.dart';
-import 'package:yt/provider/data/video.dart';
 import 'package:yt/src/help.dart';
 import 'package:yt/yt.dart';
+
+import 'provider/data/video.dart';
 
 class Videos with YouTubeHelper {
   final String token;

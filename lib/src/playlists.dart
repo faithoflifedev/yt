@@ -1,7 +1,8 @@
 import 'package:dio/dio.dart';
-import 'package:yt/provider/data/playlist.dart';
 import 'package:yt/src/help.dart';
 import 'package:yt/yt.dart';
+
+import 'provider/data/playlists.dart';
 
 class Playlists with YouTubeHelper {
   final String? token;

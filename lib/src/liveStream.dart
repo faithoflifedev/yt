@@ -1,7 +1,8 @@
 import 'package:dio/dio.dart';
-import 'package:yt/provider/live/stream.dart';
 import 'package:yt/src/help.dart';
 import 'package:yt/yt.dart';
+
+import 'provider/live/stream.dart';
 
 class LiveStream with YouTubeHelper {
   final String token;

@@ -1,7 +1,8 @@
 import 'package:dio/dio.dart';
-import 'package:yt/provider/data/search.dart';
 import 'package:yt/src/help.dart';
 import 'package:yt/yt.dart';
+
+import 'provider/data/search.dart';
 
 class Search with YouTubeHelper {
   final String? token;
