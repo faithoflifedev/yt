@@ -3,6 +3,15 @@ import 'package:yt/provider/data/playlist.dart';
 import 'package:yt/src/help.dart';
 import 'package:yt/yt.dart';
 
+///A playlist resource represents a YouTube playlist. A playlist is a collection of videos that can be viewed sequentially and shared with other users. By default, playlists are publicly visible to other users, but playlists can be public or private.
+///
+///YouTube also uses playlists to identify special collections of videos for a channel, such as:
+///
+/// - uploaded videos
+/// - positively rated (liked) videos
+///To be more specific, these lists are associated with a channel, which is a collection of a person, group, or company's videos, playlists, and other YouTube information. You can retrieve the playlist IDs for each of these lists from the channel resource for a given channel.
+///
+///You can then use the playlistItems.list method to retrieve any of those lists. You can also add or remove items from those lists by calling the playlistItems.insert and playlistItems.delete methods.
 class Playlists with YouTubeHelper {
   final String? token;
   final String? apiKey;
@@ -16,6 +25,7 @@ class Playlists with YouTubeHelper {
       : _authHeader = token != null ? 'Bearer $token' : null,
         _rest = PlaylistClient(dio);
 
+  ///Returns a collection of playlists that match the API request parameters. For example, you can retrieve all playlists that the authenticated user owns, or you can retrieve one or more playlists by their unique IDs.
   Future<PlaylistResponse> list(
       {String part = 'contentDetails,id,localizations,player,snippet,status',
       List<String> partList = const [],
@@ -46,6 +56,7 @@ class Playlists with YouTubeHelper {
           pageToken: pageToken);
   }
 
+  ///Creates a playlist.
   Future<Playlist> insert({
     String part = 'contentDetails,id,localizations,player,snippet,status',
     List<String> partList = const [],
@@ -57,6 +68,7 @@ class Playlists with YouTubeHelper {
         _authHeader, accept, contentType, buildParts(partList, part), body);
   }
 
+  ///Modifies a playlist. For example, you could change a playlist's title, description, or privacy status.
   Future<Playlist> update({
     String part = 'contentDetails,id,localizations,player,snippet,status',
     List<String> partList = const [],
@@ -68,6 +80,7 @@ class Playlists with YouTubeHelper {
         _authHeader, accept, contentType, buildParts(partList, part), body);
   }
 
+  ///Deletes a playlist.
   Future<void> delete({
     required String id,
     String? onBehalfOfContentOwner,

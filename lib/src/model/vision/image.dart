@@ -1,9 +1,9 @@
 import 'dart:convert';
-import 'dart:io';
 import 'dart:typed_data';
 
 import 'package:color/color.dart';
 import 'package:image/image.dart' as img;
+import 'package:universal_io/io.dart';
 
 class Image {
   final Uint8List encodedBytes;

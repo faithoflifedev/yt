@@ -1,9 +1,9 @@
 import 'dart:convert';
-import 'dart:io';
 
 import 'package:crypto_keys/crypto_keys.dart';
 import 'package:dio/dio.dart';
 import 'package:jose/jose.dart';
+import 'package:universal_io/io.dart';
 import 'package:yaml/yaml.dart';
 import 'package:yt/provider/oauth.dart';
 import 'package:yt/src/model/util/token.dart';

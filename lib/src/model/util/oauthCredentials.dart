@@ -1,7 +1,7 @@
 import 'dart:convert';
-import 'dart:io';
 
 import 'package:json_annotation/json_annotation.dart';
+import 'package:universal_io/io.dart';
 import 'package:yaml/yaml.dart';
 
 part 'oauthCredentials.g.dart';

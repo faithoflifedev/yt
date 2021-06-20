@@ -1,6 +1,5 @@
-import 'dart:io';
-
 import 'package:dio/dio.dart';
+import 'package:universal_io/io.dart';
 import 'package:yt/provider/data/video.dart';
 import 'package:yt/src/help.dart';
 import 'package:yt/yt.dart';
