@@ -4,5 +4,5 @@ templates:
   - name: CHANGELOG.md
     type: prepend
 
-version: 0.0.2
-change: improved README
+version: 1.0.0
+change: better support for Flutter apps, added a Flutter example

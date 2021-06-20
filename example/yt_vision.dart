@@ -5,8 +5,6 @@ void main() async {
   final yt = Yt.withJwt('example/skc-live-decbd0969cbb.json',
       'https://www.googleapis.com/auth/cloud-vision');
 
-  await yt.init(); //1060,410 460,340
-
   final vision = await yt.vision;
 
   final image = Image.fromFilePath('example/no-mask.jpg');
