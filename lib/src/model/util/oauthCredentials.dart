@@ -20,7 +20,11 @@ class OAuthCredentials {
       required this.refreshToken});
 
   factory OAuthCredentials.fromYaml(String yamlFile) {
-    final jsonString = jsonEncode(loadYaml(File(yamlFile).readAsStringSync()));
+    return OAuthCredentials.fromYamlString(File(yamlFile).readAsStringSync());
+  }
+
+  factory OAuthCredentials.fromYamlString(String yaml) {
+    final jsonString = jsonEncode(loadYaml(yaml));
 
     return OAuthCredentials.fromJson(jsonDecode(jsonString));
   }

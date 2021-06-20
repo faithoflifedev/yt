@@ -26,8 +26,9 @@ doc/api/
 scratch/
 .pubspec.yaml.bak
 
+example/flutter_playlist/res/youtube.yaml
+example/my_images/
 example/skc-live-creds.json
 example/youtube.yaml
-example/my_images/
 
 bin/

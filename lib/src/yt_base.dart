@@ -7,7 +7,7 @@ class Yt {
 
   final DateTime tokenExpiry = DateTime(2010, 0, 0);
 
-  bool useToken = true;
+  bool _useToken = true;
 
   String? _token;
 
@@ -24,7 +24,7 @@ class Yt {
 
     yt._apiKey = apiKey;
 
-    yt.useToken = false;
+    yt._useToken = false;
 
     return yt;
   }
@@ -47,13 +47,9 @@ class Yt {
     return yt;
   }
 
-  Future<void> init() async {
+  Future<void> _confirmToken() async {
     if (tokenGenerator == null) throw Exception();
 
-    await _confirmToken();
-  }
-
-  Future<void> _confirmToken() async {
     if (tokenExpiry.isBefore(DateTime.now())) {
       final tokenData = await tokenGenerator!.generate();
 
@@ -75,14 +71,14 @@ class Yt {
     return Chat(_token!, dio);
   }
 
-  Future<Playlists> get playlist async {
-    if (useToken) await _confirmToken();
+  Future<Playlists> get playlists async {
+    if (_useToken) await _confirmToken();
 
     return Playlists(token: _token, apiKey: _apiKey, dio: dio);
   }
 
   Future<Search> get search async {
-    if (useToken) await _confirmToken();
+    if (_useToken) await _confirmToken();
 
     return Search(token: _token, apiKey: _apiKey, dio: dio);
   }
