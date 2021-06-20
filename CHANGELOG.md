@@ -1,3 +1,6 @@
+## 1.0.2
+
+- even more updated api doc, and more channels API
 ## 1.0.1
 
 - updated api doc, and starting the channels API

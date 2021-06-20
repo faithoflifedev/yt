@@ -4,5 +4,5 @@ templates:
   - name: CHANGELOG.md
     type: prepend
 
-version: 1.0.1
-change: updated api doc, and starting the channels API
+version: 1.0.2
+change: even more updated api doc, and more channels API
