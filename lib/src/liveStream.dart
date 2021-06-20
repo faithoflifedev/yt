@@ -1,7 +1,8 @@
 import 'package:dio/dio.dart';
-import 'package:yt/provider/live/stream.dart';
 import 'package:yt/src/help.dart';
 import 'package:yt/yt.dart';
+
+import 'provider/live/stream.dart';
 
 ///A liveStream resource contains information about the video stream that you are transmitting to YouTube. The stream provides the content that will be broadcast to YouTube users. Once created, a [LiveStreamItem] resource can be bound to one or more [LiveBroadcastItem] resources.
 class LiveStream with YouTubeHelper {

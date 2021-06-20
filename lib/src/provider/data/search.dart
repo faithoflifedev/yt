@@ -1,14 +1,15 @@
 import 'package:dio/dio.dart';
 import 'package:retrofit/retrofit.dart';
-
-import '../../yt.dart';
+import 'package:yt/yt.dart';
 
 part 'search.g.dart';
 
+///A search result contains information about a YouTube video, channel, or playlist that matches the search parameters specified in an API request. While a search result points to a uniquely identifiable resource, like a video, it does not have its own persistent data.
 @RestApi(baseUrl: 'https://www.googleapis.com/youtube/v3')
 abstract class SearchClient {
   factory SearchClient(Dio dio, {String baseUrl}) = _SearchClient;
 
+  ///Returns a collection of search results that match the query parameters specified in the API request. By default, a search result set identifies matching video, channel, and [Playlist] resources, but you can also configure queries to only retrieve a specific type of resource.
   @GET('/search')
   Future<SearchListResponse> authList(
       @Header('Authorization') String authorization,
@@ -44,6 +45,7 @@ abstract class SearchClient {
       @Query('videoSyndicated') String? videoSyndicated,
       @Query('videoType') String? videoType});
 
+  ///Returns a collection of search results that match the query parameters specified in the API request. By default, a search result set identifies matching video, channel, and [Playlist] resources, but you can also configure queries to only retrieve a specific type of resource.
   @GET('/search')
   Future<SearchListResponse> apiKeyList(@Query('key') String apiKey,
       @Header('Accept') String accept, @Query('part') String parts,

@@ -2,15 +2,16 @@ import 'dart:io';
 
 import 'package:dio/dio.dart';
 import 'package:retrofit/retrofit.dart';
+import 'package:yt/yt.dart';
 
-import '../../yt.dart';
+part 'videos.g.dart';
 
-part 'video.g.dart';
-
+///A video resource represents a YouTube video.
 @RestApi(baseUrl: 'https://www.googleapis.com/youtube/v3')
 abstract class VideoClient {
   factory VideoClient(Dio dio, {String baseUrl}) = _VideoClient;
 
+  ///Returns a list of [VideoItem]s that match the API request parameters.
   @GET('/videos')
   Future<VideoListResponse> list(
     @Header('Authorization') String authorization,
@@ -29,6 +30,7 @@ abstract class VideoClient {
     @Query('videoCategoryId') String? videoCategoryId,
   });
 
+  ///Uploads a [VideoItem] to YouTube and optionally sets the video's metadata.
   @POST('/videos')
   Future<VideoItem> insert(
     @Header('Authorization') String authorization,
@@ -41,6 +43,7 @@ abstract class VideoClient {
         String? onBehalfOfContentOwnerChannel,
   });
 
+  ///Updates a [VideoItem]'s metadata.
   @PUT('/videos')
   Future<VideoItem> update(
     @Header('Authorization') String authorization,
@@ -52,6 +55,7 @@ abstract class VideoClient {
         String? onBehalfOfContentOwnerChannel,
   });
 
+  ///Add a like or dislike rating to a [VideoItem] or remove a rating from a [VideoItem].
   @POST('/videos/rate')
   Future<void> rate(
     @Header('Authorization') String authorization,
@@ -60,6 +64,7 @@ abstract class VideoClient {
     @Query('rating') String rating,
   );
 
+  ///Retrieves the ratings that the authorized user gave to a list of specified videos.
   @GET('/videos/getRating')
   Future<VideoGetRatingResponse> getRating(
     @Header('Authorization') String authorization,
@@ -68,6 +73,7 @@ abstract class VideoClient {
     @Query('onBehalfOfContentOwner') String? onBehalfOfContentOwner,
   });
 
+  ///Report a video for containing abusive content.
   @POST('/videos/reportAbuse')
   Future<void> reportAbuse(
     @Header('Authorization') String authorization,
@@ -76,6 +82,7 @@ abstract class VideoClient {
     @Query('onBehalfOfContentOwner') String? onBehalfOfContentOwner,
   });
 
+  ///Deletes a YouTube video.
   @DELETE('/videos')
   Future<void> delete(
     @Header('Authorization') String authorization,

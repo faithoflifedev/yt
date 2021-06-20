@@ -119,6 +119,13 @@ class Yt {
     return SetThumbnail(_token!, dio);
   }
 
+  ///A video resource represents a YouTube video.
+  Future<Videos> get videos async {
+    await _confirmToken();
+
+    return Videos(_token!, dio);
+  }
+
   ///Integrates Google Vision features, including image labeling, face, logo, and landmark detection, optical character recognition (OCR), and detection of explicit content, into applications.
   Future<Vision> get vision async {
     await _confirmToken();

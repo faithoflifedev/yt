@@ -1,13 +1,13 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'playlist.dart';
+part of 'videos.dart';
 
 // **************************************************************************
 // RetrofitGenerator
 // **************************************************************************
 
-class _PlaylistClient implements PlaylistClient {
-  _PlaylistClient(this._dio, {this.baseUrl}) {
+class _VideoClient implements VideoClient {
+  _VideoClient(this._dio, {this.baseUrl}) {
     baseUrl ??= 'https://www.googleapis.com/youtube/v3';
   }
 
@@ -16,87 +16,59 @@ class _PlaylistClient implements PlaylistClient {
   String? baseUrl;
 
   @override
-  Future<PlaylistResponse> authList(authorization, accept, parts,
-      {channelId,
+  Future<VideoListResponse> list(authorization, accept, parts,
+      {chart,
       id,
-      mine,
+      myRating,
       hl,
+      maxHeight,
       maxResults,
+      maxWidth,
       onBehalfOfContentOwner,
-      onBehalfOfContentOwnerChannel,
-      pageToken}) async {
+      pageToken,
+      regionCode,
+      videoCategoryId}) async {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{
       r'part': parts,
-      r'channelId': channelId,
+      r'chart': chart,
       r'id': id,
-      r'mine': mine,
+      r'myRating': myRating,
       r'hl': hl,
+      r'maxHeight': maxHeight,
       r'maxResults': maxResults,
+      r'maxWidth': maxWidth,
       r'onBehalfOfContentOwner': onBehalfOfContentOwner,
-      r'onBehalfOfContentOwnerChannel': onBehalfOfContentOwnerChannel,
-      r'pageToken': pageToken
+      r'pageToken': pageToken,
+      r'regionCode': regionCode,
+      r'videoCategoryId': videoCategoryId
     };
     queryParameters.removeWhere((k, v) => v == null);
     final _data = <String, dynamic>{};
     final _result = await _dio.fetch<Map<String, dynamic>>(
-        _setStreamType<PlaylistResponse>(Options(
+        _setStreamType<VideoListResponse>(Options(
                 method: 'GET',
                 headers: <String, dynamic>{
                   r'Authorization': authorization,
                   r'Accept': accept
                 },
                 extra: _extra)
-            .compose(_dio.options, '/playlists',
+            .compose(_dio.options, '/videos',
                 queryParameters: queryParameters, data: _data)
             .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
-    final value = PlaylistResponse.fromJson(_result.data!);
+    final value = VideoListResponse.fromJson(_result.data!);
     return value;
   }
 
   @override
-  Future<PlaylistResponse> apiKeyList(apiKey, accept, parts,
-      {channelId,
-      id,
-      mine,
-      hl,
-      maxResults,
+  Future<VideoItem> insert(authorization, accept, body, parts,
+      {notifySubscribers,
       onBehalfOfContentOwner,
-      onBehalfOfContentOwnerChannel,
-      pageToken}) async {
+      onBehalfOfContentOwnerChannel}) async {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{
-      r'key': apiKey,
       r'part': parts,
-      r'channelId': channelId,
-      r'id': id,
-      r'mine': mine,
-      r'hl': hl,
-      r'maxResults': maxResults,
-      r'onBehalfOfContentOwner': onBehalfOfContentOwner,
-      r'onBehalfOfContentOwnerChannel': onBehalfOfContentOwnerChannel,
-      r'pageToken': pageToken
-    };
-    queryParameters.removeWhere((k, v) => v == null);
-    final _data = <String, dynamic>{};
-    final _result = await _dio.fetch<Map<String, dynamic>>(
-        _setStreamType<PlaylistResponse>(Options(
-                method: 'GET',
-                headers: <String, dynamic>{r'Accept': accept},
-                extra: _extra)
-            .compose(_dio.options, '/playlists',
-                queryParameters: queryParameters, data: _data)
-            .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
-    final value = PlaylistResponse.fromJson(_result.data!);
-    return value;
-  }
-
-  @override
-  Future<Playlist> insert(authorization, accept, contentType, part, body,
-      {onBehalfOfContentOwner, onBehalfOfContentOwnerChannel}) async {
-    const _extra = <String, dynamic>{};
-    final queryParameters = <String, dynamic>{
-      r'part': part,
+      r'notifySubscribers': notifySubscribers,
       r'onBehalfOfContentOwner': onBehalfOfContentOwner,
       r'onBehalfOfContentOwnerChannel': onBehalfOfContentOwnerChannel
     };
@@ -104,48 +76,110 @@ class _PlaylistClient implements PlaylistClient {
     final _data = <String, dynamic>{};
     _data.addAll(body);
     final _result = await _dio.fetch<Map<String, dynamic>>(
-        _setStreamType<Playlist>(Options(
+        _setStreamType<VideoItem>(Options(
                 method: 'POST',
                 headers: <String, dynamic>{
                   r'Authorization': authorization,
-                  r'Accept': accept,
-                  r'Content-Type': contentType
+                  r'Accept': accept
                 },
-                extra: _extra,
-                contentType: contentType)
-            .compose(_dio.options, '/playlists',
+                extra: _extra)
+            .compose(_dio.options, '/videos',
                 queryParameters: queryParameters, data: _data)
             .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
-    final value = Playlist.fromJson(_result.data!);
+    final value = VideoItem.fromJson(_result.data!);
     return value;
   }
 
   @override
-  Future<Playlist> update(authorization, accept, contentType, parts, body,
+  Future<VideoItem> update(authorization, accept, Stringparts, video,
+      {onBehalfOfContentOwner, onBehalfOfContentOwnerChannel}) async {
+    const _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{
+      r'part': Stringparts.toJson(),
+      r'onBehalfOfContentOwner': onBehalfOfContentOwner,
+      r'onBehalfOfContentOwnerChannel': onBehalfOfContentOwnerChannel
+    };
+    queryParameters.removeWhere((k, v) => v == null);
+    final _data = Stream.fromIterable(video.readAsBytesSync().map((i) => [i]));
+    final _result = await _dio.fetch<Map<String, dynamic>>(
+        _setStreamType<VideoItem>(Options(
+                method: 'PUT',
+                headers: <String, dynamic>{
+                  r'Authorization': authorization,
+                  r'Accept': accept
+                },
+                extra: _extra)
+            .compose(_dio.options, '/videos',
+                queryParameters: queryParameters, data: _data)
+            .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
+    final value = VideoItem.fromJson(_result.data!);
+    return value;
+  }
+
+  @override
+  Future<void> rate(authorization, accept, id, rating) async {
+    const _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{r'id': id, r'rating': rating};
+    final _data = <String, dynamic>{};
+    await _dio.fetch<void>(_setStreamType<void>(Options(
+            method: 'POST',
+            headers: <String, dynamic>{
+              r'Authorization': authorization,
+              r'Accept': accept
+            },
+            extra: _extra)
+        .compose(_dio.options, '/videos/rate',
+            queryParameters: queryParameters, data: _data)
+        .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
+    return null;
+  }
+
+  @override
+  Future<VideoGetRatingResponse> getRating(authorization, accept, id,
       {onBehalfOfContentOwner}) async {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{
-      r'part': parts,
+      r'id': id,
+      r'onBehalfOfContentOwner': onBehalfOfContentOwner
+    };
+    queryParameters.removeWhere((k, v) => v == null);
+    final _data = <String, dynamic>{};
+    final _result = await _dio.fetch<Map<String, dynamic>>(
+        _setStreamType<VideoGetRatingResponse>(Options(
+                method: 'GET',
+                headers: <String, dynamic>{
+                  r'Authorization': authorization,
+                  r'Accept': accept
+                },
+                extra: _extra)
+            .compose(_dio.options, '/videos/getRating',
+                queryParameters: queryParameters, data: _data)
+            .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
+    final value = VideoGetRatingResponse.fromJson(_result.data!);
+    return value;
+  }
+
+  @override
+  Future<void> reportAbuse(authorization, accept, body,
+      {onBehalfOfContentOwner}) async {
+    const _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{
       r'onBehalfOfContentOwner': onBehalfOfContentOwner
     };
     queryParameters.removeWhere((k, v) => v == null);
     final _data = <String, dynamic>{};
     _data.addAll(body);
-    final _result = await _dio.fetch<Map<String, dynamic>>(
-        _setStreamType<Playlist>(Options(
-                method: 'PUT',
-                headers: <String, dynamic>{
-                  r'Authorization': authorization,
-                  r'Accept': accept,
-                  r'Content-Type': contentType
-                },
-                extra: _extra,
-                contentType: contentType)
-            .compose(_dio.options, '/playlists',
-                queryParameters: queryParameters, data: _data)
-            .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
-    final value = Playlist.fromJson(_result.data!);
-    return value;
+    await _dio.fetch<void>(_setStreamType<void>(Options(
+            method: 'POST',
+            headers: <String, dynamic>{
+              r'Authorization': authorization,
+              r'Accept': accept
+            },
+            extra: _extra)
+        .compose(_dio.options, '/videos/reportAbuse',
+            queryParameters: queryParameters, data: _data)
+        .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
+    return null;
   }
 
   @override
@@ -165,7 +199,7 @@ class _PlaylistClient implements PlaylistClient {
               r'Accept': accept
             },
             extra: _extra)
-        .compose(_dio.options, '/playlists',
+        .compose(_dio.options, '/videos',
             queryParameters: queryParameters, data: _data)
         .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
     return null;
