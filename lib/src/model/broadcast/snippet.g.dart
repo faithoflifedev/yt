@@ -26,7 +26,6 @@ Snippet _$SnippetFromJson(Map<String, dynamic> json) {
     actualStartTime: json['actualStartTime'] == null
         ? null
         : DateTime.parse(json['actualStartTime'] as String),
-    isDefaultBroadcast: json['isDefaultBroadcast'] as bool?,
     liveChatId: json['liveChatId'] as String?,
   );
 }
@@ -40,6 +39,5 @@ Map<String, dynamic> _$SnippetToJson(Snippet instance) => <String, dynamic>{
       'scheduledStartTime': instance.scheduledStartTime?.toIso8601String(),
       'scheduledEndTime': instance.scheduledEndTime?.toIso8601String(),
       'actualStartTime': instance.actualStartTime?.toIso8601String(),
-      'isDefaultBroadcast': instance.isDefaultBroadcast,
       'liveChatId': instance.liveChatId,
     };

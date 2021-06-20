@@ -1,7 +1,6 @@
-import 'dart:io';
-
 import 'package:dio/dio.dart';
 import 'package:retrofit/retrofit.dart';
+import 'package:universal_io/io.dart';
 import 'package:yt/yt.dart';
 
 part 'setThumbnail.g.dart';

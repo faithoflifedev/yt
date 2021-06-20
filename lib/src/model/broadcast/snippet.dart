@@ -34,6 +34,7 @@ class Snippet {
   final DateTime? actualStartTime;
 
   @deprecated
+  @JsonKey(ignore: true)
   final bool? isDefaultBroadcast;
 
   ///The ID for the broadcast's YouTube live chat. With this ID, you can use the [LiveChatMessage] resource's methods to retrieve, insert, or delete chat messages. You can also add or remove chat moderators, ban users from participating in live chats, or remove existing bans.
@@ -48,7 +49,7 @@ class Snippet {
       this.scheduledStartTime,
       this.scheduledEndTime,
       this.actualStartTime,
-      required this.isDefaultBroadcast,
+      this.isDefaultBroadcast,
       required this.liveChatId});
 
   factory Snippet.fromJson(Map<String, dynamic> json) =>

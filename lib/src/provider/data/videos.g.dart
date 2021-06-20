@@ -168,7 +168,7 @@ class _VideoClient implements VideoClient {
     };
     queryParameters.removeWhere((k, v) => v == null);
     final _data = <String, dynamic>{};
-    _data.addAll(body);
+    _data.addAll(body.toJson());
     await _dio.fetch<void>(_setStreamType<void>(Options(
             method: 'POST',
             headers: <String, dynamic>{

@@ -12,7 +12,6 @@ Snippet _$SnippetFromJson(Map<String, dynamic> json) {
     channelId: json['channelId'] as String,
     title: json['title'] as String,
     description: json['description'] as String,
-    isDefaultStream: json['isDefaultStream'] as bool,
   );
 }
 
@@ -21,5 +20,4 @@ Map<String, dynamic> _$SnippetToJson(Snippet instance) => <String, dynamic>{
       'channelId': instance.channelId,
       'title': instance.title,
       'description': instance.description,
-      'isDefaultStream': instance.isDefaultStream,
     };

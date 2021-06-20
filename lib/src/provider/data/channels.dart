@@ -45,7 +45,7 @@ abstract class ChannelClient {
 
   @PUT('/liveBroadcasts')
   Future<ChannelItem> update(
-      @Header('Authorization') String authorization,
+      @Header('Authorization') String? authorization,
       @Header('Accept') String accept,
       @Header('Content-Type') String contentType,
       @Query('part') String parts,

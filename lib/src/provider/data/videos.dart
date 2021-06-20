@@ -1,7 +1,6 @@
-import 'dart:io';
-
 import 'package:dio/dio.dart';
 import 'package:retrofit/retrofit.dart';
+import 'package:universal_io/io.dart';
 import 'package:yt/yt.dart';
 
 part 'videos.g.dart';
@@ -78,7 +77,7 @@ abstract class VideoClient {
   Future<void> reportAbuse(
     @Header('Authorization') String authorization,
     @Header('Accept') String accept,
-    @Body() Map<String, dynamic> body, {
+    @Body() ReportAbuse body, {
     @Query('onBehalfOfContentOwner') String? onBehalfOfContentOwner,
   });
 

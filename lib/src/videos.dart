@@ -62,20 +62,23 @@ class Videos with YouTubeHelper {
   }
 
   ///Retrieves the ratings that the authorized user gave to a list of specified videos.
-  Future<void> getRating() {
-    //TODO:
-    throw UnimplementedError();
+  Future<VideoGetRatingResponse> getRating(
+      {required String id, String? onBehalfOfContentOwner}) async {
+    return await _rest.getRating(_authHeader, accept, id,
+        onBehalfOfContentOwner: onBehalfOfContentOwner);
   }
 
   ///Report a video for containing abusive content.
-  Future<void> reportAbuse() {
-    //TODO:
-    throw UnimplementedError();
+  Future<void> reportAbuse(
+      {required ReportAbuse body, String? onBehalfOfContentOwner}) async {
+    await _rest.reportAbuse(_authHeader, accept, body,
+        onBehalfOfContentOwner: onBehalfOfContentOwner);
   }
 
   ///Deletes a YouTube video.
-  Future<void> delete() {
-    //TODO:
-    throw UnimplementedError();
+  Future<void> delete(
+      {required String id, String? onBehalfOfContentOwner}) async {
+    await _rest.delete(_authHeader, accept, id,
+        onBehalfOfContentOwner: onBehalfOfContentOwner);
   }
 }
