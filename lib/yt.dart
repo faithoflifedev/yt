@@ -16,6 +16,8 @@ export 'src/yt_base.dart';
 export 'src/model/broadcast/liveBroadcastResponse.dart';
 export 'src/model/broadcast/liveBroadcastItem.dart';
 export 'src/model/broadcast/status.dart';
+export 'src/model/channel/channelResponse.dart';
+export 'src/model/channel/channelItem.dart';
 export 'src/model/chat/liveChatMessageListResponse.dart';
 export 'src/model/chat/liveChatMessage.dart';
 export 'src/model/playlist/playlistResponse.dart';
