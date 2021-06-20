@@ -3,6 +3,7 @@ import 'package:yt/provider/data/search.dart';
 import 'package:yt/src/help.dart';
 import 'package:yt/yt.dart';
 
+///A search result contains information about a YouTube video, channel, or playlist that matches the search parameters specified in an API request. While a search result points to a uniquely identifiable resource, like a video, it does not have its own persistent data.
 class Search with YouTubeHelper {
   final String? token;
   final String? apiKey;
@@ -16,6 +17,7 @@ class Search with YouTubeHelper {
       : _authHeader = token != null ? 'Bearer $token' : null,
         _rest = SearchClient(dio);
 
+  ///Returns a collection of search results that match the query parameters specified in the API request. By default, a search result set identifies matching video, channel, and [Playlist] resources, but you can also configure queries to only retrieve a specific type of resource.
   Future<SearchListResponse> list(
       {String part = 'snippet,status,contentDetails',
       List<String> partList = const [],

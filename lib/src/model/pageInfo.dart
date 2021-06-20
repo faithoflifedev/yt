@@ -4,9 +4,13 @@ import 'package:json_annotation/json_annotation.dart';
 
 part 'pageInfo.g.dart';
 
+///PageInfo
 @JsonSerializable()
 class PageInfo {
+  ///The total number of results in the result set.
   final int totalResults;
+
+  ///The number of results included in the API response.
   final int resultsPerPage;
 
   PageInfo({
