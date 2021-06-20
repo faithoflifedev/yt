@@ -10,10 +10,11 @@ Native [Dart](https://dart.dev/) interface to multiple YouTube REST APIs, includ
 
 ### Data API:
 
+- [Channels](https://developers.google.com/youtube/v3/docs/channels) (coming soon)
 - [Playlists](https://developers.google.com/youtube/v3/docs/playlists)
 - [Search](https://developers.google.com/youtube/v3/docs/search)
 - [Thumbnails](https://developers.google.com/youtube/v3/docs/thumbnails)
-- [Videos](https://developers.google.com/youtube/v3/docs/videos)
+- [Videos](https://developers.google.com/youtube/v3/docs/videos) (partially completed)
 
 ### Live Streaming API:
 
@@ -32,7 +33,7 @@ To use this package, add the dependency to your pubspec.yaml file:
 ```yaml
 dependencies:
   ...
-  yt: ^1.0.0
+  yt: ^1.0.1
 ```
 
 ## Obtaining Authorization Credentials
@@ -83,7 +84,7 @@ final yt = Yt.withOAuth(OAuthCredentials.fromYaml('example/youtube.yaml'));
 final br = await yt.broadcast;
 
 ///the thumbnail data API client
-final th = await yt.thumbnail;
+final th = await yt.thumbnails;
 
 ///create a private broadcast for 2 hours from now
 final broadcastItem = await br.insert(body: {

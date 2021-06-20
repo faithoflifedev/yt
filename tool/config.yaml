@@ -4,5 +4,5 @@ templates:
   - name: CHANGELOG.md
     type: prepend
 
-version: 1.0.0
-change: better support for Flutter apps, added a Flutter example
+version: 1.0.1
+change: updated api doc, and starting the channels API
