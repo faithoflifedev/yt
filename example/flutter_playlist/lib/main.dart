@@ -88,7 +88,7 @@ class _MyHomePageState extends State<MyHomePage> {
                     maxHeight: 64,
                   ),
                   child: Image.network(
-                      items[index].snippet!.thumbnails.thumbnailsDefault.url!),
+                      items[index].snippet!.thumbnails.thumbnailsDefault.url),
                 ),
                 title: Text('${items[index].snippet!.title}'),
               );

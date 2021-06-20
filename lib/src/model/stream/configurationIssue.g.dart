@@ -8,10 +8,10 @@ part of 'configurationIssue.dart';
 
 ConfigurationIssue _$ConfigurationIssueFromJson(Map<String, dynamic> json) {
   return ConfigurationIssue(
-    type: json['type'] as String?,
-    severity: json['severity'] as String?,
-    reason: json['reason'] as String?,
-    description: json['description'] as String?,
+    type: json['type'] as String,
+    severity: json['severity'] as String,
+    reason: json['reason'] as String,
+    description: json['description'] as String,
   );
 }
 
