@@ -5,8 +5,8 @@ import 'package:crypto_keys/crypto_keys.dart';
 import 'package:dio/dio.dart';
 import 'package:jose/jose.dart';
 import 'package:yaml/yaml.dart';
-import 'package:yt/provider/oauth.dart';
 import 'package:yt/src/model/util/token.dart';
+import 'package:yt/src/provider/oauth.dart';
 import 'package:yt/util/util.dart';
 import 'package:yt/yt.dart';
 

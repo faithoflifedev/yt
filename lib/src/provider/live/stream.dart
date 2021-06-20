@@ -1,7 +1,6 @@
 import 'package:dio/dio.dart';
 import 'package:retrofit/retrofit.dart';
-
-import '../../yt.dart';
+import 'package:yt/yt.dart';
 
 part 'stream.g.dart';
 

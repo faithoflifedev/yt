@@ -1,6 +1,6 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'playlist.dart';
+part of 'playlists.dart';
 
 // **************************************************************************
 // RetrofitGenerator
