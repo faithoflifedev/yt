@@ -14,7 +14,7 @@ Native [Dart](https://dart.dev/) interface to multiple YouTube REST APIs, includ
 - [Playlists](https://developers.google.com/youtube/v3/docs/playlists)
 - [Search](https://developers.google.com/youtube/v3/docs/search)
 - [Thumbnails](https://developers.google.com/youtube/v3/docs/thumbnails)
-- [Videos](https://developers.google.com/youtube/v3/docs/videos) (partially completed)
+- [Videos](https://developers.google.com/youtube/v3/docs/videos)
 
 ### Live Streaming API:
 
@@ -33,7 +33,7 @@ To use this package, add the dependency to your pubspec.yaml file:
 ```yaml
 dependencies:
   ...
-  yt: ^1.0.1
+  yt: ^1.0.2
 ```
 
 ## Obtaining Authorization Credentials
