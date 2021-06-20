@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart' show rootBundle;
-import 'package:yt/yt.dart' as ytube;
+import 'package:yt/yt.dart' hide Image;
 
 void main() {
   runApp(MyApp());
@@ -29,11 +29,11 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-  final items = <ytube.Playlist>[];
+  final items = <Playlist>[];
 
-  ytube.Yt? yt;
+  Yt? yt;
 
-  ytube.Playlists? playlists;
+  Playlists? playlists;
 
   @override
   void initState() {
@@ -45,7 +45,7 @@ class _MyHomePageState extends State<MyHomePage> {
   Future<void> init() async {
     final yamlString = await rootBundle.loadString('res/youtube.yaml');
 
-    yt = ytube.Yt.withOAuth(ytube.OAuthCredentials.fromYamlString(yamlString));
+    yt = Yt.withOAuth(OAuthCredentials.fromYamlString(yamlString));
 
     if (yt == null) throw Exception();
 
