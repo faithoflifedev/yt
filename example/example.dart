@@ -7,7 +7,7 @@ void main() async {
 
   final br = await yt.broadcast;
 
-  final th = await yt.thumbnail;
+  final th = await yt.thumbnails;
 
   final broadcastItem = await br.insert(body: {
     'snippet': {
