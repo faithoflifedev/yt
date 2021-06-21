@@ -7,14 +7,25 @@ import 'channelItem.dart';
 
 part 'channelResponse.g.dart';
 
+//////A channel resource contains information about a YouTube channel.
 @JsonSerializable(explicitToJson: true)
 class ChannelResponse {
+  ///Identifies the API resource's type. The value will be youtube#channelListResponse.
   final String kind;
+
+  ///The Etag of this resource.
   final String etag;
+
+  ///The token that can be used as the value of the pageToken parameter to retrieve the next page in the result set.
   final String? nextPageToken;
+
+  ///The token that can be used as the value of the pageToken parameter to retrieve the previous page in the result set. Note that this property is not included in the API response if the corresponding API request set the managedByMe parameter to true.
   final String? prevPageToken;
-  final String? regionCode;
+
+  ///The pageInfo object encapsulates paging information for the result set.
   final PageInfo pageInfo;
+
+  ///A list of channels that match the request criteria.
   final List<ChannelItem> items;
 
   ChannelResponse(
@@ -22,7 +33,6 @@ class ChannelResponse {
       required this.etag,
       this.nextPageToken,
       this.prevPageToken,
-      this.regionCode,
       required this.pageInfo,
       required this.items});
 

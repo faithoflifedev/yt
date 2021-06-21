@@ -12,8 +12,6 @@ BannedUserDetails _$BannedUserDetailsFromJson(Map<String, dynamic> json) {
     channelUrl: json['channelUrl'] as String?,
     displayName: json['displayName'] as String?,
     profileImageUrl: json['profileImageUrl'] as String?,
-    banType: json['banType'] as String?,
-    banDurationSeconds: json['banDurationSeconds'] as int?,
   );
 }
 
@@ -23,6 +21,4 @@ Map<String, dynamic> _$BannedUserDetailsToJson(BannedUserDetails instance) =>
       'channelUrl': instance.channelUrl,
       'displayName': instance.displayName,
       'profileImageUrl': instance.profileImageUrl,
-      'banType': instance.banType,
-      'banDurationSeconds': instance.banDurationSeconds,
     };

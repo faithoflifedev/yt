@@ -4,22 +4,26 @@ import 'package:json_annotation/json_annotation.dart';
 
 part 'bannedUserDetails.g.dart';
 
+///This object contains information about the banned user.
 @JsonSerializable()
 class BannedUserDetails {
+  ///The banned user's YouTube channel ID.
   final String? channelId;
+
+  ///The URL of the banned user's YouTube channel.
   final String? channelUrl;
+
+  ///The display name of the banned user's YouTube channel.
   final String? displayName;
+
+  ///The avatar of the banned user's YouTube channel.
   final String? profileImageUrl;
-  final String? banType;
-  final int? banDurationSeconds;
 
   BannedUserDetails(
       {this.channelId,
       this.channelUrl,
       this.displayName,
-      this.profileImageUrl,
-      this.banType,
-      this.banDurationSeconds});
+      this.profileImageUrl});
 
   factory BannedUserDetails.fromJson(Map<String, dynamic> json) =>
       _$BannedUserDetailsFromJson(json);
