@@ -6,26 +6,24 @@ import 'bannedUserDetails.dart';
 
 part 'userBannedDetails.g.dart';
 
+///This object contains details about a user who has been banned from the chat. It also contains details about the ban itself. Users can be banned from a chat permanently or temporarily.
 @JsonSerializable(explicitToJson: true)
 class UserBannedDetails {
-  final BannedUserDetails? bannedUserDetails;
-  final String? channelUrl;
-  final String? displayName;
-  final String? profileImageUrl;
-  final bool? isVerified;
-  final bool? isChatOwner;
-  final bool? isChatSponsor;
-  final bool? isChatModerator;
+  ///This object contains information about the banned user.
+  final BannedUserDetails bannedUserDetails;
+
+  ///The type of ban. Valid values for this property are:
+  ///- permanent
+  ///- temporary
+  final String? banType;
+
+  ///The duration of the ban. This property is only present if the snippet.userBannedDetails.banType property value is temporary.
+  final int? banDurationSeconds;
 
   UserBannedDetails(
-      {this.bannedUserDetails,
-      this.channelUrl,
-      this.displayName,
-      this.profileImageUrl,
-      this.isVerified,
-      this.isChatOwner,
-      this.isChatSponsor,
-      this.isChatModerator});
+      {required this.bannedUserDetails,
+      required this.banType,
+      required this.banDurationSeconds});
 
   factory UserBannedDetails.fromJson(Map<String, dynamic> json) =>
       _$UserBannedDetailsFromJson(json);

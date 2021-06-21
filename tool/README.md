@@ -257,7 +257,7 @@ Future<LiveBroadcastItem> getBroadcast(String broadcastStatus) async {
 }
 ```
 
-## Avalable Examples
+## Available Examples
 
 - flutter_playlist - display a YouTube playlist in a ListView
 - yt_chat.dart - (command line) display the chat history from a running live broadcast

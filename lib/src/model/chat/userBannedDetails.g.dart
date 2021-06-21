@@ -8,28 +8,16 @@ part of 'userBannedDetails.dart';
 
 UserBannedDetails _$UserBannedDetailsFromJson(Map<String, dynamic> json) {
   return UserBannedDetails(
-    bannedUserDetails: json['bannedUserDetails'] == null
-        ? null
-        : BannedUserDetails.fromJson(
-            json['bannedUserDetails'] as Map<String, dynamic>),
-    channelUrl: json['channelUrl'] as String?,
-    displayName: json['displayName'] as String?,
-    profileImageUrl: json['profileImageUrl'] as String?,
-    isVerified: json['isVerified'] as bool?,
-    isChatOwner: json['isChatOwner'] as bool?,
-    isChatSponsor: json['isChatSponsor'] as bool?,
-    isChatModerator: json['isChatModerator'] as bool?,
+    bannedUserDetails: BannedUserDetails.fromJson(
+        json['bannedUserDetails'] as Map<String, dynamic>),
+    banType: json['banType'] as String?,
+    banDurationSeconds: json['banDurationSeconds'] as int?,
   );
 }
 
 Map<String, dynamic> _$UserBannedDetailsToJson(UserBannedDetails instance) =>
     <String, dynamic>{
-      'bannedUserDetails': instance.bannedUserDetails?.toJson(),
-      'channelUrl': instance.channelUrl,
-      'displayName': instance.displayName,
-      'profileImageUrl': instance.profileImageUrl,
-      'isVerified': instance.isVerified,
-      'isChatOwner': instance.isChatOwner,
-      'isChatSponsor': instance.isChatSponsor,
-      'isChatModerator': instance.isChatModerator,
+      'bannedUserDetails': instance.bannedUserDetails.toJson(),
+      'banType': instance.banType,
+      'banDurationSeconds': instance.banDurationSeconds,
     };

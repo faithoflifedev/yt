@@ -33,7 +33,7 @@ To use this package, add the dependency to your pubspec.yaml file:
 ```yaml
 dependencies:
   ...
-  yt: ^1.0.2
+  yt: ^1.0.3
 ```
 
 ## Obtaining Authorization Credentials
@@ -257,7 +257,7 @@ Future<LiveBroadcastItem> getBroadcast(String broadcastStatus) async {
 }
 ```
 
-## Avalable Examples
+## Available Examples
 
 - flutter_playlist - display a YouTube playlist in a ListView
 - yt_chat.dart - (command line) display the chat history from a running live broadcast

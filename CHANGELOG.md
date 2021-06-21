@@ -1,3 +1,6 @@
+## 1.0.3
+
+- still improving the api doc
 ## 1.0.2
 
 - even more updated api doc, and more channels API

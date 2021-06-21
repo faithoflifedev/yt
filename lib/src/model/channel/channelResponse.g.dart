@@ -12,7 +12,6 @@ ChannelResponse _$ChannelResponseFromJson(Map<String, dynamic> json) {
     etag: json['etag'] as String,
     nextPageToken: json['nextPageToken'] as String?,
     prevPageToken: json['prevPageToken'] as String?,
-    regionCode: json['regionCode'] as String?,
     pageInfo: PageInfo.fromJson(json['pageInfo'] as Map<String, dynamic>),
     items: (json['items'] as List<dynamic>)
         .map((e) => ChannelItem.fromJson(e as Map<String, dynamic>))
@@ -26,7 +25,6 @@ Map<String, dynamic> _$ChannelResponseToJson(ChannelResponse instance) =>
       'etag': instance.etag,
       'nextPageToken': instance.nextPageToken,
       'prevPageToken': instance.prevPageToken,
-      'regionCode': instance.regionCode,
       'pageInfo': instance.pageInfo.toJson(),
       'items': instance.items.map((e) => e.toJson()).toList(),
     };
