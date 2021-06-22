@@ -11,7 +11,7 @@ OAuthCredentials _$OAuthCredentialsFromJson(Map<String, dynamic> json) {
     url: json['url'] as String,
     clientId: json['clientId'] as String,
     clientSecret: json['clientSecret'] as String,
-    refreshToken: json['refreshToken'] as String,
+    code: json['code'] as String,
   );
 }
 
@@ -20,5 +20,5 @@ Map<String, dynamic> _$OAuthCredentialsToJson(OAuthCredentials instance) =>
       'url': instance.url,
       'clientId': instance.clientId,
       'clientSecret': instance.clientSecret,
-      'refreshToken': instance.refreshToken,
+      'code': instance.code,
     };

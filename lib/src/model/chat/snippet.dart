@@ -2,7 +2,6 @@ import 'dart:convert';
 
 import 'package:json_annotation/json_annotation.dart';
 
-import 'fanFundingEventDetails.dart';
 import 'textMessageDetails.dart';
 import 'messageDeletedDetails.dart';
 import 'userBannedDetails.dart';
@@ -48,12 +47,6 @@ class Snippet {
   ///Contains a string that is displayed to users. This field is not present if the message type is chatEndedEvent or tombstone.
   final String? displayMessage;
 
-  ///Note: This object and its child properties have been deprecated. As of February 28, 2017, liveChatMessage resources will no longer return details for Fan Funding events.
-  ///
-  ///This object contains details about the funding event. It is only present if the message type is fanFundingEvent.
-  @deprecated
-  final FanFundingEventDetails? fanFundingEventDetails;
-
   ///This object contains details about the text message. It is only present if the message type is textMessageEvent.
   final TextMessageDetails? textMessageDetails;
 
@@ -76,7 +69,6 @@ class Snippet {
       this.publishedAt,
       this.hasDisplayContent,
       this.displayMessage,
-      this.fanFundingEventDetails,
       this.textMessageDetails,
       this.messageDeletedDetails,
       this.userBannedDetails,

@@ -11,13 +11,13 @@ class OAuthCredentials {
   final String url;
   final String clientId;
   final String clientSecret;
-  final String refreshToken;
+  final String code;
 
   OAuthCredentials(
       {required this.url,
       required this.clientId,
       required this.clientSecret,
-      required this.refreshToken});
+      required this.code});
 
   factory OAuthCredentials.fromYaml(String yamlFile) {
     return OAuthCredentials.fromYamlString(File(yamlFile).readAsStringSync());

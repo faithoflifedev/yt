@@ -1,3 +1,6 @@
+## 1.0.4
+
+- tweaked OAauth2 authentication and improved README
 ## 1.0.3
 
 - still improving the api doc

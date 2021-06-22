@@ -1,4 +1,4 @@
-# Youtube API
+# Youtube RESR API Client
 
 Native [Dart](https://dart.dev/) interface to multiple YouTube REST APIs, including:
 
@@ -38,9 +38,30 @@ dependencies:
 
 ## Obtaining Authorization Credentials
 
-Youtube API access requires an authentication token or API key depending on the API. The yt library supports three mechanisms for authentication which are described in a little more detail later in this document. Overall, all of the authentication schemes require some configuration in the [Google API console](https://developers.google.com/youtube/v3/live/registering_an_application). The document [Obtaining authorization credentials](https://developers.google.com/youtube/v3/live/registering_an_application) covers authentication with [OAuth 2.0](https://developers.google.com/identity/protocols/OAuth2) which works with both the Data API and the Live Streaming API as well as authenticating with API keys which works only with the Data API. [Authenticating to the Cloud Vision API](https://cloud.google.com/vision/product-search/docs/auth) requires a JSON file with the JWT token information.
+Youtube API access requires an access token or API key depending on the API and the type of information being accessed. As a general rule of thumb, read-only public information cand be accessed through an API key, otherwise an access token is required.
 
-All of the above authentication methods will work for Flutter apps as well, however you may want to instead allow your apps users to use their own YouTube credentials. Instructions for authenticating this way are included at the endof this document in the _Usage within Flutter_ section.
+The yt library supports three mechanisms for authentication. All of the authentication schemes require some configuration in the [Google API console](https://developers.google.com/youtube/v3/live/registering_an_application). The document [Obtaining authorization credentials](https://developers.google.com/youtube/v3/live/registering_an_application) covers authentication with [OAuth 2.0](https://developers.google.com/identity/protocols/OAuth2) which works for both the Data API and the Live Streaming API the same document also covers authenticating with API keys which works only with the Data API.
+
+More in depth documentation on how OAuth2 works within the **yt library** is available in the [Using OAuth 2.0 for Web Server Applications](https://developers.google.com/identity/protocols/oauth2/web-server?csw=1) document.
+
+[Authenticating to the Cloud Vision API](https://cloud.google.com/vision/product-search/docs/auth) requires a JSON file with the JWT token information, which you can obtain by [creating a service account](https://cloud.google.com/iam/docs/creating-managing-service-accounts#creating_a_service_account) in the API console.
+
+All of the above authentication methods will work for Flutter apps as well, however you may want to instead allow your app's users to use their own YouTube credentials. Instructions for authenticating this way are included at the end of this document in the _Usage within Flutter_ section.
+
+A number of the examples use OAuth 2.0 for authentication. The examples have the OAuth2 credentials made available to sample the code though a **.yaml** file that contains these lines:
+
+```yaml
+url: https://oauth2.googleapis.com/token
+clientId: [client id from the API console]
+clientSecret: [client secret from the API console]
+code: [oauth auth code]
+```
+
+There is an additional step required to generate the **refreshToken** needed for the above file. Once you have followed the instructions outlined in the YouTube docs for obtaining the OAuth2 credentials, then the next step is to enter this url into a desktop browser:
+
+_https://accounts.google.com/o/oauth2/auth?client_id=[client_id_from_the_API_console]&redirect_uri=urn:ietf:wg:oauth:2.0:oob&scope=https://www.googleapis.com/auth/youtube&response_type=code_
+
+Once you have completed the steps to authorize the provdided account with the app created in the API console, you will be presented with an authorization code. The code is entered as the **_code_** line in the yaml file above.
 
 ## Usage of the Data API
 
@@ -61,13 +82,6 @@ final playlists = await yt.playlists;
 // List of videos from playlist
 var playlistResponse = await playlists.list(
       channelId: '[youtube channel id]', maxResults: 25);
-
-playlistResponse.items
-    .forEach((playlist) => print('${playlist.snippet?.title}'));
-
-// List the next page of videos
-playlistResponse = await playlists.list(
-    channelId: '[youtube channel id]', pageToken: playlistResponse.nextPageToken);
 
 playlistResponse.items
     .forEach((playlist) => print('${playlist.snippet?.title}'));

@@ -4,8 +4,10 @@ import 'package:json_annotation/json_annotation.dart';
 
 part 'contentDetails.g.dart';
 
+///The contentDetails object contains information about the playlist content, including the number of videos in the playlist.
 @JsonSerializable()
 class ContentDetails {
+  ///The number of videos in the playlist.
   final int itemCount;
 
   ContentDetails({required this.itemCount});

@@ -75,8 +75,9 @@ class OAuthGenerator implements TokenGenerator {
     return await oAuthClient.getToken({
       'client_id': oauthCredentials.clientId,
       'client_secret': oauthCredentials.clientSecret,
-      'refresh_token': oauthCredentials.refreshToken,
-      'grant_type': 'refresh_token'
+      'code': oauthCredentials.code,
+      'redirect_uri': 'urn:ietf:wg:oauth:2.0:oob',
+      'grant_type': 'authorization_code'
     });
   }
 }

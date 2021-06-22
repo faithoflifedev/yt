@@ -4,5 +4,5 @@ templates:
   - name: CHANGELOG.md
     type: prepend
 
-version: 1.0.3
-change: still improving the api doc
+version: 1.0.4
+change: tweaked OAauth2 authentication and improved README
