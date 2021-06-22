@@ -16,10 +16,6 @@ Snippet _$SnippetFromJson(Map<String, dynamic> json) {
         : DateTime.parse(json['publishedAt'] as String),
     hasDisplayContent: json['hasDisplayContent'] as bool?,
     displayMessage: json['displayMessage'] as String?,
-    fanFundingEventDetails: json['fanFundingEventDetails'] == null
-        ? null
-        : FanFundingEventDetails.fromJson(
-            json['fanFundingEventDetails'] as Map<String, dynamic>),
     textMessageDetails: json['textMessageDetails'] == null
         ? null
         : TextMessageDetails.fromJson(
@@ -50,7 +46,6 @@ Map<String, dynamic> _$SnippetToJson(Snippet instance) => <String, dynamic>{
       'publishedAt': instance.publishedAt?.toIso8601String(),
       'hasDisplayContent': instance.hasDisplayContent,
       'displayMessage': instance.displayMessage,
-      'fanFundingEventDetails': instance.fanFundingEventDetails?.toJson(),
       'textMessageDetails': instance.textMessageDetails?.toJson(),
       'messageDeletedDetails': instance.messageDeletedDetails?.toJson(),
       'userBannedDetails': instance.userBannedDetails?.toJson(),

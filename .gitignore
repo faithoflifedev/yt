@@ -25,6 +25,7 @@ doc/api/
 
 scratch/
 .pubspec.yaml.bak
+notes.txt
 
 example/flutter_playlist/res/youtube.yaml
 example/my_images/
