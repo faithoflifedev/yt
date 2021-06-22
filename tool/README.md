@@ -1,4 +1,4 @@
-# Youtube RESR API Client
+# Youtube REST API Client
 
 Native [Dart](https://dart.dev/) interface to multiple YouTube REST APIs, including:
 
