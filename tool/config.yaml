@@ -5,4 +5,4 @@ templates:
     type: prepend
 
 version: 1.0.4
-change: tweaked OAauth2 authentication and improved README
+change: simplified OAuth2 now with persisted refresh token, and more API docs

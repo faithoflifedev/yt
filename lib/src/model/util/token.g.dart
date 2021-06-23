@@ -12,6 +12,7 @@ Token _$TokenFromJson(Map<String, dynamic> json) {
     expiresIn: json['expires_in'] as int,
     scope: json['scope'] as String?,
     tokenType: json['token_type'] as String,
+    refreshToken: json['refresh_token'] as String?,
   );
 }
 
@@ -20,4 +21,5 @@ Map<String, dynamic> _$TokenToJson(Token instance) => <String, dynamic>{
       'expires_in': instance.expiresIn,
       'scope': instance.scope,
       'token_type': instance.tokenType,
+      'refresh_token': instance.refreshToken,
     };

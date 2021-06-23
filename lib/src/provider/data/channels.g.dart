@@ -88,7 +88,7 @@ class _ChannelClient implements ChannelClient {
                 method: 'GET',
                 headers: <String, dynamic>{r'Accept': accept},
                 extra: _extra)
-            .compose(_dio.options, '/search',
+            .compose(_dio.options, '/channels',
                 queryParameters: queryParameters, data: _data)
             .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
     final value = ChannelResponse.fromJson(_result.data!);
@@ -116,7 +116,7 @@ class _ChannelClient implements ChannelClient {
                 },
                 extra: _extra,
                 contentType: contentType)
-            .compose(_dio.options, '/liveBroadcasts',
+            .compose(_dio.options, '/channels',
                 queryParameters: queryParameters, data: _data)
             .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
     final value = ChannelItem.fromJson(_result.data!);

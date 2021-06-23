@@ -1,4 +1,4 @@
 url: https://oauth2.googleapis.com/token
 clientId: [client id from the API console]
 clientSecret: [client secret from the API console]
-code: [oauth refresh token]
+code: [single use auth code]
