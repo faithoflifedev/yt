@@ -1,3 +1,6 @@
+## 1.0.5
+
+- simplified OAuth2 now with persisted refresh token, and more API docs
 ## 1.0.4
 
 - tweaked OAauth2 authentication and improved README
