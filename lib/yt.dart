@@ -43,6 +43,7 @@ export 'src/model/util/oauthCredentials.dart';
 export 'src/model/util/jwtCredentials.dart';
 
 export 'src/broadcast.dart';
+export 'src/channels.dart';
 export 'src/chat.dart';
 export 'src/playlists.dart';
 export 'src/liveStream.dart';

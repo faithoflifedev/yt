@@ -27,7 +27,7 @@ abstract class ChannelClient {
   });
 
   ///Returns a collection of zero or more channel resources that match the request criteria.
-  @GET('/search')
+  @GET('/channels')
   Future<ChannelResponse> apiKeyList(
     @Query('key') String apiKey,
     @Header('Accept') String accept,
@@ -43,7 +43,7 @@ abstract class ChannelClient {
     @Query('pageToken') String? pageToken,
   });
 
-  @PUT('/liveBroadcasts')
+  @PUT('/channels')
   Future<ChannelItem> update(
       @Header('Authorization') String? authorization,
       @Header('Accept') String accept,

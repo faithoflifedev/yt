@@ -10,7 +10,7 @@ Native [Dart](https://dart.dev/) interface to multiple YouTube REST APIs, includ
 
 ### Data API:
 
-- [Channels](https://developers.google.com/youtube/v3/docs/channels) (coming soon)
+- [Channels](https://developers.google.com/youtube/v3/docs/channels) (partial)
 - [Playlists](https://developers.google.com/youtube/v3/docs/playlists)
 - [Search](https://developers.google.com/youtube/v3/docs/search)
 - [Thumbnails](https://developers.google.com/youtube/v3/docs/thumbnails)
@@ -42,7 +42,7 @@ Youtube API access requires an access token or API key depending on the API and 
 
 The yt library supports three mechanisms for authentication. All of the authentication schemes require some configuration in the [Google API console](https://developers.google.com/youtube/v3/live/registering_an_application). The document [Obtaining authorization credentials](https://developers.google.com/youtube/v3/live/registering_an_application) covers authentication with [OAuth 2.0](https://developers.google.com/identity/protocols/OAuth2) which works for both the Data API and the Live Streaming API the same document also covers authenticating with API keys which works only with the Data API.
 
-More in depth documentation on how OAuth2 works within the **yt library** is available in the [Using OAuth 2.0 for Web Server Applications](https://developers.google.com/identity/protocols/oauth2/web-server?csw=1) document.
+More in depth documentation on how OAuth2 works within the **yt library** is available in the [OAuth 2.0 for Mobile & Desktop Apps](https://developers.google.com/identity/protocols/oauth2/native-app) document. Overall, for OAuth2 the library takes a provided single use auth code and generates a long lived OAuth2 refresh token that is persisted as a hidden file.
 
 [Authenticating to the Cloud Vision API](https://cloud.google.com/vision/product-search/docs/auth) requires a JSON file with the JWT token information, which you can obtain by [creating a service account](https://cloud.google.com/iam/docs/creating-managing-service-accounts#creating_a_service_account) in the API console.
 
@@ -54,14 +54,14 @@ A number of the examples use OAuth 2.0 for authentication. The examples have the
 url: https://oauth2.googleapis.com/token
 clientId: [client id from the API console]
 clientSecret: [client secret from the API console]
-code: [oauth auth code]
+code: [sinngle use auth code]
 ```
 
-There is an additional step required to generate the **refreshToken** needed for the above file. Once you have followed the instructions outlined in the YouTube docs for obtaining the OAuth2 credentials, then the next step is to enter this url into a desktop browser:
+There is an additional step required to generate the **_code_** needed for the above file. Once you have followed the instructions outlined in the YouTube docs for creating the app instance and obtaining the OAuth2 credentials, then the next step is to enter this url into a desktop browser:
 
 _https://accounts.google.com/o/oauth2/auth?client_id=[client_id_from_the_API_console]&redirect_uri=urn:ietf:wg:oauth:2.0:oob&scope=https://www.googleapis.com/auth/youtube&response_type=code_
 
-Once you have completed the steps to authorize the provdided account with the app created in the API console, you will be presented with an authorization code. The code is entered as the **_code_** line in the yaml file above.
+Once you have completed the steps to authorize the provdided account with the app created in the API console, you will be presented with an single use authorization code. The code is entered as the **_code_** line in the _yaml_ file above.
 
 ## Usage of the Data API
 
@@ -239,7 +239,7 @@ class YtLoginGenerator implements TokenGenerator {
 }
 ```
 
-With the generator in place, it becomes quite easy to include google sign-in for youtube into your Flutter app. In one of your controllers you would include code like:
+With the generator in place, it becomes quite easy to include _google sign-in_ for YouTube into your Flutter app. In one of your controllers you would include code like:
 
 ```dart
 late final Broadcast broadcast;
@@ -256,8 +256,6 @@ void onInit() {
 }
 
 Future<void> init() async {
-  await yt.init();
-
   broadcast = await yt.broadcast;
 }
 
@@ -274,6 +272,7 @@ Future<LiveBroadcastItem> getBroadcast(String broadcastStatus) async {
 ## Available Examples
 
 - flutter_playlist - display a YouTube playlist in a ListView
+- yt_channle.dart - (command line) display a YouTube channels
 - yt_chat.dart - (command line) display the chat history from a running live broadcast
 - yt_playlist - (command line) display a YouTube playlist
 - yt_vision - (command line) draw a box around faces and other objects in a photo

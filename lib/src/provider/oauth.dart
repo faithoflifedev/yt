@@ -1,13 +1,15 @@
 import 'package:retrofit/retrofit.dart';
-import 'package:dio/dio.dart';
+import 'package:dio/dio.dart' hide Headers;
 import 'package:yt/src/model/util/token.dart';
 
 part 'oauth.g.dart';
 
-@RestApi(baseUrl: 'https://oauth2.googleapis.com')
+@RestApi(baseUrl: 'https://accounts.google.com/o/oauth2')
 abstract class OAuthClient {
   factory OAuthClient(Dio dio, {String baseUrl}) = _OAuthClient;
 
   @POST('/token')
+  @Headers(
+      <String, dynamic>{"Content-Type": "application/x-www-form-urlencoded"})
   Future<Token> getToken(@Body() Map<String, dynamic> params);
 }

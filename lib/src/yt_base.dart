@@ -66,6 +66,13 @@ class Yt {
     return Broadcast(_token!, dio);
   }
 
+  ///A channel resource contains information about a YouTube channel.
+  Future<Channels> get channels async {
+    if (_useToken) await _confirmToken();
+
+    return Channels(token: _token, apiKey: _apiKey, dio: dio);
+  }
+
   ///A liveChatMessage resource represents a chat message in a YouTube live chat. The resource can contain details about several types of messages, including a newly posted text message or fan funding event.
   ///
   ///The live chat feature is enabled by default for live broadcasts and is available while the live event is active. (After the event ends, live chat is no longer available for that event.)

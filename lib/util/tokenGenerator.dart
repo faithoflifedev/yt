@@ -27,6 +27,8 @@ class JwtGenerator implements TokenGenerator {
           'settings': jsonDecode(File(credentialsFile).readAsStringSync()),
           'scope': scope
         });
+
+  ///generate a OAuth2 refresh token from JWT credentials
   @override
   Future<Token> generate() async {
     final key = JsonWebKey.fromPem(jwtCredentials.settings.privateKey);
@@ -68,16 +70,39 @@ class OAuthGenerator implements TokenGenerator {
             jsonEncode(loadYaml(File(credentialsFile).readAsStringSync())))),
         dio: dio);
   }
+
+  ///generate and persist the OAuth2 refresh token from a single use auth code
   @override
   Future<Token> generate() async {
     final OAuthClient oAuthClient = new OAuthClient(dio);
 
+    final tokenFile = File('.refresh.token');
+
+    String? refreshToken;
+
+    if (tokenFile.existsSync()) {
+      refreshToken = tokenFile.readAsStringSync();
+    } else {
+      final token = await oAuthClient.getToken({
+        'client_id': oauthCredentials.clientId,
+        'client_secret': oauthCredentials.clientSecret,
+        'code': oauthCredentials.code,
+        'redirect_uri': 'urn:ietf:wg:oauth:2.0:oob',
+        'grant_type': 'authorization_code'
+      });
+
+      if (token.refreshToken == null) throw Exception();
+
+      refreshToken = token.refreshToken!;
+
+      tokenFile.writeAsStringSync(refreshToken);
+    }
+
     return await oAuthClient.getToken({
       'client_id': oauthCredentials.clientId,
       'client_secret': oauthCredentials.clientSecret,
-      'code': oauthCredentials.code,
-      'redirect_uri': 'urn:ietf:wg:oauth:2.0:oob',
-      'grant_type': 'authorization_code'
+      'refresh_token': refreshToken,
+      'grant_type': 'refresh_token'
     });
   }
 }

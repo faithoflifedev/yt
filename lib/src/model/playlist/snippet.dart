@@ -2,8 +2,7 @@ import 'dart:convert';
 
 import 'package:json_annotation/json_annotation.dart';
 
-import 'localized.dart';
-
+import '../localized.dart';
 import '../thumbnails.dart';
 
 part 'snippet.g.dart';
