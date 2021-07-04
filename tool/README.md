@@ -54,7 +54,7 @@ A number of the examples use OAuth 2.0 for authentication. The examples have the
 url: https://oauth2.googleapis.com/token
 clientId: [client id from the API console]
 clientSecret: [client secret from the API console]
-code: [sinngle use auth code]
+code: [single use auth code]
 ```
 
 There is an additional step required to generate the **_code_** needed for the above file. Once you have followed the instructions outlined in the YouTube docs for creating the app instance and obtaining the OAuth2 credentials, then the next step is to enter this url into a desktop browser:
@@ -272,7 +272,7 @@ Future<LiveBroadcastItem> getBroadcast(String broadcastStatus) async {
 ## Available Examples
 
 - flutter_playlist - display a YouTube playlist in a ListView
-- yt_channel.dart - (command line) display a YouTube channels
+- yt_channel.dart - (command line) display YouTube channels
 - yt_chat.dart - (command line) display the chat history from a running live broadcast
 - yt_playlist - (command line) display a YouTube playlist
 - yt_vision - (command line) draw a box around faces and other objects in a photo
