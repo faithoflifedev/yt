@@ -97,6 +97,15 @@ class Yt {
     return Playlists(token: _token, apiKey: _apiKey, dio: dio);
   }
 
+  ///A playlistItem resource identifies another resource, such as a video, that is included in a playlist. In addition, the playlistItem resource contains details about the included resource that pertain specifically to how that resource is used in that playlist.
+  //////
+  ///YouTube also uses a playlist to identify a channel's list of uploaded videos, with each playlistItem in that list representing one uploaded video. You can retrieve the playlist ID for that list from the channel resource for a given channel. You can then use the playlistItems.list method to the list.
+  Future<PlaylistItems> get playlistItems async {
+    if (_useToken) await _confirmToken();
+
+    return PlaylistItems(token: _token, apiKey: _apiKey, dio: dio);
+  }
+
   ///A search result contains information about a YouTube video, channel, or playlist that matches the search parameters specified in an API request. While a search result points to a uniquely identifiable resource, like a video, it does not have its own persistent data.
   Future<Search> get search async {
     if (_useToken) await _confirmToken();

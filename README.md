@@ -11,6 +11,7 @@ Native [Dart](https://dart.dev/) interface to multiple YouTube REST APIs, includ
 ### Data API:
 
 - [Channels](https://developers.google.com/youtube/v3/docs/channels) (partial)
+- [PlaylistItems](https://developers.google.com/youtube/v3/docs/playlistItems)
 - [Playlists](https://developers.google.com/youtube/v3/docs/playlists)
 - [Search](https://developers.google.com/youtube/v3/docs/search)
 - [Thumbnails](https://developers.google.com/youtube/v3/docs/thumbnails)
@@ -33,7 +34,7 @@ To use this package, add the dependency to your pubspec.yaml file:
 ```yaml
 dependencies:
   ...
-  yt: ^1.0.5
+  yt: ^1.0.6
 ```
 
 ## Obtaining Authorization Credentials
@@ -59,7 +60,7 @@ code: [single use auth code]
 
 There is an additional step required to generate the **_code_** needed for the above file. Once you have followed the instructions outlined in the YouTube docs for creating the app instance and obtaining the OAuth2 credentials, then the next step is to enter this url into a desktop browser:
 
-_https://accounts.google.com/o/oauth2/auth?client_id=[client_id_from_the_API_console]&redirect_uri=urn:ietf:wg:oauth:2.0:oob&scope=https://www.googleapis.com/auth/youtube&response_type=code_
+**https://accounts.google.com/o/oauth2/auth?client_id=[client_id_from_the_API_console]&redirect_uri=urn:ietf:wg:oauth:2.0:oob&scope=https://www.googleapis.com/auth/youtube&response_type=code**
 
 Once you have completed the steps to authorize the provdided account with the app created in the API console, you will be presented with an single use authorization code. The code is entered as the **_code_** line in the _yaml_ file above.
 
@@ -271,11 +272,12 @@ Future<LiveBroadcastItem> getBroadcast(String broadcastStatus) async {
 
 ## Available Examples
 
-- flutter_playlist - display a YouTube playlist in a ListView
-- yt_channel.dart - (command line) display YouTube channels
-- yt_chat.dart - (command line) display the chat history from a running live broadcast
-- yt_playlist - (command line) display a YouTube playlist
-- yt_vision - (command line) draw a box around faces and other objects in a photo
+- [flutter_playlist](https://github.com/faithoflifedev/yt/tree/main/example/flutter_playlist) - display a YouTube playlist in a ListView
+- [yt_channels.dart](https://github.com/faithoflifedev/yt/blob/main/example/yt_channels.dart) - (command line) display YouTube channels
+- [yt_playlistIyems.dart](https://github.com/faithoflifedev/yt/blob/main/example/yt_playlistItems.dart) - (command line) display a list of videos from a playlist
+- [yt_chat.dart](https://github.com/faithoflifedev/yt/blob/main/example/yt_chat.dart) - (command line) display the chat history from a running live broadcast
+- [yt_playlist.dart](https://github.com/faithoflifedev/yt/blob/main/example/yt_playlist.dart) - (command line) display a YouTube playlist
+- [yt_vision.dart](https://github.com/faithoflifedev/yt/blob/main/example/yt_vision.dart) - (command line) draw a box around faces and other objects in a photo
 
 ## What's Next?
 
