@@ -24,7 +24,6 @@ class MonitorStream {
   ///HTML code that embeds a player that plays the monitor stream.
   final String? embedHtml;
 
-  @JsonSerializable()
   MonitorStream({
     required this.enableMonitorStream,
     this.broadcastStreamDelayMs,

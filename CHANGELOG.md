@@ -1,3 +1,6 @@
+## 1.0.6
+
+- added the playlists API
 ## 1.0.5
 
 - simplified OAuth2 now with persisted refresh token, and more API docs
