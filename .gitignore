@@ -28,6 +28,8 @@ scratch/
 .refresh.token
 notes.txt
 
+.pubignore
+
 example/flutter_playlist/res/youtube.yaml
 example/my_images/
 example/skc-live-creds.json
