@@ -6,20 +6,18 @@ part of 'status.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-Status _$StatusFromJson(Map<String, dynamic> json) {
-  return Status(
-    uploadStatus: json['uploadStatus'] as String,
-    failureReason: json['failureReason'] as String,
-    rejectionReason: json['rejectionReason'] as String,
-    privacyStatus: json['privacyStatus'] as String,
-    publishAt: DateTime.parse(json['publishAt'] as String),
-    license: json['license'] as String,
-    embeddable: json['embeddable'] as bool,
-    publicStatsViewable: json['publicStatsViewable'] as bool,
-    madeForKids: json['madeForKids'] as bool,
-    selfDeclaredMadeForKids: json['selfDeclaredMadeForKids'] as bool,
-  );
-}
+Status _$StatusFromJson(Map<String, dynamic> json) => Status(
+      uploadStatus: json['uploadStatus'] as String,
+      failureReason: json['failureReason'] as String,
+      rejectionReason: json['rejectionReason'] as String,
+      privacyStatus: json['privacyStatus'] as String,
+      publishAt: DateTime.parse(json['publishAt'] as String),
+      license: json['license'] as String,
+      embeddable: json['embeddable'] as bool,
+      publicStatsViewable: json['publicStatsViewable'] as bool,
+      madeForKids: json['madeForKids'] as bool,
+      selfDeclaredMadeForKids: json['selfDeclaredMadeForKids'] as bool,
+    );
 
 Map<String, dynamic> _$StatusToJson(Status instance) => <String, dynamic>{
       'uploadStatus': instance.uploadStatus,

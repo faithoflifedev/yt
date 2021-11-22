@@ -6,15 +6,13 @@ part of 'healthStatus.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-HealthStatus _$HealthStatusFromJson(Map<String, dynamic> json) {
-  return HealthStatus(
-    status: json['status'] as String,
-    lastUpdateTimeSeconds: json['lastUpdateTimeSeconds'] as int?,
-    configurationIssues: (json['configurationIssues'] as List<dynamic>?)
-        ?.map((e) => ConfigurationIssue.fromJson(e as Map<String, dynamic>))
-        .toList(),
-  );
-}
+HealthStatus _$HealthStatusFromJson(Map<String, dynamic> json) => HealthStatus(
+      status: json['status'] as String,
+      lastUpdateTimeSeconds: json['lastUpdateTimeSeconds'] as int?,
+      configurationIssues: (json['configurationIssues'] as List<dynamic>?)
+          ?.map((e) => ConfigurationIssue.fromJson(e as Map<String, dynamic>))
+          .toList(),
+    );
 
 Map<String, dynamic> _$HealthStatusToJson(HealthStatus instance) =>
     <String, dynamic>{

@@ -40,18 +40,18 @@ class _ChannelClient implements ChannelClient {
       r'pageToken': pageToken
     };
     queryParameters.removeWhere((k, v) => v == null);
+    final _headers = <String, dynamic>{
+      r'Authorization': authorization,
+      r'Accept': accept
+    };
+    _headers.removeWhere((k, v) => v == null);
     final _data = <String, dynamic>{};
     final _result = await _dio.fetch<Map<String, dynamic>>(
-        _setStreamType<ChannelResponse>(Options(
-                method: 'GET',
-                headers: <String, dynamic>{
-                  r'Authorization': authorization,
-                  r'Accept': accept
-                },
-                extra: _extra)
-            .compose(_dio.options, '/channels',
-                queryParameters: queryParameters, data: _data)
-            .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
+        _setStreamType<ChannelResponse>(
+            Options(method: 'GET', headers: _headers, extra: _extra)
+                .compose(_dio.options, '/channels',
+                    queryParameters: queryParameters, data: _data)
+                .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
     final value = ChannelResponse.fromJson(_result.data!);
     return value;
   }
@@ -82,15 +82,15 @@ class _ChannelClient implements ChannelClient {
       r'pageToken': pageToken
     };
     queryParameters.removeWhere((k, v) => v == null);
+    final _headers = <String, dynamic>{r'Accept': accept};
+    _headers.removeWhere((k, v) => v == null);
     final _data = <String, dynamic>{};
     final _result = await _dio.fetch<Map<String, dynamic>>(
-        _setStreamType<ChannelResponse>(Options(
-                method: 'GET',
-                headers: <String, dynamic>{r'Accept': accept},
-                extra: _extra)
-            .compose(_dio.options, '/channels',
-                queryParameters: queryParameters, data: _data)
-            .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
+        _setStreamType<ChannelResponse>(
+            Options(method: 'GET', headers: _headers, extra: _extra)
+                .compose(_dio.options, '/channels',
+                    queryParameters: queryParameters, data: _data)
+                .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
     final value = ChannelResponse.fromJson(_result.data!);
     return value;
   }
@@ -104,16 +104,18 @@ class _ChannelClient implements ChannelClient {
       r'onBehalfOfContentOwner': onBehalfOfContentOwner
     };
     queryParameters.removeWhere((k, v) => v == null);
+    final _headers = <String, dynamic>{
+      r'Authorization': authorization,
+      r'Accept': accept,
+      r'Content-Type': contentType
+    };
+    _headers.removeWhere((k, v) => v == null);
     final _data = <String, dynamic>{};
     _data.addAll(body);
     final _result = await _dio.fetch<Map<String, dynamic>>(
         _setStreamType<ChannelItem>(Options(
                 method: 'PUT',
-                headers: <String, dynamic>{
-                  r'Authorization': authorization,
-                  r'Accept': accept,
-                  r'Content-Type': contentType
-                },
+                headers: _headers,
                 extra: _extra,
                 contentType: contentType)
             .compose(_dio.options, '/channels',

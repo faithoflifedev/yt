@@ -20,15 +20,17 @@ class _VisionClient implements VisionClient {
       authorization, contentType, params) async {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
+    final _headers = <String, dynamic>{
+      r'Authorization': authorization,
+      r'Content-Type': contentType
+    };
+    _headers.removeWhere((k, v) => v == null);
     final _data = <String, dynamic>{};
     _data.addAll(params);
     final _result = await _dio.fetch<Map<String, dynamic>>(
         _setStreamType<AnnotatedResponses>(Options(
                 method: 'POST',
-                headers: <String, dynamic>{
-                  r'Authorization': authorization,
-                  r'Content-Type': contentType
-                },
+                headers: _headers,
                 extra: _extra,
                 contentType: contentType)
             .compose(_dio.options, '/images:annotate',

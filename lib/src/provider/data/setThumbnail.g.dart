@@ -23,15 +23,14 @@ class _SetThumbnailClient implements SetThumbnailClient {
       r'videoId': videoId,
       r'uploadType': uploadType
     };
+    final _headers = <String, dynamic>{
+      r'Authorization': authorization,
+      r'Accept': accept
+    };
+    _headers.removeWhere((k, v) => v == null);
     final _data = <String, dynamic>{};
     final _result = await _dio.fetch(_setStreamType<HttpResponse<dynamic>>(
-        Options(
-                method: 'POST',
-                headers: <String, dynamic>{
-                  r'Authorization': authorization,
-                  r'Accept': accept
-                },
-                extra: _extra)
+        Options(method: 'POST', headers: _headers, extra: _extra)
             .compose(_dio.options, '/set',
                 queryParameters: queryParameters, data: _data)
             .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
@@ -49,14 +48,16 @@ class _SetThumbnailClient implements SetThumbnailClient {
       r'upload_id': uploadId,
       r'uploadType': uploadType
     };
+    final _headers = <String, dynamic>{
+      r'Authorization': authorization,
+      r'Content-Type': contentType
+    };
+    _headers.removeWhere((k, v) => v == null);
     final _data = Stream.fromIterable(image.readAsBytesSync().map((i) => [i]));
     final _result = await _dio.fetch<Map<String, dynamic>>(
         _setStreamType<ThumbnailSetResponse>(Options(
                 method: 'POST',
-                headers: <String, dynamic>{
-                  r'Authorization': authorization,
-                  r'Content-Type': contentType
-                },
+                headers: _headers,
                 extra: _extra,
                 contentType: contentType)
             .compose(_dio.options, '/set',

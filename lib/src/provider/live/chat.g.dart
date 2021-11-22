@@ -29,18 +29,18 @@ class _ChatClient implements ChatClient {
       r'profileImageSize': profileImageSize
     };
     queryParameters.removeWhere((k, v) => v == null);
+    final _headers = <String, dynamic>{
+      r'Authorization': authorization,
+      r'Accept': accept
+    };
+    _headers.removeWhere((k, v) => v == null);
     final _data = <String, dynamic>{};
     final _result = await _dio.fetch<Map<String, dynamic>>(
-        _setStreamType<LiveChatMessageListResponse>(Options(
-                method: 'GET',
-                headers: <String, dynamic>{
-                  r'Authorization': authorization,
-                  r'Accept': accept
-                },
-                extra: _extra)
-            .compose(_dio.options, '/liveChat/messages',
-                queryParameters: queryParameters, data: _data)
-            .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
+        _setStreamType<LiveChatMessageListResponse>(
+            Options(method: 'GET', headers: _headers, extra: _extra)
+                .compose(_dio.options, '/liveChat/messages',
+                    queryParameters: queryParameters, data: _data)
+                .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
     final value = LiveChatMessageListResponse.fromJson(_result.data!);
     return value;
   }
@@ -50,16 +50,18 @@ class _ChatClient implements ChatClient {
       authorization, accept, contentType, part, data) async {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{r'part': part};
+    final _headers = <String, dynamic>{
+      r'Authorization': authorization,
+      r'Accept': accept,
+      r'Content-Type': contentType
+    };
+    _headers.removeWhere((k, v) => v == null);
     final _data = <String, dynamic>{};
     _data.addAll(data);
     final _result = await _dio.fetch<Map<String, dynamic>>(
         _setStreamType<LiveChatMessage>(Options(
                 method: 'POST',
-                headers: <String, dynamic>{
-                  r'Authorization': authorization,
-                  r'Accept': accept,
-                  r'Content-Type': contentType
-                },
+                headers: _headers,
                 extra: _extra,
                 contentType: contentType)
             .compose(_dio.options, '/liveChat/messages',
@@ -73,17 +75,17 @@ class _ChatClient implements ChatClient {
   Future<void> delete(authorization, accept, id) async {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{r'id': id};
+    final _headers = <String, dynamic>{
+      r'Authorization': authorization,
+      r'Accept': accept
+    };
+    _headers.removeWhere((k, v) => v == null);
     final _data = <String, dynamic>{};
-    await _dio.fetch<void>(_setStreamType<void>(Options(
-            method: 'DELETE',
-            headers: <String, dynamic>{
-              r'Authorization': authorization,
-              r'Accept': accept
-            },
-            extra: _extra)
-        .compose(_dio.options, '/liveChat/messages',
-            queryParameters: queryParameters, data: _data)
-        .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
+    await _dio.fetch<void>(_setStreamType<void>(
+        Options(method: 'DELETE', headers: _headers, extra: _extra)
+            .compose(_dio.options, '/liveChat/messages',
+                queryParameters: queryParameters, data: _data)
+            .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
     return null;
   }
 

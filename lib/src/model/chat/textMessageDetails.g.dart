@@ -6,11 +6,10 @@ part of 'textMessageDetails.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-TextMessageDetails _$TextMessageDetailsFromJson(Map<String, dynamic> json) {
-  return TextMessageDetails(
-    messageText: json['messageText'] as String,
-  );
-}
+TextMessageDetails _$TextMessageDetailsFromJson(Map<String, dynamic> json) =>
+    TextMessageDetails(
+      messageText: json['messageText'] as String,
+    );
 
 Map<String, dynamic> _$TextMessageDetailsToJson(TextMessageDetails instance) =>
     <String, dynamic>{

@@ -6,13 +6,13 @@ part of 'superStickerMetadata.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-SuperStickerMetadata _$SuperStickerMetadataFromJson(Map<String, dynamic> json) {
-  return SuperStickerMetadata(
-    stickerId: json['stickerId'] as String?,
-    altText: json['altText'] as String?,
-    language: json['language'] as String?,
-  );
-}
+SuperStickerMetadata _$SuperStickerMetadataFromJson(
+        Map<String, dynamic> json) =>
+    SuperStickerMetadata(
+      stickerId: json['stickerId'] as String?,
+      altText: json['altText'] as String?,
+      language: json['language'] as String?,
+    );
 
 Map<String, dynamic> _$SuperStickerMetadataToJson(
         SuperStickerMetadata instance) =>

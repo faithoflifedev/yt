@@ -25,6 +25,7 @@ doc/api/
 
 scratch/
 .pubspec.yaml.bak
+.refresh.token
 notes.txt
 
 example/flutter_playlist/res/youtube.yaml

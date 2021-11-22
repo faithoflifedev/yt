@@ -6,18 +6,17 @@ part of 'authorDetails.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-AuthorDetails _$AuthorDetailsFromJson(Map<String, dynamic> json) {
-  return AuthorDetails(
-    channelId: json['channelId'] as String?,
-    channelUrl: json['channelUrl'] as String?,
-    displayName: json['displayName'] as String?,
-    profileImageUrl: json['profileImageUrl'] as String?,
-    isVerified: json['isVerified'] as bool?,
-    isChatOwner: json['isChatOwner'] as bool?,
-    isChatSponsor: json['isChatSponsor'] as bool?,
-    isChatModerator: json['isChatModerator'] as bool?,
-  );
-}
+AuthorDetails _$AuthorDetailsFromJson(Map<String, dynamic> json) =>
+    AuthorDetails(
+      channelId: json['channelId'] as String?,
+      channelUrl: json['channelUrl'] as String?,
+      displayName: json['displayName'] as String?,
+      profileImageUrl: json['profileImageUrl'] as String?,
+      isVerified: json['isVerified'] as bool?,
+      isChatOwner: json['isChatOwner'] as bool?,
+      isChatSponsor: json['isChatSponsor'] as bool?,
+      isChatModerator: json['isChatModerator'] as bool?,
+    );
 
 Map<String, dynamic> _$AuthorDetailsToJson(AuthorDetails instance) =>
     <String, dynamic>{

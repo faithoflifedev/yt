@@ -6,14 +6,13 @@ part of 'configurationIssue.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-ConfigurationIssue _$ConfigurationIssueFromJson(Map<String, dynamic> json) {
-  return ConfigurationIssue(
-    type: json['type'] as String,
-    severity: json['severity'] as String,
-    reason: json['reason'] as String,
-    description: json['description'] as String,
-  );
-}
+ConfigurationIssue _$ConfigurationIssueFromJson(Map<String, dynamic> json) =>
+    ConfigurationIssue(
+      type: json['type'] as String,
+      severity: json['severity'] as String,
+      reason: json['reason'] as String,
+      description: json['description'] as String,
+    );
 
 Map<String, dynamic> _$ConfigurationIssueToJson(ConfigurationIssue instance) =>
     <String, dynamic>{
