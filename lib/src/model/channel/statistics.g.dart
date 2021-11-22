@@ -6,14 +6,12 @@ part of 'statistics.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-Statistics _$StatisticsFromJson(Map<String, dynamic> json) {
-  return Statistics(
-    viewCount: json['viewCount'] as int,
-    subscriberCount: json['subscriberCount'] as int,
-    hiddenSubscriberCount: json['hiddenSubscriberCount'] as bool,
-    videoCount: json['videoCount'] as int,
-  );
-}
+Statistics _$StatisticsFromJson(Map<String, dynamic> json) => Statistics(
+      viewCount: json['viewCount'] as int,
+      subscriberCount: json['subscriberCount'] as int,
+      hiddenSubscriberCount: json['hiddenSubscriberCount'] as bool,
+      videoCount: json['videoCount'] as int,
+    );
 
 Map<String, dynamic> _$StatisticsToJson(Statistics instance) =>
     <String, dynamic>{

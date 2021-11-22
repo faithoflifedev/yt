@@ -42,12 +42,10 @@ extension DetectionTypeTxe on String {
 // JsonSerializableGenerator
 // **************************************************************************
 
-Feature _$FeatureFromJson(Map<String, dynamic> json) {
-  return Feature(
-    maxResults: json['maxResults'] as int,
-    type: json['type'] as String,
-  );
-}
+Feature _$FeatureFromJson(Map<String, dynamic> json) => Feature(
+      maxResults: json['maxResults'] as int,
+      type: json['type'] as String,
+    );
 
 Map<String, dynamic> _$FeatureToJson(Feature instance) => <String, dynamic>{
       'maxResults': instance.maxResults,

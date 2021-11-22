@@ -6,16 +6,16 @@ part of 'liveStreamingDetails.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-LiveStreamingDetails _$LiveStreamingDetailsFromJson(Map<String, dynamic> json) {
-  return LiveStreamingDetails(
-    actualStartTime: DateTime.parse(json['actualStartTime'] as String),
-    actualEndTime: DateTime.parse(json['actualEndTime'] as String),
-    scheduledStartTime: DateTime.parse(json['scheduledStartTime'] as String),
-    scheduledEndTime: DateTime.parse(json['scheduledEndTime'] as String),
-    concurrentViewers: json['concurrentViewers'] as int,
-    activeLiveChatId: json['activeLiveChatId'] as String?,
-  );
-}
+LiveStreamingDetails _$LiveStreamingDetailsFromJson(
+        Map<String, dynamic> json) =>
+    LiveStreamingDetails(
+      actualStartTime: DateTime.parse(json['actualStartTime'] as String),
+      actualEndTime: DateTime.parse(json['actualEndTime'] as String),
+      scheduledStartTime: DateTime.parse(json['scheduledStartTime'] as String),
+      scheduledEndTime: DateTime.parse(json['scheduledEndTime'] as String),
+      concurrentViewers: json['concurrentViewers'] as int,
+      activeLiveChatId: json['activeLiveChatId'] as String?,
+    );
 
 Map<String, dynamic> _$LiveStreamingDetailsToJson(
         LiveStreamingDetails instance) =>

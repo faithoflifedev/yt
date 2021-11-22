@@ -44,24 +44,24 @@ class _VideoClient implements VideoClient {
       r'videoCategoryId': videoCategoryId
     };
     queryParameters.removeWhere((k, v) => v == null);
+    final _headers = <String, dynamic>{
+      r'Authorization': authorization,
+      r'Accept': accept
+    };
+    _headers.removeWhere((k, v) => v == null);
     final _data = <String, dynamic>{};
     final _result = await _dio.fetch<Map<String, dynamic>>(
-        _setStreamType<VideoListResponse>(Options(
-                method: 'GET',
-                headers: <String, dynamic>{
-                  r'Authorization': authorization,
-                  r'Accept': accept
-                },
-                extra: _extra)
-            .compose(_dio.options, '/videos',
-                queryParameters: queryParameters, data: _data)
-            .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
+        _setStreamType<VideoListResponse>(
+            Options(method: 'GET', headers: _headers, extra: _extra)
+                .compose(_dio.options, '/videos',
+                    queryParameters: queryParameters, data: _data)
+                .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
     final value = VideoListResponse.fromJson(_result.data!);
     return value;
   }
 
   @override
-  Future<VideoItem> insert(authorization, accept, body, parts,
+  Future<VideoItem> insert(authorization, accept, video, parts,
       {notifySubscribers,
       onBehalfOfContentOwner,
       onBehalfOfContentOwnerChannel}) async {
@@ -73,19 +73,18 @@ class _VideoClient implements VideoClient {
       r'onBehalfOfContentOwnerChannel': onBehalfOfContentOwnerChannel
     };
     queryParameters.removeWhere((k, v) => v == null);
-    final _data = <String, dynamic>{};
-    _data.addAll(body);
+    final _headers = <String, dynamic>{
+      r'Authorization': authorization,
+      r'Accept': accept
+    };
+    _headers.removeWhere((k, v) => v == null);
+    final _data = Stream.fromIterable(video.readAsBytesSync().map((i) => [i]));
     final _result = await _dio.fetch<Map<String, dynamic>>(
-        _setStreamType<VideoItem>(Options(
-                method: 'POST',
-                headers: <String, dynamic>{
-                  r'Authorization': authorization,
-                  r'Accept': accept
-                },
-                extra: _extra)
-            .compose(_dio.options, '/videos',
-                queryParameters: queryParameters, data: _data)
-            .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
+        _setStreamType<VideoItem>(
+            Options(method: 'POST', headers: _headers, extra: _extra)
+                .compose(_dio.options, '/videos',
+                    queryParameters: queryParameters, data: _data)
+                .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
     final value = VideoItem.fromJson(_result.data!);
     return value;
   }
@@ -100,18 +99,18 @@ class _VideoClient implements VideoClient {
       r'onBehalfOfContentOwnerChannel': onBehalfOfContentOwnerChannel
     };
     queryParameters.removeWhere((k, v) => v == null);
+    final _headers = <String, dynamic>{
+      r'Authorization': authorization,
+      r'Accept': accept
+    };
+    _headers.removeWhere((k, v) => v == null);
     final _data = Stream.fromIterable(video.readAsBytesSync().map((i) => [i]));
     final _result = await _dio.fetch<Map<String, dynamic>>(
-        _setStreamType<VideoItem>(Options(
-                method: 'PUT',
-                headers: <String, dynamic>{
-                  r'Authorization': authorization,
-                  r'Accept': accept
-                },
-                extra: _extra)
-            .compose(_dio.options, '/videos',
-                queryParameters: queryParameters, data: _data)
-            .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
+        _setStreamType<VideoItem>(
+            Options(method: 'PUT', headers: _headers, extra: _extra)
+                .compose(_dio.options, '/videos',
+                    queryParameters: queryParameters, data: _data)
+                .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
     final value = VideoItem.fromJson(_result.data!);
     return value;
   }
@@ -120,17 +119,17 @@ class _VideoClient implements VideoClient {
   Future<void> rate(authorization, accept, id, rating) async {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{r'id': id, r'rating': rating};
+    final _headers = <String, dynamic>{
+      r'Authorization': authorization,
+      r'Accept': accept
+    };
+    _headers.removeWhere((k, v) => v == null);
     final _data = <String, dynamic>{};
-    await _dio.fetch<void>(_setStreamType<void>(Options(
-            method: 'POST',
-            headers: <String, dynamic>{
-              r'Authorization': authorization,
-              r'Accept': accept
-            },
-            extra: _extra)
-        .compose(_dio.options, '/videos/rate',
-            queryParameters: queryParameters, data: _data)
-        .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
+    await _dio.fetch<void>(_setStreamType<void>(
+        Options(method: 'POST', headers: _headers, extra: _extra)
+            .compose(_dio.options, '/videos/rate',
+                queryParameters: queryParameters, data: _data)
+            .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
     return null;
   }
 
@@ -143,18 +142,18 @@ class _VideoClient implements VideoClient {
       r'onBehalfOfContentOwner': onBehalfOfContentOwner
     };
     queryParameters.removeWhere((k, v) => v == null);
+    final _headers = <String, dynamic>{
+      r'Authorization': authorization,
+      r'Accept': accept
+    };
+    _headers.removeWhere((k, v) => v == null);
     final _data = <String, dynamic>{};
     final _result = await _dio.fetch<Map<String, dynamic>>(
-        _setStreamType<VideoGetRatingResponse>(Options(
-                method: 'GET',
-                headers: <String, dynamic>{
-                  r'Authorization': authorization,
-                  r'Accept': accept
-                },
-                extra: _extra)
-            .compose(_dio.options, '/videos/getRating',
-                queryParameters: queryParameters, data: _data)
-            .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
+        _setStreamType<VideoGetRatingResponse>(
+            Options(method: 'GET', headers: _headers, extra: _extra)
+                .compose(_dio.options, '/videos/getRating',
+                    queryParameters: queryParameters, data: _data)
+                .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
     final value = VideoGetRatingResponse.fromJson(_result.data!);
     return value;
   }
@@ -167,18 +166,18 @@ class _VideoClient implements VideoClient {
       r'onBehalfOfContentOwner': onBehalfOfContentOwner
     };
     queryParameters.removeWhere((k, v) => v == null);
+    final _headers = <String, dynamic>{
+      r'Authorization': authorization,
+      r'Accept': accept
+    };
+    _headers.removeWhere((k, v) => v == null);
     final _data = <String, dynamic>{};
     _data.addAll(body.toJson());
-    await _dio.fetch<void>(_setStreamType<void>(Options(
-            method: 'POST',
-            headers: <String, dynamic>{
-              r'Authorization': authorization,
-              r'Accept': accept
-            },
-            extra: _extra)
-        .compose(_dio.options, '/videos/reportAbuse',
-            queryParameters: queryParameters, data: _data)
-        .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
+    await _dio.fetch<void>(_setStreamType<void>(
+        Options(method: 'POST', headers: _headers, extra: _extra)
+            .compose(_dio.options, '/videos/reportAbuse',
+                queryParameters: queryParameters, data: _data)
+            .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
     return null;
   }
 
@@ -191,17 +190,17 @@ class _VideoClient implements VideoClient {
       r'onBehalfOfContentOwner': onBehalfOfContentOwner
     };
     queryParameters.removeWhere((k, v) => v == null);
+    final _headers = <String, dynamic>{
+      r'Authorization': authorization,
+      r'Accept': accept
+    };
+    _headers.removeWhere((k, v) => v == null);
     final _data = <String, dynamic>{};
-    await _dio.fetch<void>(_setStreamType<void>(Options(
-            method: 'DELETE',
-            headers: <String, dynamic>{
-              r'Authorization': authorization,
-              r'Accept': accept
-            },
-            extra: _extra)
-        .compose(_dio.options, '/videos',
-            queryParameters: queryParameters, data: _data)
-        .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
+    await _dio.fetch<void>(_setStreamType<void>(
+        Options(method: 'DELETE', headers: _headers, extra: _extra)
+            .compose(_dio.options, '/videos',
+                queryParameters: queryParameters, data: _data)
+            .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
     return null;
   }
 

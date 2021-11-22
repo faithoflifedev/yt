@@ -38,7 +38,7 @@ class Videos with YouTubeHelper {
 
   ///Uploads a video to YouTube and optionally sets the video's metadata.
   Future<VideoItem> insert({
-    required Map<String, dynamic> body,
+    required File body,
     String part = 'snippet,status,contentDetails',
     List<String> partList = const [],
   }) async {

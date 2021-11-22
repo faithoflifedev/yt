@@ -6,13 +6,12 @@ part of 'annotatedResponses.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-AnnotatedResponses _$AnnotatedResponsesFromJson(Map<String, dynamic> json) {
-  return AnnotatedResponses(
-    responses: (json['responses'] as List<dynamic>)
-        .map((e) => AnnotatedResponse.fromJson(e as Map<String, dynamic>))
-        .toList(),
-  );
-}
+AnnotatedResponses _$AnnotatedResponsesFromJson(Map<String, dynamic> json) =>
+    AnnotatedResponses(
+      responses: (json['responses'] as List<dynamic>)
+          .map((e) => AnnotatedResponse.fromJson(e as Map<String, dynamic>))
+          .toList(),
+    );
 
 Map<String, dynamic> _$AnnotatedResponsesToJson(AnnotatedResponses instance) =>
     <String, dynamic>{

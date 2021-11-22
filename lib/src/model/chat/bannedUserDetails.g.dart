@@ -6,14 +6,13 @@ part of 'bannedUserDetails.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-BannedUserDetails _$BannedUserDetailsFromJson(Map<String, dynamic> json) {
-  return BannedUserDetails(
-    channelId: json['channelId'] as String?,
-    channelUrl: json['channelUrl'] as String?,
-    displayName: json['displayName'] as String?,
-    profileImageUrl: json['profileImageUrl'] as String?,
-  );
-}
+BannedUserDetails _$BannedUserDetailsFromJson(Map<String, dynamic> json) =>
+    BannedUserDetails(
+      channelId: json['channelId'] as String?,
+      channelUrl: json['channelUrl'] as String?,
+      displayName: json['displayName'] as String?,
+      profileImageUrl: json['profileImageUrl'] as String?,
+    );
 
 Map<String, dynamic> _$BannedUserDetailsToJson(BannedUserDetails instance) =>
     <String, dynamic>{

@@ -7,17 +7,16 @@ part of 'liveStreamListResponse.dart';
 // **************************************************************************
 
 LiveStreamListResponse _$LiveStreamListResponseFromJson(
-    Map<String, dynamic> json) {
-  return LiveStreamListResponse(
-    json['kind'] as String,
-    json['etag'] as String,
-    PageInfo.fromJson(json['pageInfo'] as Map<String, dynamic>),
-    (json['items'] as List<dynamic>)
-        .map((e) => LiveStreamItem.fromJson(e as Map<String, dynamic>))
-        .toList(),
-    json['id'] as String,
-  );
-}
+        Map<String, dynamic> json) =>
+    LiveStreamListResponse(
+      json['kind'] as String,
+      json['etag'] as String,
+      PageInfo.fromJson(json['pageInfo'] as Map<String, dynamic>),
+      (json['items'] as List<dynamic>)
+          .map((e) => LiveStreamItem.fromJson(e as Map<String, dynamic>))
+          .toList(),
+      json['id'] as String,
+    );
 
 Map<String, dynamic> _$LiveStreamListResponseToJson(
         LiveStreamListResponse instance) =>

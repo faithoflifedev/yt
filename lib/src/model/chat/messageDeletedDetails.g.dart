@@ -7,11 +7,10 @@ part of 'messageDeletedDetails.dart';
 // **************************************************************************
 
 MessageDeletedDetails _$MessageDeletedDetailsFromJson(
-    Map<String, dynamic> json) {
-  return MessageDeletedDetails(
-    deletedMessageId: json['deletedMessageId'] as String?,
-  );
-}
+        Map<String, dynamic> json) =>
+    MessageDeletedDetails(
+      deletedMessageId: json['deletedMessageId'] as String?,
+    );
 
 Map<String, dynamic> _$MessageDeletedDetailsToJson(
         MessageDeletedDetails instance) =>

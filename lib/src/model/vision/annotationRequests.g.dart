@@ -6,13 +6,12 @@ part of 'annotationRequests.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-AnnotationRequests _$AnnotationRequestsFromJson(Map<String, dynamic> json) {
-  return AnnotationRequests(
-    requests: (json['requests'] as List<dynamic>)
-        .map((e) => AnnotationRequest.fromJson(e as Map<String, dynamic>))
-        .toList(),
-  );
-}
+AnnotationRequests _$AnnotationRequestsFromJson(Map<String, dynamic> json) =>
+    AnnotationRequests(
+      requests: (json['requests'] as List<dynamic>)
+          .map((e) => AnnotationRequest.fromJson(e as Map<String, dynamic>))
+          .toList(),
+    );
 
 Map<String, dynamic> _$AnnotationRequestsToJson(AnnotationRequests instance) =>
     <String, dynamic>{

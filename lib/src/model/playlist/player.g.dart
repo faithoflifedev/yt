@@ -6,11 +6,9 @@ part of 'player.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-Player _$PlayerFromJson(Map<String, dynamic> json) {
-  return Player(
-    embedHtml: json['embedHtml'] as String,
-  );
-}
+Player _$PlayerFromJson(Map<String, dynamic> json) => Player(
+      embedHtml: json['embedHtml'] as String,
+    );
 
 Map<String, dynamic> _$PlayerToJson(Player instance) => <String, dynamic>{
       'embedHtml': instance.embedHtml,

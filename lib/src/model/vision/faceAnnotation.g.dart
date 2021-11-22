@@ -32,29 +32,28 @@ extension LikelihoodTxe on String {
 // JsonSerializableGenerator
 // **************************************************************************
 
-FaceAnnotation _$FaceAnnotationFromJson(Map<String, dynamic> json) {
-  return FaceAnnotation(
-    boundingPoly:
-        BoundingPoly.fromJson(json['boundingPoly'] as Map<String, dynamic>),
-    fdBoundingPoly:
-        BoundingPoly.fromJson(json['fdBoundingPoly'] as Map<String, dynamic>),
-    landmarks: (json['landmarks'] as List<dynamic>)
-        .map((e) => Landmark.fromJson(e as Map<String, dynamic>))
-        .toList(),
-    rollAngle: (json['rollAngle'] as num).toDouble(),
-    panAngle: (json['panAngle'] as num).toDouble(),
-    tiltAngle: (json['tiltAngle'] as num).toDouble(),
-    detectionConfidence: (json['detectionConfidence'] as num).toDouble(),
-    landmarkingConfidence: (json['landmarkingConfidence'] as num).toDouble(),
-    enumJoyLikelihood: json['joyLikelihood'] as String,
-    enumSorrowLikelihood: json['sorrowLikelihood'] as String,
-    enumAngerLikelihood: json['angerLikelihood'] as String,
-    enumSurpriseLikelihood: json['surpriseLikelihood'] as String,
-    enumUnderExposedLikelihood: json['underExposedLikelihood'] as String,
-    enumBlurredLikelihood: json['blurredLikelihood'] as String,
-    enumHeadwearLikelihood: json['headwearLikelihood'] as String,
-  );
-}
+FaceAnnotation _$FaceAnnotationFromJson(Map<String, dynamic> json) =>
+    FaceAnnotation(
+      boundingPoly:
+          BoundingPoly.fromJson(json['boundingPoly'] as Map<String, dynamic>),
+      fdBoundingPoly:
+          BoundingPoly.fromJson(json['fdBoundingPoly'] as Map<String, dynamic>),
+      landmarks: (json['landmarks'] as List<dynamic>)
+          .map((e) => Landmark.fromJson(e as Map<String, dynamic>))
+          .toList(),
+      rollAngle: (json['rollAngle'] as num).toDouble(),
+      panAngle: (json['panAngle'] as num).toDouble(),
+      tiltAngle: (json['tiltAngle'] as num).toDouble(),
+      detectionConfidence: (json['detectionConfidence'] as num).toDouble(),
+      landmarkingConfidence: (json['landmarkingConfidence'] as num).toDouble(),
+      enumJoyLikelihood: json['joyLikelihood'] as String,
+      enumSorrowLikelihood: json['sorrowLikelihood'] as String,
+      enumAngerLikelihood: json['angerLikelihood'] as String,
+      enumSurpriseLikelihood: json['surpriseLikelihood'] as String,
+      enumUnderExposedLikelihood: json['underExposedLikelihood'] as String,
+      enumBlurredLikelihood: json['blurredLikelihood'] as String,
+      enumHeadwearLikelihood: json['headwearLikelihood'] as String,
+    );
 
 Map<String, dynamic> _$FaceAnnotationToJson(FaceAnnotation instance) =>
     <String, dynamic>{

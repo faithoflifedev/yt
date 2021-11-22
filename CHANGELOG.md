@@ -1,3 +1,6 @@
+## 1.0.7
+
+- correction for video upload, and dependency updates
 ## 1.0.6
 
 - added the playlists API

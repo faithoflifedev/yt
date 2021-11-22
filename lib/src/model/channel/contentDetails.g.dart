@@ -6,12 +6,11 @@ part of 'contentDetails.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-ContentDetails _$ContentDetailsFromJson(Map<String, dynamic> json) {
-  return ContentDetails(
-    relatedPlaylists: RelatedPlaylists.fromJson(
-        json['relatedPlaylists'] as Map<String, dynamic>),
-  );
-}
+ContentDetails _$ContentDetailsFromJson(Map<String, dynamic> json) =>
+    ContentDetails(
+      relatedPlaylists: RelatedPlaylists.fromJson(
+          json['relatedPlaylists'] as Map<String, dynamic>),
+    );
 
 Map<String, dynamic> _$ContentDetailsToJson(ContentDetails instance) =>
     <String, dynamic>{

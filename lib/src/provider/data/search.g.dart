@@ -80,18 +80,18 @@ class _SearchClient implements SearchClient {
       r'videoType': videoType
     };
     queryParameters.removeWhere((k, v) => v == null);
+    final _headers = <String, dynamic>{
+      r'Authorization': authorization,
+      r'Accept': accept
+    };
+    _headers.removeWhere((k, v) => v == null);
     final _data = <String, dynamic>{};
     final _result = await _dio.fetch<Map<String, dynamic>>(
-        _setStreamType<SearchListResponse>(Options(
-                method: 'GET',
-                headers: <String, dynamic>{
-                  r'Authorization': authorization,
-                  r'Accept': accept
-                },
-                extra: _extra)
-            .compose(_dio.options, '/search',
-                queryParameters: queryParameters, data: _data)
-            .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
+        _setStreamType<SearchListResponse>(
+            Options(method: 'GET', headers: _headers, extra: _extra)
+                .compose(_dio.options, '/search',
+                    queryParameters: queryParameters, data: _data)
+                .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
     final value = SearchListResponse.fromJson(_result.data!);
     return value;
   }
@@ -162,15 +162,15 @@ class _SearchClient implements SearchClient {
       r'videoType': videoType
     };
     queryParameters.removeWhere((k, v) => v == null);
+    final _headers = <String, dynamic>{r'Accept': accept};
+    _headers.removeWhere((k, v) => v == null);
     final _data = <String, dynamic>{};
     final _result = await _dio.fetch<Map<String, dynamic>>(
-        _setStreamType<SearchListResponse>(Options(
-                method: 'GET',
-                headers: <String, dynamic>{r'Accept': accept},
-                extra: _extra)
-            .compose(_dio.options, '/search',
-                queryParameters: queryParameters, data: _data)
-            .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
+        _setStreamType<SearchListResponse>(
+            Options(method: 'GET', headers: _headers, extra: _extra)
+                .compose(_dio.options, '/search',
+                    queryParameters: queryParameters, data: _data)
+                .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
     final value = SearchListResponse.fromJson(_result.data!);
     return value;
   }

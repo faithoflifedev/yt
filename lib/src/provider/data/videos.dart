@@ -34,7 +34,7 @@ abstract class VideoClient {
   Future<VideoItem> insert(
     @Header('Authorization') String authorization,
     @Header('Accept') String accept,
-    @Body() Map<String, dynamic> body,
+    @Body() File video,
     @Query('part') String parts, {
     @Query('notifySubscribers') bool? notifySubscribers,
     @Query('onBehalfOfContentOwner') String? onBehalfOfContentOwner,

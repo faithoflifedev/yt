@@ -6,15 +6,14 @@ part of 'superChatDetails.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-SuperChatDetails _$SuperChatDetailsFromJson(Map<String, dynamic> json) {
-  return SuperChatDetails(
-    amountMicros: json['amountMicros'] as int?,
-    currency: json['currency'] as String?,
-    amountDisplayString: json['amountDisplayString'] as String?,
-    userComment: json['userComment'] as String?,
-    tier: json['tier'] as int?,
-  );
-}
+SuperChatDetails _$SuperChatDetailsFromJson(Map<String, dynamic> json) =>
+    SuperChatDetails(
+      amountMicros: json['amountMicros'] as int?,
+      currency: json['currency'] as String?,
+      amountDisplayString: json['amountDisplayString'] as String?,
+      userComment: json['userComment'] as String?,
+      tier: json['tier'] as int?,
+    );
 
 Map<String, dynamic> _$SuperChatDetailsToJson(SuperChatDetails instance) =>
     <String, dynamic>{

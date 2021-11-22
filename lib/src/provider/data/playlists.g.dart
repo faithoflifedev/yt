@@ -38,18 +38,18 @@ class _PlaylistClient implements PlaylistClient {
       r'pageToken': pageToken
     };
     queryParameters.removeWhere((k, v) => v == null);
+    final _headers = <String, dynamic>{
+      r'Authorization': authorization,
+      r'Accept': accept
+    };
+    _headers.removeWhere((k, v) => v == null);
     final _data = <String, dynamic>{};
     final _result = await _dio.fetch<Map<String, dynamic>>(
-        _setStreamType<PlaylistResponse>(Options(
-                method: 'GET',
-                headers: <String, dynamic>{
-                  r'Authorization': authorization,
-                  r'Accept': accept
-                },
-                extra: _extra)
-            .compose(_dio.options, '/playlists',
-                queryParameters: queryParameters, data: _data)
-            .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
+        _setStreamType<PlaylistResponse>(
+            Options(method: 'GET', headers: _headers, extra: _extra)
+                .compose(_dio.options, '/playlists',
+                    queryParameters: queryParameters, data: _data)
+                .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
     final value = PlaylistResponse.fromJson(_result.data!);
     return value;
   }
@@ -78,15 +78,15 @@ class _PlaylistClient implements PlaylistClient {
       r'pageToken': pageToken
     };
     queryParameters.removeWhere((k, v) => v == null);
+    final _headers = <String, dynamic>{r'Accept': accept};
+    _headers.removeWhere((k, v) => v == null);
     final _data = <String, dynamic>{};
     final _result = await _dio.fetch<Map<String, dynamic>>(
-        _setStreamType<PlaylistResponse>(Options(
-                method: 'GET',
-                headers: <String, dynamic>{r'Accept': accept},
-                extra: _extra)
-            .compose(_dio.options, '/playlists',
-                queryParameters: queryParameters, data: _data)
-            .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
+        _setStreamType<PlaylistResponse>(
+            Options(method: 'GET', headers: _headers, extra: _extra)
+                .compose(_dio.options, '/playlists',
+                    queryParameters: queryParameters, data: _data)
+                .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
     final value = PlaylistResponse.fromJson(_result.data!);
     return value;
   }
@@ -101,16 +101,18 @@ class _PlaylistClient implements PlaylistClient {
       r'onBehalfOfContentOwnerChannel': onBehalfOfContentOwnerChannel
     };
     queryParameters.removeWhere((k, v) => v == null);
+    final _headers = <String, dynamic>{
+      r'Authorization': authorization,
+      r'Accept': accept,
+      r'Content-Type': contentType
+    };
+    _headers.removeWhere((k, v) => v == null);
     final _data = <String, dynamic>{};
     _data.addAll(body);
     final _result = await _dio.fetch<Map<String, dynamic>>(
         _setStreamType<Playlist>(Options(
                 method: 'POST',
-                headers: <String, dynamic>{
-                  r'Authorization': authorization,
-                  r'Accept': accept,
-                  r'Content-Type': contentType
-                },
+                headers: _headers,
                 extra: _extra,
                 contentType: contentType)
             .compose(_dio.options, '/playlists',
@@ -129,16 +131,18 @@ class _PlaylistClient implements PlaylistClient {
       r'onBehalfOfContentOwner': onBehalfOfContentOwner
     };
     queryParameters.removeWhere((k, v) => v == null);
+    final _headers = <String, dynamic>{
+      r'Authorization': authorization,
+      r'Accept': accept,
+      r'Content-Type': contentType
+    };
+    _headers.removeWhere((k, v) => v == null);
     final _data = <String, dynamic>{};
     _data.addAll(body);
     final _result = await _dio.fetch<Map<String, dynamic>>(
         _setStreamType<Playlist>(Options(
                 method: 'PUT',
-                headers: <String, dynamic>{
-                  r'Authorization': authorization,
-                  r'Accept': accept,
-                  r'Content-Type': contentType
-                },
+                headers: _headers,
                 extra: _extra,
                 contentType: contentType)
             .compose(_dio.options, '/playlists',
@@ -157,17 +161,17 @@ class _PlaylistClient implements PlaylistClient {
       r'onBehalfOfContentOwner': onBehalfOfContentOwner
     };
     queryParameters.removeWhere((k, v) => v == null);
+    final _headers = <String, dynamic>{
+      r'Authorization': authorization,
+      r'Accept': accept
+    };
+    _headers.removeWhere((k, v) => v == null);
     final _data = <String, dynamic>{};
-    await _dio.fetch<void>(_setStreamType<void>(Options(
-            method: 'DELETE',
-            headers: <String, dynamic>{
-              r'Authorization': authorization,
-              r'Accept': accept
-            },
-            extra: _extra)
-        .compose(_dio.options, '/playlists',
-            queryParameters: queryParameters, data: _data)
-        .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
+    await _dio.fetch<void>(_setStreamType<void>(
+        Options(method: 'DELETE', headers: _headers, extra: _extra)
+            .compose(_dio.options, '/playlists',
+                queryParameters: queryParameters, data: _data)
+            .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
     return null;
   }
 

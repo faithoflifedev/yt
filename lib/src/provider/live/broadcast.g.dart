@@ -38,18 +38,18 @@ class _BroadcastClient implements BroadcastClient {
       r'pageToken': pageToken
     };
     queryParameters.removeWhere((k, v) => v == null);
+    final _headers = <String, dynamic>{
+      r'Authorization': authorization,
+      r'Accept': accept
+    };
+    _headers.removeWhere((k, v) => v == null);
     final _data = <String, dynamic>{};
     final _result = await _dio.fetch<Map<String, dynamic>>(
-        _setStreamType<LiveBroadcastResponse>(Options(
-                method: 'GET',
-                headers: <String, dynamic>{
-                  r'Authorization': authorization,
-                  r'Accept': accept
-                },
-                extra: _extra)
-            .compose(_dio.options, '/liveBroadcasts',
-                queryParameters: queryParameters, data: _data)
-            .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
+        _setStreamType<LiveBroadcastResponse>(
+            Options(method: 'GET', headers: _headers, extra: _extra)
+                .compose(_dio.options, '/liveBroadcasts',
+                    queryParameters: queryParameters, data: _data)
+                .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
     final value = LiveBroadcastResponse.fromJson(_result.data!);
     return value;
   }
@@ -65,16 +65,18 @@ class _BroadcastClient implements BroadcastClient {
       r'onBehalfOfContentOwnerChannel': onBehalfOfContentOwnerChannel
     };
     queryParameters.removeWhere((k, v) => v == null);
+    final _headers = <String, dynamic>{
+      r'Authorization': authorization,
+      r'Accept': accept,
+      r'Content-Type': contentType
+    };
+    _headers.removeWhere((k, v) => v == null);
     final _data = <String, dynamic>{};
     _data.addAll(body);
     final _result = await _dio.fetch<Map<String, dynamic>>(
         _setStreamType<LiveBroadcastItem>(Options(
                 method: 'POST',
-                headers: <String, dynamic>{
-                  r'Authorization': authorization,
-                  r'Accept': accept,
-                  r'Content-Type': contentType
-                },
+                headers: _headers,
                 extra: _extra,
                 contentType: contentType)
             .compose(_dio.options, '/liveBroadcasts',
@@ -95,16 +97,18 @@ class _BroadcastClient implements BroadcastClient {
       r'onBehalfOfContentOwnerChannel': onBehalfOfContentOwnerChannel
     };
     queryParameters.removeWhere((k, v) => v == null);
+    final _headers = <String, dynamic>{
+      r'Authorization': authorization,
+      r'Accept': accept,
+      r'Content-Type': contentType
+    };
+    _headers.removeWhere((k, v) => v == null);
     final _data = <String, dynamic>{};
     _data.addAll(body);
     final _result = await _dio.fetch<Map<String, dynamic>>(
         _setStreamType<LiveBroadcastItem>(Options(
                 method: 'PUT',
-                headers: <String, dynamic>{
-                  r'Authorization': authorization,
-                  r'Accept': accept,
-                  r'Content-Type': contentType
-                },
+                headers: _headers,
                 extra: _extra,
                 contentType: contentType)
             .compose(_dio.options, '/liveBroadcasts',
@@ -126,18 +130,18 @@ class _BroadcastClient implements BroadcastClient {
       r'onBehalfOfContentOwnerChannel': onBehalfOfContentOwnerChannel
     };
     queryParameters.removeWhere((k, v) => v == null);
+    final _headers = <String, dynamic>{
+      r'Authorization': authorization,
+      r'Accept': accept
+    };
+    _headers.removeWhere((k, v) => v == null);
     final _data = <String, dynamic>{};
     final _result = await _dio.fetch<Map<String, dynamic>>(
-        _setStreamType<LiveBroadcastItem>(Options(
-                method: 'POST',
-                headers: <String, dynamic>{
-                  r'Authorization': authorization,
-                  r'Accept': accept
-                },
-                extra: _extra)
-            .compose(_dio.options, '/liveBroadcasts/bind',
-                queryParameters: queryParameters, data: _data)
-            .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
+        _setStreamType<LiveBroadcastItem>(
+            Options(method: 'POST', headers: _headers, extra: _extra)
+                .compose(_dio.options, '/liveBroadcasts/bind',
+                    queryParameters: queryParameters, data: _data)
+                .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
     final value = LiveBroadcastItem.fromJson(_result.data!);
     return value;
   }
@@ -155,18 +159,18 @@ class _BroadcastClient implements BroadcastClient {
       r'onBehalfOfContentOwnerChannel': onBehalfOfContentOwnerChannel
     };
     queryParameters.removeWhere((k, v) => v == null);
+    final _headers = <String, dynamic>{
+      r'Authorization': authorization,
+      r'Accept': accept
+    };
+    _headers.removeWhere((k, v) => v == null);
     final _data = <String, dynamic>{};
     final _result = await _dio.fetch<Map<String, dynamic>>(
-        _setStreamType<LiveBroadcastItem>(Options(
-                method: 'POST',
-                headers: <String, dynamic>{
-                  r'Authorization': authorization,
-                  r'Accept': accept
-                },
-                extra: _extra)
-            .compose(_dio.options, '/liveBroadcasts/transition',
-                queryParameters: queryParameters, data: _data)
-            .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
+        _setStreamType<LiveBroadcastItem>(
+            Options(method: 'POST', headers: _headers, extra: _extra)
+                .compose(_dio.options, '/liveBroadcasts/transition',
+                    queryParameters: queryParameters, data: _data)
+                .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
     final value = LiveBroadcastItem.fromJson(_result.data!);
     return value;
   }
@@ -181,17 +185,17 @@ class _BroadcastClient implements BroadcastClient {
       r'onBehalfOfContentOwnerChannel': onBehalfOfContentOwnerChannel
     };
     queryParameters.removeWhere((k, v) => v == null);
+    final _headers = <String, dynamic>{
+      r'Authorization': authorization,
+      r'Accept': accept
+    };
+    _headers.removeWhere((k, v) => v == null);
     final _data = <String, dynamic>{};
-    await _dio.fetch<void>(_setStreamType<void>(Options(
-            method: 'DELETE',
-            headers: <String, dynamic>{
-              r'Authorization': authorization,
-              r'Accept': accept
-            },
-            extra: _extra)
-        .compose(_dio.options, '/liveBroadcasts',
-            queryParameters: queryParameters, data: _data)
-        .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
+    await _dio.fetch<void>(_setStreamType<void>(
+        Options(method: 'DELETE', headers: _headers, extra: _extra)
+            .compose(_dio.options, '/liveBroadcasts',
+                queryParameters: queryParameters, data: _data)
+            .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
     return null;
   }
 

@@ -19,14 +19,16 @@ class _OAuthClient implements OAuthClient {
   Future<Token> getToken(params) async {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
+    final _headers = <String, dynamic>{
+      r'Content-Type': 'application/x-www-form-urlencoded'
+    };
+    _headers.removeWhere((k, v) => v == null);
     final _data = <String, dynamic>{};
     _data.addAll(params);
     final _result = await _dio.fetch<Map<String, dynamic>>(
         _setStreamType<Token>(Options(
                 method: 'POST',
-                headers: <String, dynamic>{
-                  r'Content-Type': 'application/x-www-form-urlencoded'
-                },
+                headers: _headers,
                 extra: _extra,
                 contentType: 'application/x-www-form-urlencoded')
             .compose(_dio.options, '/token',

@@ -7,21 +7,20 @@ part of 'liveChatMessageListResponse.dart';
 // **************************************************************************
 
 LiveChatMessageListResponse _$LiveChatMessageListResponseFromJson(
-    Map<String, dynamic> json) {
-  return LiveChatMessageListResponse(
-    kind: json['kind'] as String,
-    etag: json['etag'] as String,
-    nextPageToken: json['nextPageToken'] as String?,
-    pollingIntervalMillis: json['pollingIntervalMillis'] as int?,
-    offlineAt: json['offlineAt'] == null
-        ? null
-        : DateTime.parse(json['offlineAt'] as String),
-    pageInfo: PageInfo.fromJson(json['pageInfo'] as Map<String, dynamic>),
-    items: (json['items'] as List<dynamic>)
-        .map((e) => LiveChatMessage.fromJson(e as Map<String, dynamic>))
-        .toList(),
-  );
-}
+        Map<String, dynamic> json) =>
+    LiveChatMessageListResponse(
+      kind: json['kind'] as String,
+      etag: json['etag'] as String,
+      nextPageToken: json['nextPageToken'] as String?,
+      pollingIntervalMillis: json['pollingIntervalMillis'] as int?,
+      offlineAt: json['offlineAt'] == null
+          ? null
+          : DateTime.parse(json['offlineAt'] as String),
+      pageInfo: PageInfo.fromJson(json['pageInfo'] as Map<String, dynamic>),
+      items: (json['items'] as List<dynamic>)
+          .map((e) => LiveChatMessage.fromJson(e as Map<String, dynamic>))
+          .toList(),
+    );
 
 Map<String, dynamic> _$LiveChatMessageListResponseToJson(
         LiveChatMessageListResponse instance) =>

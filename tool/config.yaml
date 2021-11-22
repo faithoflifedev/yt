@@ -4,5 +4,5 @@ templates:
   - name: CHANGELOG.md
     type: prepend
 
-version: 1.0.6
-change: added the playlists API
+version: 1.0.7
+change: correction for video upload, and dependency updates
