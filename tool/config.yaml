@@ -4,5 +4,5 @@ templates:
   - name: CHANGELOG.md
     type: prepend
 
-version: 1.0.7
-change: correction for video upload, and dependency updates
+version: 1.1.0
+change: video upload actually works, refactored thumbnail upload and added support for the VideoCategories API

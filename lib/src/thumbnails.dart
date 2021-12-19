@@ -3,7 +3,7 @@ import 'package:universal_io/io.dart';
 import 'package:yt/src/help.dart';
 import 'package:yt/yt.dart';
 
-import 'provider/data/setThumbnail.dart';
+import 'provider/data/thumbnails.dart';
 
 ///A [Thumbnail] resource identifies different thumbnail image sizes associated with a resource. Please note the following characteristics of thumbnail images:
 ///
@@ -14,41 +14,37 @@ import 'provider/data/setThumbnail.dart';
 ///- Resources of the same type may still have different thumbnail image sizes for certain images depending on the resolution of the original image or content uploaded to YouTube. For example, an HD video may support higher resolution thumbnails than non-HD videos.
 ///- Each object that contains information about a thumbnail image size has a width property and a height property. However, the width and height properties may not be returned for that image.
 ///- If an uploaded thumbnail image does not match the required dimensions, the image is resized to match the correct size without changing its aspect ratio. The image is not cropped, but may include black bars so that the size is correct.
-class SetThumbnail with YouTubeHelper {
+class Thumbnails with YouTubeHelper {
   final String token;
   final Dio dio;
 
-  final SetThumbnailClient _rest;
+  final ThumbnailsClient _rest;
 
   final String _authHeader;
 
-  SetThumbnail(this.token, this.dio)
+  Thumbnails(this.token, this.dio)
       : _authHeader = 'Bearer $token',
-        _rest = SetThumbnailClient(dio);
+        _rest = ThumbnailsClient(dio);
 
   ///Supply the [videoId] and retrieve the url used to upload the thumbnail image
-  Future<String> location({required String videoId}) async {
-    String uploadType = 'resumable';
+  Future<ThumbnailSetResponse> set(
+      {required String videoId, required File thumbnail}) async {
+    final String uploadType = 'resumable';
 
     final httpResponse =
-        await _rest.thumbnailLocation(_authHeader, accept, videoId, uploadType);
+        await _rest.location(_authHeader, accept, videoId, uploadType);
 
     if (!httpResponse.response.headers.map.containsKey('location')) {
       throw Exception(
           'Upload location for the thumbnail could not be determined');
     }
 
-    return httpResponse.response.headers.value('location')!;
-  }
-
-  ///Uploads a custom video thumbnail to YouTube and sets it for a video.
-  Future<ThumbnailSetResponse> set(
-      {required String videoId,
-      required String uploadId,
-      required File thumbnail}) async {
-    String uploadType = 'resumable';
-
-    return await _rest.set(_authHeader, 'application/x-www-form-urlencoded',
-        videoId, uploadId, thumbnail, uploadType);
+    return await _rest.upload(
+        _authHeader,
+        'application/x-www-form-urlencoded',
+        videoId,
+        httpResponse.response.headers.value('location')!,
+        thumbnail,
+        uploadType);
   }
 }

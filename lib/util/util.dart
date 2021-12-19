@@ -15,7 +15,7 @@ class Util {
 
   static T cast<T>(dynamic x, {required T fallback}) => x is T ? x : fallback;
 
-  static getUploadIdFromLocationHeader(String locationUrl) {
+  static String getUploadIdFromUrl(String locationUrl) {
     final locationUri = Uri.parse(locationUrl);
 
     if (!locationUri.queryParameters.containsKey('upload_id'))

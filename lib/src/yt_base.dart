@@ -1,5 +1,4 @@
 import 'package:dio/dio.dart';
-import 'package:yt/util/tokenGenerator.dart';
 import 'package:yt/yt.dart';
 
 class Yt {
@@ -129,10 +128,10 @@ class Yt {
   ///- Resources of the same type may still have different thumbnail image sizes for certain images depending on the resolution of the original image or content uploaded to YouTube. For example, an HD video may support higher resolution thumbnails than non-HD videos.
   ///- Each object that contains information about a thumbnail image size has a width property and a height property. However, the width and height properties may not be returned for that image.
   ///- If an uploaded thumbnail image does not match the required dimensions, the image is resized to match the correct size without changing its aspect ratio. The image is not cropped, but may include black bars so that the size is correct.
-  Future<SetThumbnail> get thumbnails async {
+  Future<Thumbnails> get thumbnails async {
     await _confirmToken();
 
-    return SetThumbnail(_token!, dio);
+    return Thumbnails(_token!, dio);
   }
 
   ///A video resource represents a YouTube video.

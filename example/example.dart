@@ -36,24 +36,10 @@ void main() async {
 
   print(broadcastItem);
 
-  final locationUrl = await th.location(videoId: broadcastItem.id);
-
-  print(locationUrl);
-
   await th.set(
       videoId: broadcastItem.id,
-      uploadId: getUploadId(locationUrl),
       thumbnail: File(
           '/Users/chris/projects/skc/broadcast/broadcast_cli/thumbnail/pre-iftar.jpg'));
 
   print('image uploaded');
-}
-
-String getUploadId(String locationUrl) {
-  final locationUri = Uri.parse(locationUrl);
-
-  if (!locationUri.queryParameters.containsKey('upload_id'))
-    throw Exception('The uplaod ID has not been found.');
-
-  return locationUri.queryParameters['upload_id']!;
 }

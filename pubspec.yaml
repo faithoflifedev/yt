@@ -1,5 +1,5 @@
 name: yt
-version: 1.0.7
+version: 1.1.0
 description: Native Dart interface to multiple YouTube REST APIs including the Data API, Live Streaming API and Cloud Vision API.
 repository: https://github.com/faithoflifedev/yt
 homepage: https://github.com/faithoflifedev/yt
@@ -10,24 +10,25 @@ environment:
 dependencies:
   color: ^3.0.0
   crypto_keys: ^0.3.0
-  dio: ^4.0.0
-  image: ^3.0.2
+  dio: ^4.0.4
+  image: ^3.1.0
   easy_enum: ^1.0.0
+  http_parser: ^4.0.0
   jose: ^0.3.2
-  json_annotation: ^4.3.0
-  process_run: ^0.12.1+1
+  json_annotation: ^4.4.0
+  process_run: ^0.12.3+1
   retrofit: ^3.0.0
   universal_io: ^2.0.4
   yaml: ^3.1.0
 
 dev_dependencies:
-  build_runner: ^2.0.4
-  easy_enum_generator: ^2.0.0
+  build_runner: ^2.1.7
+  easy_enum_generator: ^2.0.1
   # easy_enum_generator:
   #   git:
   #     url: https://github.com/faithoflifedev/easy_enum.git
   #     path: easy_enum_generator
   grinder: ^0.9.0
-  json_serializable: ^6.0.1
+  json_serializable: ^6.1.3
   mustache_template: ^2.0.0
   retrofit_generator: ^3.0.0+2

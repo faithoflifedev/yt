@@ -1,10 +1,10 @@
 # Youtube REST API Client
 
-Native [Dart](https://dart.dev/) interface to multiple YouTube REST APIs, including:
+Native [Dart](https://dart.dev/) interface to multiple Google REST APIs, including:
 
 - [YouTube Data API](https://developers.google.com/youtube/v3/docs)
 - [YouTube Live Streaming API](https://developers.google.com/youtube/v3/live/docs)
-- [YouTube Cloud Vision API](https://cloud.google.com/vision/docs/reference/rest)
+- [Cloud Vision API](https://cloud.google.com/vision/docs/reference/rest) (not really a YouTube API but gives some image processing options)
 
 ## API Commands Supported
 
@@ -15,6 +15,7 @@ Native [Dart](https://dart.dev/) interface to multiple YouTube REST APIs, includ
 - [Playlists](https://developers.google.com/youtube/v3/docs/playlists)
 - [Search](https://developers.google.com/youtube/v3/docs/search)
 - [Thumbnails](https://developers.google.com/youtube/v3/docs/thumbnails)
+- [VideoCategoriess](https://developers.google.com/youtube/v3/docs/videoCategories)
 - [Videos](https://developers.google.com/youtube/v3/docs/videos)
 
 ### Live Streaming API:
@@ -88,6 +89,36 @@ playlistResponse.items
     .forEach((playlist) => print('${playlist.snippet?.title}'));
 ```
 
+## Upload a Video
+
+```dart
+final yt = Yt.withOAuth(OAuthCredentials.fromYaml('example/youtube.yaml'));
+
+final videos = await yt.videos;
+
+final body = <String, dynamic>{
+  'snippet': {
+    'title': 'TEST title',
+    'description': 'Test Description',
+    'tags': ['tag1', 'tag2'],
+    'categoryId': "22"
+  },
+  'status': {
+    'privacyStatus': 'private',
+    "embeddable": true,
+    "license": "youtube"
+  }
+};
+
+final videoItem = await videos.insert(
+    body: body,
+    videoFile:
+        File('[path to a video to upload]'),
+    notifySubscribers: false);
+
+print(videoItem);
+```
+
 ## Usage of the Live Streaming API
 
 ```dart
@@ -128,13 +159,9 @@ await br.bind(
     broadcastId: broadcastItem.id,
     streamId: '[one of your valid stream ids]');
 
-///get info on where to upload your thumbnail for the broadcast
-final locationUrl = await th.location(videoId: broadcastItem.id);
-
 ///upload the thumbnail
 await th.set(
     videoId: broadcastItem.id,
-    uploadId: Uri.parse(locationUrl).queryParameters['upload_id']!,
     thumbnail: File('[path to an image to upload]'));
 
 ```
@@ -284,3 +311,32 @@ Future<LiveBroadcastItem> getBroadcast(String broadcastStatus) async {
 - ~~A working sample Flutter app~~
 - Expanded API Commands
 - Improved documentation
+
+## Breaking change in v1.1.0 from v1.0.x
+
+The latest revision has been updated so that it better matches the actual Youtube Data API for thumbnail upload. So, whereas in v1.0.x you would use this code to upload a thumbnail:
+
+```dart
+final th = await yt.thumbnails;
+
+///get info on where to upload your thumbnail for the broadcast
+final locationUrl = await th.location(videoId: broadcastItem.id);
+
+///upload the thumbnail
+await th.set(
+    videoId: broadcastItem.id,
+    uploadId: Uri.parse(locationUrl).queryParameters['upload_id']!,
+    thumbnail: File('[path to an image to upload]'));
+```
+
+In v1.1.x the code has been simplified and matches the API definition:
+
+```dart
+
+///upload the thumbnail
+final th = await yt.thumbnails;
+
+await th.set(
+    videoId: broadcastItem.id,
+    thumbnail: File('[path to an image to upload]'));
+```

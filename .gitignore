@@ -25,7 +25,7 @@ doc/api/
 
 scratch/
 .pubspec.yaml.bak
-.refresh.token
+.refreshToken.json
 notes.txt
 
 .pubignore
@@ -35,5 +35,6 @@ example/flutter_playlist/res/youtube.yaml
 example/my_images/
 example/skc-live-creds.json
 example/youtube.yaml
+example/upload.yaml
 
 bin/

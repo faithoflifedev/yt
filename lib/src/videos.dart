@@ -1,6 +1,7 @@
 import 'package:dio/dio.dart';
 import 'package:universal_io/io.dart';
 import 'package:yt/src/help.dart';
+import 'package:yt/util/util.dart';
 import 'package:yt/yt.dart';
 
 import 'provider/data/videos.dart';
@@ -38,12 +39,38 @@ class Videos with YouTubeHelper {
 
   ///Uploads a video to YouTube and optionally sets the video's metadata.
   Future<VideoItem> insert({
-    required File body,
+    required Map<String, dynamic> body,
+    required File videoFile,
     String part = 'snippet,status,contentDetails',
     List<String> partList = const [],
+    bool? notifySubscribers,
+    String? onBehalfOfContentOwner,
+    String? onBehalfOfContentOwnerChannel,
   }) async {
-    return await _rest.insert(
-        _authHeader, accept, body, buildParts(partList, part));
+    final uploadType = 'resumable';
+
+    final xUploadContentType = 'video/*';
+
+    final parts = buildParts(partList, part);
+
+    final httpResponse = await await _rest.location(_authHeader, accept,
+        videoFile.lengthSync(), xUploadContentType, body, parts, uploadType,
+        notifySubscribers: notifySubscribers,
+        onBehalfOfContentOwner: onBehalfOfContentOwner,
+        onBehalfOfContentOwnerChannel: onBehalfOfContentOwnerChannel);
+
+    if (!httpResponse.response.headers.map.containsKey('location')) {
+      throw Exception('Upload location for the video could not be determined');
+    }
+
+    return await _rest.upload(
+        _authHeader,
+        accept,
+        Util.getUploadIdFromUrl(
+            httpResponse.response.headers.value('location')!),
+        parts,
+        videoFile,
+        uploadType);
   }
 
   ///Updates a [VideoItem]'s metadata.

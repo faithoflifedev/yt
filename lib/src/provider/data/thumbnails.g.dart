@@ -1,13 +1,13 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'setThumbnail.dart';
+part of 'thumbnails.dart';
 
 // **************************************************************************
 // RetrofitGenerator
 // **************************************************************************
 
-class _SetThumbnailClient implements SetThumbnailClient {
-  _SetThumbnailClient(this._dio, {this.baseUrl}) {
+class _ThumbnailsClient implements ThumbnailsClient {
+  _ThumbnailsClient(this._dio, {this.baseUrl}) {
     baseUrl ??= 'https://www.googleapis.com/upload/youtube/v3/thumbnails';
   }
 
@@ -16,7 +16,7 @@ class _SetThumbnailClient implements SetThumbnailClient {
   String? baseUrl;
 
   @override
-  Future<HttpResponse<dynamic>> thumbnailLocation(
+  Future<HttpResponse<dynamic>> location(
       authorization, accept, videoId, uploadType) async {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{
@@ -40,7 +40,7 @@ class _SetThumbnailClient implements SetThumbnailClient {
   }
 
   @override
-  Future<ThumbnailSetResponse> set(
+  Future<ThumbnailSetResponse> upload(
       authorization, contentType, videoId, uploadId, image, uploadType) async {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{

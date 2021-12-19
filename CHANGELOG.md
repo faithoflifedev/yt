@@ -1,3 +1,6 @@
+## 1.1.0
+
+- video upload actually works, refactored thumbnail upload and added support for the VideoCategories API
 ## 1.0.7
 
 - correction for video upload, and dependency updates

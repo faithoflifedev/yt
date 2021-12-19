@@ -5,7 +5,6 @@ import 'package:dio/dio.dart';
 import 'package:jose/jose.dart';
 import 'package:universal_io/io.dart';
 import 'package:yaml/yaml.dart';
-import 'package:yt/src/model/util/token.dart';
 import 'package:yt/src/provider/oauth.dart';
 import 'package:yt/util/util.dart';
 import 'package:yt/yt.dart';
@@ -76,12 +75,20 @@ class OAuthGenerator implements TokenGenerator {
   Future<Token> generate() async {
     final OAuthClient oAuthClient = new OAuthClient(dio);
 
-    final tokenFile = File('.refresh.token');
+    final tokenFile = File('.refreshToken.json');
+
+    // Map<String, String>? tokenStore;
+
+    final tokenStore = <String, dynamic>{};
 
     String? refreshToken;
 
     if (tokenFile.existsSync()) {
-      refreshToken = tokenFile.readAsStringSync();
+      tokenStore.addAll(json.decode(tokenFile.readAsStringSync()));
+    }
+
+    if (tokenStore.containsKey(oauthCredentials.clientId)) {
+      refreshToken = tokenStore[oauthCredentials.clientId];
     } else {
       final token = await oAuthClient.getToken({
         'client_id': oauthCredentials.clientId,
@@ -95,7 +102,9 @@ class OAuthGenerator implements TokenGenerator {
 
       refreshToken = token.refreshToken!;
 
-      tokenFile.writeAsStringSync(refreshToken);
+      tokenStore[oauthCredentials.clientId] = refreshToken;
+
+      tokenFile.writeAsStringSync(json.encode(tokenStore));
     }
 
     return await oAuthClient.getToken({
