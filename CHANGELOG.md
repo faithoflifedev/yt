@@ -1,3 +1,6 @@
+## 1.1.2
+
+- custom exception for authorization failure
 ## 1.1.1
 
 - custom exception for authorization failure

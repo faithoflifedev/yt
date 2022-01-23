@@ -4,5 +4,5 @@ templates:
   - name: CHANGELOG.md
     type: prepend
 
-version: 1.1.1
+version: 1.1.2
 change: custom exception for authorization failure
