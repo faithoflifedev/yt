@@ -7,7 +7,7 @@ import 'provider/live/chat.dart';
 ///A liveChatMessage resource represents a chat message in a YouTube live chat. The resource can contain details about several types of messages, including a newly posted text message or fan funding event.
 ///
 ///The live chat feature is enabled by default for live broadcasts and is available while the live event is active. (After the event ends, live chat is no longer available for that event.)
-class Chat with YouTubeHelper {
+class Chat extends YouTubeHelper {
   final String token;
   final Dio dio;
 

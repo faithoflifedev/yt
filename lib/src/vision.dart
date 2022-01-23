@@ -8,7 +8,7 @@ import 'package:yt/yt.dart';
 import 'provider/vision/vision.dart';
 
 ///Integrates Google Vision features, including image labeling, face, logo, and landmark detection, optical character recognition (OCR), and detection of explicit content, into applications.
-class Vision with YouTubeHelper {
+class Vision extends YouTubeHelper {
   final String token;
   final Dio dio;
 

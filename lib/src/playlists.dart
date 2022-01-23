@@ -13,7 +13,7 @@ import 'provider/data/playlists.dart';
 ///To be more specific, these lists are associated with a channel, which is a collection of a person, group, or company's videos, playlists, and other YouTube information. You can retrieve the playlist IDs for each of these lists from the channel resource for a given channel.
 ///
 ///You can then use the [list()] method to retrieve any of those lists. You can also add or remove items from those lists by calling the [insert()] and [delete()] methods.
-class Playlists with YouTubeHelper {
+class Playlists extends YouTubeHelper {
   final String? token;
   final String? apiKey;
   final Dio dio;

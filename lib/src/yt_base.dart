@@ -28,11 +28,12 @@ class Yt {
     return yt;
   }
 
-  factory Yt.withOAuth(OAuthCredentials oauthCredentials) {
+  factory Yt.withOAuth(OAuthCredentials oauthCredentials,
+      {bool refresh = false}) {
     Yt yt = Yt();
 
-    yt.tokenGenerator =
-        OAuthGenerator(oauthCredentials: oauthCredentials, dio: dio);
+    yt.tokenGenerator = OAuthGenerator(
+        oauthCredentials: oauthCredentials, dio: dio, refresh: refresh);
 
     return yt;
   }

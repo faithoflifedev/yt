@@ -57,10 +57,13 @@ class JwtGenerator implements TokenGenerator {
 
 class OAuthGenerator implements TokenGenerator {
   final Dio dio;
-
   final OAuthCredentials oauthCredentials;
+  final bool refresh;
 
-  OAuthGenerator({required this.oauthCredentials, required this.dio});
+  OAuthGenerator(
+      {required this.oauthCredentials,
+      required this.dio,
+      this.refresh = false});
 
   factory OAuthGenerator.fromYamlCredentials(
       {required String credentialsFile, required Dio dio}) {
@@ -77,30 +80,37 @@ class OAuthGenerator implements TokenGenerator {
 
     final tokenFile = File('.refreshToken.json');
 
-    // Map<String, String>? tokenStore;
+    final tokenFileExits = tokenFile.existsSync();
+
+    if (tokenFileExits && refresh) tokenFile.deleteSync();
 
     final tokenStore = <String, dynamic>{};
 
     String? refreshToken;
 
-    if (tokenFile.existsSync()) {
+    if (tokenFileExits) {
       tokenStore.addAll(json.decode(tokenFile.readAsStringSync()));
     }
 
     if (tokenStore.containsKey(oauthCredentials.clientId)) {
       refreshToken = tokenStore[oauthCredentials.clientId];
     } else {
-      final token = await oAuthClient.getToken({
-        'client_id': oauthCredentials.clientId,
-        'client_secret': oauthCredentials.clientSecret,
-        'code': oauthCredentials.code,
-        'redirect_uri': 'urn:ietf:wg:oauth:2.0:oob',
-        'grant_type': 'authorization_code'
-      });
+      try {
+        final token = await oAuthClient.getToken({
+          'client_id': oauthCredentials.clientId,
+          'client_secret': oauthCredentials.clientSecret,
+          'code': oauthCredentials.code,
+          'redirect_uri': 'urn:ietf:wg:oauth:2.0:oob',
+          'grant_type': 'authorization_code'
+        });
 
-      if (token.refreshToken == null) throw Exception();
+        if (token.refreshToken == null)
+          throw Exception('Could not retrieve the refresh token');
 
-      refreshToken = token.refreshToken!;
+        refreshToken = token.refreshToken!;
+      } on DioError catch (err) {
+        throw AuthorizationException(err.response.toString(), err);
+      }
 
       tokenStore[oauthCredentials.clientId] = refreshToken;
 

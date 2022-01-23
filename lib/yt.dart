@@ -10,6 +10,7 @@
 library yt;
 
 export 'util/tokenGenerator.dart';
+export 'util/authorizationException.dart';
 
 export 'src/yt_base.dart';
 

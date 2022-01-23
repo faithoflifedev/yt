@@ -4,7 +4,7 @@ import 'package:yt/yt.dart';
 
 import 'provider/data/channels.dart';
 
-class Channels with YouTubeHelper {
+class Channels extends YouTubeHelper {
   final String? token;
   final String? apiKey;
   final Dio dio;

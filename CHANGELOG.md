@@ -1,3 +1,6 @@
+## 1.1.1
+
+- custom exception for authorization failure
 ## 1.1.0
 
 - video upload actually works, refactored thumbnail upload and added support for the VideoCategories API

@@ -1,7 +1,7 @@
-mixin YouTubeHelper {
-  String get accept => 'application/json';
+abstract class YouTubeHelper {
+  final accept = 'application/json';
 
-  String get contentType => 'application/json';
+  final contentType = 'application/json';
 
   String buildParts(List<String> partList, String part) {
     if (partList.isEmpty && part == '')

@@ -5,7 +5,7 @@ import 'package:yt/yt.dart';
 import 'provider/data/videoCategories.dart';
 
 ///Returns a list of [VideoItem]s that match the API request parameters.
-class VideoCategories with YouTubeHelper {
+class VideoCategories extends YouTubeHelper {
   final String token;
   final Dio dio;
 

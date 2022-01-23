@@ -5,7 +5,7 @@ import 'package:yt/yt.dart';
 import 'provider/live/broadcast.dart';
 
 ///A liveBroadcast resource represents an event that will be streamed, via live video, on YouTube.
-class Broadcast with YouTubeHelper {
+class Broadcast extends YouTubeHelper {
   final String token;
   final Dio dio;
 

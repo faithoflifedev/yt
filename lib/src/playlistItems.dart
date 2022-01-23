@@ -4,7 +4,7 @@ import 'package:yt/yt.dart';
 
 import 'provider/data/playlistItems.dart';
 
-class PlaylistItems with YouTubeHelper {
+class PlaylistItems extends YouTubeHelper {
   final String? token;
   final String? apiKey;
   final Dio dio;
