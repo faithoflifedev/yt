@@ -25,7 +25,7 @@ ContentDetails _$ContentDetailsFromJson(Map<String, dynamic> json) =>
       latencyPreference: json['latencyPreference'] as String,
       projection: json['projection'] as String,
       enableAutoStart: json['enableAutoStart'] as bool,
-      enableAutoStop: json['enableAutoStop'] as bool,
+      enableAutoStop: json['enableAutoStop'] as bool?,
     );
 
 Map<String, dynamic> _$ContentDetailsToJson(ContentDetails instance) =>

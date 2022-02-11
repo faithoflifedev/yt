@@ -1,3 +1,6 @@
+## 1.1.3
+
+- autostop is not required
 ## 1.1.2
 
 - custom exception for authorization failure

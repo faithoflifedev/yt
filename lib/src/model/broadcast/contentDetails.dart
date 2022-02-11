@@ -99,7 +99,7 @@ class ContentDetails {
   final bool enableAutoStart;
 
   ///Indicates whether this broadcast should stop automatically around one minute after the channel owner stops streaming video on the bound video stream.
-  final bool enableAutoStop;
+  final bool? enableAutoStop;
 
   ContentDetails(
       {required this.boundStreamId,

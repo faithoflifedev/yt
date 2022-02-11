@@ -4,5 +4,5 @@ templates:
   - name: CHANGELOG.md
     type: prepend
 
-version: 1.1.2
-change: custom exception for authorization failure
+version: 1.1.3
+change: autostop is not required
