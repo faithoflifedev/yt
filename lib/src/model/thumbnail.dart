@@ -11,15 +11,15 @@ class Thumbnail {
   final String url;
 
   ///The image's width.
-  final int width;
+  final int? width;
 
   ///The image's height.
-  final int height;
+  final int? height;
 
   Thumbnail({
     required this.url,
-    required this.width,
-    required this.height,
+    this.width,
+    this.height,
   });
 
   factory Thumbnail.fromJson(Map<String, dynamic> json) =>
