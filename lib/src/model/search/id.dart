@@ -9,8 +9,9 @@ class Id {
   final String kind;
   final String? videoId;
   final String? channelId;
+  final String? playlistId;
 
-  Id({required this.kind, this.videoId, this.channelId});
+  Id({required this.kind, this.videoId, this.channelId, this.playlistId});
 
   factory Id.fromJson(Map<String, dynamic> json) => _$IdFromJson(json);
 
