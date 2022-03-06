@@ -7,13 +7,13 @@ void main() async {
 
   var playlists = await yt.playlists;
 
-  var playlistResponse = await playlists.list(mine: true);
+  var playlistResponse = await playlists.list(mine: true, maxResults: 25);
 
   // var playlistResponse =
   //     await playlists.list(channelId: '[youtube channel id]', maxResults: 25);
 
   playlistResponse.items.forEach((playlist) => print(
-      'title: ${playlist.snippet?.title}, ${playlist.snippet?.thumbnails.thumbnailsDefault.url}'));
+      'id: ${playlist.id}, title: ${playlist.snippet?.title}, ${playlist.snippet?.thumbnails.thumbnailsDefault.url}'));
 
   // playlistResponse = await playlists.list(
   //     mine: true, pageToken: playlistResponse.nextPageToken);
