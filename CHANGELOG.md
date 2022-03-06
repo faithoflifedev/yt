@@ -1,3 +1,6 @@
+## 1.1.4
+
+- added support for playlist id
 ## 1.1.3
 
 - autostop is not required
