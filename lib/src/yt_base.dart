@@ -1,8 +1,45 @@
 import 'package:dio/dio.dart';
+import 'package:dio_cache_interceptor/dio_cache_interceptor.dart';
 import 'package:yt/yt.dart';
 
 class Yt {
   static final dio = Dio();
+
+  static void initCache([bool useCache = false]) {
+    if (!useCache) return;
+
+    // Add cache interceptor with global/default options
+    dio.interceptors.add(
+      DioCacheInterceptor(
+        options: CacheOptions(
+          // A default store is required for interceptor.
+          store: MemCacheStore(),
+
+          // All subsequent fields are optional.
+
+          // Default.
+          policy: CachePolicy.request,
+          // Returns a cached response on error but for statuses 401 & 403.
+          // Also allows to return a cached response on network errors (e.g. offline usage).
+          // Defaults to [null].
+          hitCacheOnErrorExcept: [401, 403],
+          // Overrides any HTTP directive to delete entry past this duration.
+          // Useful only when origin server has no cache config or custom behaviour is desired.
+          // Defaults to [null].
+          maxStale: const Duration(days: 7),
+          // Default. Allows 3 cache sets and ease cleanup.
+          priority: CachePriority.normal,
+          // Default. Body and headers encryption with your own algorithm.
+          cipher: null,
+          // Default. Key builder to retrieve requests.
+          keyBuilder: CacheOptions.defaultCacheKeyBuilder,
+          // Default. Allows to cache POST requests.
+          // Overriding [keyBuilder] is strongly recommended when [true].
+          allowPostMethod: false,
+        ),
+      ),
+    );
+  }
 
   final DateTime tokenExpiry = DateTime(2010, 0, 0);
 
@@ -18,7 +55,9 @@ class Yt {
 
   Yt();
 
-  factory Yt.withKey(String apiKey) {
+  factory Yt.withKey(String apiKey, {bool useCache = false}) {
+    Yt.initCache(useCache);
+
     final yt = Yt();
 
     yt._apiKey = apiKey;
@@ -29,8 +68,9 @@ class Yt {
   }
 
   factory Yt.withOAuth(OAuthCredentials oauthCredentials,
-      {bool refresh = false}) {
+      {bool useCache = false, bool refresh = false}) {
     Yt yt = Yt();
+    Yt.initCache();
 
     yt.tokenGenerator = OAuthGenerator(
         oauthCredentials: oauthCredentials, dio: dio, refresh: refresh);
@@ -38,8 +78,13 @@ class Yt {
     return yt;
   }
 
-  factory Yt.withJwt(String credentialsFile, String scope) {
+  factory Yt.withJwt(
+    String credentialsFile,
+    String scope, {
+    bool useCache = false,
+  }) {
     Yt yt = Yt();
+    Yt.initCache(useCache);
 
     yt.tokenGenerator =
         JwtGenerator(credentialsFile: credentialsFile, scope: scope, dio: dio);
@@ -48,14 +93,16 @@ class Yt {
   }
 
   Future<void> _confirmToken() async {
-    if (tokenGenerator == null) throw Exception();
+    if (tokenGenerator == null) {
+      throw Exception();
+    } else {
+      if (tokenExpiry.isBefore(DateTime.now())) {
+        final tokenData = await tokenGenerator!.generate();
 
-    if (tokenExpiry.isBefore(DateTime.now())) {
-      final tokenData = await tokenGenerator!.generate();
+        _token = tokenData.accessToken;
 
-      _token = tokenData.accessToken;
-
-      tokenExpiry.add(Duration(seconds: tokenData.expiresIn));
+        tokenExpiry.add(Duration(seconds: tokenData.expiresIn));
+      }
     }
   }
 

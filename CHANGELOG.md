@@ -1,3 +1,8 @@
+## 1.2.0
+
+- Use dio cache interceptor
+- Fetch video details
+
 ## 1.1.4
 
 - bugfix for flutter build web
