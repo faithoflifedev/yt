@@ -1,6 +1,6 @@
-## 1.2.0
+## 1.2.1
 
-- Use dio cache interceptor
+- Integration of dio cache interceptor. Default dont use DioCacheIntercepter.
 - Fetch video details
 
 ## 1.1.4

@@ -5,8 +5,8 @@ import 'package:yt/yt.dart';
 class Yt {
   static final dio = Dio();
 
-  static void initCache([bool useCache = false]) {
-    if (!useCache) return;
+  static void initCache([CachePolicy? cachePolicy]) {
+    if (cachePolicy == null) return;
 
     // Add cache interceptor with global/default options
     dio.interceptors.add(
@@ -18,7 +18,7 @@ class Yt {
           // All subsequent fields are optional.
 
           // Default.
-          policy: CachePolicy.request,
+          policy: cachePolicy,
           // Returns a cached response on error but for statuses 401 & 403.
           // Also allows to return a cached response on network errors (e.g. offline usage).
           // Defaults to [null].
@@ -55,8 +55,8 @@ class Yt {
 
   Yt();
 
-  factory Yt.withKey(String apiKey, {bool useCache = false}) {
-    Yt.initCache(useCache);
+  factory Yt.withKey(String apiKey, {CachePolicy? cachePolicy}) {
+    Yt.initCache(cachePolicy);
 
     final yt = Yt();
 
@@ -81,10 +81,10 @@ class Yt {
   factory Yt.withJwt(
     String credentialsFile,
     String scope, {
-    bool useCache = false,
+    CachePolicy? cachePolicy,
   }) {
     Yt yt = Yt();
-    Yt.initCache(useCache);
+    Yt.initCache(cachePolicy);
 
     yt.tokenGenerator =
         JwtGenerator(credentialsFile: credentialsFile, scope: scope, dio: dio);
