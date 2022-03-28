@@ -1,3 +1,7 @@
+## 1.2.0
+
+- Use dio cache interceptor
+
 ## 1.1.4
 
 - bugfix for flutter build web
