@@ -16,6 +16,10 @@ VideoItem _$VideoItemFromJson(Map<String, dynamic> json) => VideoItem(
       status: json['status'] == null
           ? null
           : Status.fromJson(json['status'] as Map<String, dynamic>),
+      contentDetails: json['contentDetails'] == null
+          ? null
+          : ContentDetails.fromJson(
+              json['contentDetails'] as Map<String, dynamic>),
       statistics: json['statistics'] == null
           ? null
           : Statistics.fromJson(json['statistics'] as Map<String, dynamic>),
@@ -33,6 +37,7 @@ Map<String, dynamic> _$VideoItemToJson(VideoItem instance) => <String, dynamic>{
       'etag': instance.etag,
       'id': instance.id,
       'snippet': instance.snippet?.toJson(),
+      'contentDetails': instance.contentDetails?.toJson(),
       'status': instance.status?.toJson(),
       'statistics': instance.statistics?.toJson(),
       'player': instance.player?.toJson(),

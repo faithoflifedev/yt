@@ -1,6 +1,6 @@
 import 'package:dio/dio.dart';
 import 'package:retrofit/retrofit.dart';
-import 'package:universal_io/io.dart';
+import 'package:universal_io/io.dart' show File;
 import 'package:yt/yt.dart';
 
 part 'thumbnails.g.dart';

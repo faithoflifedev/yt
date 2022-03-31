@@ -3,7 +3,7 @@ import 'dart:convert';
 import 'package:json_annotation/json_annotation.dart';
 
 import 'snippet.dart';
-// import 'contentDetails.dart';
+import 'contentDetails.dart';
 import 'status.dart';
 import 'statistics.dart';
 import 'player.dart';
@@ -17,7 +17,7 @@ class VideoItem {
   final String etag;
   final String id;
   final Snippet? snippet;
-  // final ContentDetails? contentDetails;
+  final ContentDetails? contentDetails;
   final Status? status;
   final Statistics? statistics;
   final Player? player;
@@ -35,7 +35,7 @@ class VideoItem {
       required this.id,
       this.snippet,
       this.status,
-      // this.contentDetails,
+      this.contentDetails,
       this.statistics,
       this.player,
       this.liveStreamingDetails});
