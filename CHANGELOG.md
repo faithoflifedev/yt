@@ -1,3 +1,6 @@
+## 1.2.2
+
+- Export CachePolicy
 ## 1.2.1
 
 - Integration of dio cache interceptor. Default dont use DioCacheIntercepter.
