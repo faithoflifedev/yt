@@ -4,7 +4,7 @@ import 'package:json_annotation/json_annotation.dart';
 
 import 'snippet.dart';
 import 'status.dart';
-import 'contentDetails.dart';
+import 'content_details.dart';
 import 'player.dart';
 
 part 'playlist.g.dart';

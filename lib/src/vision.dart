@@ -1,7 +1,7 @@
 import 'package:color/color.dart';
 import 'package:dio/dio.dart';
 import 'package:yt/src/help.dart';
-import 'package:yt/src/model/vision/normalizedVertex.dart';
+import 'package:yt/src/model/vision/normalized_vertex.dart';
 import 'package:yt/src/model/vision/vertex.dart';
 import 'package:yt/yt.dart';
 

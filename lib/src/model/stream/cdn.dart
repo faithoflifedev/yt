@@ -2,7 +2,7 @@ import 'dart:convert';
 
 import 'package:json_annotation/json_annotation.dart';
 
-import 'ingestionInfo.dart';
+import 'ingestion_info.dart';
 
 part 'cdn.g.dart';
 

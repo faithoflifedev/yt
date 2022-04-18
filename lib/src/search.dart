@@ -49,8 +49,9 @@ class Search extends YouTubeHelper {
       String? videoDuration,
       String? videoEmbeddable,
       String? videoLicense,
-      String? videoSyndicated}) async {
-    if (apiKey == null)
+      String? videoSyndicated,
+      String? videoType}) async {
+    if (apiKey == null) {
       return _rest.authList(_authHeader!, accept, buildParts(partList, part),
           channelId: channelId,
           channelType: channelType,
@@ -79,8 +80,9 @@ class Search extends YouTubeHelper {
           videoDuration: videoDuration,
           videoEmbeddable: videoEmbeddable,
           videoLicense: videoLicense,
-          videoSyndicated: videoSyndicated);
-    else
+          videoSyndicated: videoSyndicated,
+          videoType: videoType);
+    } else {
       return _rest.apiKeyList(apiKey!, accept, buildParts(partList, part),
           channelId: channelId,
           channelType: channelType,
@@ -109,6 +111,8 @@ class Search extends YouTubeHelper {
           videoDuration: videoDuration,
           videoEmbeddable: videoEmbeddable,
           videoLicense: videoLicense,
-          videoSyndicated: videoSyndicated);
+          videoSyndicated: videoSyndicated,
+          videoType: videoType);
+    }
   }
 }

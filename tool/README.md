@@ -6,6 +6,10 @@ Native [Dart](https://dart.dev/) interface to multiple Google REST APIs, includi
 - [YouTube Live Streaming API](https://developers.google.com/youtube/v3/live/docs)
 - [Cloud Vision API](https://cloud.google.com/vision/docs/reference/rest) (not really a YouTube API but gives some image processing options)
 
+# New for version 2.0.0.dev.1
+
+The new release will include a cli utility that can be used to return data for any API call currently supported by this package. Please see the [README](/bin/README.md) for more information
+
 ## API Commands Supported
 
 ### Data API:

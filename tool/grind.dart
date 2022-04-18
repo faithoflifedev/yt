@@ -1,13 +1,13 @@
 import 'package:grinder/grinder.dart';
-import 'package:mustache_template/mustache.dart';
 import 'package:process_run/shell.dart';
+import 'package:simple_mustache/simple_mustache.dart';
 import 'package:universal_io/io.dart';
 import 'package:yaml/yaml.dart';
 
 main(args) => grind(args);
 
 @Task()
-test() => new TestRunner().testAsync();
+test() => TestRunner().testAsync();
 
 @DefaultTask()
 @Depends(test)
@@ -74,7 +74,7 @@ version() async {
 }
 
 Future<String> shell(
-    {String exec = 'dart', String args = '', bool verbose: true}) async {
+    {String exec = 'dart', String args = '', bool verbose = true}) async {
   final exectutable = whichSync(exec);
 
   if (exectutable == null) throw Exception();
@@ -85,7 +85,9 @@ Future<String> shell(
 
   String response = '';
 
-  result.forEach((processResult) => response += processResult.outText);
+  for (ProcessResult processResult in result) {
+    response += processResult.outText;
+  }
 
   return response;
 }
@@ -128,14 +130,14 @@ void updateMarkdown(config) {
 
     final outputFile = File(templateFileName);
 
-    final template =
-        new Template(mustacheTpl.readAsStringSync(), name: templateFileName);
+    final mustache = Mustache(map: config);
 
     switch (type) {
       case 'prepend':
         final currentContent = outputFile.readAsStringSync();
 
-        outputFile.writeAsStringSync(template.renderString(config));
+        outputFile.writeAsStringSync(
+            mustache.convert(mustacheTpl.readAsStringSync()));
 
         outputFile.writeAsStringSync(currentContent, mode: FileMode.append);
 
@@ -144,12 +146,14 @@ void updateMarkdown(config) {
       case 'overwrite':
         outputFile.deleteSync();
 
-        outputFile.writeAsStringSync(template.renderString(config));
+        outputFile.writeAsStringSync(
+            mustache.convert(mustacheTpl.readAsStringSync()));
 
         break;
 
       default:
-        outputFile.writeAsString(template.renderString(config),
+        outputFile.writeAsString(
+            mustache.convert(mustacheTpl.readAsStringSync()),
             mode: FileMode.append);
     }
   });

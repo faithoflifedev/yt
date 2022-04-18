@@ -81,7 +81,7 @@ abstract class BroadcastClient {
       @Query('id')
           String id,
       @Query('streamId')
-          String streamId,
+          String? streamId,
       @Query('part')
           String parts,
       {@Query('onBehalfOfContentOwner')
@@ -96,13 +96,13 @@ abstract class BroadcastClient {
           String authorization,
       @Header('Accept')
           String accept,
-      @Query('broadcastStatus')
-          String broadcastStatus,
       @Query('id')
           String id,
       @Query('part')
           String parts,
-      {@Query('onBehalfOfContentOwner')
+      {@Query('broadcastStatus')
+          String? broadcastStatus,
+      @Query('onBehalfOfContentOwner')
           String? onBehalfOfContentOwner,
       @Query('onBehalfOfContentOwnerChannel')
           String? onBehalfOfContentOwnerChannel});

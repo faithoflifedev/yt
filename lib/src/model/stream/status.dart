@@ -2,7 +2,7 @@ import 'dart:convert';
 
 import 'package:json_annotation/json_annotation.dart';
 
-import 'healthStatus.dart';
+import 'health_status.dart';
 
 part 'status.g.dart';
 

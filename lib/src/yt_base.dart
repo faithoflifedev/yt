@@ -51,7 +51,7 @@ class Yt {
 
   String? _apiKey;
 
-  void set token(String token) => _token = token;
+  set token(String token) => _token = token;
 
   Yt();
 

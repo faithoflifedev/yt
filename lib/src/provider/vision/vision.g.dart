@@ -6,6 +6,8 @@ part of 'vision.dart';
 // RetrofitGenerator
 // **************************************************************************
 
+// ignore_for_file: unnecessary_brace_in_string_interps
+
 class _VisionClient implements VisionClient {
   _VisionClient(this._dio, {this.baseUrl}) {
     baseUrl ??= 'https://vision.googleapis.com/v1';

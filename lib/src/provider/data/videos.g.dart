@@ -6,6 +6,8 @@ part of 'videos.dart';
 // RetrofitGenerator
 // **************************************************************************
 
+// ignore_for_file: unnecessary_brace_in_string_interps
+
 class _VideoClient implements VideoClient {
   _VideoClient(this._dio, {this.baseUrl}) {
     baseUrl ??= 'https://www.googleapis.com';

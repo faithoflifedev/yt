@@ -6,6 +6,8 @@ part of 'playlists.dart';
 // RetrofitGenerator
 // **************************************************************************
 
+// ignore_for_file: unnecessary_brace_in_string_interps
+
 class _PlaylistClient implements PlaylistClient {
   _PlaylistClient(this._dio, {this.baseUrl}) {
     baseUrl ??= 'https://www.googleapis.com/youtube/v3';

@@ -6,6 +6,8 @@ part of 'broadcast.dart';
 // RetrofitGenerator
 // **************************************************************************
 
+// ignore_for_file: unnecessary_brace_in_string_interps
+
 class _BroadcastClient implements BroadcastClient {
   _BroadcastClient(this._dio, {this.baseUrl}) {
     baseUrl ??= 'https://youtube.googleapis.com/youtube/v3';
@@ -147,14 +149,15 @@ class _BroadcastClient implements BroadcastClient {
   }
 
   @override
-  Future<LiveBroadcastItem> transition(
-      authorization, accept, broadcastStatus, id, parts,
-      {onBehalfOfContentOwner, onBehalfOfContentOwnerChannel}) async {
+  Future<LiveBroadcastItem> transition(authorization, accept, id, parts,
+      {broadcastStatus,
+      onBehalfOfContentOwner,
+      onBehalfOfContentOwnerChannel}) async {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{
-      r'broadcastStatus': broadcastStatus,
       r'id': id,
       r'part': parts,
+      r'broadcastStatus': broadcastStatus,
       r'onBehalfOfContentOwner': onBehalfOfContentOwner,
       r'onBehalfOfContentOwnerChannel': onBehalfOfContentOwnerChannel
     };

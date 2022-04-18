@@ -4,5 +4,5 @@ templates:
   - name: CHANGELOG.md
     type: prepend
 
-version: 1.2.2
-change: Export CachePolicy
+version: 2.0.0-dev.1
+change: Command line app provided

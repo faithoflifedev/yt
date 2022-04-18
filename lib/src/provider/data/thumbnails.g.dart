@@ -6,6 +6,8 @@ part of 'thumbnails.dart';
 // RetrofitGenerator
 // **************************************************************************
 
+// ignore_for_file: unnecessary_brace_in_string_interps
+
 class _ThumbnailsClient implements ThumbnailsClient {
   _ThumbnailsClient(this._dio, {this.baseUrl}) {
     baseUrl ??= 'https://www.googleapis.com/upload/youtube/v3/thumbnails';

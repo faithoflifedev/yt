@@ -1,7 +1,6 @@
 import 'package:dio/dio.dart';
 import 'package:universal_io/io.dart';
 import 'package:yt/src/help.dart';
-import 'package:yt/util/util.dart';
 import 'package:yt/yt.dart';
 
 import 'provider/data/videos.dart';
@@ -53,7 +52,7 @@ class Videos extends YouTubeHelper {
 
     final parts = buildParts(partList, part);
 
-    final httpResponse = await await _rest.location(_authHeader, accept,
+    final httpResponse = await _rest.location(_authHeader, accept,
         videoFile.lengthSync(), xUploadContentType, body, parts, uploadType,
         notifySubscribers: notifySubscribers,
         onBehalfOfContentOwner: onBehalfOfContentOwner,

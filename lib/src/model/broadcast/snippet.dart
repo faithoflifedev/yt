@@ -33,7 +33,7 @@ class Snippet {
   ///The date and time that the broadcast actually started. This information is only available once the broadcast's state is live. The value is specified in [ISO 8601](https://www.w3.org/TR/NOTE-datetime) (YYYY-MM-DDThh:mm:ss.sZ) format.
   final DateTime? actualStartTime;
 
-  @deprecated
+  @Deprecated('')
   @JsonKey(ignore: true)
   final bool? isDefaultBroadcast;
 

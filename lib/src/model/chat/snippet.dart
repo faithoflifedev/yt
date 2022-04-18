@@ -2,11 +2,11 @@ import 'dart:convert';
 
 import 'package:json_annotation/json_annotation.dart';
 
-import 'textMessageDetails.dart';
-import 'messageDeletedDetails.dart';
-import 'userBannedDetails.dart';
-import 'superChatDetails.dart';
-import 'superStickerDetails.dart';
+import 'text_message_details.dart';
+import 'message_deleted_details.dart';
+import 'user_banned_details.dart';
+import 'super_chat_details.dart';
+import 'super_sticker_details.dart';
 
 part 'snippet.g.dart';
 

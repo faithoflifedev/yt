@@ -19,7 +19,7 @@ class Snippet {
 
   ///The stream's description. The value cannot be longer than 10000 characters.
   final String description;
-  @deprecated
+  @Deprecated('')
   @JsonKey(ignore: true)
   final bool? isDefaultStream;
 
