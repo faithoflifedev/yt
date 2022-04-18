@@ -8,7 +8,7 @@ Native [Dart](https://dart.dev/) interface to multiple Google REST APIs, includi
 
 # New for version 2.0.0.dev.1
 
-The new release will include a cli utility that can be used to return data for any API call currently supported by this package. Please see the [README](/bin/README.md) for more information
+The new release will include a cli utility that can be used to return data for any API call currently supported by this package. Please see the [README](/bin/README.md) for more information.
 
 ## API Commands Supported
 

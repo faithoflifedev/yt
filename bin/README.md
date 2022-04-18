@@ -26,7 +26,7 @@ Available commands:
 |stream|A liveStream resource contains information about the video stream that you are transmitting to YouTube. The stream provides the content that will be broadcast to YouTube users. Once created, a liveStream resource can be bound to one or more liveBroadcast resources.|
 |thumbnails|A thumbnail resource identifies different thumbnail image sizes associated with a resource.|
 
-###authorize
+## authorize
 
 ```
 prompt>yt authorize
@@ -34,7 +34,7 @@ prompt>yt authorize
 
 Use this command to generate a refresh token that will allow authentication for future command line API requests. You will be rewuired to supply a **clientId** and **clientSecret** as generated through the [Obtaining authorization credentials](https://developers.google.com/youtube/v3/live/registering_an_application) in the YouTube docs.
 
-###broadcast
+## broadcast
 
 ```
 prompt>yt broadcast --help
@@ -52,7 +52,7 @@ Available subcommands:
   transition   Changes the status of a YouTube live broadcast and initiates any processes associated with the new status. For example, when you transition a broadcast's status to testing, YouTube starts to transmit video to that broadcast's monitor stream. Before calling this method, you should confirm that the value of the status.streamStatus property for the stream bound to your broadcast is active.
 ```
 
-####broadcast bind
+#### broadcast bind
 
 ```
 prompt>yt broadcast bind --help
@@ -67,7 +67,7 @@ Usage: yt broadcast bind [arguments]
     --stream-id=<stream-id>    The streamId parameter specifies the unique ID of the video stream that is being bound to a broadcast. If this parameter is omitted, the API will remove any existing binding between the broadcast and a video stream.
 ```
 
-####broadcast delete
+#### broadcast delete
 
 ```
 prompt>yt broadcast delete --help
@@ -79,7 +79,7 @@ Usage: yt broadcast delete [arguments]
     --id=<id> (mandatory)    The id parameter specifies the YouTube live broadcast ID for the resource that is being deleted.
 ```
 
-####broadcast insert
+#### broadcast insert
 
 ```
 prompt>yt help broadcast insert
@@ -95,7 +95,7 @@ Usage: yt broadcast insert [arguments]
     --body (mandatory)    Provide a liveBroadcast resource [https://developers.google.com/youtube/v3/live/docs/liveBroadcasts#resource] in the request body
 ```
 
-####broadcast list
+#### broadcast list
 
 ```
 prompt>yt broadcast list --help
@@ -124,7 +124,7 @@ Usage: yt broadcast list [arguments]
                                    (defaults to "5")
 ```
 
-####broadcast transition
+#### broadcast transition
 
 ```
 prompt>yt broadcast transition --help
@@ -144,7 +144,7 @@ Usage: yt broadcast transition [arguments]
     --id=<id> (mandatory)             The id parameter specifies the unique ID of the broadcast that is transitioning to another status.
 ```
 
-###channels
+## channels
 
 ```
 prompt>yt channels --help
@@ -159,7 +159,7 @@ Available subcommands:
   update   Updates a channel's metadata. Note that this method currently only supports updates to the channel resource's brandingSettings, invideoPromotion, and localizations objects and their child properties.
 ```
 
-###channels list
+#### channels list
 
 ```
 prompt>yt channels list --help
@@ -178,7 +178,7 @@ Usage: yt channels list [arguments]
     --id=<id>                            The id parameter specifies a comma-separated list of the YouTube channel ID(s) for the resource(s) that are being retrieved. In a channel resource, the id property specifies the channel's YouTube channel ID.
 ```
 
-###channels update
+#### channels update
 
 ```
 prompt>yt channels update --help
@@ -195,7 +195,7 @@ Usage: yt channels update [arguments]
     --body (mandatory)    Provide a liveBroadcast resource [https://developers.google.com/youtube/v3/live/docs/liveBroadcasts#resource] in the request body
 ```
 
-##chat
+## chat
 
 ```
 prompt>yt chat --help
@@ -214,7 +214,7 @@ Available subcommands:
   list     Lists live chat messages for a specific chat.
 ```
 
-###chat answer
+#### chat answer
 
 ```
 prompt>yt chat answer --help
@@ -227,7 +227,7 @@ Usage: yt chat answer [arguments]
                                (defaults to "$HOME/.yt/chatbot.yaml")
 ```
 
-###chat delete
+#### chat delete
 
 ```
 prompt>yt chat delete --help
@@ -239,7 +239,7 @@ Usage: yt chat delete [arguments]
     --id=<id> (mandatory)    The id parameter specifies the YouTube chat message ID of the resource that is being deleted.
 ```
 
-###chat insert
+#### chat insert
 
 ```
 prompt>yt chat insert --help
@@ -253,7 +253,7 @@ Usage: yt chat insert [arguments]
     --body (mandatory)    Provide a liveChatMessage resource [https://developers.google.com/youtube/v3/live/docs/liveChatMessages#resource] in the request body.
 ```
 
-###chat list
+#### chat list
 
 ```
 prompt>yt chat list --help
@@ -272,7 +272,7 @@ Usage: yt chat list [arguments]
                                              (defaults to "88")
 ```
 
-##playlists
+## playlists
 
 ```
 prompt>yt playlists --help
@@ -289,7 +289,7 @@ Available subcommands:
   update   Modifies a playlist. For example, you could change a playlist's title, description, or privacy status.
 ```
 
-###playlists delete
+#### playlists delete
 
 ```
 prompt>yt playlists delete --help
@@ -301,7 +301,7 @@ Usage: yt playlists delete [arguments]
     --id=<id> (mandatory)    The id parameter specifies the YouTube playlist ID for the playlist that is being deleted. In a playlist resource, the id property specifies the playlist's ID.
 ```
 
-###playlists insert
+#### playlists insert
 
 ```
 prompt>yt playlists insert --help
@@ -317,7 +317,7 @@ Usage: yt playlists insert [arguments]
     --body (mandatory)    Provide a liveBroadcast resource [https://developers.google.com/youtube/v3/live/docs/liveBroadcasts#resource] in the request body.
 ```
 
-###playlists list
+#### playlists list
 
 ```
 prompt>yt playlists list --help
@@ -340,7 +340,7 @@ Usage: yt playlists list [arguments]
     --page-token=<token>               The pageToken parameter identifies a specific page in the result set that should be returned. In an API response, the nextPageToken and prevPageToken properties identify other pages that could be retrieved.
 ```
 
-###playlists update
+#### playlists update
 
 ```
 prompt>yt playlists update --help
@@ -358,7 +358,7 @@ Usage: yt playlists update [arguments]
     --body (mandatory)    Provide a liveBroadcast resource [https://developers.google.com/youtube/v3/live/docs/liveBroadcasts#resource] in the request body.
 ```
 
-##search
+## search
 
 ```
 prompt>yt search --help
@@ -372,7 +372,7 @@ Available subcommands:
   list   Returns a collection of search results that match the query parameters specified in the API request. By default, a search result set identifies matching video, channel, and playlist resources, but you can also configure queries to only retrieve a specific type of resource.
 ```
 
-###search list
+#### search list
 
 ```
 prompt>yt search list --help
@@ -474,7 +474,7 @@ Usage: yt search list [arguments]
           [movie]                               Only retrieve movies.
 ```
 
-##stream
+## stream
 
 ```
 prompt>yt stream --help
@@ -491,7 +491,7 @@ Available subcommands:
   update   Updates a video stream. If the properties that you want to change cannot be updated, then you need to create a new stream with the proper settings.
 ```
 
-###stream delete
+#### stream delete
 
 ```
 prompt>yt stream delete --help
@@ -503,7 +503,7 @@ Usage: yt stream delete [arguments]
     --id=<id> (mandatory)    The id parameter specifies the YouTube live stream ID for the resource that is being deleted.
 ```
 
-###stream insert
+#### stream insert
 
 ```
 prompt>yt stream insert --help
@@ -517,7 +517,7 @@ Usage: yt stream insert [arguments]
     --body (mandatory)    Provide a liveBroadcast resource [https://developers.google.com/youtube/v3/live/docs/liveBroadcasts#resource] in the request body.
 ```
 
-###stream list
+#### stream list
 
 ```
 prompt>yt stream list --help
@@ -536,7 +536,7 @@ Usage: yt stream list [arguments]
     --page-token=<token>      The pageToken parameter identifies a specific page in the result set that should be returned. In an API response, the nextPageToken and prevPageToken properties identify other pages that could be retrieved.
 ```
 
-###stream update
+#### stream update
 
 ```
 prompt>yt stream update --help
@@ -554,7 +554,7 @@ Usage: yt stream update [arguments]
     --body (mandatory)    Provide a liveBroadcast resource [https://developers.google.com/youtube/v3/live/docs/liveBroadcasts#resource] in the request body.
 ```
 
-##thumbnails
+## thumbnails
 
 ```
 prompt>yt thumbnails --help
@@ -568,7 +568,7 @@ Available subcommands:
   set   Uploads a custom video thumbnail to YouTube and sets it for a video.
 ```
 
-###thumbnails set
+#### thumbnails set
 
 ```
 prompt>yt thumbnails set --help
