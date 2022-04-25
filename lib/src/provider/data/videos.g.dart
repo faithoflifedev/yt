@@ -130,7 +130,7 @@ class _VideoClient implements VideoClient {
   }
 
   @override
-  Future<VideoItem> update(authorization, accept, parts, video,
+  Future<VideoItem> update(authorization, accept, parts, body,
       {onBehalfOfContentOwner, onBehalfOfContentOwnerChannel}) async {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{
@@ -144,11 +144,12 @@ class _VideoClient implements VideoClient {
       r'Accept': accept
     };
     _headers.removeWhere((k, v) => v == null);
-    final _data = Stream.fromIterable(video.readAsBytesSync().map((i) => [i]));
+    final _data = <String, dynamic>{};
+    _data.addAll(body);
     final _result = await _dio.fetch<Map<String, dynamic>>(
         _setStreamType<VideoItem>(
             Options(method: 'PUT', headers: _headers, extra: _extra)
-                .compose(_dio.options, '/videos',
+                .compose(_dio.options, '/youtube/v3/videos',
                     queryParameters: queryParameters, data: _data)
                 .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
     final value = VideoItem.fromJson(_result.data!);

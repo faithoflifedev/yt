@@ -1,12 +1,13 @@
 # Youtube REST API Client
 
+[![pub package](https://img.shields.io/pub/v/yt.svg)](https://pub.dartlang.org/packages/yt)
+
 Native [Dart](https://dart.dev/) interface to multiple Google REST APIs, including:
 
 - [YouTube Data API](https://developers.google.com/youtube/v3/docs)
 - [YouTube Live Streaming API](https://developers.google.com/youtube/v3/live/docs)
-- [Cloud Vision API](https://cloud.google.com/vision/docs/reference/rest) (not really a YouTube API but gives some image processing options)
 
-# New for version 2.0.0.dev.1
+# New for version 2.0.0-dev.1
 
 The new release will include a cli utility that can be used to return data for any API call currently supported by this package. Please see the [README](/bin/README.md) for more information
 
@@ -27,10 +28,6 @@ The new release will include a cli utility that can be used to return data for a
 - [LiveBroadcasts](https://developers.google.com/youtube/v3/live/docs/liveBroadcasts)
 - [LiveChatMessages](https://developers.google.com/youtube/v3/live/docs/liveChatMessages)
 - [LiveStreams](https://developers.google.com/youtube/v3/live/docs/liveStreams)
-
-### Cloud Vision API:
-
-- [v1/images](https://cloud.google.com/vision/docs/reference/rest/v1/images)
 
 ## Getting Started
 
@@ -168,73 +165,6 @@ await th.set(
     videoId: broadcastItem.id,
     thumbnail: File('[path to an image to upload]'));
 
-```
-
-## Usage of the Cloud Vision API
-
-```dart
-final yt = Yt.withJwt('example/cloud_vision_auth.json',
-    'https://www.googleapis.com/auth/cloud-vision');
-
-final vision = await yt.vision;
-
-///the original image to be annotated
-final image = Image.fromFilePath('[a large image that will be cropped]');
-
-///crop the image to save some processing time
-final cropped = image.copyCrop(1060, 410, 460, 340);
-
-///use the API to find faces and objects
-final requests = AnnotationRequests(requests: [
-  AnnotationRequest(
-      image: cropped,
-      features: [
-        Feature(maxResults: 10, type: DetectionType.FACE_DETECTION.value),
-        Feature(maxResults: 10, type: DetectionType.OBJECT_LOCALIZATION.value)
-      ])
-]);
-
-///make the API request
-final annotatedResponses = await vision.annotate(requests: requests);
-
-///loop through any face detection and draw on the image
-annotatedResponses.responses.forEach((annotatedResponse) =>
-    annotatedResponse.faceAnnotations?.forEach((faceAnnotation) {
-      Vision.drawText(
-          cropped,
-          faceAnnotation.boundingPoly.vertices.first.x + 2,
-          faceAnnotation.boundingPoly.vertices.first.y + 2,
-          'Face - ${faceAnnotation.detectionConfidence}');
-
-      Vision.drawAnnotations(cropped, faceAnnotation.boundingPoly.vertices);
-      // print('confidence: ${faceAnnotation.detectionConfidence}')
-    }));
-
-///loop through any object only detections and draw on the image of a "Person"
-///if found
-annotatedResponses.responses.forEach((annotatedResponse) => annotatedResponse
-        .localizedObjectAnnotations
-        ?.where((localizedObjectAnnotation) =>
-            localizedObjectAnnotation.name == 'Person')
-        .toList()
-        .forEach((localizedObjectAnnotation) {
-      Vision.drawText(
-          cropped,
-          (localizedObjectAnnotation.boundingPoly.normalizedVertices.first.x *
-                  cropped.width)
-              .toInt(),
-          (localizedObjectAnnotation.boundingPoly.normalizedVertices.first.y *
-                      cropped.height)
-                  .toInt() -
-              16,
-          'Person - ${localizedObjectAnnotation.score}');
-
-      Vision.drawAnnotationsNormalized(
-          cropped, localizedObjectAnnotation.boundingPoly.normalizedVertices);
-    }));
-
-///output the results as a new image file
-await cropped.writeAsJpeg('resulting_image.jpg');
 ```
 
 ## Usage within Flutter

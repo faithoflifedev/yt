@@ -10,10 +10,10 @@ part 'oauth_credentials.g.dart';
 class OAuthCredentials {
   final String clientId;
   final String clientSecret;
-  final String code;
+  final String? code;
 
   OAuthCredentials(
-      {required this.clientId, required this.clientSecret, required this.code});
+      {required this.clientId, required this.clientSecret, this.code});
 
   factory OAuthCredentials.fromYamlFile(File yamlFile) {
     return OAuthCredentials.fromYamlString(yamlFile.readAsStringSync());

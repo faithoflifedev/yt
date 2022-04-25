@@ -14,7 +14,7 @@ class Videos extends YouTubeHelper {
 
   final String _authHeader;
 
-  Videos(this.token, this.dio)
+  Videos({required this.token, required this.dio})
       : _authHeader = 'Bearer $token',
         _rest = VideoClient(dio);
 
@@ -33,7 +33,18 @@ class Videos extends YouTubeHelper {
       String? pageToken,
       String? regionCode,
       String? videoCategoryId}) async {
-    return await _rest.list(_authHeader, accept, buildParts(partList, part));
+    return await _rest.list(_authHeader, accept, buildParts(partList, part),
+        chart: chart,
+        id: id,
+        myRating: myRating,
+        hl: hl,
+        maxHeight: maxHeight,
+        maxResults: maxResults,
+        maxWidth: maxWidth,
+        onBehalfOfContentOwner: onBehalfOfContentOwner,
+        pageToken: pageToken,
+        regionCode: regionCode,
+        videoCategoryId: videoCategoryId);
   }
 
   ///Uploads a video to YouTube and optionally sets the video's metadata.
@@ -76,10 +87,9 @@ class Videos extends YouTubeHelper {
   Future<VideoItem> update(
       {required Map<String, dynamic> body,
       String part = 'snippet,status,contentDetails',
-      List<String> partList = const [],
-      required File videoFile}) async {
+      List<String> partList = const []}) async {
     return await _rest.update(
-        _authHeader, accept, buildParts(partList, part), videoFile);
+        _authHeader, accept, buildParts(partList, part), body);
   }
 
   ///Add a like or dislike rating to a [VideoItem] or remove a rating from a [VideoItem].

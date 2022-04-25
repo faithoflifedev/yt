@@ -72,12 +72,12 @@ abstract class VideoClient {
   // });
 
   ///Updates a [VideoItem]'s metadata.
-  @PUT('/videos')
+  @PUT('/youtube/v3/videos')
   Future<VideoItem> update(
     @Header('Authorization') String authorization,
     @Header('Accept') String accept,
     @Query('part') String parts,
-    @Body() File video, {
+    @Body() Map<String, dynamic> body, {
     @Query('onBehalfOfContentOwner') String? onBehalfOfContentOwner,
     @Query('onBehalfOfContentOwnerChannel')
         String? onBehalfOfContentOwnerChannel,

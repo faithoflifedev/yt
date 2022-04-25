@@ -17,22 +17,27 @@ yt <command> [subcommand] [arguments]
 Available commands:
 |command|description|
 |--- |--- |
-|authorize|Generate a refresh token used to authenticate the command line API requests|
-|broadcast|A liveBroadcast resource represents an event that will be streamed, via live video, on YouTube.|
-|channels|A channel resource contains information about a YouTube channel.|
-|chat|A liveChatMessage resource represents a chat message in a YouTube live chat. The resource can contain details about several types of messages, including a newly posted text message or fan funding event.|
-|playlists|A playlist resource represents a YouTube playlist. A playlist is a collection of videos that can be viewed sequentially and shared with other users. By default, playlists are publicly visible to other users, but playlists can be public or private.|
-|search|A search result contains information about a YouTube video, channel, or playlist that matches the search parameters specified in an API request. While a search result points to a uniquely identifiable resource, like a video, it does not have its own persistent data.|
-|stream|A liveStream resource contains information about the video stream that you are transmitting to YouTube. The stream provides the content that will be broadcast to YouTube users. Once created, a liveStream resource can be bound to one or more liveBroadcast resources.|
-|thumbnails|A thumbnail resource identifies different thumbnail image sizes associated with a resource.|
+|[authorize](#authorize)|Generate a refresh token used to authenticate the command line API requests|
+|[broadcast](#broadcast)|A liveBroadcast resource represents an event that will be streamed, via live video, on YouTube.|
+|[channels](#channels)|A channel resource contains information about a YouTube channel.|
+|[chat](#chat)|A liveChatMessage resource represents a chat message in a YouTube live chat. The resource can contain details about several types of messages, including a newly posted text message or fan funding event.|
+|[playlists](#playlists)|A playlist resource represents a YouTube playlist. A playlist is a collection of videos that can be viewed sequentially and shared with other users. By default, playlists are publicly visible to other users, but playlists can be public or private.|
+|[search](#search)|A search result contains information about a YouTube video, channel, or playlist that matches the search parameters specified in an API request. While a search result points to a uniquely identifiable resource, like a video, it does not have its own persistent data.|
+|[stream](#stream)|A liveStream resource contains information about the video stream that you are transmitting to YouTube. The stream provides the content that will be broadcast to YouTube users. Once created, a liveStream resource can be bound to one or more liveBroadcast resources.|
+|[thumbnails](#thumbnails)|A thumbnail resource identifies different thumbnail image sizes associated with a resource.|
 
 ## authorize
 
 ```
-prompt>yt authorize
+prompt>yt authorize --help
+
+Generate a refresh token used to authenticate the command line API requests
+
+Usage: yt authorize [arguments]
+-h, --help    Print this usage information.
 ```
 
-Use this command to generate a refresh token that will allow authentication for future command line API requests. You will be rewuired to supply a **clientId** and **clientSecret** as generated through the [Obtaining authorization credentials](https://developers.google.com/youtube/v3/live/registering_an_application) in the YouTube docs.
+Use this command to generate a refresh token that will allow authentication for future command line API requests. You will be required to supply a **clientId** and **clientSecret** as generated through the [Obtaining authorization credentials](https://developers.google.com/youtube/v3/live/registering_an_application) in the YouTube docs.
 
 ## broadcast
 

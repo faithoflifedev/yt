@@ -22,7 +22,7 @@ class Thumbnails extends YouTubeHelper {
 
   final String _authHeader;
 
-  Thumbnails(this.token, this.dio)
+  Thumbnails({required this.token, required this.dio})
       : _authHeader = 'Bearer $token',
         _rest = ThumbnailsClient(dio);
 

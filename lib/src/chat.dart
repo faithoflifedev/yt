@@ -17,7 +17,7 @@ class Chat extends YouTubeHelper {
 
   final String _authHeader;
 
-  Chat(this.token, this.dio)
+  Chat({required this.token, required this.dio})
       : _authHeader = 'Bearer $token',
         _rest = ChatClient(dio);
 
@@ -155,7 +155,7 @@ class Chat extends YouTubeHelper {
     } while (liveChatMessageListResponse.nextPageToken != null);
   }
 
-  Future<void> bot(
+  Future<void> answerBot(
       {required LiveBroadcastItem liveBroadcastItem,
       required Chatbot chatbot,
       TimeStore? timeStore}) async {

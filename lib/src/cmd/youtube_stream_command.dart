@@ -60,7 +60,7 @@ class YoutubeListStreamCommand extends YtHelperCommand {
   void run() async {
     await initializeYt();
 
-    LiveStreamListResponse liveStreamListResponse = await stream.list(
+    LiveStreamListResponse liveStreamListResponse = await liveStream.list(
       part: argResults!['part'],
       id: argResults?['id'],
       mine: argResults?['mine'],
@@ -97,7 +97,7 @@ class YoutubeInsertStreamCommand extends YtHelperCommand {
   void run() async {
     await initializeYt();
 
-    LiveStreamItem liveStreamItem = await stream.insert(
+    LiveStreamItem liveStreamItem = await liveStream.insert(
       part: argResults!['part'],
       body: json.decode(argResults!['body']),
     );
@@ -136,7 +136,7 @@ Note that this method will override the existing values for all of the mutable p
   void run() async {
     await initializeYt();
 
-    LiveStreamItem liveStreamItem = await stream.insert(
+    LiveStreamItem liveStreamItem = await liveStream.insert(
       part: argResults!['part'],
       body: json.decode(argResults!['body']),
     );
@@ -165,6 +165,6 @@ class YoutubeDeleteStreamCommand extends YtHelperCommand {
   void run() async {
     await initializeYt();
 
-    await stream.delete(id: argResults!['id']);
+    await liveStream.delete(id: argResults!['id']);
   }
 }

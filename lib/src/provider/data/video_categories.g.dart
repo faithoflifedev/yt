@@ -37,7 +37,7 @@ class _VideoCategoriesClient implements VideoCategoriesClient {
     final _result = await _dio.fetch<Map<String, dynamic>>(
         _setStreamType<VideoCategoryListResponse>(
             Options(method: 'GET', headers: _headers, extra: _extra)
-                .compose(_dio.options, '/youtube/v3/videoCategories',
+                .compose(_dio.options, '/videoCategories',
                     queryParameters: queryParameters, data: _data)
                 .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
     final value = VideoCategoryListResponse.fromJson(_result.data!);

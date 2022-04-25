@@ -82,7 +82,7 @@ contentDetails, id, localizations, player, snippet, status''')
           part: argResults!['part'],
           channelId: argResults?['channel-id'],
           id: argResults?['id'],
-          mine: argResults?['mine'] != null || argResults!['mine'] != "false"
+          mine: argResults?['mine'] != null && argResults!['mine'] != "false"
               ? true
               : null,
           maxResults: int.parse(argResults!['max-results']),

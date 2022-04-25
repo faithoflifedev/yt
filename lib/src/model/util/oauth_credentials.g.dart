@@ -10,7 +10,7 @@ OAuthCredentials _$OAuthCredentialsFromJson(Map<String, dynamic> json) =>
     OAuthCredentials(
       clientId: json['clientId'] as String,
       clientSecret: json['clientSecret'] as String,
-      code: json['code'] as String,
+      code: json['code'] as String?,
     );
 
 Map<String, dynamic> _$OAuthCredentialsToJson(OAuthCredentials instance) =>

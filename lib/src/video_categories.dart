@@ -13,7 +13,9 @@ class VideoCategories extends YouTubeHelper {
 
   final String _authHeader;
 
-  VideoCategories(this.token, this.dio)
+  ///A videoCategory resource identifies a category that has been or could be
+  ///associated with uploaded videos.
+  VideoCategories({required this.token, required this.dio})
       : _authHeader = 'Bearer $token',
         _rest = VideoCategoriesClient(dio);
 
@@ -25,7 +27,7 @@ class VideoCategories extends YouTubeHelper {
       List<String> partList = const [],
       String? id,
       String? regionCode,
-      bool? hl}) async {
+      String? hl}) async {
     return await _rest.list(_authHeader, accept, buildParts(partList, part),
         id: id, regionCode: regionCode, hl: hl);
   }

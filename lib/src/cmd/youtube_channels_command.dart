@@ -58,8 +58,7 @@ auditDetails, brandingSettings, contentDetails, contentOwnerDetails, id, localiz
       final channelResponse = await channels.list(
           part: argResults!['part'],
           forUsername: argResults?['for-username'],
-          id: argResults?['id'],
-          managedByMe: argResults?['managed-by-me']);
+          id: argResults?['id']);
 
       print(channelResponse);
     } on DioError catch (err) {

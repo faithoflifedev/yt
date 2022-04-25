@@ -13,7 +13,7 @@ class Broadcast extends YouTubeHelper {
 
   final String _authHeader;
 
-  Broadcast(this.token, this.dio)
+  Broadcast({required this.token, required this.dio})
       : _authHeader = 'Bearer $token',
         _rest = BroadcastClient(dio);
 

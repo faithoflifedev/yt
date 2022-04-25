@@ -13,7 +13,7 @@ class LiveStream extends YouTubeHelper {
 
   final String _authHeader;
 
-  LiveStream(this.token, this.dio)
+  LiveStream({required this.token, required this.dio})
       : _authHeader = 'Bearer $token',
         _rest = StreamClient(dio);
 

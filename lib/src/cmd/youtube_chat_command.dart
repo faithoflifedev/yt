@@ -181,6 +181,7 @@ class YoutubeAnswerChatCommand extends YtHelperCommand {
 
     var liveBroadcastItem = await broadcast.getActiveBroadcast();
 
-    await chat.bot(liveBroadcastItem: liveBroadcastItem, chatbot: chatbot);
+    await chat.answerBot(
+        liveBroadcastItem: liveBroadcastItem, chatbot: chatbot);
   }
 }

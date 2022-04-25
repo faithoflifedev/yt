@@ -4,20 +4,20 @@ import 'package:yt/yt.dart';
 
 part 'video_categories.g.dart';
 
-///A video resource represents a YouTube video.
+///A videoCategory resource identifies a category that has been or could be associated with uploaded videos.
 @RestApi(baseUrl: 'https://www.googleapis.com/youtube/v3')
 abstract class VideoCategoriesClient {
   factory VideoCategoriesClient(Dio dio, {String baseUrl}) =
       _VideoCategoriesClient;
 
   ///Returns a list of [VideoItem]s that match the API request parameters.
-  @GET('/youtube/v3/videoCategories')
+  @GET('/videoCategories')
   Future<VideoCategoryListResponse> list(
     @Header('Authorization') String authorization,
     @Header('Accept') String accept,
     @Query('part') String parts, {
     @Query('id') String? id,
     @Query('regionCode') String? regionCode,
-    @Query('hl') bool? hl,
+    @Query('hl') String? hl,
   });
 }
