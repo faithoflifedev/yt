@@ -24,7 +24,7 @@ abstract class YtHelperCommand extends Command {
   VideoCategories get videoCategories => _yt!.videoCategories;
 
   Future<void> initializeYt() async {
-    final File configFile = File('${Util.userHome}/.yt/credentials.json');
+    final File configFile = Util.defaultCredentialsFile;
 
     if (!configFile.existsSync()) {
       throw Exception(

@@ -5,10 +5,10 @@ import 'package:yt/yt.dart';
 void main(List<String> arguments) async {
   CommandRunner(
       'yt', 'A command line interface for broadcasting to Youtube through OBS')
+    ..addCommand(YoutubeAuthorizeCommand())
     ..addCommand(YoutubeBroadcastCommand())
     ..addCommand(YoutubeChannelsCommand())
     ..addCommand(YoutubeChatCommand())
-    ..addCommand(YoutubeLoginCommand())
     ..addCommand(YoutubePlaylistsCommand())
     ..addCommand(YoutubeSearchCommand())
     ..addCommand(YoutubeStreamCommand())

@@ -65,7 +65,7 @@ version() async {
   final newTag = await isNewTag(config['version']);
 
   if (newTag) {
-    updateMarkdown(config);
+    updateMarkdown(config as YamlMap);
 
     updatePubspec(config['version']);
   }
@@ -114,7 +114,7 @@ commit(
   }
 }
 
-void updateMarkdown(config) {
+void updateMarkdown(YamlMap config) {
   final templates = config['templates'].value;
 
   templates.forEach((templateFilename) {
@@ -130,7 +130,7 @@ void updateMarkdown(config) {
 
     final outputFile = File(templateFileName);
 
-    final mustache = Mustache(map: config);
+    final mustache = Mustache(map: config.cast<String, dynamic>());
 
     switch (type) {
       case 'prepend':

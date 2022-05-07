@@ -3,14 +3,10 @@
 ///
 ///The YouTube Data API lets you incorporate functions normally executed on the
 ///YouTube website into your own website or application.
-///
-/// The Cloud Vision API integrates Google Vision features, including image
-/// labeling, face, logo, and landmark detection, optical character recognition
-/// (OCR), and detection of explicit content, into applications.
 library yt;
 
-export 'package:dio_cache_interceptor/dio_cache_interceptor.dart'
-    show CachePolicy;
+// export 'package:dio_cache_interceptor/dio_cache_interceptor.dart'
+//     show CachePolicy;
 
 export 'src/broadcast.dart';
 export 'src/channels.dart';

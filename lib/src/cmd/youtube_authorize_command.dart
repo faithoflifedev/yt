@@ -7,7 +7,7 @@ import 'package:yt/src/provider/oauth.dart';
 import 'package:yt/yt.dart';
 
 ///Generate a refresh token used to authenticate the command line API requests
-class YoutubeLoginCommand extends Command {
+class YoutubeAuthorizeCommand extends Command {
   @override
   String get description =>
       'Generate a refresh token used to authenticate the command line API requests';
@@ -21,9 +21,9 @@ class YoutubeLoginCommand extends Command {
 
     final tokenStore = <String, dynamic>{};
 
-    final credFile = File('${Util.userHome}/.yt/credentials.json');
+    final credFile = Util.defaultCredentialsFile;
 
-    final tokenFile = File('${Util.userHome}/.yt/.refreshToken.json');
+    final tokenFile = Util.defaultTokenFile;
 
     final hasCred = credFile.existsSync();
 

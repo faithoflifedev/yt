@@ -96,11 +96,11 @@ class YoutubeListBroadcastCommand extends YtHelperCommand {
           defaultsTo: 'snippet,status,contentDetails',
           help: 'The type of a pre-built template for the broadcast to start')
       ..addOption('broadcast-status',
-          defaultsTo: 'all',
+          // defaultsTo: 'all',
           allowed: ['active', 'all', 'completed', 'upcoming'],
           help:
               'The broadcastStatus parameter filters the API response to only include broadcasts with the specified status.',
-          valueHelp: 'status',
+          // valueHelp: 'status',
           allowedHelp: {
             'active': 'Return current live broadcasts.',
             'all': 'Return all broadcasts.',

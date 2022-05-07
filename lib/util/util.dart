@@ -29,4 +29,10 @@ class Util {
 
   static String? get userHome =>
       Platform.environment['HOME'] ?? Platform.environment['USERPROFILE'];
+
+  static File get defaultCredentialsFile =>
+      File('${Util.userHome}/.yt/credentials.json');
+
+  static File get defaultTokenFile =>
+      File('${Util.userHome}/.yt/.refreshToken.json');
 }

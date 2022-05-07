@@ -7,13 +7,23 @@ Native [Dart](https://dart.dev/) interface to multiple Google REST APIs, includi
 - [YouTube Data API](https://developers.google.com/youtube/v3/docs)
 - [YouTube Live Streaming API](https://developers.google.com/youtube/v3/live/docs)
 
-# New for version 2.0.0-dev.1
+## New for version 2.0.0
 
-The new release will include a cli utility that can be used to return data for any API call currently supported by this package. Please see the [README](/bin/README.md) for more information
+As of the 2.0.0 release of this package there is a cli utility included that can be used to return data for any API call currently supported by the package. If you want to get started quicky with the cli utility run these commands in a terminal session:
+
+```sh
+pub global activate yt
+
+yt --help
+```
+
+Please see the cli documentation [README.md](/bin/README.md) for more detailed usage information.
+
+**NOTE:** Cloud Vision API support has been permanently removed from this package and will be available as it's own package.  Additionally, cache support has been temporarily removed.
 
 ## API Commands Supported
 
-### Data API:
+### Data API
 
 - [Channels](https://developers.google.com/youtube/v3/docs/channels) (partial)
 - [PlaylistItems](https://developers.google.com/youtube/v3/docs/playlistItems)
@@ -23,7 +33,7 @@ The new release will include a cli utility that can be used to return data for a
 - [VideoCategoriess](https://developers.google.com/youtube/v3/docs/videoCategories)
 - [Videos](https://developers.google.com/youtube/v3/docs/videos)
 
-### Live Streaming API:
+### Live Streaming API
 
 - [LiveBroadcasts](https://developers.google.com/youtube/v3/live/docs/liveBroadcasts)
 - [LiveChatMessages](https://developers.google.com/youtube/v3/live/docs/liveChatMessages)
@@ -41,49 +51,62 @@ dependencies:
 
 ## Obtaining Authorization Credentials
 
-Youtube API access requires an access token or API key depending on the API and the type of information being accessed. As a general rule of thumb, read-only public information cand be accessed through an API key, otherwise an access token is required.
+YouTube API access requires an access token or API key depending on the API and the type of information being accessed. As a general rule of thumb, read-only public information cand be accessed through an API key, otherwise an access token is required.
 
-The yt library supports three mechanisms for authentication. All of the authentication schemes require some configuration in the [Google API console](https://developers.google.com/youtube/v3/live/registering_an_application). The document [Obtaining authorization credentials](https://developers.google.com/youtube/v3/live/registering_an_application) covers authentication with [OAuth 2.0](https://developers.google.com/identity/protocols/OAuth2) which works for both the Data API and the Live Streaming API the same document also covers authenticating with API keys which works only with the Data API.
+The yt library supports two mechanisms for authentication. All of the authentication schemes require some configuration in the [Google API console](https://developers.google.com/youtube/v3/live/registering_an_application). The document [Obtaining authorization credentials](https://developers.google.com/youtube/v3/live/registering_an_application) covers authentication with [OAuth 2.0](https://developers.google.com/identity/protocols/OAuth2) which works for both the Data API and the Live Streaming API the same document also covers authenticating with API keys which works only with the Data API.
 
 More in depth documentation on how OAuth2 works within the **yt library** is available in the [OAuth 2.0 for Mobile & Desktop Apps](https://developers.google.com/identity/protocols/oauth2/native-app) document. Overall, for OAuth2 the library takes a provided single use auth code and generates a long lived OAuth2 refresh token that is persisted as a hidden file.
 
-[Authenticating to the Cloud Vision API](https://cloud.google.com/vision/product-search/docs/auth) requires a JSON file with the JWT token information, which you can obtain by [creating a service account](https://cloud.google.com/iam/docs/creating-managing-service-accounts#creating_a_service_account) in the API console.
+Both of the above authentication methods will work for Flutter apps as well, however you may want to instead allow your app's users to use their own YouTube credentials. Instructions for authenticating this way are included at the end of this document in the _Usage within Flutter_ section.
 
-All of the above authentication methods will work for Flutter apps as well, however you may want to instead allow your app's users to use their own YouTube credentials. Instructions for authenticating this way are included at the end of this document in the _Usage within Flutter_ section.
-
-A number of the examples use OAuth 2.0 for authentication. The examples have the OAuth2 credentials made available to sample the code though a **.yaml** file that contains these lines:
+A number of the examples use OAuth 2.0 for authentication. The examples have the OAuth2 credentials made available to sample the code though a **.json** or **.yaml** file that contains these lines:
 
 ```yaml
-url: https://oauth2.googleapis.com/token
 clientId: [client id from the API console]
 clientSecret: [client secret from the API console]
 code: [single use auth code]
 ```
 
-There is an additional step required to generate the **_code_** needed for the above file. Once you have followed the instructions outlined in the YouTube docs for creating the app instance and obtaining the OAuth2 credentials, then the next step is to enter this url into a desktop browser:
+The **.json** version of this file can be generated using the cli utility:
 
-**https://accounts.google.com/o/oauth2/auth?client_id=[client_id_from_the_API_console]&redirect_uri=urn:ietf:wg:oauth:2.0:oob&scope=https://www.googleapis.com/auth/youtube&response_type=code**
+```sh
+#make sure you've created an app instance in the Goolge API console
+#make sure you've already activated the cli utility "pub global activate yt"
 
-Once you have completed the steps to authorize the provdided account with the app created in the API console, you will be presented with an single use authorization code. The code is entered as the **_code_** line in the _yaml_ file above.
+yt authorize
 
-## Usage of the Data API
+#follow the prompts to provide clientID, clientSecret, then use a browser to 
+#authenticate and generate the one-time code
+```
+
+After following the steps provided by the **_cli_** command, your credential file will be auto created as `$HOME/.yt/credentials.json`
+
+Alternatively, if you want to manually create your credentials file, then you will need to use a browser to generate the required one-time **_code_**. Once you have followed the instructions outlined in the YouTube docs for creating the app instance and obtaining the OAuth2 credentials, then the next step is to enter this url into a desktop browser:
+
+```txt
+https://accounts.google.com/o/oauth2/auth?client_id=[client_id_from_the_API_console]&redirect_uri=urn:ietf:wg:oauth:2.0:oob&scope=https://www.googleapis.com/auth/youtube&response_type=code
+```
+
+After following the steps to authorize the provdided account with the app created in the API console, you will be presented with an single use authorization code. The code is entered as the **_code_** line in the _yaml_ or _json_file referenced above.
+
+## Using of the Data API
 
 Youtube provides multiple methods for API authentication. The Data API can use both API key and OAuth for authentication the example below shows how both of these
 
 ```dart
 import 'package:yt/yt.dart';
 
-//authenticate using OAuth
-final yt = Yt.withOAuth(OAuthCredentials.fromYaml('example/youtube.yaml'));
+//if you used "yt authorize" to generate a credentials file
+final yt = await Yt.withOAuth();
 
-//alternatively, some APIs can use an API Key for authentication
-//final yt = Yt.withKey('[youtube api key]');
+//authenticate using OAuth - manually created file
+//final yt = await Yt.withOAuth(OAuthCredentials.fromYaml('example/youtube.yaml'));
 
-///get an instance of the playlists API client
-final playlists = await yt.playlists;
+//some APIs can use an API Key for authentication
+//final yt = await Yt.withKey('[youtube api key]');
 
 // List of videos from playlist
-var playlistResponse = await playlists.list(
+var playlistResponse = await yt.playlists.list(
       channelId: '[youtube channel id]', maxResults: 25);
 
 playlistResponse.items
@@ -93,9 +116,7 @@ playlistResponse.items
 ## Upload a Video
 
 ```dart
-final yt = Yt.withOAuth(OAuthCredentials.fromYaml('example/youtube.yaml'));
-
-final videos = await yt.videos;
+final yt = await Yt.withOAuth();
 
 final body = <String, dynamic>{
   'snippet': {
@@ -111,7 +132,7 @@ final body = <String, dynamic>{
   }
 };
 
-final videoItem = await videos.insert(
+final videoItem = await yt.videos.insert(
     body: body,
     videoFile:
         File('[path to a video to upload]'),
@@ -120,18 +141,18 @@ final videoItem = await videos.insert(
 print(videoItem);
 ```
 
-## Usage of the Live Streaming API
+## Using the Live Streaming API
 
 ```dart
 import 'package:yt/yt.dart';
 
-final yt = Yt.withOAuth(OAuthCredentials.fromYaml('example/youtube.yaml'));
+final yt = await Yt.withOAuth();
 
 ///the live streaming broadcast API client
-final br = await yt.broadcast;
+final br = yt.broadcast;
 
 ///the thumbnail data API client
-final th = await yt.thumbnails;
+final th = yt.thumbnails;
 
 ///create a private broadcast for 2 hours from now
 final broadcastItem = await br.insert(body: {
@@ -171,7 +192,7 @@ await th.set(
 
 This library does not include any Flutter dependencies but it can be easily integrated with Flutter code using any of the authentication mechanisms described above. In addition, for some applications there may be a desire to use the user's own YouTube credentials for authentication. The library uses the concept of a [TokenGenerator](https://pub.dev/documentation/yt/latest/yt/util_tokenGenerator/TokenGenerator-class.html) to allow for this. [TokenGenerator](https://pub.dev/documentation/yt/latest/yt/util_tokenGenerator/TokenGenerator-class.html) is an abstract class that is extended within the library through the [JwtGenerator](https://pub.dev/documentation/yt/latest/yt/util_tokenGenerator/JwtGenerator-class.html) and [OAuthGenerator](https://pub.dev/documentation/yt/latest/yt/util_tokenGenerator//OAuthGenerator-class.html) classes, and generates the authentication token used in API calls to YouTube.
 
-For a Flutter app the [TokenGenerator](https://pub.dev/documentation/yt/latest/yt/util_tokenGenerator/TokenGenerator-class.html) can be extended to allow for auth tokens to be generated through the [google_sign_in](https://pub.dev/packages/google_sign_in) pacakge provided by the [flutter.dev](https://pub.dev/publishers/flutter.dev/packages) team. Keep in mind that you must fulfill all of the requirements for the **google_sign_in** package before attempting to use the code below. The code to use google_sign_in for authentication this looks like this:
+For a Flutter app the [TokenGenerator](https://pub.dev/documentation/yt/latest/yt/util_tokenGenerator/TokenGenerator-class.html) can be extended to allow for auth tokens to be generated through the [google_sign_in](https://pub.dev/packages/google_sign_in) pacakge provided by the [flutter.dev](https://pub.dev/publishers/flutter.dev/packages) team. Keep in mind that you must fulfill all of the requirements for the **google_sign_in** package before attempting to use the code below. The code to use google_sign_in for authentication:
 
 ```dart
 import 'package:google_sign_in/google_sign_in.dart';
@@ -204,47 +225,78 @@ class YtLoginGenerator implements TokenGenerator {
 With the generator in place, it becomes quite easy to include _google sign-in_ for YouTube into your Flutter app. In one of your controllers you would include code like:
 
 ```dart
-late final Broadcast broadcast;
+  //class definitions for a Flutter app
+  ...
+  final items = <Playlist>[];
 
-final Yt yt = Yt();
+  late final Yt yt;
 
-@override
-void onInit() {
-  super.onInit();
+  Playlists? playlists;
 
-  yt.tokenGenerator = YtLoginGenerator();
+  @override
+  void initState() {
+    super.initState();
 
-  init();
-}
+    _init();
+  }
 
-Future<void> init() async {
-  broadcast = await yt.broadcast;
-}
+  void _init() async {
+    yt = await Yt.withGenerator(YtLoginGenerator());
+  }
 
-Future<LiveBroadcastItem> getBroadcast(String broadcastStatus) async {
-  LiveBroadcastResponse liveBroadcastResponse =
-      await broadcast.list(broadcastStatus: broadcastStatus, maxResults: 50);
+  void _getPlaylists() async {
+    items.clear();
 
-  return liveBroadcastResponse.items.isNotEmpty
-      ? liveBroadcastResponse.items
-      : <LiveBroadcastItem>[];
-}
+    setState(() {
+      items.addAll(await yt.playlists.list(mine: true));
+    });
+  }
+
+    @override
+  Widget build(BuildContext context) {
+    //ListView.builder
+    ...
+    floatingActionButton: FloatingActionButton(
+        onPressed: _getPlaylists,
+        child: Icon(Icons.add),
+      )
+  }
 ```
 
 ## Available Examples
 
+- [example.dart](https://github.com/faithoflifedev/yt/blob/main/example/example.dart) - (command line) display various YouTube data
 - [flutter_playlist](https://github.com/faithoflifedev/yt/tree/main/example/flutter_playlist) - display a YouTube playlist in a ListView
-- [yt_channels.dart](https://github.com/faithoflifedev/yt/blob/main/example/yt_channels.dart) - (command line) display YouTube channels
-- [yt_playlistIyems.dart](https://github.com/faithoflifedev/yt/blob/main/example/yt_playlistItems.dart) - (command line) display a list of videos from a playlist
-- [yt_chat.dart](https://github.com/faithoflifedev/yt/blob/main/example/yt_chat.dart) - (command line) display the chat history from a running live broadcast
-- [yt_playlist.dart](https://github.com/faithoflifedev/yt/blob/main/example/yt_playlist.dart) - (command line) display a YouTube playlist
-- [yt_vision.dart](https://github.com/faithoflifedev/yt/blob/main/example/yt_vision.dart) - (command line) draw a box around faces and other objects in a photo
 
 ## What's Next?
 
 - ~~A working sample Flutter app~~
 - Expanded API Commands
-- Improved documentation
+
+## Breaking change in v2.0.0 from v1.2.x
+
+The `Yt` object now returuns a `Future` and the reference to a specific API module is no longer a `Future`.  So now you can use the following code:
+
+```dart
+final yt = await Yt.withOAuth(); //uses default credentials file, created with "yt authorize" cli utility
+
+final playlists = yt.playlists;
+
+var playlistResponse = await yt.playlists.list(
+      channelId: '[youtube channel id]', maxResults: 25);
+```
+
+in place of:
+
+```dart
+final yt = Yt.withOAuth(OAuthCredentials.fromYaml('example/youtube.yaml'));
+
+final playlists = await yt.playlists;
+
+var playlistResponse = await yt.playlists.list(
+      channelId: '[youtube channel id]', maxResults: 25);
+
+```
 
 ## Breaking change in v1.1.0 from v1.0.x
 
@@ -274,3 +326,5 @@ await th.set(
     videoId: broadcastItem.id,
     thumbnail: File('[path to an image to upload]'));
 ```
+
+[![Buy me a coffee](https://www.buymeacoffee.com/assets/img/guidelines/download-assets-1.svg)](https://www.buymeacoffee.com/faithoflif2)

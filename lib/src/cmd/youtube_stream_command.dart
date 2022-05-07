@@ -42,7 +42,6 @@ class YoutubeListStreamCommand extends YtHelperCommand {
           help:
               'The id parameter specifies a comma-separated list of YouTube stream IDs that identify the streams being retrieved. In a liveStream resource, the id property specifies the stream\'s ID.')
       ..addFlag('mine',
-          defaultsTo: true,
           help:
               'This parameter can only be used in a properly authorized request. The mine parameter can be used to instruct the API to only return streams owned by the authenticated user. Set the parameter value to true to only retrieve your own streams.')
       ..addOption('max-results',
@@ -63,7 +62,7 @@ class YoutubeListStreamCommand extends YtHelperCommand {
     LiveStreamListResponse liveStreamListResponse = await liveStream.list(
       part: argResults!['part'],
       id: argResults?['id'],
-      mine: argResults?['mine'],
+      mine: argResults?['mine'] ? true : null,
       maxResults: int.parse(argResults!['max-results']),
     );
 
