@@ -23,7 +23,7 @@ pub global activate yt
 yt --help
 ```
 
-Please see the cli documentation [README.md](/bin/README.md) for more detailed usage information.
+Please see the cli documentation [README.md](https://github.com/faithoflifedev/yt/tree/main/bin) for more detailed usage information.
 
 **NOTE:** Cloud Vision API support has been permanently removed from this package and will be available as it's own package.  Additionally, cache support has been temporarily removed.
 
