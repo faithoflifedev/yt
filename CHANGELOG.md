@@ -1,3 +1,6 @@
+## 2.0.2
+
+- better chatbot docs
 ## 2.0.1
 
 - added chatbot example, better docs

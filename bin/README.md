@@ -11,7 +11,25 @@ pub global activate yt
 Usage:
 
 ```sh
-yt <command> [subcommand] [arguments]
+prompt>yt --help
+A command line interface for connecting to Youtube
+
+Usage: yt <command> [arguments]
+
+Global options:
+-h, --help    Print this usage information.
+
+Available commands:
+  authorize          Generate a refresh token used to authenticate the command line API requests
+  broadcast          A liveBroadcast resource represents an event that will be streamed, via live video, on YouTube.
+  channels           A channel resource contains information about a YouTube channel.
+  chat               A liveChatMessage resource represents a chat message in a YouTube live chat. The resource can contain details about several types of messages, including a newly posted text message or fan funding event.
+  playlists          A playlist resource represents a YouTube playlist. A playlist is a collection of videos that can be viewed sequentially and shared with other users. By default, playlists are publicly visible to other users, but playlists can be public or private.
+  search             A search result contains information about a YouTube video, channel, or playlist that matches the search parameters specified in an API request. While a search result points to a uniquely identifiable resource, like a video, it does not have its own persistent data.
+  stream             A liveStream resource contains information about the video stream that you are transmitting to YouTube. The stream provides the content that will be broadcast to YouTube users. Once created, a liveStream resource can be bound to one or more liveBroadcast resources.
+  thumbnails         A thumbnail resource identifies different thumbnail image sizes associated with a resource.
+  video-categories   A videoCategory resource identifies a category that has been or could be associated with uploaded videos.
+  videos             A video resource represents a YouTube video.
 ```
 
 Available commands:
@@ -25,6 +43,22 @@ Available commands:
 |[search](#search)|A search result contains information about a YouTube video, channel, or playlist that matches the search parameters specified in an API request. While a search result points to a uniquely identifiable resource, like a video, it does not have its own persistent data.|
 |[stream](#stream)|A liveStream resource contains information about the video stream that you are transmitting to YouTube. The stream provides the content that will be broadcast to YouTube users. Once created, a liveStream resource can be bound to one or more liveBroadcast resources.|
 |[thumbnails](#thumbnails)|A thumbnail resource identifies different thumbnail image sizes associated with a resource.|
+
+Just like the main library, any responses provided by the above commands will be given in the JSON format.  So ideally, you will want to use a command line json parser to interpret the results.  The recommended json parser for this purpose is [_jq_](https://stedolan.github.io/jq/).  With _jq_ you can process the results of a command as follows:
+
+## Quick start
+
+```sh
+#step 1
+onvif authorize
+#follow prompts
+
+#step 2
+yt playlists list --part snippet,contentDetails --id PLjxrf2q8roU3BopVma21AnrhDD_12Bu1w | jq -r '.items[] | "title: " + .snippet.title + "\nthumbnail: " + .snippet.thumbnails.default.url'
+#output would be
+title: Get ready for Flutter at Google I/O
+thumbnail: https://i.ytimg.com/vi/IdrCyS7EF8M/default.jpg
+```
 
 ## authorize
 

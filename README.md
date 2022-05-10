@@ -23,7 +23,7 @@ pub global activate yt
 yt --help
 ```
 
-Please see the cli documentation [README.md](/bin/README.md) for more detailed usage information.
+Please see the cli documentation [README.md](https://github.com/faithoflifedev/yt/tree/main/bin) for more detailed usage information.
 
 **NOTE:** Cloud Vision API support has been permanently removed from this package and will be available as it's own package.  Additionally, cache support has been temporarily removed.
 
@@ -57,7 +57,7 @@ To use this package, add the dependency to your pubspec.yaml file:
 ```yaml
 dependencies:
   ...
-  yt: ^2.0.1
+  yt: ^2.0.2
 ```
 
 ## Obtaining Authorization Credentials
@@ -234,9 +234,7 @@ if (broadcastResponse.items.isNotEmpty) {
   final liveBroadcastItem = broadcastResponse.items.first;
 
   //setup the chatbot with a custom dialog
-  final chatbot = Chatbot(
-      botName: ':robot: FLN Bot Automated Message',
-      dialogs: DialogLoader.fromYamlFile('dialogs.yaml'));
+  final chatbot = Chatbot.fromYaml(File('chatbot.yaml'));
 
   //if being run periodically you will want to provide a TimeStore to persist
   //a timestamp that will ensure the chatbot doesn't repeat answers

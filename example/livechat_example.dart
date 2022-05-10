@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:yt/yt.dart';
 
 void main() async {
@@ -16,9 +18,7 @@ void main() async {
   if (broadcastResponse.items.isNotEmpty) {
     final liveBroadcastItem = broadcastResponse.items.first;
 
-    final chatbot = Chatbot(
-        botName: ':robot: FLN Bot Automated Message',
-        dialogs: DialogLoader.fromYamlFile('dialogs.yaml'));
+    final chatbot = Chatbot.fromYaml(File('chatbot.yaml'));
 
     //if being run periodically you will want to provide a TimeStore to persist
     //a timestamp that will ensure the chatbot doesn't repeat answers
