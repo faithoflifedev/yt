@@ -18,7 +18,8 @@ class Channels extends YouTubeHelper {
         _rest = ChannelClient(dio);
 
   Future<ChannelResponse> list(
-      {String part = 'contentDetails,id,localizations,player,snippet,status',
+      {String part =
+          'contentDetails,id,localizations,snippet,status,brandingSettings',
       List<String> partList = const [],
       String? categoryId,
       String? forUsername,
@@ -29,7 +30,7 @@ class Channels extends YouTubeHelper {
       int? maxResults,
       String? onBehalfOfContentOwner,
       String? pageToken}) async {
-    if (apiKey == null)
+    if (apiKey == null) {
       return _rest.authList('Bearer $token', accept, buildParts(partList, part),
           categoryId: categoryId,
           forUsername: forUsername,
@@ -40,7 +41,7 @@ class Channels extends YouTubeHelper {
           maxResults: maxResults,
           onBehalfOfContentOwner: onBehalfOfContentOwner,
           pageToken: pageToken);
-    else
+    } else {
       return _rest.apiKeyList(apiKey!, accept, buildParts(partList, part),
           categoryId: categoryId,
           forUsername: forUsername,
@@ -51,6 +52,7 @@ class Channels extends YouTubeHelper {
           maxResults: maxResults,
           onBehalfOfContentOwner: onBehalfOfContentOwner,
           pageToken: pageToken);
+    }
   }
 
   ///Modifies a Channels For example, you could change a Channelss title, description, or privacy status.

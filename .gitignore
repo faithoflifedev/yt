@@ -23,6 +23,7 @@ doc/api/
 *.js.deps
 *.js.map
 
+sh/
 scratch/
 .pubspec.yaml.bak
 .refreshToken.json
@@ -30,11 +31,4 @@ notes.txt
 
 .pubignore
 
-example/flutter_playlist/build
-example/flutter_playlist/res/youtube.yaml
-example/my_images/
-example/skc-live-creds.json
-example/youtube.yaml
-example/upload.yaml
-
-bin/
+example/flutter_playlist/ios/Runner/GoogleService-Info.plist

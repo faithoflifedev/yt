@@ -1,45 +1,44 @@
-import 'dart:io';
-
 import 'package:yt/yt.dart';
 
 void main() async {
-  final yt = Yt.withOAuth(OAuthCredentials.fromYaml('example/youtube.yaml'));
+  final yt = await Yt.withOAuth();
 
-  final br = await yt.broadcast;
+  final searchListResponse = await yt.search
+      .list(q: 'reddit', part: 'snippet', type: 'video'); //the Flutter channel
 
-  final th = await yt.thumbnails;
+  print('\nSearch:');
+  for (SearchResult searchResult in searchListResponse.items) {
+    print('''title: ${searchResult.snippet?.title}, 
+thumbnail: ${searchResult.snippet?.thumbnails.thumbnailsDefault.url}
+channel title: ${searchResult.snippet?.channelTitle}''');
+  }
 
-  final broadcastItem = await br.insert(body: {
-    'snippet': {
-      'title': 'TEST AGAIN',
-      'description': 'Test',
-      'scheduledStartTime':
-          DateTime.now().add(Duration(hours: 2)).toUtc().toIso8601String()
-    },
-    'status': {'privacyStatus': 'private'},
-    'contentDetails': {
-      'monitorStream': {
-        'enableMonitorStream': false,
-        'broadcastStreamDelayMs': 10
-      },
-      'enableDvr': true,
-      'enableContentEncryption': true,
-      'enableEmbed': true,
-      'recordFromStart': true,
-      'startWithSlate': false
-    }
-  }, part: 'snippet,status,contentDetails');
+  print('Playlist: [a playlist id]');
+  final playlistResponse = await yt.playlists.list(id: '[a playlist id]');
 
-  await br.bind(
-      broadcastId: broadcastItem.id,
-      streamId: 'nryUpLOoYOYhjAwN6E4Wvw1589352667178384');
+  for (Playlist playlist in playlistResponse.items) {
+    print('''title: ${playlist.snippet?.title},
+thumbnail: ${playlist.snippet?.thumbnails.thumbnailsDefault.url}''');
+  }
 
-  print(broadcastItem);
+  final channelsResponse = await yt.channels.list(
+      id: '[a channel id]',
+      part: 'snippet,contentDetails'); //the Flutter channel
 
-  await th.set(
-      videoId: broadcastItem.id,
-      thumbnail: File(
-          '/Users/chris/projects/skc/broadcast/broadcast_cli/thumbnail/pre-iftar.jpg'));
+  print('\nChannel: [a channel id]');
+  for (ChannelItem channelItem in channelsResponse.items) {
+    print('''title: ${channelItem.snippet?.title},
+thumbnail: ${channelItem.snippet?.thumbnails?.thumbnailsDefault.url}
+relatedPlaylists: ${channelItem.contentDetails?.relatedPlaylists.uploads}''');
+  }
 
-  print('image uploaded');
+  final liveBroadcastResponse = await yt.broadcast.list(
+      mine: true, part: 'snippet,contentDetails,status'); //the Flutter channel
+
+  print('\nBroadcasts:');
+  for (LiveBroadcastItem broadcastItem in liveBroadcastResponse.items) {
+    print('''title: ${broadcastItem.snippet?.title},
+thumbnail: ${broadcastItem.snippet?.thumbnails?.thumbnailsDefault.url}
+status: ${broadcastItem.status?.lifeCycleStatus}''');
+  }
 }

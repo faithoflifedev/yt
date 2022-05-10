@@ -1,3 +1,15 @@
+## 2.0.2
+
+- better chatbot docs
+## 2.0.1
+
+- added chatbot example, better docs
+## 2.0.0
+
+- Command line app provided, some functional updates
+## 1.2.2
+
+- Export CachePolicy
 ## 1.2.1
 
 - Integration of dio cache interceptor. Default dont use DioCacheIntercepter.

@@ -1,5 +1,7 @@
 import 'dart:convert';
 
+import 'package:universal_io/io.dart';
+
 class Util {
   static String base64GCloudString(String data) =>
       Util.base64GCloudList(utf8.encode(data));
@@ -18,9 +20,19 @@ class Util {
   static String getUploadIdFromUrl(String locationUrl) {
     final locationUri = Uri.parse(locationUrl);
 
-    if (!locationUri.queryParameters.containsKey('upload_id'))
+    if (!locationUri.queryParameters.containsKey('upload_id')) {
       throw Exception('The uplaod ID has not been found.');
+    }
 
     return locationUri.queryParameters['upload_id']!;
   }
+
+  static String? get userHome =>
+      Platform.environment['HOME'] ?? Platform.environment['USERPROFILE'];
+
+  static File get defaultCredentialsFile =>
+      File('${Util.userHome}/.yt/credentials.json');
+
+  static File get defaultTokenFile =>
+      File('${Util.userHome}/.yt/.refreshToken.json');
 }

@@ -26,7 +26,9 @@ class Playlists extends YouTubeHelper {
       : _authHeader = token != null ? 'Bearer $token' : null,
         _rest = PlaylistClient(dio);
 
-  ///Returns a collection of playlists that match the API request parameters. For example, you can retrieve all playlists that the authenticated user owns, or you can retrieve one or more playlists by their unique IDs.
+  ///Returns a collection of playlists that match the API request parameters.
+  ///For example, you can retrieve all playlists that the authenticated user
+  ///owns, or you can retrieve one or more playlists by their unique IDs.
   Future<PlaylistResponse> list(
       {String part = 'contentDetails,id,localizations,player,snippet,status',
       List<String> partList = const [],
@@ -37,7 +39,7 @@ class Playlists extends YouTubeHelper {
       String? onBehalfOfContentOwner,
       String? onBehalfOfContentOwnerChannel,
       String? pageToken}) async {
-    if (apiKey == null)
+    if (apiKey == null) {
       return _rest.authList('Bearer $token', accept, buildParts(partList, part),
           channelId: channelId,
           id: id,
@@ -46,7 +48,7 @@ class Playlists extends YouTubeHelper {
           onBehalfOfContentOwner: onBehalfOfContentOwner,
           onBehalfOfContentOwnerChannel: onBehalfOfContentOwnerChannel,
           pageToken: pageToken);
-    else
+    } else {
       return _rest.apiKeyList(apiKey!, accept, buildParts(partList, part),
           channelId: channelId,
           id: id,
@@ -55,6 +57,7 @@ class Playlists extends YouTubeHelper {
           onBehalfOfContentOwner: onBehalfOfContentOwner,
           onBehalfOfContentOwnerChannel: onBehalfOfContentOwnerChannel,
           pageToken: pageToken);
+    }
   }
 
   ///Creates a playlist.

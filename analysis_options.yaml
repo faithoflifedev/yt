@@ -1,0 +1,7 @@
+include: package:lints/recommended.yaml
+
+analyzer:
+  exclude:
+    # workaround for https://github.com/dart-lang/sdk/issues/42910
+    - "example/flutter_playlist/**"
+    - "lib/**.g.dart"

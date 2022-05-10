@@ -6,6 +6,8 @@ part of 'channels.dart';
 // RetrofitGenerator
 // **************************************************************************
 
+// ignore_for_file: unnecessary_brace_in_string_interps
+
 class _ChannelClient implements ChannelClient {
   _ChannelClient(this._dio, {this.baseUrl}) {
     baseUrl ??= 'https://www.googleapis.com/youtube/v3';

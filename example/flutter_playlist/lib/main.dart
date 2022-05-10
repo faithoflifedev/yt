@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart' show rootBundle;
-import 'package:yt/yt.dart' hide Image;
+import 'package:google_sign_in/google_sign_in.dart';
+import 'package:yt/yt.dart';
 
 void main() {
   runApp(MyApp());
@@ -31,7 +31,7 @@ class MyHomePage extends StatefulWidget {
 class _MyHomePageState extends State<MyHomePage> {
   final items = <Playlist>[];
 
-  Yt? yt;
+  late final Yt yt;
 
   Playlists? playlists;
 
@@ -39,25 +39,19 @@ class _MyHomePageState extends State<MyHomePage> {
   void initState() {
     super.initState();
 
-    init();
+    _init();
   }
 
-  Future<void> init() async {
-    final yamlString = await rootBundle.loadString('res/youtube.yaml');
-
-    yt = Yt.withOAuth(OAuthCredentials.fromYamlString(yamlString));
-
-    if (yt == null) throw Exception();
-
-    playlists = await yt!.playlists;
+  void _init() async {
+    yt = await Yt.withGenerator(YtLoginGenerator());
   }
 
   void _getPlaylists() async {
-    if (playlists == null) throw Exception();
+    // if (playlists == null) throw Exception();
 
     items.clear();
 
-    final playlistResponse = await playlists!.list(mine: true);
+    final playlistResponse = await yt.playlists.list(mine: true);
 
     setState(() {
       items.addAll(playlistResponse.items);
@@ -90,7 +84,7 @@ class _MyHomePageState extends State<MyHomePage> {
                   child: Image.network(
                       items[index].snippet!.thumbnails.thumbnailsDefault.url),
                 ),
-                title: Text('${items[index].snippet!.title}'),
+                title: Text(items[index].snippet!.title),
               );
             }),
       ),
@@ -100,5 +94,28 @@ class _MyHomePageState extends State<MyHomePage> {
         child: Icon(Icons.add),
       ), // This trailing comma makes auto-formatting nicer for build methods.
     );
+  }
+}
+
+class YtLoginGenerator implements TokenGenerator {
+  final GoogleSignIn _googleSignIn = GoogleSignIn(
+    scopes: [
+      'email',
+      'https://www.googleapis.com/auth/youtube',
+    ],
+  );
+
+  @override
+  Future<Token> generate() async {
+    var _currentUser = await _googleSignIn.signInSilently();
+
+    _currentUser ??= await _googleSignIn.signIn();
+
+    final token = (await _currentUser!.authentication).accessToken;
+
+    if (token == null) throw Exception();
+
+    return Token(
+        accessToken: token, expiresIn: 3599, scope: null, tokenType: '');
   }
 }

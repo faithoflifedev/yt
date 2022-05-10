@@ -6,6 +6,8 @@ part of 'stream.dart';
 // RetrofitGenerator
 // **************************************************************************
 
+// ignore_for_file: unnecessary_brace_in_string_interps
+
 class _StreamClient implements StreamClient {
   _StreamClient(this._dio, {this.baseUrl}) {
     baseUrl ??= 'https://youtube.googleapis.com/youtube/v3';
