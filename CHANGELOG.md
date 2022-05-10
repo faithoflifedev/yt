@@ -7,9 +7,6 @@
 ## 2.0.0
 
 - Command line app provided, some functional updates
-## 2.0.0
-
-- Command line app provided, some functional updates
 ## 1.2.2
 
 - Export CachePolicy
