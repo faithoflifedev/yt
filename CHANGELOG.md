@@ -1,3 +1,6 @@
+## 2.0.1
+
+- added chatbot example, better docs
 ## 2.0.0
 
 - Command line app provided, some functional updates

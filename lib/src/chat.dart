@@ -60,6 +60,7 @@ class Chat extends YouTubeHelper {
     return _rest.delete(_authHeader, accept, id);
   }
 
+  ///Send a message to the liveChat session.
   Future<void> send(
       {required String message,
       String? chatId,
@@ -83,6 +84,9 @@ class Chat extends YouTubeHelper {
     await insert(body: chatMessage);
   }
 
+  ///Download the liveChat history.  If a [File] is specified then the data will
+  ///be stored there otherwise if a [TimeStore] is specfied, only history with a
+  ///timestamp greater than that given by the TimeStore will be diwnloaded.
   Future<void> downloadHistory(
       {required LiveBroadcastItem liveBroadcastItem,
       File? file,
@@ -155,6 +159,7 @@ class Chat extends YouTubeHelper {
     } while (liveChatMessageListResponse.nextPageToken != null);
   }
 
+  ///Use a [Chatbot] to answer questions in the liveChat.
   Future<void> answerBot(
       {required LiveBroadcastItem liveBroadcastItem,
       required Chatbot chatbot,

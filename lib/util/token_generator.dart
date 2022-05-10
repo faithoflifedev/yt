@@ -73,11 +73,17 @@ class OAuthGenerator implements TokenGenerator {
       tokenFile.writeAsStringSync(json.encode(tokenStore));
     }
 
-    return await oAuthClient.getToken({
-      'client_id': oauthCredentials.clientId,
-      'client_secret': oauthCredentials.clientSecret,
-      'refresh_token': refreshToken,
-      'grant_type': 'refresh_token'
-    });
+    try {
+      final token = await oAuthClient.getToken({
+        'client_id': oauthCredentials.clientId,
+        'client_secret': oauthCredentials.clientSecret,
+        'refresh_token': refreshToken,
+        'grant_type': 'refresh_token'
+      });
+
+      return token;
+    } on DioError catch (err) {
+      throw Exception(err.response?.data);
+    }
   }
 }

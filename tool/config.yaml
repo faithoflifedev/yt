@@ -4,5 +4,5 @@ templates:
   - name: CHANGELOG.md
     type: prepend
 
-version: 2.0.0
-change: Command line app provided, some functional updates
+version: 2.0.1
+change: added chatbot example, better docs

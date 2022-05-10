@@ -7,6 +7,12 @@ Native [Dart](https://dart.dev/) interface to multiple Google REST APIs, includi
 - [YouTube Data API](https://developers.google.com/youtube/v3/docs)
 - [YouTube Live Streaming API](https://developers.google.com/youtube/v3/live/docs)
 
+## How does this package differ from the [googleapis](https://pub.dev/packages/googleapis) package?
+
+- It's not generated, it's manually coded and limited to a targetted set to just YouTube APIs
+- Since it's not generated the package includes additional useful features like a cli (Command Line Interface) and the experimental Chatbot
+- A tighter focus to the package means focused documentation and focused examples
+
 ## New for version 2.0.0
 
 As of the 2.0.0 release of this package there is a cli utility included that can be used to return data for any API call currently supported by the package. If you want to get started quicky with the cli utility run these commands in a terminal session:
@@ -38,6 +44,11 @@ Please see the cli documentation [README.md](/bin/README.md) for more detailed u
 - [LiveBroadcasts](https://developers.google.com/youtube/v3/live/docs/liveBroadcasts)
 - [LiveChatMessages](https://developers.google.com/youtube/v3/live/docs/liveChatMessages)
 - [LiveStreams](https://developers.google.com/youtube/v3/live/docs/liveStreams)
+
+### Custom Features (experimental)
+
+- download chat history from a LiveChat
+- simple chatbot functionality for LiveChat
 
 ## Getting Started
 
@@ -185,7 +196,53 @@ await br.bind(
 await th.set(
     videoId: broadcastItem.id,
     thumbnail: File('[path to an image to upload]'));
+```
 
+## Download a LiveChat
+
+```dart
+import 'package:yt/yt.dart';
+
+final yt = await Yt.withOAuth();
+
+var broadcastResponse = await yt.broadcast.list(broadcastStatus: 'active');
+
+if (broadcastResponse.items.isNotEmpty) {
+  //will download and output to stdout
+  await yt.chat.downloadHistory(liveBroadcastItem: broadcastResponse.items.first);
+}
+```
+
+## Experimental Chatbot
+
+```dart
+final yt = await Yt.withOAuth();
+
+//the live streaming broadcast API client
+final br = yt.broadcast;
+
+//look for an active broadcast
+var broadcastResponse = await br.list(broadcastStatus: 'active');
+
+//get an upcoming broadcast, if there's no active
+if (broadcastResponse.items.isEmpty) {
+  broadcastResponse =
+      await br.list(broadcastStatus: 'upcoming', maxResults: 1);
+}
+
+if (broadcastResponse.items.isNotEmpty) {
+  final liveBroadcastItem = broadcastResponse.items.first;
+
+  //setup the chatbot with a custom dialog
+  final chatbot = Chatbot(
+      botName: ':robot: FLN Bot Automated Message',
+      dialogs: DialogLoader.fromYamlFile('dialogs.yaml'));
+
+  //if being run periodically you will want to provide a TimeStore to persist
+  //a timestamp that will ensure the chatbot doesn't repeat answers
+  await yt.chat
+      .answerBot(liveBroadcastItem: liveBroadcastItem, chatbot: chatbot);
+}
 ```
 
 ## Usage within Flutter
@@ -266,6 +323,7 @@ With the generator in place, it becomes quite easy to include _google sign-in_ f
 ## Available Examples
 
 - [example.dart](https://github.com/faithoflifedev/yt/blob/main/example/example.dart) - (command line) display various YouTube data
+- [livechat_example.dart](https://github.com/faithoflifedev/yt/blob/main/example/livechat_example.dart) - (command line) chatbot will answer a set of questions in a liveChat session
 - [flutter_playlist](https://github.com/faithoflifedev/yt/tree/main/example/flutter_playlist) - display a YouTube playlist in a ListView
 
 ## What's Next?

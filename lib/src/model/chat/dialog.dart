@@ -1,11 +1,25 @@
 import 'dart:convert';
 
 import 'package:json_annotation/json_annotation.dart';
+import 'package:universal_io/io.dart';
+import 'package:yaml/yaml.dart';
 import 'package:yt/util/emoji_formatter.dart';
 
 import 'keyword.dart';
 
 part 'dialog.g.dart';
+
+class DialogLoader {
+  static List<Dialog> fromYamlFile(String path) {
+    final jsonString = json.encode(loadYaml(File(path).readAsStringSync()));
+
+    final jsonList = json.decode(jsonString) as List;
+
+    return jsonList
+        .map((element) => Dialog.fromJson(element.cast<String, dynamic>()))
+        .toList();
+  }
+}
 
 @JsonSerializable(explicitToJson: true)
 class Dialog {
