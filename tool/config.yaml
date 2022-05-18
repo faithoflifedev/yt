@@ -4,5 +4,5 @@ templates:
   - name: CHANGELOG.md
     type: prepend
 
-version: 2.0.2
-change: better chatbot docs
+version: 2.0.3
+change: fixed broken apiKey support

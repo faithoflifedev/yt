@@ -19,7 +19,8 @@ build() {
 clean() => defaultClean();
 
 @Task('publish')
-@Depends(dartdoc, analyze, version, dryrun)
+//@Depends(dartdoc, analyze, version, dryrun)
+@Depends(analyze, version, dryrun)
 publish() {
   // log('publishing...');
 

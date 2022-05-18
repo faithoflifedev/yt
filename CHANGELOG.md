@@ -1,3 +1,6 @@
+## 2.0.3
+
+- fixed broken apiKey support
 ## 2.0.2
 
 - better chatbot docs
