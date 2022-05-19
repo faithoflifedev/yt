@@ -19,35 +19,11 @@ abstract class PlaylistClient {
 
   ///Returns a collection of playlists that match the API request parameters. For example, you can retrieve all playlists that the authenticated user owns, or you can retrieve one or more playlists by their unique IDs.
   @GET('/playlists')
-  Future<PlaylistResponse> authList(
+  Future<PlaylistResponse> list(
       @Header('Authorization')
-          String authorization,
-      @Header('Accept')
-          String accept,
-      @Query('part')
-          String parts,
-      {@Query('channelId')
-          String? channelId,
-      @Query('id')
-          String? id,
-      @Query('mine')
-          bool? mine,
-      @Query('hl')
-          int? hl,
-      @Query('maxResults')
-          int? maxResults,
-      @Query('onBehalfOfContentOwner')
-          String? onBehalfOfContentOwner,
-      @Query('onBehalfOfContentOwnerChannel')
-          String? onBehalfOfContentOwnerChannel,
-      @Query('pageToken')
-          String? pageToken});
-
-  ///Returns a collection of playlists that match the API request parameters. For example, you can retrieve all playlists that the authenticated user owns, or you can retrieve one or more playlists by their unique IDs.
-  @GET('/playlists')
-  Future<PlaylistResponse> apiKeyList(
+          String? authorization,
       @Query('key')
-          String apiKey,
+          String? apiKey,
       @Header('Accept')
           String accept,
       @Query('part')

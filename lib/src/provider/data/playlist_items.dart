@@ -14,21 +14,11 @@ abstract class PlaylistItemsClient {
 
   ///Returns a collection of playlist items that match the API request parameters. You can retrieve all of the playlist items in a specified playlist or retrieve one or more playlist items by their unique IDs.
   @GET('/playlistItems')
-  Future<PlaylistItemListResponse> authList(
-      @Header('Authorization') String authorization,
+  Future<PlaylistItemListResponse> list(
+      @Header('Authorization') String? authorization,
+      @Query('key') String? apiKey,
       @Header('Accept') String accept,
       @Query('part') String parts,
-      {@Query('id') String? id,
-      @Query('playlistId') String? playlistId,
-      @Query('maxResults') int? maxResults,
-      @Query('onBehalfOfContentOwner') String? onBehalfOfContentOwner,
-      @Query('pageToken') String? pageToken,
-      @Query('videoId') String? videoId});
-
-  ///Returns a collection of playlist items that match the API request parameters. You can retrieve all of the playlist items in a specified playlist or retrieve one or more playlist items by their unique IDs.
-  @GET('/playlistItems')
-  Future<PlaylistItemListResponse> apiKeyList(@Query('key') String apiKey,
-      @Header('Accept') String accept, @Query('part') String parts,
       {@Query('id') String? id,
       @Query('playlistId') String? playlistId,
       @Query('maxResults') int? maxResults,

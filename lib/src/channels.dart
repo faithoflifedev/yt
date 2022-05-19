@@ -30,29 +30,16 @@ class Channels extends YouTubeHelper {
       int? maxResults,
       String? onBehalfOfContentOwner,
       String? pageToken}) async {
-    if (apiKey == null) {
-      return _rest.authList('Bearer $token', accept, buildParts(partList, part),
-          categoryId: categoryId,
-          forUsername: forUsername,
-          id: id,
-          managedByMe: managedByMe,
-          mine: mine,
-          hl: hl,
-          maxResults: maxResults,
-          onBehalfOfContentOwner: onBehalfOfContentOwner,
-          pageToken: pageToken);
-    } else {
-      return _rest.apiKeyList(apiKey!, accept, buildParts(partList, part),
-          categoryId: categoryId,
-          forUsername: forUsername,
-          id: id,
-          managedByMe: managedByMe,
-          mine: mine,
-          hl: hl,
-          maxResults: maxResults,
-          onBehalfOfContentOwner: onBehalfOfContentOwner,
-          pageToken: pageToken);
-    }
+    return _rest.list(_authHeader, apiKey, accept, buildParts(partList, part),
+        categoryId: categoryId,
+        forUsername: forUsername,
+        id: id,
+        managedByMe: managedByMe,
+        mine: mine,
+        hl: hl,
+        maxResults: maxResults,
+        onBehalfOfContentOwner: onBehalfOfContentOwner,
+        pageToken: pageToken);
   }
 
   ///Modifies a Channels For example, you could change a Channelss title, description, or privacy status.

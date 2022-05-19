@@ -11,25 +11,9 @@ abstract class ChannelClient {
 
   ///Returns a collection of zero or more channel resources that match the request criteria.
   @GET('/channels')
-  Future<ChannelResponse> authList(
-    @Header('Authorization') String authorization,
-    @Header('Accept') String accept,
-    @Query('part') String parts, {
-    @Query('categoryId') String? categoryId,
-    @Query('forUsername') String? forUsername,
-    @Query('id') String? id,
-    @Query('managedByMe') bool? managedByMe,
-    @Query('mine') bool? mine,
-    @Query('hl') String? hl,
-    @Query('maxResults') int? maxResults,
-    @Query('onBehalfOfContentOwner') String? onBehalfOfContentOwner,
-    @Query('pageToken') String? pageToken,
-  });
-
-  ///Returns a collection of zero or more channel resources that match the request criteria.
-  @GET('/channels')
-  Future<ChannelResponse> apiKeyList(
-    @Query('key') String apiKey,
+  Future<ChannelResponse> list(
+    @Header('Authorization') String? authorization,
+    @Query('key') String? apiKey,
     @Header('Accept') String accept,
     @Query('part') String parts, {
     @Query('categoryId') String? categoryId,

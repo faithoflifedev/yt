@@ -18,42 +18,7 @@ class _PlaylistItemsClient implements PlaylistItemsClient {
   String? baseUrl;
 
   @override
-  Future<PlaylistItemListResponse> authList(authorization, accept, parts,
-      {id,
-      playlistId,
-      maxResults,
-      onBehalfOfContentOwner,
-      pageToken,
-      videoId}) async {
-    const _extra = <String, dynamic>{};
-    final queryParameters = <String, dynamic>{
-      r'part': parts,
-      r'id': id,
-      r'playlistId': playlistId,
-      r'maxResults': maxResults,
-      r'onBehalfOfContentOwner': onBehalfOfContentOwner,
-      r'pageToken': pageToken,
-      r'videoId': videoId
-    };
-    queryParameters.removeWhere((k, v) => v == null);
-    final _headers = <String, dynamic>{
-      r'Authorization': authorization,
-      r'Accept': accept
-    };
-    _headers.removeWhere((k, v) => v == null);
-    final _data = <String, dynamic>{};
-    final _result = await _dio.fetch<Map<String, dynamic>>(
-        _setStreamType<PlaylistItemListResponse>(
-            Options(method: 'GET', headers: _headers, extra: _extra)
-                .compose(_dio.options, '/playlistItems',
-                    queryParameters: queryParameters, data: _data)
-                .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
-    final value = PlaylistItemListResponse.fromJson(_result.data!);
-    return value;
-  }
-
-  @override
-  Future<PlaylistItemListResponse> apiKeyList(apiKey, accept, parts,
+  Future<PlaylistItemListResponse> list(authorization, apiKey, accept, parts,
       {id,
       playlistId,
       maxResults,
@@ -72,7 +37,10 @@ class _PlaylistItemsClient implements PlaylistItemsClient {
       r'videoId': videoId
     };
     queryParameters.removeWhere((k, v) => v == null);
-    final _headers = <String, dynamic>{r'Accept': accept};
+    final _headers = <String, dynamic>{
+      r'Authorization': authorization,
+      r'Accept': accept
+    };
     _headers.removeWhere((k, v) => v == null);
     final _data = <String, dynamic>{};
     final _result = await _dio.fetch<Map<String, dynamic>>(

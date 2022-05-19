@@ -9,7 +9,7 @@ Native [Dart](https://dart.dev/) interface to multiple Google REST APIs, includi
 
 ## How does this package differ from the [googleapis](https://pub.dev/packages/googleapis) package?
 
-- It's not generated, it's manually coded and limited to a targetted set to just YouTube APIs
+- It's not generated, it's manually coded and limited to a targeted set to just YouTube APIs
 - Since it's not generated the package includes additional useful features like a cli (Command Line Interface) and the experimental Chatbot
 - A tighter focus to the package means focused documentation and focused examples
 

@@ -29,20 +29,20 @@ class Thumbnails extends YouTubeHelper {
   ///Supply the [videoId] and retrieve the url used to upload the thumbnail image
   Future<ThumbnailSetResponse> set(
       {required String videoId, required File thumbnail}) async {
-    final String _uploadType = 'resumable';
+    final String uploadType = 'resumable';
 
     final httpResponse =
-        await _rest.location(_authHeader, accept, videoId, _uploadType);
+        await _rest.location(_authHeader, accept, videoId, uploadType);
 
     if (!httpResponse.response.headers.map.containsKey('location')) {
       throw Exception(
           'Upload location for the thumbnail could not be determined');
     }
 
-    final _uploadUri =
+    final uploadUri =
         Uri.parse(httpResponse.response.headers.value('location')!);
 
-    if (!_uploadUri.queryParameters.containsKey('upload_id')) {
+    if (!uploadUri.queryParameters.containsKey('upload_id')) {
       throw Exception('Upload Id for the thumbnail could not be determined');
     }
 
@@ -50,8 +50,8 @@ class Thumbnails extends YouTubeHelper {
         _authHeader,
         'application/x-www-form-urlencoded',
         videoId,
-        _uploadUri.queryParameters['upload_id']!,
+        uploadUri.queryParameters['upload_id']!,
         thumbnail,
-        _uploadType);
+        uploadType);
   }
 }

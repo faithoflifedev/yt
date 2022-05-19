@@ -27,23 +27,13 @@ class PlaylistItems extends YouTubeHelper {
       String? onBehalfOfContentOwner,
       String? videoId,
       String? pageToken}) async {
-    if (apiKey == null) {
-      return _rest.authList('Bearer $token', accept, buildParts(partList, part),
-          playlistId: playlistId,
-          id: id,
-          maxResults: maxResults,
-          onBehalfOfContentOwner: onBehalfOfContentOwner,
-          pageToken: pageToken,
-          videoId: videoId);
-    } else {
-      return _rest.apiKeyList(apiKey!, accept, buildParts(partList, part),
-          playlistId: playlistId,
-          id: id,
-          maxResults: maxResults,
-          onBehalfOfContentOwner: onBehalfOfContentOwner,
-          pageToken: pageToken,
-          videoId: videoId);
-    }
+    return _rest.list(_authHeader, apiKey, accept, buildParts(partList, part),
+        playlistId: playlistId,
+        id: id,
+        maxResults: maxResults,
+        onBehalfOfContentOwner: onBehalfOfContentOwner,
+        pageToken: pageToken,
+        videoId: videoId);
   }
 
   ///Creates a playlist.

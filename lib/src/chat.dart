@@ -99,8 +99,7 @@ class Chat extends YouTubeHelper {
           if (file == null) {
             for (LiveChatMessage liveChatMessage in liveChatMessageList) {
               stdout.writeln(
-                  '${liveChatMessage.snippet.publishedAt!.toLocal()} | ${liveChatMessage.authorDetails?.displayName}: ' +
-                      liveChatMessage.snippet.textMessageDetails!.messageText);
+                  '${liveChatMessage.snippet.publishedAt!.toLocal()} | ${liveChatMessage.authorDetails?.displayName}: ${liveChatMessage.snippet.textMessageDetails!.messageText}');
             }
           } else {
             file.writeAsStringSync(

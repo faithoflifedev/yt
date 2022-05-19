@@ -18,46 +18,7 @@ class _PlaylistClient implements PlaylistClient {
   String? baseUrl;
 
   @override
-  Future<PlaylistResponse> authList(authorization, accept, parts,
-      {channelId,
-      id,
-      mine,
-      hl,
-      maxResults,
-      onBehalfOfContentOwner,
-      onBehalfOfContentOwnerChannel,
-      pageToken}) async {
-    const _extra = <String, dynamic>{};
-    final queryParameters = <String, dynamic>{
-      r'part': parts,
-      r'channelId': channelId,
-      r'id': id,
-      r'mine': mine,
-      r'hl': hl,
-      r'maxResults': maxResults,
-      r'onBehalfOfContentOwner': onBehalfOfContentOwner,
-      r'onBehalfOfContentOwnerChannel': onBehalfOfContentOwnerChannel,
-      r'pageToken': pageToken
-    };
-    queryParameters.removeWhere((k, v) => v == null);
-    final _headers = <String, dynamic>{
-      r'Authorization': authorization,
-      r'Accept': accept
-    };
-    _headers.removeWhere((k, v) => v == null);
-    final _data = <String, dynamic>{};
-    final _result = await _dio.fetch<Map<String, dynamic>>(
-        _setStreamType<PlaylistResponse>(
-            Options(method: 'GET', headers: _headers, extra: _extra)
-                .compose(_dio.options, '/playlists',
-                    queryParameters: queryParameters, data: _data)
-                .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
-    final value = PlaylistResponse.fromJson(_result.data!);
-    return value;
-  }
-
-  @override
-  Future<PlaylistResponse> apiKeyList(apiKey, accept, parts,
+  Future<PlaylistResponse> list(authorization, apiKey, accept, parts,
       {channelId,
       id,
       mine,
@@ -80,7 +41,10 @@ class _PlaylistClient implements PlaylistClient {
       r'pageToken': pageToken
     };
     queryParameters.removeWhere((k, v) => v == null);
-    final _headers = <String, dynamic>{r'Accept': accept};
+    final _headers = <String, dynamic>{
+      r'Authorization': authorization,
+      r'Accept': accept
+    };
     _headers.removeWhere((k, v) => v == null);
     final _data = <String, dynamic>{};
     final _result = await _dio.fetch<Map<String, dynamic>>(
