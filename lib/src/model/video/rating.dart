@@ -1,6 +1,5 @@
 import 'dart:convert';
 
-import 'package:easy_enum/easy_enum.dart';
 import 'package:json_annotation/json_annotation.dart';
 
 part 'rating.g.dart';
@@ -9,10 +8,8 @@ part 'rating.g.dart';
 class Rating {
   final String videoId;
   final String rating;
-  VideoRating? enumRating;
 
-  Rating({required this.videoId, required this.rating})
-      : enumRating = rating.videoRating;
+  Rating({required this.videoId, required this.rating});
 
   factory Rating.fromJson(Map<String, dynamic> json) => _$RatingFromJson(json);
 
@@ -21,6 +18,3 @@ class Rating {
   @override
   String toString() => jsonEncode(toJson());
 }
-
-@EasyEnum()
-enum VideoRating { none, dislike, like }

@@ -1,5 +1,9 @@
 # Changelog
 
+## 2.0.4
+
+- remove deprecated dependency
+
 ## 2.0.3
 
 - fix apiKey
