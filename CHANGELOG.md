@@ -1,5 +1,9 @@
 # Changelog
 
+## 2.0.5
+
+- fixing pub points
+
 ## 2.0.4
 
 - remove deprecated dependency
