@@ -1,13 +1,14 @@
+## 2.0.6+3
+
+* adjustments
+
 ## 2.0.6+1
 
-- * build tools
-* dependency bump
+- dependency bump
 
 ## 2.0.6
 
-- * build tools
-* dependency bump
-
+- build tools
 
 ## 2.0.5
 

@@ -1,3 +1,3 @@
 ## {{ pubspec.version }}
 
-- {{ changes }}
+{{ changes }}
