@@ -34,5 +34,5 @@ notes.txt
 
 .pubignore
 
-example/flutter_playlist/ios/Runner/GoogleService-Info.plist
-example/flutter_playlist/ios/Runner/Info.plist
+example/flutter_playlist/android/
+example/flutter_playlist/ios/
