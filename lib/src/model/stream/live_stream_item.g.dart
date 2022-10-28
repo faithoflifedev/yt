@@ -1,6 +1,6 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'live_tream_item.dart';
+part of 'live_stream_item.dart';
 
 // **************************************************************************
 // JsonSerializableGenerator

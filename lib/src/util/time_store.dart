@@ -1,6 +1,5 @@
-import 'dart:io';
-
 import 'package:fling_pickle/fling_pickle.dart';
+import 'package:universal_io/io.dart';
 
 class TimeStore implements Pickleable {
   DateTime timeStamp = DateTime.now();

@@ -20,8 +20,6 @@ abstract class PlaylistClient {
   ///Returns a collection of playlists that match the API request parameters. For example, you can retrieve all playlists that the authenticated user owns, or you can retrieve one or more playlists by their unique IDs.
   @GET('/playlists')
   Future<PlaylistResponse> list(
-      @Header('Authorization')
-          String? authorization,
       @Query('key')
           String? apiKey,
       @Header('Accept')
@@ -48,8 +46,6 @@ abstract class PlaylistClient {
   ///Creates a playlist.
   @POST('/playlists')
   Future<Playlist> insert(
-      @Header('Authorization')
-          String? authorization,
       @Header('Accept')
           String accept,
       @Header('Content-Type')
@@ -66,7 +62,6 @@ abstract class PlaylistClient {
   ///Modifies a playlist. For example, you could change a playlist's title, description, or privacy status.
   @PUT('/playlists')
   Future<Playlist> update(
-      @Header('Authorization') String? authorization,
       @Header('Accept') String accept,
       @Header('Content-Type') String contentType,
       @Query('part') String parts,
@@ -75,7 +70,9 @@ abstract class PlaylistClient {
 
   ///Deletes a playlist
   @DELETE('/playlists')
-  Future<void> delete(@Header('Authorization') String? authorization,
-      @Header('Accept') String accept, @Query('id') String id,
-      {@Query('onBehalfOfContentOwner') String? onBehalfOfContentOwner});
+  Future<void> delete(
+    @Header('Accept') String accept,
+    @Query('id') String id, {
+    @Query('onBehalfOfContentOwner') String? onBehalfOfContentOwner,
+  });
 }

@@ -12,8 +12,8 @@ abstract class StreamClient {
   ///Returns a list of video streams that match the API request parameters.
   @GET('/liveStreams')
   Future<LiveStreamListResponse> list(
-      @Header('Authorization')
-          String authorization,
+      // @Header('Authorization')
+      //     String authorization,
       @Header('Accept')
           String accept,
       @Query('part')
@@ -34,8 +34,8 @@ abstract class StreamClient {
   ///Creates a video stream. The stream enables you to send your video to YouTube, which can then broadcast the video to your audience.
   @POST('/liveStreams')
   Future<LiveStreamItem> insert(
-      @Header('Authorization')
-          String authorization,
+      // @Header('Authorization')
+      //     String authorization,
       @Header('Accept')
           String accept,
       @Header('Content-Type')
@@ -52,8 +52,8 @@ abstract class StreamClient {
   ///Updates a video stream. If the properties that you want to change cannot be updated, then you need to create a new stream with the proper settings.
   @PUT('/liveStreams')
   Future<LiveStreamItem> update(
-      @Header('Authorization')
-          String authorization,
+      // @Header('Authorization')
+      //     String authorization,
       @Header('Accept')
           String accept,
       @Header('Content-Type')
@@ -70,8 +70,8 @@ abstract class StreamClient {
   ///Deletes a video stream.
   @DELETE('/liveStreams')
   Future<void> delete(
-      @Header('Authorization')
-          String authorization,
+      // @Header('Authorization')
+      //     String authorization,
       @Header('Accept')
           String accept,
       @Query('id')

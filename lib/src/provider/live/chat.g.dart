@@ -6,10 +6,13 @@ part of 'chat.dart';
 // RetrofitGenerator
 // **************************************************************************
 
-// ignore_for_file: unnecessary_brace_in_string_interps
+// ignore_for_file: unnecessary_brace_in_string_interps,no_leading_underscores_for_local_identifiers
 
 class _ChatClient implements ChatClient {
-  _ChatClient(this._dio, {this.baseUrl}) {
+  _ChatClient(
+    this._dio, {
+    this.baseUrl,
+  }) {
     baseUrl ??= 'https://youtube.googleapis.com/youtube/v3';
   }
 
@@ -19,8 +22,14 @@ class _ChatClient implements ChatClient {
 
   @override
   Future<LiveChatMessageListResponse> list(
-      authorization, accept, parts, liveChatId,
-      {hl, maxResults, pageToken, profileImageSize}) async {
+    accept,
+    parts,
+    liveChatId, {
+    hl,
+    maxResults,
+    pageToken,
+    profileImageSize,
+  }) async {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{
       r'part': parts,
@@ -28,66 +37,85 @@ class _ChatClient implements ChatClient {
       r'hl': hl,
       r'maxResults': maxResults,
       r'pageToken': pageToken,
-      r'profileImageSize': profileImageSize
+      r'profileImageSize': profileImageSize,
     };
     queryParameters.removeWhere((k, v) => v == null);
-    final _headers = <String, dynamic>{
-      r'Authorization': authorization,
-      r'Accept': accept
-    };
+    final _headers = <String, dynamic>{r'Accept': accept};
     _headers.removeWhere((k, v) => v == null);
     final _data = <String, dynamic>{};
     final _result = await _dio.fetch<Map<String, dynamic>>(
-        _setStreamType<LiveChatMessageListResponse>(
-            Options(method: 'GET', headers: _headers, extra: _extra)
-                .compose(_dio.options, '/liveChat/messages',
-                    queryParameters: queryParameters, data: _data)
-                .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
+        _setStreamType<LiveChatMessageListResponse>(Options(
+      method: 'GET',
+      headers: _headers,
+      extra: _extra,
+    )
+            .compose(
+              _dio.options,
+              '/liveChat/messages',
+              queryParameters: queryParameters,
+              data: _data,
+            )
+            .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
     final value = LiveChatMessageListResponse.fromJson(_result.data!);
     return value;
   }
 
   @override
   Future<LiveChatMessage> insert(
-      authorization, accept, contentType, part, data) async {
+    accept,
+    contentType,
+    part,
+    data,
+  ) async {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{r'part': part};
     final _headers = <String, dynamic>{
-      r'Authorization': authorization,
       r'Accept': accept,
-      r'Content-Type': contentType
+      r'Content-Type': contentType,
     };
     _headers.removeWhere((k, v) => v == null);
     final _data = <String, dynamic>{};
     _data.addAll(data);
-    final _result = await _dio.fetch<Map<String, dynamic>>(
-        _setStreamType<LiveChatMessage>(Options(
-                method: 'POST',
-                headers: _headers,
-                extra: _extra,
-                contentType: contentType)
-            .compose(_dio.options, '/liveChat/messages',
-                queryParameters: queryParameters, data: _data)
+    final _result = await _dio
+        .fetch<Map<String, dynamic>>(_setStreamType<LiveChatMessage>(Options(
+      method: 'POST',
+      headers: _headers,
+      extra: _extra,
+      contentType: contentType,
+    )
+            .compose(
+              _dio.options,
+              '/liveChat/messages',
+              queryParameters: queryParameters,
+              data: _data,
+            )
             .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
     final value = LiveChatMessage.fromJson(_result.data!);
     return value;
   }
 
   @override
-  Future<void> delete(authorization, accept, id) async {
+  Future<void> delete(
+    accept,
+    id,
+  ) async {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{r'id': id};
-    final _headers = <String, dynamic>{
-      r'Authorization': authorization,
-      r'Accept': accept
-    };
+    final _headers = <String, dynamic>{r'Accept': accept};
     _headers.removeWhere((k, v) => v == null);
     final _data = <String, dynamic>{};
-    await _dio.fetch<void>(_setStreamType<void>(
-        Options(method: 'DELETE', headers: _headers, extra: _extra)
-            .compose(_dio.options, '/liveChat/messages',
-                queryParameters: queryParameters, data: _data)
-            .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
+    await _dio.fetch<void>(_setStreamType<void>(Options(
+      method: 'DELETE',
+      headers: _headers,
+      extra: _extra,
+    )
+        .compose(
+          _dio.options,
+          '/liveChat/messages',
+          queryParameters: queryParameters,
+          data: _data,
+        )
+        .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
     return null;
   }
 

@@ -3,7 +3,7 @@ import 'dart:convert';
 import 'package:json_annotation/json_annotation.dart';
 import 'package:universal_io/io.dart';
 import 'package:yaml/yaml.dart';
-import 'package:yt/util/emoji_formatter.dart';
+import 'package:yt/src/util/emoji_formatter.dart';
 
 import 'keyword.dart';
 

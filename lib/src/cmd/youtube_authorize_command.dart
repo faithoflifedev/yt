@@ -4,7 +4,7 @@ import 'package:args/command_runner.dart';
 import 'package:dio/dio.dart';
 import 'package:universal_io/io.dart';
 import 'package:yt/src/provider/oauth.dart';
-import 'package:yt/yt.dart';
+import 'package:yt/src/util/util.dart';
 
 ///Generate a refresh token used to authenticate the command line API requests
 class YoutubeAuthorizeCommand extends Command {
@@ -80,12 +80,12 @@ class YoutubeAuthorizeCommand extends Command {
     if (!credentials.containsKey('clientId')) {
       print('Enter clientId:');
 
-      credentials['clientId'] =
+      credentials['identifier'] =
           stdin.readLineSync(encoding: Encoding.getByName('utf-8')!);
 
       print('Enter clientSecret:');
 
-      credentials['clientSecret'] =
+      credentials['secret'] =
           stdin.readLineSync(encoding: Encoding.getByName('utf-8')!);
     }
 
@@ -93,15 +93,15 @@ class YoutubeAuthorizeCommand extends Command {
         'Follow the link provided below, provide your YouTube credentials for authorization and then paste in the provided "code":');
 
     print(
-        'https://accounts.google.com/o/oauth2/v2/auth?client_id=${credentials['clientId']}&response_type=code&scope=https://www.googleapis.com/auth/youtube&redirect_uri=urn:ietf:wg:oauth:2.0:oob&access_type=offline');
+        'https://accounts.google.com/o/oauth2/v2/auth?client_id=${credentials['identifier']}&response_type=code&scope=https://www.googleapis.com/auth/youtube&redirect_uri=urn:ietf:wg:oauth:2.0:oob&access_type=offline');
 
     print('\nEnter authorization code:');
 
     credentials['code'] =
         stdin.readLineSync(encoding: Encoding.getByName('utf-8')!);
 
-    if (credentials['clientId'] == null ||
-        credentials['clientSecret'] == null ||
+    if (credentials['identifier'] == null ||
+        credentials['secret'] == null ||
         credentials['code'] == null) {
       throw Exception('Error: missing required data.');
     }
@@ -113,8 +113,8 @@ class YoutubeAuthorizeCommand extends Command {
     credFile.writeAsStringSync(json.encode(credentials));
 
     final token = await oAuthClient.getToken({
-      'client_id': credentials['clientId'],
-      'client_secret': credentials['clientSecret'],
+      'client_id': credentials['identifier'],
+      'client_secret': credentials['secret'],
       'code': credentials['code'],
       'redirect_uri': 'urn:ietf:wg:oauth:2.0:oob',
       'grant_type': 'authorization_code'
@@ -124,7 +124,7 @@ class YoutubeAuthorizeCommand extends Command {
       throw Exception('Could not retrieve the refresh token');
     }
 
-    tokenStore.addAll({credentials['clientId']!: token.refreshToken});
+    tokenStore.addAll({credentials['identifier']!: token.refreshToken});
 
     tokenFile.createSync(recursive: true);
 

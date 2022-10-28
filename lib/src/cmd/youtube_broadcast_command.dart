@@ -116,7 +116,6 @@ class YoutubeListBroadcastCommand extends YtHelperCommand {
           allowed: ['all', 'event', 'persistent'],
           help:
               'The broadcastType parameter filters the API response to only include broadcasts with the specified type. The parameter should be used in requests that set the mine parameter to true or that use the broadcastStatus parameter. The default value is event.',
-          valueHelp: 'event',
           allowedHelp: {
             'all': 'Return all broadcasts.',
             'event': 'Return only scheduled event broadcasts.',
@@ -126,7 +125,11 @@ class YoutubeListBroadcastCommand extends YtHelperCommand {
           defaultsTo: '5',
           valueHelp: 'number',
           help:
-              'The maxResults parameter specifies the maximum number of items that should be returned in the result set. Acceptable values are 0 to 50, inclusive. The default value is 5.');
+              'The maxResults parameter specifies the maximum number of items that should be returned in the result set. Acceptable values are 0 to 50, inclusive. The default value is 5.')
+      ..addOption('pageToken',
+          valueHelp: 'string',
+          help:
+              'The pageToken parameter identifies a specific page in the result set that should be returned. In an API response, the nextPageToken and prevPageToken properties identify other pages that could be retrieved.');
   }
 
   @override

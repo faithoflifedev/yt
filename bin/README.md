@@ -18,7 +18,8 @@ Usage: yt <command> [arguments]
 
 Global options:
 -h, --help    Print this usage information.
-
+    --log-level    [all, debug, info, warning, error, off (default)]
+    
 Available commands:
   authorize          Generate a refresh token used to authenticate the command line API requests
   broadcast          A liveBroadcast resource represents an event that will be streamed, via live video, on YouTube.
@@ -27,6 +28,7 @@ Available commands:
   playlists          A playlist resource represents a YouTube playlist. A playlist is a collection of videos that can be viewed sequentially and shared with other users. By default, playlists are publicly visible to other users, but playlists can be public or private.
   search             A search result contains information about a YouTube video, channel, or playlist that matches the search parameters specified in an API request. While a search result points to a uniquely identifiable resource, like a video, it does not have its own persistent data.
   stream             A liveStream resource contains information about the video stream that you are transmitting to YouTube. The stream provides the content that will be broadcast to YouTube users. Once created, a liveStream resource can be bound to one or more liveBroadcast resources.
+  subscriptions      A subscription resource contains information about a YouTube user subscription. A subscription notifies a user when new videos are added to a channel or when another user takes one of several actions on YouTube, such as uploading a video, rating a video, or commenting on a video.
   thumbnails         A thumbnail resource identifies different thumbnail image sizes associated with a resource.
   video-categories   A videoCategory resource identifies a category that has been or could be associated with uploaded videos.
   videos             A video resource represents a YouTube video.
@@ -42,6 +44,7 @@ Available commands:
 |[playlists](#playlists)|A playlist resource represents a YouTube playlist. A playlist is a collection of videos that can be viewed sequentially and shared with other users. By default, playlists are publicly visible to other users, but playlists can be public or private.|
 |[search](#search)|A search result contains information about a YouTube video, channel, or playlist that matches the search parameters specified in an API request. While a search result points to a uniquely identifiable resource, like a video, it does not have its own persistent data.|
 |[stream](#stream)|A liveStream resource contains information about the video stream that you are transmitting to YouTube. The stream provides the content that will be broadcast to YouTube users. Once created, a liveStream resource can be bound to one or more liveBroadcast resources.|
+|[subscriptions](#subscriptions)|A subscription resource contains information about a YouTube user subscription. A subscription notifies a user when new videos are added to a channel or when another user takes one of several actions on YouTube, such as uploading a video, rating a video, or commenting on a video.|
 |[thumbnails](#thumbnails)|A thumbnail resource identifies different thumbnail image sizes associated with a resource.|
 
 Just like the main library, any responses provided by the above commands will be given in the JSON format.  So ideally, you will want to use a command line json parser to interpret the results.  The recommended json parser for this purpose is [_jq_](https://stedolan.github.io/jq/).  With _jq_ you can process the results of a command as follows:
@@ -64,7 +67,9 @@ thumbnail: https://i.ytimg.com/vi/IdrCyS7EF8M/default.jpg
 
 ```sh
 prompt>yt authorize --help
+```
 
+```text
 Generate a refresh token used to authenticate the command line API requests
 
 Usage: yt authorize [arguments]
@@ -77,7 +82,9 @@ Use this command to generate a refresh token that will allow authentication for 
 
 ```sh
 prompt>yt broadcast --help
+```
 
+```text
 A liveBroadcast resource represents an event that will be streamed, via live video, on YouTube.
 
 Usage: yt broadcast <subcommand> [arguments]
@@ -95,7 +102,9 @@ Available subcommands:
 
 ```sh
 prompt>yt broadcast bind --help
+```
 
+```text
 Binds a YouTube broadcast to a stream or removes an existing binding between a broadcast and a stream. A broadcast can only be bound to one video stream, though a video stream may be bound to more than one broadcast.
 
 Usage: yt broadcast bind [arguments]
@@ -110,7 +119,9 @@ Usage: yt broadcast bind [arguments]
 
 ```sh
 prompt>yt broadcast delete --help
+```
 
+```text
 Deletes a broadcast.
 
 Usage: yt broadcast delete [arguments]
@@ -122,7 +133,9 @@ Usage: yt broadcast delete [arguments]
 
 ```sh
 prompt>yt help broadcast insert
+```
 
+```text
 Creates a broadcast.
 
 Usage: yt broadcast insert [arguments]
@@ -138,7 +151,9 @@ Usage: yt broadcast insert [arguments]
 
 ```sh
 prompt>yt broadcast list --help
+```
 
+```text
 Returns a list of YouTube broadcasts that match the API request parameters.
 
 Usage: yt broadcast list [arguments]
@@ -167,7 +182,9 @@ Usage: yt broadcast list [arguments]
 
 ```sh
 prompt>yt broadcast transition --help
+```
 
+```text
 Changes the status of a YouTube live broadcast and initiates any processes associated with the new status.
 
 Usage: yt broadcast transition [arguments]
@@ -187,7 +204,9 @@ Usage: yt broadcast transition [arguments]
 
 ```sh
 prompt>yt channels --help
+```
 
+```text
 A channel resource contains information about a YouTube channel.
 
 Usage: yt channels <subcommand> [arguments]
@@ -202,7 +221,9 @@ Available subcommands:
 
 ```sh
 prompt>yt channels list --help
+```
 
+```text
 Updates a channel's metadata. Note that this method currently only supports updates to the channel resource's brandingSettings, invideoPromotion, and localizations objects and their child properties.
 
 Usage: yt channels list [arguments]
@@ -221,7 +242,9 @@ Usage: yt channels list [arguments]
 
 ```sh
 prompt>yt channels update --help
+```
 
+```text
 Updates a channel's metadata. Note that this method currently only supports updates to the channel resource's brandingSettings, invideoPromotion, and localizations objects and their child properties.
 
 Usage: yt channels update [arguments]
@@ -238,7 +261,9 @@ Usage: yt channels update [arguments]
 
 ```sh
 prompt>yt chat --help
+```
 
+```text
 A liveChatMessage resource represents a chat message in a YouTube live chat. The resource can contain details about several types of messages, including a newly posted text message or fan funding event.
 
 The live chat feature is enabled by default for live broadcasts and is available while the live event is active. (After the event ends, live chat is no longer available for that event.)
@@ -257,7 +282,9 @@ Available subcommands:
 
 ```sh
 prompt>yt chat answer --help
+```
 
+```text
 Process chat messages and provided canned answers to set questions (not part of the documented API).
 
 Usage: yt chat answer [arguments]
@@ -270,7 +297,9 @@ Usage: yt chat answer [arguments]
 
 ```sh
 prompt>yt chat delete --help
+```
 
+```text
 Deletes a chat message. The API request must be authorized by the channel owner or a moderator of the live chat associated with the ban.
 
 Usage: yt chat delete [arguments]
@@ -282,7 +311,9 @@ Usage: yt chat delete [arguments]
 
 ```sh
 prompt>yt chat insert --help
+```
 
+```text
 Adds a message to a live chat. The API currently supports the ability to insert text messages only.
 
 Usage: yt chat insert [arguments]
@@ -296,7 +327,9 @@ Usage: yt chat insert [arguments]
 
 ```sh
 prompt>yt chat list --help
+```
 
+```text
 Lists live chat messages for a specific chat.
 
 Usage: yt chat list [arguments]
@@ -315,7 +348,9 @@ Usage: yt chat list [arguments]
 
 ```sh
 prompt>yt playlists --help
+```
 
+```text
 A playlist resource represents a YouTube playlist. A playlist is a collection of videos that can be viewed sequentially and shared with other users. By default, playlists are publicly visible to other users, but playlists can be public or private.
 
 Usage: yt playlists <subcommand> [arguments]
@@ -332,7 +367,9 @@ Available subcommands:
 
 ```sh
 prompt>yt playlists delete --help
+```
 
+```text
 Deletes a playlist.
 
 Usage: yt playlists delete [arguments]
@@ -344,7 +381,9 @@ Usage: yt playlists delete [arguments]
 
 ```sh
 prompt>yt playlists insert --help
+```
 
+```text
 Creates a playlist.
 
 Usage: yt playlists insert [arguments]
@@ -360,7 +399,9 @@ Usage: yt playlists insert [arguments]
 
 ```sh
 prompt>yt playlists list --help
+```
 
+```text
 Returns a collection of playlists that match the API request parameters. For example, you can retrieve all playlists that the authenticated user owns, or you can retrieve one or more playlists by their unique IDs.
 
 Usage: yt playlists list [arguments]
@@ -383,7 +424,9 @@ Usage: yt playlists list [arguments]
 
 ```sh
 prompt>yt playlists update --help
+```
 
+```text
 Modifies a playlist. For example, you could change a playlist\'s title, description, or privacy status.
 
 Usage: yt playlists update [arguments]
@@ -401,7 +444,9 @@ Usage: yt playlists update [arguments]
 
 ```sh
 prompt>yt search --help
+```
 
+```text
 A search result contains information about a YouTube video, channel, or playlist that matches the search parameters specified in an API request. While a search result points to a uniquely identifiable resource, like a video, it does not have its own persistent data.
 
 Usage: yt search <subcommand> [arguments]
@@ -415,7 +460,9 @@ Available subcommands:
 
 ```sh
 prompt>yt search list --help
+```
 
+```text
 Returns a collection of search results that match the query parameters specified in the API request. By default, a search result set identifies matching video, channel, and playlist resources, but you can also configure queries to only retrieve a specific type of resource.
 
 Usage: yt search list [arguments]
@@ -517,7 +564,9 @@ Usage: yt search list [arguments]
 
 ```sh
 prompt>yt stream --help
+```
 
+```text
 A liveStream resource contains information about the video stream that you are transmitting to YouTube. The stream provides the content that will be broadcast to YouTube users. Once created, a liveStream resource can be bound to one or more liveBroadcast resources.
 
 Usage: yt stream <subcommand> [arguments]
@@ -534,7 +583,9 @@ Available subcommands:
 
 ```sh
 prompt>yt stream delete --help
+```
 
+```text
 Deletes a video stream.
 
 Usage: yt stream delete [arguments]
@@ -546,7 +597,9 @@ Usage: yt stream delete [arguments]
 
 ```sh
 prompt>yt stream insert --help
+```
 
+```text
 Creates a video stream. The stream enables you to send your video to YouTube, which can then broadcast the video to your audience.
 
 Usage: yt stream insert [arguments]
@@ -560,7 +613,9 @@ Usage: yt stream insert [arguments]
 
 ```sh
 prompt>yt stream list --help
+```
 
+```text
 Returns a list of video streams that match the API request parameters.
 
 Usage: yt stream list [arguments]
@@ -579,7 +634,9 @@ Usage: yt stream list [arguments]
 
 ```sh
 prompt>yt stream update --help
+```
 
+```text
 Updates a video stream. If the properties that you want to change cannot be updated, then you need to create a new stream with the proper settings.
 
 Usage: yt stream update [arguments]
@@ -593,11 +650,109 @@ Usage: yt stream update [arguments]
     --body (mandatory)    Provide a liveBroadcast resource [https://developers.google.com/youtube/v3/live/docs/liveBroadcasts#resource] in the request body.
 ```
 
+### subscriptions
+
+```sh
+prompt>yt subscriptions --help
+```
+
+```text
+A subscription resource contains information about a YouTube user subscription. A subscription notifies a user when new videos are added to a channel or when another user takes one of several actions on YouTube, such as uploading a video, rating a video, or commenting on a video.
+
+Usage: yt subscriptions <subcommand> [arguments]
+-h, --help    Print this usage information.
+
+Available subcommands:
+  delete   Deletes a subscription.
+  insert   Adds a subscription for the authenticated user's channel.
+  list     Returns subscription resources that match the API request criteria.
+```
+
+## subscriptions list
+
+```sh
+prompt>yt subscriptions list --help
+```
+
+```text
+Returns subscription resources that match the API request criteria.
+
+Usage: yt subscriptions list [arguments]
+-h, --help                             Print this usage information.
+    --part                             The part parameter specifies a comma-separated list of one or more subscription resource properties that the API response will include.
+                                       
+                                       If the parameter identifies a property that contains child properties, the child properties will be included in the response. For example, in a subscription resource, the snippet property contains other properties, such as a display title for the subscription. If you set part=snippet, the API response will also contain all of those nested properties.
+                                       
+                                       The following list contains the part names that you can include in the parameter value:
+                                       - contentDetails
+                                       - id
+                                       - snippet
+                                       - subscriberSnippet
+                                       (defaults to "id,snippet,contentDetails,subscriberSnippet")
+    --channel-id=<YouTube username>    The channelId parameter specifies a YouTube channel ID. The API will only return that channel's subscriptions.
+    --id=<id>                          The id parameter specifies a comma-separated list of the YouTube subscription ID(s) for the resource(s) that are being retrieved. In a subscription resource, the id property specifies the YouTube subscription ID.
+    --mine                             This parameter can only be used in a properly authorized request. Set this parameter's value to true to retrieve a feed of the authenticated user's subscriptions.
+    --[no-]myRecentSubscribers         This parameter can only be used in a properly authorized request. Set this parameter's value to true to retrieve a feed of the subscribers of the authenticated user in reverse chronological order (newest first).
+                                       
+                                       Note that the maximum number of subscribers returned through this API might be limited.
+    --[no-]mySubscribers               This parameter can only be used in a properly authorized request. Set this parameter's value to true to retrieve a feed of the subscribers of the authenticated user in no particular order. Note that the maximum number of subscribers returned through this API might be limited.
+    --forChannelId                     The forChannelId parameter specifies a comma-separated list of channel IDs. The API response will then only contain subscriptions matching those channels.
+    --max-results=<number>             The maxResults parameter specifies the maximum number of items that should be returned in the result set. Acceptable values are 0 to 50, inclusive. The default value is 5.
+                                       (defaults to "5")
+    --order                            The order parameter specifies the method that will be used to sort resources in the API response. The default value is SUBSCRIPTION_ORDER_RELEVANCE.
+
+          [alphabetical]               Sort alphabetically.
+          [relevance] (default)        Sort by relevance.
+          [unread]                     Sort by order of activity.
+```
+
+## subscriptions insert
+
+```sh
+prompt>yt subscriptions insert --help
+```
+
+```text
+Adds a subscription for the authenticated user's channel.
+
+Usage: yt subscriptions insert [arguments]
+-h, --help                               Print this usage information.
+    --part                               The part parameter specifies a comma-separated list of one or more subscription resource properties that the API response will include.
+                                         
+                                         If the parameter identifies a property that contains child properties, the child properties will be included in the response. For example, in a subscription resource, the snippet property contains other properties, such as a display title for the subscription. If you set part=snippet, the API response will also contain all of those nested properties.
+                                         
+                                         The following list contains the part names that you can include in the parameter value:
+                                         - contentDetails
+                                         - id
+                                         - snippet
+                                         - subscriberSnippet
+                                         (defaults to "snippet")
+    --kind=<string>                      The type of the API resource.
+                                         (defaults to "youtube#channel")
+    --channel-id=<string> (mandatory)    The value that YouTube uses to uniquely identify the channel that the user subscribed to.
+```
+
+## subscriptions delete
+
+```sh
+prompt>yt subscriptions delete --help
+```
+
+```text
+Deletes a subscription.
+
+Usage: yt subscriptions delete [arguments]
+-h, --help                   Print this usage information.
+    --id=<resource id> (mandatory)    The id parameter specifies the YouTube subscription ID for the resource that is being deleted. In a subscription resource, the id property specifies the YouTube subscription ID.
+```
+
 ## thumbnails
 
 ```sh
 prompt>yt thumbnails --help
+```
 
+```text
 A thumbnail resource identifies different thumbnail image sizes associated with a resource.
 
 Usage: yt thumbnails <subcommand> [arguments]
@@ -611,11 +766,27 @@ Available subcommands:
 
 ```sh
 prompt>yt thumbnails set --help
+```
 
+```text
 Uploads a custom video thumbnail to YouTube and sets it for a video.
 
 Usage: yt thumbnails set [arguments]
 -h, --help                                       Print this usage information.
     --video-id=<YouTube video id> (mandatory)    The videoId parameter specifies a YouTube video ID for which the custom video thumbnail is being provided.
     --file=<file name> (mandatory)               The file name that contains the thumbnail image that you are uploading.
+```
+
+## version
+
+
+```sh
+prompt>yt version --help
+```
+
+```text
+Display the package name and version
+
+Usage: yt version [arguments]
+-h, --help    Print this usage information.
 ```

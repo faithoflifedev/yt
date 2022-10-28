@@ -6,10 +6,13 @@ part of 'playlists.dart';
 // RetrofitGenerator
 // **************************************************************************
 
-// ignore_for_file: unnecessary_brace_in_string_interps
+// ignore_for_file: unnecessary_brace_in_string_interps,no_leading_underscores_for_local_identifiers
 
 class _PlaylistClient implements PlaylistClient {
-  _PlaylistClient(this._dio, {this.baseUrl}) {
+  _PlaylistClient(
+    this._dio, {
+    this.baseUrl,
+  }) {
     baseUrl ??= 'https://www.googleapis.com/youtube/v3';
   }
 
@@ -18,15 +21,19 @@ class _PlaylistClient implements PlaylistClient {
   String? baseUrl;
 
   @override
-  Future<PlaylistResponse> list(authorization, apiKey, accept, parts,
-      {channelId,
-      id,
-      mine,
-      hl,
-      maxResults,
-      onBehalfOfContentOwner,
-      onBehalfOfContentOwnerChannel,
-      pageToken}) async {
+  Future<PlaylistResponse> list(
+    apiKey,
+    accept,
+    parts, {
+    channelId,
+    id,
+    mine,
+    hl,
+    maxResults,
+    onBehalfOfContentOwner,
+    onBehalfOfContentOwnerChannel,
+    pageToken,
+  }) async {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{
       r'key': apiKey,
@@ -38,106 +45,136 @@ class _PlaylistClient implements PlaylistClient {
       r'maxResults': maxResults,
       r'onBehalfOfContentOwner': onBehalfOfContentOwner,
       r'onBehalfOfContentOwnerChannel': onBehalfOfContentOwnerChannel,
-      r'pageToken': pageToken
+      r'pageToken': pageToken,
     };
     queryParameters.removeWhere((k, v) => v == null);
-    final _headers = <String, dynamic>{
-      r'Authorization': authorization,
-      r'Accept': accept
-    };
+    final _headers = <String, dynamic>{r'Accept': accept};
     _headers.removeWhere((k, v) => v == null);
     final _data = <String, dynamic>{};
-    final _result = await _dio.fetch<Map<String, dynamic>>(
-        _setStreamType<PlaylistResponse>(
-            Options(method: 'GET', headers: _headers, extra: _extra)
-                .compose(_dio.options, '/playlists',
-                    queryParameters: queryParameters, data: _data)
-                .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
+    final _result = await _dio
+        .fetch<Map<String, dynamic>>(_setStreamType<PlaylistResponse>(Options(
+      method: 'GET',
+      headers: _headers,
+      extra: _extra,
+    )
+            .compose(
+              _dio.options,
+              '/playlists',
+              queryParameters: queryParameters,
+              data: _data,
+            )
+            .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
     final value = PlaylistResponse.fromJson(_result.data!);
     return value;
   }
 
   @override
-  Future<Playlist> insert(authorization, accept, contentType, part, body,
-      {onBehalfOfContentOwner, onBehalfOfContentOwnerChannel}) async {
+  Future<Playlist> insert(
+    accept,
+    contentType,
+    part,
+    body, {
+    onBehalfOfContentOwner,
+    onBehalfOfContentOwnerChannel,
+  }) async {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{
       r'part': part,
       r'onBehalfOfContentOwner': onBehalfOfContentOwner,
-      r'onBehalfOfContentOwnerChannel': onBehalfOfContentOwnerChannel
+      r'onBehalfOfContentOwnerChannel': onBehalfOfContentOwnerChannel,
     };
     queryParameters.removeWhere((k, v) => v == null);
     final _headers = <String, dynamic>{
-      r'Authorization': authorization,
       r'Accept': accept,
-      r'Content-Type': contentType
+      r'Content-Type': contentType,
     };
     _headers.removeWhere((k, v) => v == null);
     final _data = <String, dynamic>{};
     _data.addAll(body);
-    final _result = await _dio.fetch<Map<String, dynamic>>(
-        _setStreamType<Playlist>(Options(
-                method: 'POST',
-                headers: _headers,
-                extra: _extra,
-                contentType: contentType)
-            .compose(_dio.options, '/playlists',
-                queryParameters: queryParameters, data: _data)
+    final _result =
+        await _dio.fetch<Map<String, dynamic>>(_setStreamType<Playlist>(Options(
+      method: 'POST',
+      headers: _headers,
+      extra: _extra,
+      contentType: contentType,
+    )
+            .compose(
+              _dio.options,
+              '/playlists',
+              queryParameters: queryParameters,
+              data: _data,
+            )
             .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
     final value = Playlist.fromJson(_result.data!);
     return value;
   }
 
   @override
-  Future<Playlist> update(authorization, accept, contentType, parts, body,
-      {onBehalfOfContentOwner}) async {
+  Future<Playlist> update(
+    accept,
+    contentType,
+    parts,
+    body, {
+    onBehalfOfContentOwner,
+  }) async {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{
       r'part': parts,
-      r'onBehalfOfContentOwner': onBehalfOfContentOwner
+      r'onBehalfOfContentOwner': onBehalfOfContentOwner,
     };
     queryParameters.removeWhere((k, v) => v == null);
     final _headers = <String, dynamic>{
-      r'Authorization': authorization,
       r'Accept': accept,
-      r'Content-Type': contentType
+      r'Content-Type': contentType,
     };
     _headers.removeWhere((k, v) => v == null);
     final _data = <String, dynamic>{};
     _data.addAll(body);
-    final _result = await _dio.fetch<Map<String, dynamic>>(
-        _setStreamType<Playlist>(Options(
-                method: 'PUT',
-                headers: _headers,
-                extra: _extra,
-                contentType: contentType)
-            .compose(_dio.options, '/playlists',
-                queryParameters: queryParameters, data: _data)
+    final _result =
+        await _dio.fetch<Map<String, dynamic>>(_setStreamType<Playlist>(Options(
+      method: 'PUT',
+      headers: _headers,
+      extra: _extra,
+      contentType: contentType,
+    )
+            .compose(
+              _dio.options,
+              '/playlists',
+              queryParameters: queryParameters,
+              data: _data,
+            )
             .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
     final value = Playlist.fromJson(_result.data!);
     return value;
   }
 
   @override
-  Future<void> delete(authorization, accept, id,
-      {onBehalfOfContentOwner}) async {
+  Future<void> delete(
+    accept,
+    id, {
+    onBehalfOfContentOwner,
+  }) async {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{
       r'id': id,
-      r'onBehalfOfContentOwner': onBehalfOfContentOwner
+      r'onBehalfOfContentOwner': onBehalfOfContentOwner,
     };
     queryParameters.removeWhere((k, v) => v == null);
-    final _headers = <String, dynamic>{
-      r'Authorization': authorization,
-      r'Accept': accept
-    };
+    final _headers = <String, dynamic>{r'Accept': accept};
     _headers.removeWhere((k, v) => v == null);
     final _data = <String, dynamic>{};
-    await _dio.fetch<void>(_setStreamType<void>(
-        Options(method: 'DELETE', headers: _headers, extra: _extra)
-            .compose(_dio.options, '/playlists',
-                queryParameters: queryParameters, data: _data)
-            .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
+    await _dio.fetch<void>(_setStreamType<void>(Options(
+      method: 'DELETE',
+      headers: _headers,
+      extra: _extra,
+    )
+        .compose(
+          _dio.options,
+          '/playlists',
+          queryParameters: queryParameters,
+          data: _data,
+        )
+        .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
     return null;
   }
 

@@ -10,16 +10,11 @@ import 'provider/live/chat.dart';
 ///
 ///The live chat feature is enabled by default for live broadcasts and is available while the live event is active. (After the event ends, live chat is no longer available for that event.)
 class Chat extends YouTubeHelper {
-  final String token;
   final Dio dio;
 
   final ChatClient _rest;
 
-  final String _authHeader;
-
-  Chat({required this.token, required this.dio})
-      : _authHeader = 'Bearer $token',
-        _rest = ChatClient(dio);
+  Chat(this.dio) : _rest = ChatClient(dio);
 
   ///Lists live chat messages for a specific chat.
   Future<LiveChatMessageListResponse> list(
@@ -33,11 +28,15 @@ class Chat extends YouTubeHelper {
     final String part = 'snippet,authorDetails';
 
     return await _rest.list(
-        _authHeader, accept, buildParts(partList, part), liveChatId,
-        hl: hl,
-        maxResults: maxResults,
-        pageToken: pageToken,
-        profileImageSize: profileImageSize);
+      // _authHeader,
+      accept,
+      buildParts(partList, part),
+      liveChatId,
+      hl: hl,
+      maxResults: maxResults,
+      pageToken: pageToken,
+      profileImageSize: profileImageSize,
+    );
   }
 
   ///Adds a message to a live chat.
@@ -52,12 +51,21 @@ class Chat extends YouTubeHelper {
     }
 
     return await _rest.insert(
-        _authHeader, accept, contentType, buildParts(partList, part), body);
+      // _authHeader,
+      accept,
+      contentType,
+      buildParts(partList, part),
+      body,
+    );
   }
 
   ///Deletes a chat message. The API request must be authorized by the channel owner or a moderator of the live chat.
   Future<void> delete({required String id}) async {
-    return _rest.delete(_authHeader, accept, id);
+    return _rest.delete(
+      // _authHeader,
+      accept,
+      id,
+    );
   }
 
   ///Send a message to the liveChat session.

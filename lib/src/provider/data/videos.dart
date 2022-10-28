@@ -13,7 +13,6 @@ abstract class VideoClient {
   ///Returns a list of [VideoItem]s that match the API request parameters.
   @GET('/youtube/v3/videos')
   Future<VideoListResponse> list(
-    @Header('Authorization') String authorization,
     @Header('Accept') String accept,
     @Query('part') String parts, {
     @Query('chart') String? chart,
@@ -32,7 +31,6 @@ abstract class VideoClient {
   //////Uploads a video to YouTube.
   @POST('/upload/youtube/v3/videos')
   Future<VideoItem> upload(
-      @Header('Authorization') String authorization,
       @Header('Accept') String accept,
       @Query('upload_id') String uploadId,
       @Query('part') String parts,
@@ -43,7 +41,6 @@ abstract class VideoClient {
   ///Retrieve the url used to upload the thumbnail image
   @POST('/upload/youtube/v3/videos')
   Future<HttpResponse<dynamic>> location(
-    @Header('Authorization') String authorization,
     @Header('Content-Type') String contentType,
     @Header('X-Upload-Content-Length') int xUploadContentLength,
     @Header('X-Upload-Content-Type') String xUploadContentType,
@@ -56,25 +53,9 @@ abstract class VideoClient {
         String? onBehalfOfContentOwnerChannel,
   });
 
-  ///Uploads a [VideoItem] to YouTube and optionally sets the video's metadata.
-  // @POST('/upload/youtube/v3/videos')
-  // Future<VideoItem> insert(
-  //   @Header('Authorization') String authorization,
-  //   @Header('Accept') String accept,
-  //   @Part(contentType: 'application/json') Map<String, dynamic> body,
-  //   @Part(contentType: 'video/*') File videoFile,
-  //   @Query('part') String parts,
-  //   @Query('uploadType') String uploadType, {
-  //   @Query('notifySubscribers') bool? notifySubscribers,
-  //   @Query('onBehalfOfContentOwner') String? onBehalfOfContentOwner,
-  //   @Query('onBehalfOfContentOwnerChannel')
-  //       String? onBehalfOfContentOwnerChannel,
-  // });
-
   ///Updates a [VideoItem]'s metadata.
   @PUT('/youtube/v3/videos')
   Future<VideoItem> update(
-    @Header('Authorization') String authorization,
     @Header('Accept') String accept,
     @Query('part') String parts,
     @Body() Map<String, dynamic> body, {
@@ -86,7 +67,6 @@ abstract class VideoClient {
   ///Add a like or dislike rating to a [VideoItem] or remove a rating from a [VideoItem].
   @POST('/youtube/v3/videos/rate')
   Future<void> rate(
-    @Header('Authorization') String authorization,
     @Header('Accept') String accept,
     @Query('id') String id,
     @Query('rating') String rating,
@@ -95,7 +75,6 @@ abstract class VideoClient {
   ///Retrieves the ratings that the authorized user gave to a list of specified videos.
   @GET('/youtube/v3/videos/getRating')
   Future<VideoGetRatingResponse> getRating(
-    @Header('Authorization') String authorization,
     @Header('Accept') String accept,
     @Query('id') String id, {
     @Query('onBehalfOfContentOwner') String? onBehalfOfContentOwner,
@@ -104,7 +83,6 @@ abstract class VideoClient {
   ///Report a video for containing abusive content.
   @POST('/youtube/v3/videos/reportAbuse')
   Future<void> reportAbuse(
-    @Header('Authorization') String authorization,
     @Header('Accept') String accept,
     @Body() ReportAbuse body, {
     @Query('onBehalfOfContentOwner') String? onBehalfOfContentOwner,
@@ -113,7 +91,6 @@ abstract class VideoClient {
   ///Deletes a YouTube video.
   @DELETE('/youtube/v3/videos')
   Future<void> delete(
-    @Header('Authorization') String authorization,
     @Header('Accept') String accept,
     @Query('id') String id, {
     @Query('onBehalfOfContentOwner') String? onBehalfOfContentOwner,

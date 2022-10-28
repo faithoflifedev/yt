@@ -14,7 +14,7 @@ abstract class ChatClient {
   ///Lists live chat messages for a specific chat.
   @GET('/liveChat/messages')
   Future<LiveChatMessageListResponse> list(
-      @Header('Authorization') String authorization,
+      // @Header('Authorization') String authorization,
       @Header('Accept') String accept,
       @Query('part') String parts,
       @Query('liveChatId') String liveChatId,
@@ -26,7 +26,7 @@ abstract class ChatClient {
   ///Adds a message to a live chat.
   @POST('/liveChat/messages')
   Future<LiveChatMessage> insert(
-      @Header('Authorization') String authorization,
+      // @Header('Authorization') String authorization,
       @Header('Accept') String accept,
       @Header('Content-Type') String contentType,
       @Query('part') String part,
@@ -34,6 +34,9 @@ abstract class ChatClient {
 
   ///Deletes a chat message. The API request must be authorized by the channel owner or a moderator of the live chat.
   @DELETE('/liveChat/messages')
-  Future<void> delete(@Header('Authorization') String authorization,
-      @Header('Accept') String accept, @Query('id') String id);
+  Future<void> delete(
+    // @Header('Authorization') String authorization,
+    @Header('Accept') String accept,
+    @Query('id') String id,
+  );
 }

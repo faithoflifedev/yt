@@ -4,6 +4,7 @@ import 'package:dio/dio.dart';
 import 'package:universal_io/io.dart';
 import 'package:yaml/yaml.dart';
 import 'package:yt/src/provider/oauth.dart';
+import 'package:yt/src/util/util.dart';
 import 'package:yt/yt.dart';
 
 abstract class TokenGenerator {

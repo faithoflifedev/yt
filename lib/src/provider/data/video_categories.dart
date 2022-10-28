@@ -13,7 +13,6 @@ abstract class VideoCategoriesClient {
   ///Returns a list of [VideoItem]s that match the API request parameters.
   @GET('/videoCategories')
   Future<VideoCategoryListResponse> list(
-    @Header('Authorization') String authorization,
     @Header('Accept') String accept,
     @Query('part') String parts, {
     @Query('id') String? id,

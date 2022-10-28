@@ -1,14 +1,14 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'thumbnail_set_response.dart';
+part of 'thumbnails_set_response.dart';
 
 // **************************************************************************
 // JsonSerializableGenerator
 // **************************************************************************
 
-ThumbnailSetResponse _$ThumbnailSetResponseFromJson(
+ThumbnailsSetResponse _$ThumbnailsSetResponseFromJson(
         Map<String, dynamic> json) =>
-    ThumbnailSetResponse(
+    ThumbnailsSetResponse(
       kind: json['kind'] as String,
       etag: json['etag'] as String,
       items: (json['items'] as List<dynamic>)
@@ -19,8 +19,8 @@ ThumbnailSetResponse _$ThumbnailSetResponseFromJson(
           .toList(),
     );
 
-Map<String, dynamic> _$ThumbnailSetResponseToJson(
-        ThumbnailSetResponse instance) =>
+Map<String, dynamic> _$ThumbnailsSetResponseToJson(
+        ThumbnailsSetResponse instance) =>
     <String, dynamic>{
       'kind': instance.kind,
       'etag': instance.etag,

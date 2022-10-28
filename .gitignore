@@ -23,8 +23,11 @@ doc/api/
 *.js.deps
 *.js.map
 
+bin/config.yaml
 sh/
 scratch/
+tool/publish_tools.yaml
+
 .pubspec.yaml.bak
 .refreshToken.json
 notes.txt

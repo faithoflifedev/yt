@@ -14,17 +14,12 @@ import 'provider/data/playlists.dart';
 ///
 ///You can then use the [list()] method to retrieve any of those lists. You can also add or remove items from those lists by calling the [insert()] and [delete()] methods.
 class Playlists extends YouTubeHelper {
-  final String? token;
   final String? apiKey;
   final Dio dio;
 
   final PlaylistClient _rest;
 
-  final String? _authHeader;
-
-  Playlists({required this.dio, this.token, this.apiKey})
-      : _authHeader = token != null ? 'Bearer $token' : null,
-        _rest = PlaylistClient(dio);
+  Playlists({required this.dio, this.apiKey}) : _rest = PlaylistClient(dio);
 
   ///Returns a collection of playlists that match the API request parameters.
   ///For example, you can retrieve all playlists that the authenticated user
@@ -39,14 +34,18 @@ class Playlists extends YouTubeHelper {
       String? onBehalfOfContentOwner,
       String? onBehalfOfContentOwnerChannel,
       String? pageToken}) async {
-    return _rest.list(_authHeader, apiKey, accept, buildParts(partList, part),
-        channelId: channelId,
-        id: id,
-        mine: mine,
-        maxResults: maxResults,
-        onBehalfOfContentOwner: onBehalfOfContentOwner,
-        onBehalfOfContentOwnerChannel: onBehalfOfContentOwnerChannel,
-        pageToken: pageToken);
+    return _rest.list(
+      apiKey,
+      accept,
+      buildParts(partList, part),
+      channelId: channelId,
+      id: id,
+      mine: mine,
+      maxResults: maxResults,
+      onBehalfOfContentOwner: onBehalfOfContentOwner,
+      onBehalfOfContentOwnerChannel: onBehalfOfContentOwnerChannel,
+      pageToken: pageToken,
+    );
   }
 
   ///Creates a playlist.
@@ -58,7 +57,11 @@ class Playlists extends YouTubeHelper {
     String? onBehalfOfContentOwnerChannel,
   }) async {
     return await _rest.insert(
-        _authHeader, accept, contentType, buildParts(partList, part), body);
+      accept,
+      contentType,
+      buildParts(partList, part),
+      body,
+    );
   }
 
   ///Modifies a playlist. For example, you could change a playlist's title, description, or privacy status.
@@ -70,7 +73,11 @@ class Playlists extends YouTubeHelper {
     String? onBehalfOfContentOwnerChannel,
   }) async {
     return await _rest.update(
-        _authHeader, accept, contentType, buildParts(partList, part), body);
+      accept,
+      contentType,
+      buildParts(partList, part),
+      body,
+    );
   }
 
   ///Deletes a playlist.
@@ -79,6 +86,9 @@ class Playlists extends YouTubeHelper {
     String? onBehalfOfContentOwner,
     String? onBehalfOfContentOwnerChannel,
   }) async {
-    return await _rest.delete(_authHeader, accept, id);
+    return await _rest.delete(
+      accept,
+      id,
+    );
   }
 }

@@ -6,10 +6,13 @@ part of 'video_categories.dart';
 // RetrofitGenerator
 // **************************************************************************
 
-// ignore_for_file: unnecessary_brace_in_string_interps
+// ignore_for_file: unnecessary_brace_in_string_interps,no_leading_underscores_for_local_identifiers
 
 class _VideoCategoriesClient implements VideoCategoriesClient {
-  _VideoCategoriesClient(this._dio, {this.baseUrl}) {
+  _VideoCategoriesClient(
+    this._dio, {
+    this.baseUrl,
+  }) {
     baseUrl ??= 'https://www.googleapis.com/youtube/v3';
   }
 
@@ -18,28 +21,37 @@ class _VideoCategoriesClient implements VideoCategoriesClient {
   String? baseUrl;
 
   @override
-  Future<VideoCategoryListResponse> list(authorization, accept, parts,
-      {id, regionCode, hl}) async {
+  Future<VideoCategoryListResponse> list(
+    accept,
+    parts, {
+    id,
+    regionCode,
+    hl,
+  }) async {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{
       r'part': parts,
       r'id': id,
       r'regionCode': regionCode,
-      r'hl': hl
+      r'hl': hl,
     };
     queryParameters.removeWhere((k, v) => v == null);
-    final _headers = <String, dynamic>{
-      r'Authorization': authorization,
-      r'Accept': accept
-    };
+    final _headers = <String, dynamic>{r'Accept': accept};
     _headers.removeWhere((k, v) => v == null);
     final _data = <String, dynamic>{};
     final _result = await _dio.fetch<Map<String, dynamic>>(
-        _setStreamType<VideoCategoryListResponse>(
-            Options(method: 'GET', headers: _headers, extra: _extra)
-                .compose(_dio.options, '/videoCategories',
-                    queryParameters: queryParameters, data: _data)
-                .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
+        _setStreamType<VideoCategoryListResponse>(Options(
+      method: 'GET',
+      headers: _headers,
+      extra: _extra,
+    )
+            .compose(
+              _dio.options,
+              '/videoCategories',
+              queryParameters: queryParameters,
+              data: _data,
+            )
+            .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
     final value = VideoCategoryListResponse.fromJson(_result.data!);
     return value;
   }

@@ -3,7 +3,7 @@ import 'dart:convert';
 import 'package:json_annotation/json_annotation.dart';
 
 import '../page_info.dart';
-import 'live_tream_item.dart';
+import 'live_stream_item.dart';
 
 part 'live_stream_list_response.g.dart';
 

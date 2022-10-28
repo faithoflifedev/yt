@@ -12,8 +12,6 @@ abstract class BroadcastClient {
   ///Returns a list of YouTube broadcasts that match the API request parameters.
   @GET('/liveBroadcasts')
   Future<LiveBroadcastResponse> list(
-      @Header('Authorization')
-          String authorization,
       @Header('Accept')
           String accept,
       @Query('part')
@@ -38,8 +36,8 @@ abstract class BroadcastClient {
   ///Creates a broadcast.
   @POST('/liveBroadcasts')
   Future<LiveBroadcastItem> insert(
-      @Header('Authorization')
-          String authorization,
+      // @Header('Authorization')
+      //     String authorization,
       @Header('Accept')
           String accept,
       @Header('Content-Type')
@@ -56,8 +54,8 @@ abstract class BroadcastClient {
   ///Updates a broadcast. For example, you could modify the broadcast settings defined in the [LiveBroadcastItem] resource's [LiveBroadcastItem.contentDetails] object.
   @PUT('/liveBroadcasts')
   Future<LiveBroadcastItem> update(
-      @Header('Authorization')
-          String authorization,
+      // @Header('Authorization')
+      //     String authorization,
       @Header('Accept')
           String accept,
       @Header('Content-Type')
@@ -74,8 +72,8 @@ abstract class BroadcastClient {
   ///Binds a YouTube broadcast to a stream or removes an existing binding between a broadcast and a stream. A broadcast can only be bound to one video stream, though a video stream may be bound to more than one broadcast.
   @POST('/liveBroadcasts/bind')
   Future<LiveBroadcastItem> bind(
-      @Header('Authorization')
-          String authorization,
+      // @Header('Authorization')
+      //     String authorization,
       @Header('Accept')
           String accept,
       @Query('id')
@@ -92,8 +90,8 @@ abstract class BroadcastClient {
   ///Changes the status of a YouTube live broadcast and initiates any processes associated with the new status. For example, when you transition a broadcast's status to testing, YouTube starts to transmit video to that broadcast's monitor stream. Before calling this method, you should confirm that the value of the [LiveBroadcastItem.status] property for the stream bound to your broadcast is active.
   @POST('/liveBroadcasts/transition')
   Future<LiveBroadcastItem> transition(
-      @Header('Authorization')
-          String authorization,
+      // @Header('Authorization')
+      //     String authorization,
       @Header('Accept')
           String accept,
       @Query('id')
@@ -110,8 +108,8 @@ abstract class BroadcastClient {
   ///Deletes a broadcast.
   @DELETE('/liveBroadcasts')
   Future<void> delete(
-      @Header('Authorization')
-          String authorization,
+      // @Header('Authorization')
+      //     String authorization,
       @Header('Accept')
           String accept,
       @Query('id')

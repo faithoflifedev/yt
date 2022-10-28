@@ -1,4 +1,8 @@
-# Changelog
+## 2.0.6
+
+- * build tools
+* dependency bump
+
 
 ## 2.0.5
 

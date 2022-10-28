@@ -6,16 +6,11 @@ import 'provider/live/broadcast.dart';
 
 ///A liveBroadcast resource represents an event that will be streamed, via live video, on YouTube.
 class Broadcast extends YouTubeHelper {
-  final String token;
   final Dio dio;
 
   final BroadcastClient _rest;
 
-  final String _authHeader;
-
-  Broadcast({required this.token, required this.dio})
-      : _authHeader = 'Bearer $token',
-        _rest = BroadcastClient(dio);
+  Broadcast(this.dio) : _rest = BroadcastClient(dio);
 
   ///Returns a list of YouTube broadcasts that match the API request parameters.
   Future<LiveBroadcastResponse> list(
@@ -29,7 +24,7 @@ class Broadcast extends YouTubeHelper {
       String? onBehalfOfContentOwner,
       String? onBehalfOfContentOwnerChannel,
       String? pageToken}) {
-    return _rest.list(_authHeader, accept, buildParts(partList, part),
+    return _rest.list(accept, buildParts(partList, part),
         broadcastStatus: broadcastStatus,
         broadcastType: broadcastType,
         id: id,
@@ -48,9 +43,14 @@ class Broadcast extends YouTubeHelper {
       String? onBehalfOfContentOwner,
       String? onBehalfOfContentOwnerChannel}) {
     return _rest.insert(
-        _authHeader, accept, contentType, buildParts(partList, part), body,
-        onBehalfOfContentOwner: onBehalfOfContentOwner,
-        onBehalfOfContentOwnerChannel: onBehalfOfContentOwnerChannel);
+      // _authHeader,
+      accept,
+      contentType,
+      buildParts(partList, part),
+      body,
+      onBehalfOfContentOwner: onBehalfOfContentOwner,
+      onBehalfOfContentOwnerChannel: onBehalfOfContentOwnerChannel,
+    );
   }
 
   ///Updates a broadcast. For example, you could modify the broadcast settings defined in the [LiveBroadcastItem] resource's [LiveBroadcastItem.contentDetails] object.
@@ -61,9 +61,14 @@ class Broadcast extends YouTubeHelper {
       String? onBehalfOfContentOwner,
       String? onBehalfOfContentOwnerChannel}) {
     return _rest.update(
-        _authHeader, accept, contentType, buildParts(partList, part), body,
-        onBehalfOfContentOwner: onBehalfOfContentOwner,
-        onBehalfOfContentOwnerChannel: onBehalfOfContentOwnerChannel);
+      // _authHeader,
+      accept,
+      contentType,
+      buildParts(partList, part),
+      body,
+      onBehalfOfContentOwner: onBehalfOfContentOwner,
+      onBehalfOfContentOwnerChannel: onBehalfOfContentOwnerChannel,
+    );
   }
 
   ///Changes the status of a YouTube live broadcast and initiates any processes associated with the new status. For example, when you transition a broadcast's status to testing, YouTube starts to transmit video to that broadcast's monitor stream. Before calling this method, you should confirm that the value of the [LiveBroadcastItem.status] property for the stream bound to your broadcast is active.
@@ -75,8 +80,13 @@ class Broadcast extends YouTubeHelper {
     String? onBehalfOfContentOwner,
     String? onBehalfOfContentOwnerChannel,
   }) {
-    return _rest.transition(_authHeader, accept, id, buildParts(partList, part),
-        broadcastStatus: broadcastStatus);
+    return _rest.transition(
+      // _authHeader,
+      accept,
+      id,
+      buildParts(partList, part),
+      broadcastStatus: broadcastStatus,
+    );
   }
 
   ///Binds a YouTube broadcast to a stream or removes an existing binding between a broadcast and a stream. A broadcast can only be bound to one video stream, though a video stream may be bound to more than one broadcast.
@@ -89,7 +99,12 @@ class Broadcast extends YouTubeHelper {
     String? streamId,
   }) {
     return _rest.bind(
-        _authHeader, accept, id, streamId, buildParts(partList, part));
+      // _authHeader,
+      accept,
+      id,
+      streamId,
+      buildParts(partList, part),
+    );
   }
 
   ///Deletes a broadcast.
@@ -98,9 +113,13 @@ class Broadcast extends YouTubeHelper {
     String? onBehalfOfContentOwner,
     String? onBehalfOfContentOwnerChannel,
   }) {
-    return _rest.delete(_authHeader, accept, id,
-        onBehalfOfContentOwner: onBehalfOfContentOwner,
-        onBehalfOfContentOwnerChannel: onBehalfOfContentOwnerChannel);
+    return _rest.delete(
+      // _authHeader,
+      accept,
+      id,
+      onBehalfOfContentOwner: onBehalfOfContentOwner,
+      onBehalfOfContentOwnerChannel: onBehalfOfContentOwnerChannel,
+    );
   }
 
   Future<LiveBroadcastItem> getActiveBroadcast() async {

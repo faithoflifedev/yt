@@ -3,6 +3,7 @@ import 'dart:convert';
 import 'package:args/command_runner.dart';
 import 'package:dio/dio.dart';
 import 'package:universal_io/io.dart';
+import 'package:yt/src/util/util.dart';
 import 'package:yt/yt.dart';
 
 ///A liveChatMessage resource represents a chat message in a YouTube live chat.

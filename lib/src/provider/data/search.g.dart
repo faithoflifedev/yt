@@ -6,10 +6,13 @@ part of 'search.dart';
 // RetrofitGenerator
 // **************************************************************************
 
-// ignore_for_file: unnecessary_brace_in_string_interps
+// ignore_for_file: unnecessary_brace_in_string_interps,no_leading_underscores_for_local_identifiers
 
 class _SearchClient implements SearchClient {
-  _SearchClient(this._dio, {this.baseUrl}) {
+  _SearchClient(
+    this._dio, {
+    this.baseUrl,
+  }) {
     baseUrl ??= 'https://www.googleapis.com/youtube/v3';
   }
 
@@ -18,36 +21,41 @@ class _SearchClient implements SearchClient {
   String? baseUrl;
 
   @override
-  Future<SearchListResponse> list(authorization, apiKey, accept, parts,
-      {channelId,
-      channelType,
-      eventType,
-      forContentOwner,
-      forDeveloper,
-      forMine,
-      location,
-      locationRadius,
-      maxResults,
-      onBehalfOfContentOwner,
-      order,
-      pageToken,
-      publishedAfter,
-      publishedBefore,
-      q,
-      regionCode,
-      relevanceLanguage,
-      safeSearch,
-      topicId,
-      type,
-      videoCaption,
-      videoCategoryId,
-      videoDefinition,
-      videoDimension,
-      videoDuration,
-      videoEmbeddable,
-      videoLicense,
-      videoSyndicated,
-      videoType}) async {
+  Future<SearchListResponse> list(
+    authorization,
+    apiKey,
+    accept,
+    parts, {
+    channelId,
+    channelType,
+    eventType,
+    forContentOwner,
+    forDeveloper,
+    forMine,
+    location,
+    locationRadius,
+    maxResults,
+    onBehalfOfContentOwner,
+    order,
+    pageToken,
+    publishedAfter,
+    publishedBefore,
+    q,
+    regionCode,
+    relevanceLanguage,
+    safeSearch,
+    topicId,
+    type,
+    videoCaption,
+    videoCategoryId,
+    videoDefinition,
+    videoDimension,
+    videoDuration,
+    videoEmbeddable,
+    videoLicense,
+    videoSyndicated,
+    videoType,
+  }) async {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{
       r'key': apiKey,
@@ -80,21 +88,28 @@ class _SearchClient implements SearchClient {
       r'videoEmbeddable': videoEmbeddable,
       r'videoLicense': videoLicense,
       r'videoSyndicated': videoSyndicated,
-      r'videoType': videoType
+      r'videoType': videoType,
     };
     queryParameters.removeWhere((k, v) => v == null);
     final _headers = <String, dynamic>{
       r'Authorization': authorization,
-      r'Accept': accept
+      r'Accept': accept,
     };
     _headers.removeWhere((k, v) => v == null);
     final _data = <String, dynamic>{};
-    final _result = await _dio.fetch<Map<String, dynamic>>(
-        _setStreamType<SearchListResponse>(
-            Options(method: 'GET', headers: _headers, extra: _extra)
-                .compose(_dio.options, '/search',
-                    queryParameters: queryParameters, data: _data)
-                .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
+    final _result = await _dio
+        .fetch<Map<String, dynamic>>(_setStreamType<SearchListResponse>(Options(
+      method: 'GET',
+      headers: _headers,
+      extra: _extra,
+    )
+            .compose(
+              _dio.options,
+              '/search',
+              queryParameters: queryParameters,
+              data: _data,
+            )
+            .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
     final value = SearchListResponse.fromJson(_result.data!);
     return value;
   }

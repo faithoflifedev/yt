@@ -6,16 +6,11 @@ import 'provider/live/stream.dart';
 
 ///A liveStream resource contains information about the video stream that you are transmitting to YouTube. The stream provides the content that will be broadcast to YouTube users. Once created, a [LiveStreamItem] resource can be bound to one or more [LiveBroadcastItem] resources.
 class LiveStream extends YouTubeHelper {
-  final String token;
   final Dio dio;
 
   final StreamClient _rest;
 
-  final String _authHeader;
-
-  LiveStream({required this.token, required this.dio})
-      : _authHeader = 'Bearer $token',
-        _rest = StreamClient(dio);
+  LiveStream(this.dio) : _rest = StreamClient(dio);
 
   ///Returns a list of video streams that match the API request parameters.
   Future<LiveStreamListResponse> list(
@@ -27,7 +22,13 @@ class LiveStream extends YouTubeHelper {
       String? onBehalfOfContentOwner,
       String? onBehalfOfContentOwnerChannel,
       String? pageToken}) {
-    return _rest.list(_authHeader, accept, buildParts(partList, part),
+    return _rest.list(
+        // _authHeader,
+        accept,
+        buildParts(
+          partList,
+          part,
+        ),
         id: id,
         mine: mine,
         maxResults: maxResults,
@@ -45,7 +46,12 @@ class LiveStream extends YouTubeHelper {
     String? onBehalfOfContentOwnerChannel,
   }) {
     return _rest.insert(
-        _authHeader, accept, contentType, buildParts(partList, part), body);
+      // _authHeader,
+      accept,
+      contentType,
+      buildParts(partList, part),
+      body,
+    );
   }
 
   ///Updates a video stream. If the properties that you want to change cannot be updated, then you need to create a new stream with the proper settings.
@@ -57,7 +63,12 @@ class LiveStream extends YouTubeHelper {
     String? onBehalfOfContentOwnerChannel,
   }) {
     return _rest.update(
-        _authHeader, accept, contentType, buildParts(partList, part), body);
+      // _authHeader,
+      accept,
+      contentType,
+      buildParts(partList, part),
+      body,
+    );
   }
 
   ///Deletes a video stream.
@@ -66,6 +77,10 @@ class LiveStream extends YouTubeHelper {
     String? onBehalfOfContentOwner,
     String? onBehalfOfContentOwnerChannel,
   }) {
-    return _rest.delete(_authHeader, accept, id);
+    return _rest.delete(
+      // _authHeader,
+      accept,
+      id,
+    );
   }
 }

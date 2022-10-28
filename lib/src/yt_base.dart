@@ -1,16 +1,20 @@
+import 'package:dio/adapter.dart';
 import 'package:dio/dio.dart';
-// import 'package:dio_cache_interceptor/dio_cache_interceptor.dart';
+import 'package:googleapis_auth/auth_io.dart';
+import 'package:http/io_client.dart' show IOClient;
+import 'package:loggy/loggy.dart';
+import 'package:universal_io/io.dart';
+import 'package:yt/src/util/oauth_access_control.dart';
+import 'package:yt/src/util/util.dart';
 import 'package:yt/yt.dart';
 
-class Yt {
+class Yt with UiLoggy {
   static final dio = Dio();
+  static final httpClient = HttpClient();
   static final DateTime tokenExpiry = DateTime(2000, 0, 0);
 
   static TokenGenerator? tokenGenerator;
-  static String? _token;
 
-  String? _apiKey;
-  // CachePolicy? _cachePolicy;
   Broadcast? _broadcast;
   Channels? _channels;
   Chat? _chat;
@@ -18,12 +22,11 @@ class Yt {
   Playlists? _playlists;
   PlaylistItems? _playlistItems;
   Search? _search;
+  Subscriptions? _subscriptions;
   Thumbnails? _thumbnails;
   Videos? _videos;
   VideoCategories? _videoCategories;
-
-  set token(String token) => _token = token;
-  // set cachePolicy(CachePolicy cachePolicy) => _cachePolicy;
+  Watermarks? _watermarks;
 
   Broadcast get broadcast => _broadcast!;
   Channels get channels => _channels!;
@@ -32,98 +35,144 @@ class Yt {
   Playlists get playlists => _playlists!;
   PlaylistItems get playlistItems => _playlistItems!;
   Search get search => _search!;
+  Subscriptions get subscriptions => _subscriptions!;
   Thumbnails get thumbnails => _thumbnails!;
   Videos get videos => _videos!;
   VideoCategories get videoCategories => _videoCategories!;
+  Watermarks get watermarks => _watermarks!;
 
-  // Yt();
+  Yt(
+      {LogOptions logOptions = const LogOptions(
+        LogLevel.error,
+        stackTraceLevel: LogLevel.off,
+      ),
+      LoggyPrinter printer = const PrettyPrinter(
+        showColors: false,
+      )}) {
+    Loggy.initLoggy(logPrinter: printer, logOptions: logOptions);
 
-  static Future<Yt> withGenerator(TokenGenerator generator) async {
-    final yt = Yt();
+    (dio.httpClientAdapter as DefaultHttpClientAdapter).onHttpClientCreate =
+        (client) => httpClient;
 
-    Yt.tokenGenerator = generator;
+    dio.interceptors.add(InterceptorsWrapper(
+        onRequest: (RequestOptions options, RequestInterceptorHandler handler) {
+      loggy.debug('URI: ${options.uri}');
 
-    await _confirmToken();
+      loggy.debug('HEADERS:\n${options.headers}');
 
-    yt.setModules();
+      loggy.debug('REQUEST:\n${options.data}');
 
-    return yt;
+      return handler.next(options); //continue
+    }, onResponse: (response, handler) {
+      loggy.debug('RESPONSE:\n${response.data}');
+
+      return handler.next(response); // continue
+    }, onError: (DioError e, handler) {
+      loggy.error('ERROR:\n$e');
+
+      return handler.next(e); //continue
+    }));
   }
 
   static Future<Yt> withKey(String apiKey) async {
     final yt = Yt();
 
-    yt._apiKey = apiKey;
-
-    yt.setModules();
+    yt.setModules(apiKey: apiKey);
 
     return yt;
   }
 
   static Future<Yt> withOAuth(
-      [OAuthCredentials? oauthCredentials, bool refresh = false]) async {
-    final Yt yt = Yt();
+      {ClientId? oAuthClientId,
+      LogOptions logOptions = const LogOptions(
+        LogLevel.error,
+        stackTraceLevel: LogLevel.off,
+      )}) async {
+    oAuthClientId ??= Util.defaultClientId();
 
-    oauthCredentials ??=
-        OAuthCredentials.fromJsonFile(Util.defaultCredentialsFile);
+    final oauthAccessControl = OAuthAccessControl(
+        clientId: oAuthClientId, httpClient: IOClient(httpClient));
 
-    tokenGenerator = OAuthGenerator(
-        oauthCredentials: oauthCredentials, dio: dio, refresh: refresh);
+    final yt = Yt(logOptions: logOptions);
 
-    await _confirmToken();
+    dio.interceptors
+        .add(InterceptorsWrapper(onRequest: (options, handler) async {
+      await oauthAccessControl.checkAccessToken();
 
-    yt.setModules();
+      options.headers['Authorization'] = 'Bearer ${oauthAccessControl.token}';
+
+      return handler.next(options);
+    }));
+
+    yt.setModules(useToken: true);
 
     return yt;
   }
 
-  static Future<void> _confirmToken() async {
-    if (tokenGenerator == null) {
-      throw Exception();
-    } else {
-      if (tokenExpiry.isBefore(DateTime.now())) {
-        final tokenData = await tokenGenerator!.generate();
+  static Future<Yt> withGenerator(TokenGenerator generator,
+      {LogOptions logOptions = const LogOptions(
+        LogLevel.error,
+        stackTraceLevel: LogLevel.off,
+      )}) async {
+    final yt = Yt(logOptions: logOptions);
 
-        _token = tokenData.accessToken;
+    Token token = await generator.generate();
 
-        tokenExpiry.add(Duration(seconds: tokenData.expiresIn));
-      }
-    }
+    dio.interceptors
+        .add(InterceptorsWrapper(onRequest: (options, handler) async {
+      options.headers['Authorization'] = 'Bearer ${token.accessToken}';
+
+      return handler.next(options);
+    }));
+
+    yt.setModules(useToken: true);
+
+    return yt;
   }
 
-  void setModules() {
-    if (_token != null) {
+  void setModules({bool? useToken, String? apiKey}) {
+    if (useToken != null && useToken) {
       ///A liveBroadcast resource represents an event that will be streamed, via live video, on YouTube.
-      _broadcast = Broadcast(token: _token!, dio: dio);
+      _broadcast = Broadcast(dio);
 
       ///A liveChatMessage resource represents a chat message in a YouTube live chat. The resource can contain details about several types of messages, including a newly posted text message or fan funding event.
       ///
       ///The live chat feature is enabled by default for live broadcasts and is available while the live event is active. (After the event ends, live chat is no longer available for that event.)
-      _chat = Chat(token: _token!, dio: dio);
+      _chat = Chat(dio);
 
       ///A liveStream resource contains information about the video stream that you are transmitting to YouTube. The stream provides the content that will be broadcast to YouTube users. Once created, a [LiveStreamItem] resource can be bound to one or more [LiveBroadcastItem] resources.
-      _liveStream = LiveStream(token: _token!, dio: dio);
+      _liveStream = LiveStream(dio);
 
-      ///A [Thumbnail] resource identifies different thumbnail image sizes associated with a resource. Please note the following characteristics of thumbnail images:
+      /// A subscription resource contains information about a YouTube user subscription. A subscription notifies a user when new videos are added to a channel or when another user takes one of several actions on YouTube, such as uploading a video, rating a video, or commenting on a video.
+      _subscriptions = Subscriptions(dio);
+
+      /// A [Thumbnail] resource identifies different thumbnail image sizes associated with a resource. Please note the following characteristics of thumbnail images:
       ///
-      ///- A resource's Snippet.thumbnails property is an object that identifies the thumbnail images available for that resource.
-      ///- A thumbnail resource contains a series of objects. The name of each object (default, medium, high, etc.) refers to the thumbnail image size.
+      /// - A resource's Snippet.thumbnails property is an object that identifies the thumbnail images available for that resource.
+      /// - A thumbnail resource contains a series of objects. The name of each object (default, medium, high, etc.) refers to the thumbnail image size.
       /// - Different types of resources may support different thumbnail image sizes.
-      ///- Different types of resources may define different sizes for thumbnail images with the same name. For example, the default thumbnail image for a video resource is typically 120px by 90px, and the default thumbnail image for a channel resource is typically 88px by 88px.
-      ///- Resources of the same type may still have different thumbnail image sizes for certain images depending on the resolution of the original image or content uploaded to YouTube. For example, an HD video may support higher resolution thumbnails than non-HD videos.
-      ///- Each object that contains information about a thumbnail image size has a width property and a height property. However, the width and height properties may not be returned for that image.
-      ///- If an uploaded thumbnail image does not match the required dimensions, the image is resized to match the correct size without changing its aspect ratio. The image is not cropped, but may include black bars so that the size is correct.
-      _thumbnails = Thumbnails(token: _token!, dio: dio);
+      /// - Different types of resources may define different sizes for thumbnail images with the same name. For example, the default thumbnail image for a video resource is typically 120px by 90px, and the default thumbnail image for a channel resource is typically 88px by 88px.
+      /// - Resources of the same type may still have different thumbnail image sizes for certain images depending on the resolution of the original image or content uploaded to YouTube. For example, an HD video may support higher resolution thumbnails than non-HD videos.
+      /// - Each object that contains information about a thumbnail image size has a width property and a height property. However, the width and height properties may not be returned for that image.
+      /// - If an uploaded thumbnail image does not match the required dimensions, the image is resized to match the correct size without changing its aspect ratio. The image is not cropped, but may include black bars so that the size is correct.
+      _thumbnails = Thumbnails(dio);
 
-      ///A video resource represents a YouTube video.
-      _videos = Videos(token: _token!, dio: dio);
+      /// A video resource represents a YouTube video.
+      _videos = Videos(dio);
 
       ///A videoCategory resource identifies a category that has been or could be associated with uploaded videos.
-      _videoCategories = VideoCategories(token: _token!, dio: dio);
+      _videoCategories = VideoCategories(dio);
+
+      /// A [Watermark] resource identifies an image that displays during playbacks of
+      /// a specified channel's videos. You can also specify a target channel to which
+      /// the image will link as well as timing details that determine when the
+      /// watermark appears during video playbacks and the length of time it is
+      /// visible.
+      _watermarks = Watermarks(dio);
     }
 
     ///A channel resource contains information about a YouTube channel.
-    _channels = Channels(token: _token, apiKey: _apiKey, dio: dio);
+    _channels = Channels(apiKey: apiKey, dio: dio);
 
     ///A playlist resource represents a YouTube playlist. A playlist is a collection of videos that can be viewed sequentially and shared with other users. By default, playlists are publicly visible to other users, but playlists can be public or private.
     ///
@@ -134,14 +183,14 @@ class Yt {
     ///To be more specific, these lists are associated with a channel, which is a collection of a person, group, or company's videos, playlists, and other YouTube information. You can retrieve the playlist IDs for each of these lists from the channel resource for a given channel.
     ///
     ///You can then use the playlistItems.list method to retrieve any of those lists. You can also add or remove items from those lists by calling the playlistItems.insert and playlistItems.delete methods.
-    _playlists = Playlists(token: _token, apiKey: _apiKey, dio: dio);
+    _playlists = Playlists(apiKey: apiKey, dio: dio);
 
     ///A playlistItem resource identifies another resource, such as a video, that is included in a playlist. In addition, the playlistItem resource contains details about the included resource that pertain specifically to how that resource is used in that playlist.
     //////
     ///YouTube also uses a playlist to identify a channel's list of uploaded videos, with each playlistItem in that list representing one uploaded video. You can retrieve the playlist ID for that list from the channel resource for a given channel. You can then use the playlistItems.list method to the list.
-    _playlistItems = PlaylistItems(token: _token, apiKey: _apiKey, dio: dio);
+    _playlistItems = PlaylistItems(apiKey: apiKey, dio: dio);
 
     ///A search result contains information about a YouTube video, channel, or playlist that matches the search parameters specified in an API request. While a search result points to a uniquely identifiable resource, like a video, it does not have its own persistent data.
-    _search = Search(token: _token, apiKey: _apiKey, dio: dio);
+    _search = Search(apiKey: apiKey, dio: dio);
   }
 }
