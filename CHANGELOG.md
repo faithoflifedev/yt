@@ -1,3 +1,7 @@
+## 2.0.6+4
+
+* fix publishing tools
+
 ## 2.0.6+3
 
 * adjustments
