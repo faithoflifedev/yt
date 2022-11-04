@@ -74,7 +74,7 @@ class Yt with UiLoggy {
     }));
   }
 
-  static Future<Yt> withKey(String apiKey) async {
+  static Yt withKey(String apiKey) {
     final yt = Yt();
 
     yt.setModules(apiKey: apiKey);
