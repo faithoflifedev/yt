@@ -129,6 +129,8 @@ class YoutubeInsertPlaylistsCommand extends YtHelperCommand {
     } on DioError catch (err) {
       throw UsageException('API usage error:', err.usage);
     }
+
+    disconnectYt();
   }
 }
 
@@ -171,6 +173,8 @@ contentDetails, id, localizations, player, snippet, status''')
     } on DioError catch (err) {
       throw UsageException('API usage error:', err.usage);
     }
+
+    disconnectYt();
   }
 }
 
@@ -199,5 +203,7 @@ class YoutubeDeletePlaylistsCommand extends YtHelperCommand {
     } on DioError catch (err) {
       throw UsageException('API usage error:', err.usage);
     }
+
+    disconnectYt();
   }
 }

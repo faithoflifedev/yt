@@ -21,7 +21,7 @@ class YoutubeWatermarksCommand extends YtHelperCommand {
   }
 }
 
-///Uploads a custom video thumbnail to YouTube and sets it for a video.
+/// Uploads a custom video thumbnail to YouTube and sets it for a video.
 class YoutubeSetWatermarksCommand extends YtHelperCommand {
   @override
   String get description =>
@@ -90,9 +90,12 @@ class YoutubeSetWatermarksCommand extends YtHelperCommand {
     } on DioError catch (err) {
       throw UsageException('API usage error:', err.usage);
     }
+
+    disconnectYt();
   }
 }
 
+/// Deletes a channel's watermark image.
 class YoutubeUnsetWatermarksCommand extends YtHelperCommand {
   @override
   String get description => 'Deletes a channel\'s watermark image.';
@@ -119,5 +122,7 @@ class YoutubeUnsetWatermarksCommand extends YtHelperCommand {
     } on DioError catch (err) {
       throw UsageException('API usage error:', err.usage);
     }
+
+    disconnectYt();
   }
 }

@@ -33,6 +33,8 @@ class Util {
     return logOptions;
   }
 
+  static Encoding defaultEncoding() => Encoding.getByName('utf-8')!;
+
   static ClientId defaultClientId() =>
       clientIdFromFileSpec(defaultCredentialsFileSpec);
 
@@ -70,9 +72,6 @@ class Util {
       '${Util.userHome}/.yt/credentials.json';
 
   static File get defaultCredentialsFile => File(defaultCredentialsFileSpec);
-
-  static File get defaultTokenFile =>
-      File('${Util.userHome}/.yt/.refreshToken.json');
 
   static File get accessCredentialsFile =>
       File('${Util.userHome}/.yt/access_credentials.json');

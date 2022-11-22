@@ -57,7 +57,7 @@ To use this package, add the dependency to your pubspec.yaml file:
 ```yaml
 dependencies:
   ...
-  yt: ^2.0.6+6
+  yt: ^2.0.6+7
 ```
 
 ## Obtaining Authorization Credentials

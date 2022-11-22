@@ -1,5 +1,7 @@
 import 'dart:convert';
 
+import 'package:args/command_runner.dart';
+import 'package:dio/dio.dart';
 import 'package:yt/yt.dart';
 
 ///A liveStream resource contains information about the video stream that you
@@ -59,14 +61,20 @@ class YoutubeListStreamCommand extends YtHelperCommand {
   void run() async {
     await initializeYt();
 
-    LiveStreamListResponse liveStreamListResponse = await liveStream.list(
-      part: argResults!['part'],
-      id: argResults?['id'],
-      mine: argResults?['mine'] ? true : null,
-      maxResults: int.parse(argResults!['max-results']),
-    );
+    try {
+      LiveStreamListResponse liveStreamListResponse = await liveStream.list(
+        part: argResults!['part'],
+        id: argResults?['id'],
+        mine: argResults?['mine'] ? true : null,
+        maxResults: int.parse(argResults!['max-results']),
+      );
 
-    print(liveStreamListResponse);
+      print(liveStreamListResponse);
+    } on DioError catch (err) {
+      throw UsageException('API usage error:', err.usage);
+    }
+
+    disconnectYt();
   }
 }
 
@@ -96,12 +104,18 @@ class YoutubeInsertStreamCommand extends YtHelperCommand {
   void run() async {
     await initializeYt();
 
-    LiveStreamItem liveStreamItem = await liveStream.insert(
-      part: argResults!['part'],
-      body: json.decode(argResults!['body']),
-    );
+    try {
+      LiveStreamItem liveStreamItem = await liveStream.insert(
+        part: argResults!['part'],
+        body: json.decode(argResults!['body']),
+      );
 
-    print(liveStreamItem);
+      print(liveStreamItem);
+    } on DioError catch (err) {
+      throw UsageException('API usage error:', err.usage);
+    }
+
+    disconnectYt();
   }
 }
 
@@ -135,12 +149,18 @@ Note that this method will override the existing values for all of the mutable p
   void run() async {
     await initializeYt();
 
-    LiveStreamItem liveStreamItem = await liveStream.insert(
-      part: argResults!['part'],
-      body: json.decode(argResults!['body']),
-    );
+    try {
+      LiveStreamItem liveStreamItem = await liveStream.insert(
+        part: argResults!['part'],
+        body: json.decode(argResults!['body']),
+      );
 
-    print(liveStreamItem);
+      print(liveStreamItem);
+    } on DioError catch (err) {
+      throw UsageException('API usage error:', err.usage);
+    }
+
+    disconnectYt();
   }
 }
 
@@ -164,6 +184,12 @@ class YoutubeDeleteStreamCommand extends YtHelperCommand {
   void run() async {
     await initializeYt();
 
-    await liveStream.delete(id: argResults!['id']);
+    try {
+      await liveStream.delete(id: argResults!['id']);
+    } on DioError catch (err) {
+      throw UsageException('API usage error:', err.usage);
+    }
+
+    disconnectYt();
   }
 }

@@ -290,5 +290,7 @@ Your request can also use the Boolean NOT (-) and OR (|) operators to exclude vi
     } on DioError catch (err) {
       throw UsageException('API usage error:', err.usage);
     }
+
+    disconnectYt();
   }
 }

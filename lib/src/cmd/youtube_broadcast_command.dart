@@ -80,6 +80,8 @@ class YoutubeTransitionBroadcastCommand extends YtHelperCommand {
     } on DioError catch (err) {
       throw UsageException('API usage error:', err.usage);
     }
+
+    disconnectYt();
   }
 }
 
@@ -151,6 +153,8 @@ class YoutubeListBroadcastCommand extends YtHelperCommand {
     } on DioError catch (err) {
       throw UsageException('API usage error:', err.usage);
     }
+
+    disconnectYt();
   }
 }
 
@@ -195,6 +199,8 @@ class YoutubeInsertBroadcastCommand extends YtHelperCommand {
     } on DioError catch (err) {
       throw UsageException('API usage error:', err.usage);
     }
+
+    disconnectYt();
   }
 }
 
@@ -223,6 +229,8 @@ class YoutubeDeleteBroadcastCommand extends YtHelperCommand {
     } on DioError catch (err) {
       throw UsageException('API usage error:', err.usage);
     }
+
+    disconnectYt();
   }
 }
 
@@ -271,6 +279,8 @@ Note that this method will override the existing values for all of the mutable p
     } on DioError catch (err) {
       throw UsageException('API usage error:', err.usage);
     }
+
+    disconnectYt();
   }
 }
 
@@ -316,5 +326,7 @@ class YoutubeBindBroadcastCommand extends YtHelperCommand {
     } on DioError catch (err) {
       throw UsageException('API usage error:', err.usage);
     }
+
+    disconnectYt();
   }
 }

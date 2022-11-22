@@ -5,7 +5,7 @@ import 'package:dio/dio.dart';
 import 'package:universal_io/io.dart';
 import 'package:yt/yt.dart';
 
-///A video resource represents a YouTube video.
+/// A video resource represents a YouTube video.
 class YoutubeVideosCommand extends YtHelperCommand {
   @override
   String get description => 'A video resource represents a YouTube video.';
@@ -22,7 +22,7 @@ class YoutubeVideosCommand extends YtHelperCommand {
   }
 }
 
-///Add a like or dislike rating to a video or remove a rating from a video.
+/// Add a like or dislike rating to a video or remove a rating from a video.
 class YoutubeRateVideosCommand extends YtHelperCommand {
   @override
   String get description =>
@@ -64,7 +64,7 @@ class YoutubeRateVideosCommand extends YtHelperCommand {
   }
 }
 
-///Returns a list of videos that match the API request parameters.
+/// Returns a list of videos that match the API request parameters.
 class YoutubeListVideosCommand extends YtHelperCommand {
   @override
   String get description =>
@@ -175,10 +175,12 @@ Note: This parameter is supported for use in conjunction with the myRating param
     } on DioError catch (err) {
       throw UsageException('API usage error:', err.usage);
     }
+
+    disconnectYt();
   }
 }
 
-///Uploads a video to YouTube and optionally sets the video's metadata.
+/// Uploads a video to YouTube and optionally sets the video's metadata.
 class YoutubeInsertVideosCommand extends YtHelperCommand {
   @override
   String get description =>
@@ -229,10 +231,12 @@ Accepted Media MIME types: video/*, application/octet-stream''')
     } on DioError catch (err) {
       throw UsageException('API usage error:', err.usage);
     }
+
+    disconnectYt();
   }
 }
 
-///Deletes a YouTube video.
+/// Deletes a YouTube video.
 class YoutubeDeleteVideosCommand extends YtHelperCommand {
   @override
   String get description => 'Deletes a YouTube video.';
@@ -257,10 +261,12 @@ class YoutubeDeleteVideosCommand extends YtHelperCommand {
     } on DioError catch (err) {
       throw UsageException('API usage error:', err.usage);
     }
+
+    disconnectYt();
   }
 }
 
-///Updates a video's metadata.
+/// Updates a video's metadata.
 class YoutubeUpdateVideosCommand extends YtHelperCommand {
   @override
   String get description => 'Updates a video\'s metadata.';
@@ -299,12 +305,14 @@ contentDetails, fileDetails, id, liveStreamingDetails, localizations, player, pr
     } on DioError catch (err) {
       throw UsageException('API usage error:', err.usage);
     }
+
+    disconnectYt();
   }
 }
 
-///Binds a YouTube broadcast to a stream or removes an existing binding between
-///a broadcast and a stream. A broadcast can only be bound to one video stream,
-///though a video stream may be bound to more than one broadcast.
+/// Binds a YouTube broadcast to a stream or removes an existing binding between
+/// a broadcast and a stream. A broadcast can only be bound to one video stream,
+/// though a video stream may be bound to more than one broadcast.
 class YoutubeGetRatingVideosCommand extends YtHelperCommand {
   @override
   String get description =>

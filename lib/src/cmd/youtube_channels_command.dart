@@ -64,6 +64,8 @@ auditDetails, brandingSettings, contentDetails, contentOwnerDetails, id, localiz
     } on DioError catch (err) {
       throw UsageException('API usage error:', err.usage);
     }
+
+    disconnectYt();
   }
 }
 
@@ -106,5 +108,7 @@ Note that this method overrides the existing values for all of the mutable prope
     } on DioError catch (err) {
       throw UsageException('API usage error:', err.usage);
     }
+
+    disconnectYt();
   }
 }

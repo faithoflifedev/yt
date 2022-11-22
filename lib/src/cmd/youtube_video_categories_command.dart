@@ -2,7 +2,7 @@ import 'package:args/command_runner.dart';
 import 'package:dio/dio.dart';
 import 'package:yt/yt.dart';
 
-///A video resource represents a YouTube video.
+/// A video resource represents a YouTube video.
 class YoutubeVideoCategoriesCommand extends Command {
   @override
   String get description =>
@@ -16,7 +16,7 @@ class YoutubeVideoCategoriesCommand extends Command {
   }
 }
 
-///Returns a list of categories that can be associated with YouTube videos.
+/// Returns a list of categories that can be associated with YouTube videos.
 class YoutubeListVideoCategoriesCommand extends YtHelperCommand {
   @override
   String get description =>
@@ -54,5 +54,7 @@ class YoutubeListVideoCategoriesCommand extends YtHelperCommand {
     } on DioError catch (err) {
       throw UsageException('API usage error:', err.usage);
     }
+
+    disconnectYt();
   }
 }

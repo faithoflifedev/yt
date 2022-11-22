@@ -40,4 +40,8 @@ abstract class YtHelperCommand extends Command {
       logOptions: Util.convertToLogOptions(globalResults!['log-level']),
     );
   }
+
+  disconnectYt() {
+    Yt.httpClient.close();
+  }
 }

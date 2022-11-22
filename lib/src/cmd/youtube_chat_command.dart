@@ -82,6 +82,8 @@ class YoutubeListChatCommand extends YtHelperCommand {
     } on DioError catch (err) {
       throw UsageException('API usage error:', err.usage);
     }
+
+    disconnectYt();
   }
 }
 
@@ -119,6 +121,8 @@ class YoutubeInsertChatCommand extends YtHelperCommand {
     } on DioError catch (err) {
       throw UsageException('API usage error:', err.usage);
     }
+
+    disconnectYt();
   }
 }
 
@@ -149,6 +153,8 @@ class YoutubeDeleteChatCommand extends YtHelperCommand {
     } on DioError catch (err) {
       throw UsageException('API usage error:', err.usage);
     }
+
+    disconnectYt();
   }
 }
 
@@ -182,7 +188,13 @@ class YoutubeAnswerChatCommand extends YtHelperCommand {
 
     var liveBroadcastItem = await broadcast.getActiveBroadcast();
 
-    await chat.answerBot(
-        liveBroadcastItem: liveBroadcastItem, chatbot: chatbot);
+    try {
+      await chat.answerBot(
+          liveBroadcastItem: liveBroadcastItem, chatbot: chatbot);
+    } on DioError catch (err) {
+      throw UsageException('API usage error:', err.usage);
+    }
+
+    disconnectYt();
   }
 }

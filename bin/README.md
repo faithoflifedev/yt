@@ -82,6 +82,7 @@ Generate a refresh token used to authenticate the command line API requests
 
 Usage: yt authorize [arguments]
 -h, --help    Print this usage information.
+-o, --[no-]overwrite-credentials    use this flag if you need to overwrite the currently stored credentials.
 ```
 
 Use this command to generate a refresh token that will allow authentication for future command line API requests. You will be required to supply a **clientId** and **clientSecret** as generated through the [Obtaining authorization credentials](https://developers.google.com/youtube/v3/live/registering_an_application) in the YouTube docs.
