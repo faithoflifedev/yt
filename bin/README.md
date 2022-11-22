@@ -2,10 +2,18 @@
 
 A command line interface for broadcasting to Youtube through OBS
 
-To install:
+To install using `dart pub`:
 
 ```sh
 pub global activate yt
+```
+
+Install using `brew`:
+
+```sh
+brew tap faithoflifedev/yt
+
+brew install yt
 ```
 
 Usage:
@@ -141,10 +149,10 @@ Creates a broadcast.
 Usage: yt broadcast insert [arguments]
 -h, --help                Print this usage information.
     --part                The part parameter serves two purposes in this operation. It identifies the properties that the write operation will set as well as the properties that the API response will include.
-
+                                        
                                         The part properties that you can include in the parameter value are id, snippet, contentDetails, and status.
                           (defaults to "snippet,contentDetails,status")
-    --body (mandatory)    Provide a liveBroadcast resource [https://developers.google.com/youtube/v3/live/docs/liveBroadcasts#resource] in the request body
+    --body (mandatory)    Provide a json formatted `liveBroadcast` resource [https://developers.google.com/youtube/v3/live/docs/liveBroadcasts#resource] in the request body or provide the `file name` of a json file that contains the `liveBroadcast` resource.
 ```
 
 ### broadcast list
@@ -198,6 +206,26 @@ Usage: yt broadcast transition [arguments]
     --part                            The part parameter specifies a comma-separated list of one or more liveBroadcast resource properties that the API response will include. The part names that you can include in the parameter value are id, snippet, contentDetails, and status.
                                       (defaults to "id,snippet,contentDetails,status")
     --id=<id> (mandatory)             The id parameter specifies the unique ID of the broadcast that is transitioning to another status.
+```
+
+### broadcast update
+
+```sh
+prompt>yt broadcast update --help
+```
+
+```text
+A liveBroadcast resource represents an event that will be streamed, via live video, on YouTube.
+
+Usage: yt broadcast update [arguments]
+-h, --help                Print this usage information.
+    --part                The part parameter serves two purposes in this operation. It identifies the properties that the write operation will set as well as the properties that the API response will include.
+                          
+                          The part properties that you can include in the parameter value are id, snippet, contentDetails, and status.
+                          
+                          Note that this method will override the existing values for all of the mutable properties that are contained in any parts that the parameter value specifies. For example, a broadcast's privacy status is defined in the status part. As such, if your request is updating a private or unlisted broadcast, and the request's part parameter value includes the status part, the broadcast's privacy setting will be updated to whatever value the request body specifies. If the request body does not specify a value, the existing privacy setting will be removed and the broadcast will revert to the default privacy setting.
+                          (defaults to "snippet,contentDetails,status")
+    --body (mandatory)    Provide a json formatted `liveBroadcast` resource [https://developers.google.com/youtube/v3/live/docs/liveBroadcasts#resource] in the request body or provide the `file name` of a json file that contains the `liveBroadcast` resource.
 ```
 
 ## channels

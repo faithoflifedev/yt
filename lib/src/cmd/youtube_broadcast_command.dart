@@ -2,10 +2,11 @@ import 'dart:convert';
 
 import 'package:args/command_runner.dart';
 import 'package:dio/dio.dart';
+import 'package:universal_io/io.dart';
 import 'package:yt/yt.dart';
 
-///A liveBroadcast resource represents an event that will be streamed, via live
-///video, on YouTube.
+/// A liveBroadcast resource represents an event that will be streamed, via live
+/// video, on YouTube.
 class YoutubeBroadcastCommand extends YtHelperCommand {
   @override
   String get description =>
@@ -20,15 +21,16 @@ class YoutubeBroadcastCommand extends YtHelperCommand {
     addSubcommand(YoutubeInsertBroadcastCommand());
     addSubcommand(YoutubeDeleteBroadcastCommand());
     addSubcommand(YoutubeBindBroadcastCommand());
+    addSubcommand(YoutubeUpdateBroadcastCommand());
   }
 }
 
-///Changes the status of a YouTube live broadcast and initiates any processes
-///associated with the new status. For example, when you transition a
-///broadcast's status to testing, YouTube starts to transmit video to that
-///broadcast's monitor stream. Before calling this method, you should confirm
-///that the value of the status.streamStatus property for the stream bound to
-///your broadcast is active.
+/// Changes the status of a YouTube live broadcast and initiates any processes
+/// associated with the new status. For example, when you transition a
+/// broadcast's status to testing, YouTube starts to transmit video to that
+/// broadcast's monitor stream. Before calling this method, you should confirm
+/// that the value of the status.streamStatus property for the stream bound to
+/// your broadcast is active.
 class YoutubeTransitionBroadcastCommand extends YtHelperCommand {
   @override
   String get description =>
@@ -81,7 +83,7 @@ class YoutubeTransitionBroadcastCommand extends YtHelperCommand {
   }
 }
 
-///Returns a list of YouTube broadcasts that match the API request parameters.
+/// Returns a list of YouTube broadcasts that match the API request parameters.
 class YoutubeListBroadcastCommand extends YtHelperCommand {
   @override
   String get description =>
@@ -152,7 +154,7 @@ class YoutubeListBroadcastCommand extends YtHelperCommand {
   }
 }
 
-///Creates a broadcast.
+/// Creates a broadcast.
 class YoutubeInsertBroadcastCommand extends YtHelperCommand {
   @override
   String get description => 'Creates a broadcast.';
@@ -171,16 +173,23 @@ class YoutubeInsertBroadcastCommand extends YtHelperCommand {
       ..addOption('body',
           mandatory: true,
           help:
-              'Provide a liveBroadcast resource [https://developers.google.com/youtube/v3/live/docs/liveBroadcasts#resource] in the request body');
+              'Provide a json formatted `liveBroadcast` resource [https://developers.google.com/youtube/v3/live/docs/liveBroadcasts#resource] in the request body or provide the `file name` of a json file that contains the `liveBroadcast` resource.');
   }
 
   @override
   void run() async {
     await initializeYt();
 
+    final content = argResults!['body'] as String;
+
+    // won't work with a file name that starts with the '{' character
+    final isJson = content.trimLeft().startsWith('{');
+
+    final body = isJson ? content : File(content).readAsStringSync();
+
     try {
       final liveBroadcastItem = await broadcast.insert(
-          body: json.decode(argResults!['body']), part: argResults!['part']);
+          body: json.decode(body), part: argResults!['part']);
 
       print(liveBroadcastItem);
     } on DioError catch (err) {
@@ -189,7 +198,7 @@ class YoutubeInsertBroadcastCommand extends YtHelperCommand {
   }
 }
 
-///Deletes a broadcast.
+/// Deletes a broadcast.
 class YoutubeDeleteBroadcastCommand extends YtHelperCommand {
   @override
   String get description => 'Deletes a broadcast.';
@@ -217,8 +226,8 @@ class YoutubeDeleteBroadcastCommand extends YtHelperCommand {
   }
 }
 
-///Updates a broadcast. For example, you could modify the broadcast settings
-///defined in the liveBroadcast resource's contentDetails object.
+/// Updates a broadcast. For example, you could modify the broadcast settings
+/// defined in the liveBroadcast resource's contentDetails object.
 class YoutubeUpdateBroadcastCommand extends YtHelperCommand {
   @override
   String get description =>
@@ -240,16 +249,23 @@ Note that this method will override the existing values for all of the mutable p
       ..addOption('body',
           mandatory: true,
           help:
-              'Provide a liveBroadcast resource [https://developers.google.com/youtube/v3/live/docs/liveBroadcasts#resource] in the request body');
+              'Provide a json formatted `liveBroadcast` resource [https://developers.google.com/youtube/v3/live/docs/liveBroadcasts#resource] in the request body or provide the `file name` of a json file that contains the `liveBroadcast` resource.');
   }
 
   @override
   void run() async {
     await initializeYt();
 
+    final content = argResults!['body'] as String;
+
+    // won't work with a file name that starts with the '{' character
+    final isJson = content.trimLeft().startsWith('{');
+
+    final body = isJson ? content : File(content).readAsStringSync();
+
     try {
       final liveBroadcastItem = await broadcast.update(
-          body: json.decode(argResults!['body']), part: argResults!['part']);
+          body: json.decode(body), part: argResults!['part']);
 
       print(liveBroadcastItem);
     } on DioError catch (err) {
@@ -258,9 +274,9 @@ Note that this method will override the existing values for all of the mutable p
   }
 }
 
-///Binds a YouTube broadcast to a stream or removes an existing binding between
-///a broadcast and a stream. A broadcast can only be bound to one video stream,
-///though a video stream may be bound to more than one broadcast.
+/// Binds a YouTube broadcast to a stream or removes an existing binding between
+/// a broadcast and a stream. A broadcast can only be bound to one video stream,
+/// though a video stream may be bound to more than one broadcast.
 class YoutubeBindBroadcastCommand extends YtHelperCommand {
   @override
   String get description =>

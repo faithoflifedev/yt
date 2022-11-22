@@ -10,10 +10,6 @@ Native [Dart](https://dart.dev/) interface to multiple Google REST APIs, includi
 ## Table of Contents
 - [How does this package differ from the googleapis package?](#how-does-this-package-differ-from-the-googleapis-package)
 - [New for version 2.0.0](#new-for-version-200)
-- [API Commands Supported](#api-commands-supported)
-  - [Data API](#data-api)
-  - [Live Streaming API](#live-streaming-api)
-  - [Custom Features (experimental)](#custom-features-experimental)
 - [Getting Started](#getting-started)
 - [Obtaining Authorization Credentials](#obtaining-authorization-credentials)
 - [Using of the Data API](#using-of-the-data-api)
@@ -23,8 +19,13 @@ Native [Dart](https://dart.dev/) interface to multiple Google REST APIs, includi
 - [Experimental Chatbot](#experimental-chatbot)
 - [Usage within Flutter](#usage-within-flutter)
 - [Available Examples](#available-examples)
+- [Youtube REST API cli (Youtube at the command prompt)](#youtube-rest-api-cli-youtube-at-the-command-prompt)
+- [API Commands Supported](#api-commands-supported)
+  - [Data API](#data-api)
+  - [Live Streaming API](#live-streaming-api)
+  - [Custom Features (experimental)](#custom-features-experimental)
 - [What's Next?](#whats-next)
-- [Breaking change in v2.0.0 from v1.2.x](#breaking-change-in-v200-from-v12x)
+- [Breaking change in v2.0.x from v1.2.x](#breaking-change-in-v200-from-v12x)
 - [Breaking change in v1.1.0 from v1.0.x](#breaking-change-in-v110-from-v10x)
 
 [![Buy me a coffee](https://www.buymeacoffee.com/assets/img/guidelines/download-assets-1.svg)](https://www.buymeacoffee.com/faithoflif2)
@@ -35,9 +36,9 @@ Native [Dart](https://dart.dev/) interface to multiple Google REST APIs, includi
 - Since it's not generated the package includes additional useful features like a cli (Command Line Interface) and the experimental Chatbot
 - A tighter focus to the package means focused documentation and focused examples
 
-## New for version 2.0.0
+## New for version 2.0.x
 
-As of the 2.0.0 release of this package there is a cli utility included that can be used to return data for any API call currently supported by the package. If you want to get started quickly with the cli utility run these commands in a terminal session:
+As of the 2.0.x release of this package there is a cli utility included that can be used to return data for any API call currently supported by the package. If you want to get started quickly with the cli utility run these commands in a terminal session:
 
 ```sh
 pub global activate yt
@@ -48,29 +49,6 @@ yt --help
 Please see the cli documentation [README.md](https://github.com/faithoflifedev/yt/tree/main/bin) for more detailed usage information.
 
 **NOTE:** Cloud Vision API support has been permanently removed from this package and will be available as it's own package.  Additionally, cache support has been temporarily removed.
-
-## API Commands Supported
-
-### Data API
-
-- [Channels](https://developers.google.com/youtube/v3/docs/channels) (partial)
-- [PlaylistItems](https://developers.google.com/youtube/v3/docs/playlistItems)
-- [Playlists](https://developers.google.com/youtube/v3/docs/playlists)
-- [Search](https://developers.google.com/youtube/v3/docs/search)
-- [Thumbnails](https://developers.google.com/youtube/v3/docs/thumbnails)
-- [VideoCategories](https://developers.google.com/youtube/v3/docs/videoCategories)
-- [Videos](https://developers.google.com/youtube/v3/docs/videos)
-
-### Live Streaming API
-
-- [LiveBroadcasts](https://developers.google.com/youtube/v3/live/docs/liveBroadcasts)
-- [LiveChatMessages](https://developers.google.com/youtube/v3/live/docs/liveChatMessages)
-- [LiveStreams](https://developers.google.com/youtube/v3/live/docs/liveStreams)
-
-### Custom Features (experimental)
-
-- download chat history from a LiveChat
-- simple chatbot functionality for LiveChat
 
 ## Getting Started
 
@@ -345,13 +323,80 @@ With the generator in place, it becomes quite easy to include _google sign-in_ f
 - [example.dart](https://github.com/faithoflifedev/yt/blob/main/example/example.dart) - (command line) display various YouTube data
 - [livechat_example.dart](https://github.com/faithoflifedev/yt/blob/main/example/livechat_example.dart) - (command line) chatbot will answer a set of questions in a liveChat session
 - [flutter_playlist](https://github.com/faithoflifedev/yt/tree/main/example/flutter_playlist) - display a YouTube playlist in a ListView
+  
+# Youtube REST API cli (Youtube at the command prompt)
+
+A command line interface for broadcasting to Youtube through OBS
+
+To install using `dart pub`:
+
+```sh
+pub global activate yt
+```
+
+Install using `brew`:
+
+```sh
+brew tap faithoflifedev/yt
+
+brew install yt
+```
+
+Usage:
+
+```sh
+prompt>yt --help
+A command line interface for connecting to Youtube
+
+Usage: yt <command> [arguments]
+
+Global options:
+-h, --help    Print this usage information.
+    --log-level    [all, debug, info, warning, error, off (default)]
+    
+Available commands:
+  authorize          Generate a refresh token used to authenticate the command line API requests
+  broadcast          A liveBroadcast resource represents an event that will be streamed, via live video, on YouTube.
+  channels           A channel resource contains information about a YouTube channel.
+  chat               A liveChatMessage resource represents a chat message in a YouTube live chat. The resource can contain details about several types of messages, including a newly posted text message or fan funding event.
+  playlists          A playlist resource represents a YouTube playlist. A playlist is a collection of videos that can be viewed sequentially and shared with other users. By default, playlists are publicly visible to other users, but playlists can be public or private.
+  search             A search result contains information about a YouTube video, channel, or playlist that matches the search parameters specified in an API request. While a search result points to a uniquely identifiable resource, like a video, it does not have its own persistent data.
+  stream             A liveStream resource contains information about the video stream that you are transmitting to YouTube. The stream provides the content that will be broadcast to YouTube users. Once created, a liveStream resource can be bound to one or more liveBroadcast resources.
+  subscriptions      A subscription resource contains information about a YouTube user subscription. A subscription notifies a user when new videos are added to a channel or when another user takes one of several actions on YouTube, such as uploading a video, rating a video, or commenting on a video.
+  thumbnails         A thumbnail resource identifies different thumbnail image sizes associated with a resource.
+  video-categories   A videoCategory resource identifies a category that has been or could be associated with uploaded videos.
+  videos             A video resource represents a YouTube video.
+```
+
+## API Commands Supported
+
+### Data API
+
+- [Channels](https://developers.google.com/youtube/v3/docs/channels) (partial)
+- [PlaylistItems](https://developers.google.com/youtube/v3/docs/playlistItems)
+- [Playlists](https://developers.google.com/youtube/v3/docs/playlists)
+- [Search](https://developers.google.com/youtube/v3/docs/search)
+- [Thumbnails](https://developers.google.com/youtube/v3/docs/thumbnails)
+- [VideoCategories](https://developers.google.com/youtube/v3/docs/videoCategories)
+- [Videos](https://developers.google.com/youtube/v3/docs/videos)
+
+### Live Streaming API
+
+- [LiveBroadcasts](https://developers.google.com/youtube/v3/live/docs/liveBroadcasts)
+- [LiveChatMessages](https://developers.google.com/youtube/v3/live/docs/liveChatMessages)
+- [LiveStreams](https://developers.google.com/youtube/v3/live/docs/liveStreams)
+
+### Custom Features (experimental)
+
+- download chat history from a LiveChat
+- simple chatbot functionality for LiveChat
 
 ## What's Next?
 
 - ~~A working sample Flutter app~~
 - Expanded API Commands
 
-## Breaking change in v2.0.0 from v1.2.x
+## Breaking change in v2.0.x from v1.2.x
 
 The `Yt` object now returns a `Future` and the reference to a specific API module is no longer a `Future`.  So now you can use the following code:
 

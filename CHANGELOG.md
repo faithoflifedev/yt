@@ -1,3 +1,9 @@
+## 2.0.6+6
+
+* README changes
+* support for `stream update`
+* dependency bump
+
 ## 2.0.6+5
 
 * auth by key doesn&#x27;t need &quot;async&quot;
