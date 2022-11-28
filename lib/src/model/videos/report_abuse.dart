@@ -2,7 +2,7 @@ import 'dart:convert';
 
 import 'package:json_annotation/json_annotation.dart';
 
-part 'report_abuse.g.dart';
+part '../videos/report_abuse.g.dart';
 
 ///Reports a video for containing abusive content.
 @JsonSerializable()

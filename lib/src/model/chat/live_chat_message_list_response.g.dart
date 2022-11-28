@@ -17,8 +17,8 @@ LiveChatMessageListResponse _$LiveChatMessageListResponseFromJson(
           ? null
           : DateTime.parse(json['offlineAt'] as String),
       pageInfo: PageInfo.fromJson(json['pageInfo'] as Map<String, dynamic>),
-      items: (json['items'] as List<dynamic>)
-          .map((e) => LiveChatMessage.fromJson(e as Map<String, dynamic>))
+      liveChatMessageItems: (json['items'] as List<dynamic>?)
+          ?.map((e) => LiveChatMessage.fromJson(e as Map<String, dynamic>))
           .toList(),
     );
 
@@ -28,8 +28,8 @@ Map<String, dynamic> _$LiveChatMessageListResponseToJson(
       'kind': instance.kind,
       'etag': instance.etag,
       'nextPageToken': instance.nextPageToken,
+      'pageInfo': instance.pageInfo,
       'pollingIntervalMillis': instance.pollingIntervalMillis,
       'offlineAt': instance.offlineAt?.toIso8601String(),
-      'pageInfo': instance.pageInfo.toJson(),
-      'items': instance.items.map((e) => e.toJson()).toList(),
+      'items': instance.liveChatMessageItems,
     };

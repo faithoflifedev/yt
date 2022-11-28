@@ -9,13 +9,14 @@ part of 'live_stream_list_response.dart';
 LiveStreamListResponse _$LiveStreamListResponseFromJson(
         Map<String, dynamic> json) =>
     LiveStreamListResponse(
-      json['kind'] as String,
-      json['etag'] as String,
-      PageInfo.fromJson(json['pageInfo'] as Map<String, dynamic>),
-      (json['items'] as List<dynamic>)
-          .map((e) => LiveStreamItem.fromJson(e as Map<String, dynamic>))
+      kind: json['kind'] as String,
+      etag: json['etag'] as String,
+      nextPageToken: json['nextPageToken'] as String?,
+      prevPageToken: json['prevPageToken'] as String?,
+      pageInfo: PageInfo.fromJson(json['pageInfo'] as Map<String, dynamic>),
+      liveStreamItems: (json['items'] as List<dynamic>?)
+          ?.map((e) => LiveStreamItem.fromJson(e as Map<String, dynamic>))
           .toList(),
-      json['id'] as String?,
     );
 
 Map<String, dynamic> _$LiveStreamListResponseToJson(
@@ -23,7 +24,8 @@ Map<String, dynamic> _$LiveStreamListResponseToJson(
     <String, dynamic>{
       'kind': instance.kind,
       'etag': instance.etag,
-      'pageInfo': instance.pageInfo.toJson(),
-      'items': instance.items.map((e) => e.toJson()).toList(),
-      'id': instance.id,
+      'nextPageToken': instance.nextPageToken,
+      'prevPageToken': instance.prevPageToken,
+      'pageInfo': instance.pageInfo,
+      'items': instance.liveStreamItems,
     };

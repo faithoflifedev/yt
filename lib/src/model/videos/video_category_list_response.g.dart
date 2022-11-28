@@ -11,8 +11,8 @@ VideoCategoryListResponse _$VideoCategoryListResponseFromJson(
     VideoCategoryListResponse(
       kind: json['kind'] as String,
       etag: json['etag'] as String,
-      items: (json['items'] as List<dynamic>)
-          .map((e) => VideoCategory.fromJson(e as Map<String, dynamic>))
+      videoCategoryItems: (json['items'] as List<dynamic>?)
+          ?.map((e) => VideoCategory.fromJson(e as Map<String, dynamic>))
           .toList(),
     );
 
@@ -21,5 +21,5 @@ Map<String, dynamic> _$VideoCategoryListResponseToJson(
     <String, dynamic>{
       'kind': instance.kind,
       'etag': instance.etag,
-      'items': instance.items.map((e) => e.toJson()).toList(),
+      'items': instance.videoCategoryItems,
     };

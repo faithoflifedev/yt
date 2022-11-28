@@ -93,8 +93,8 @@ class Chat extends YouTubeHelper {
   }
 
   ///Download the liveChat history.  If a [File] is specified then the data will
-  ///be stored there otherwise if a [TimeStore] is specfied, only history with a
-  ///timestamp greater than that given by the TimeStore will be diwnloaded.
+  ///be stored there otherwise if a [TimeStore] is specified, only history with a
+  ///timestamp greater than that given by the TimeStore will be downloaded.
   Future<void> downloadHistory(
       {required LiveBroadcastItem liveBroadcastItem,
       File? file,

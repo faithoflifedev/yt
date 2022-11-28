@@ -27,7 +27,7 @@ Map<String, dynamic> _$PlaylistItemToJson(PlaylistItem instance) =>
       'kind': instance.kind,
       'etag': instance.etag,
       'id': instance.id,
-      'snippet': instance.snippet?.toJson(),
-      'status': instance.status?.toJson(),
-      'contentDetails': instance.contentDetails?.toJson(),
+      'snippet': instance.snippet,
+      'status': instance.status,
+      'contentDetails': instance.contentDetails,
     };

@@ -1,3 +1,10 @@
+## 2.0.6+8
+
+* more relevant flutter example
+* close out http connection so cli code exits immediately
+* superclasses to remove code repitition
+* updated README for main project and flutter example
+
 ## 2.0.6+7
 
 * switch to googleapis_auth package for cli

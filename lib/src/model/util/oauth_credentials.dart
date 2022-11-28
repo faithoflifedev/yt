@@ -1,5 +1,6 @@
 import 'dart:convert';
 
+import 'package:googleapis_auth/googleapis_auth.dart';
 import 'package:json_annotation/json_annotation.dart';
 import 'package:universal_io/io.dart';
 import 'package:yaml/yaml.dart';
@@ -8,12 +9,15 @@ part 'oauth_credentials.g.dart';
 
 @JsonSerializable()
 class OAuthCredentials {
-  final String clientId;
-  final String clientSecret;
-  final String? code;
+  final String identifier;
+  final String secret;
 
   OAuthCredentials(
-      {required this.clientId, required this.clientSecret, this.code});
+    this.identifier,
+    this.secret,
+  );
+
+  ClientId get oAuthClientId => ClientId(identifier, secret);
 
   factory OAuthCredentials.fromYamlFile(File yamlFile) {
     return OAuthCredentials.fromYamlString(yamlFile.readAsStringSync());
@@ -25,13 +29,14 @@ class OAuthCredentials {
   }
 
   factory OAuthCredentials.fromYamlString(String yaml) {
-    final jsonString = jsonEncode(loadYaml(yaml));
+    final credentialsYaml = loadYaml(yaml) as Map;
 
-    return OAuthCredentials.fromJson(jsonDecode(jsonString));
+    return OAuthCredentials.fromJson(credentialsYaml
+        .map<String, dynamic>((key, value) => MapEntry(key, value)));
   }
 
   factory OAuthCredentials.fromJsonFile(File jsonFile) {
-    return OAuthCredentials.fromJsonString(jsonFile.readAsStringSync());
+    return OAuthCredentials.fromYamlString(jsonFile.readAsStringSync());
   }
 
   factory OAuthCredentials.fromJsonString(String jsonString) {

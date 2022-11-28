@@ -1,8 +1,0 @@
-templates:
-  - name: README.md
-    type: overwrite
-  - name: CHANGELOG.md
-    type: prepend
-
-version: 2.0.2
-change: better chatbot docs

@@ -31,8 +31,8 @@ Map<String, dynamic> _$ChannelItemToJson(ChannelItem instance) =>
       'kind': instance.kind,
       'etag': instance.etag,
       'id': instance.id,
-      'snippet': instance.snippet?.toJson(),
-      'contentDetails': instance.contentDetails?.toJson(),
-      'statistics': instance.statistics?.toJson(),
-      'brandingSettings': instance.brandingSettings?.toJson(),
+      'snippet': instance.snippet,
+      'contentDetails': instance.contentDetails,
+      'statistics': instance.statistics,
+      'brandingSettings': instance.brandingSettings,
     };

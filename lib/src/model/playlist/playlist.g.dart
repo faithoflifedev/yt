@@ -30,9 +30,9 @@ Map<String, dynamic> _$PlaylistToJson(Playlist instance) => <String, dynamic>{
       'kind': instance.kind,
       'etag': instance.etag,
       'id': instance.id,
-      'snippet': instance.snippet?.toJson(),
-      'status': instance.status?.toJson(),
-      'contentDetails': instance.contentDetails?.toJson(),
-      'player': instance.player?.toJson(),
+      'snippet': instance.snippet,
+      'status': instance.status,
+      'contentDetails': instance.contentDetails,
+      'player': instance.player,
       'localizations': instance.localizations,
     };

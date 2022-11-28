@@ -3,28 +3,26 @@ import 'dart:convert';
 import 'package:json_annotation/json_annotation.dart';
 
 import '../page_info.dart';
+import '../list_response.dart';
 import 'playlist.dart';
 
 part 'playlist_response.g.dart';
 
 @JsonSerializable(explicitToJson: true)
-class PlaylistResponse {
-  final String kind;
-  final String etag;
-  final String? nextPageToken;
-  final String? prevPageToken;
-  final String? regionCode;
-  final PageInfo pageInfo;
-  final List<Playlist> items;
+class PlaylistResponse extends ListResponse {
+  /// A list of playlists that match the request criteria.
+  @JsonKey(name: 'items')
+  final List<Playlist>? playlistItems;
 
   PlaylistResponse(
-      {required this.kind,
-      required this.etag,
-      this.nextPageToken,
-      this.prevPageToken,
-      this.regionCode,
-      required this.pageInfo,
-      required this.items});
+      {required super.kind,
+      required super.etag,
+      super.nextPageToken,
+      super.prevPageToken,
+      required super.pageInfo,
+      this.playlistItems});
+
+  List<Playlist> get items => playlistItems ?? [];
 
   factory PlaylistResponse.fromJson(Map<String, dynamic> json) =>
       _$PlaylistResponseFromJson(json);

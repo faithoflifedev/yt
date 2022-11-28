@@ -14,8 +14,8 @@ LiveBroadcastResponse _$LiveBroadcastResponseFromJson(
       nextPageToken: json['nextPageToken'] as String?,
       prevPageToken: json['prevPageToken'] as String?,
       pageInfo: PageInfo.fromJson(json['pageInfo'] as Map<String, dynamic>),
-      items: (json['items'] as List<dynamic>)
-          .map((e) => LiveBroadcastItem.fromJson(e as Map<String, dynamic>))
+      broadcastItems: (json['items'] as List<dynamic>?)
+          ?.map((e) => LiveBroadcastItem.fromJson(e as Map<String, dynamic>))
           .toList(),
     );
 
@@ -27,5 +27,5 @@ Map<String, dynamic> _$LiveBroadcastResponseToJson(
       'nextPageToken': instance.nextPageToken,
       'prevPageToken': instance.prevPageToken,
       'pageInfo': instance.pageInfo.toJson(),
-      'items': instance.items.map((e) => e.toJson()).toList(),
+      'items': instance.broadcastItems?.map((e) => e.toJson()).toList(),
     };

@@ -2,8 +2,9 @@ import 'dart:convert';
 
 import 'package:json_annotation/json_annotation.dart';
 
-import 'snippet.dart';
+import '../response_metadata.dart';
 import 'content_details.dart';
+import 'snippet.dart';
 import 'subscriber_snippet.dart';
 
 part 'subscription.g.dart';
@@ -12,14 +13,8 @@ part 'subscription.g.dart';
 /// subscription. A subscription notifies a user when new videos are added to a
 /// channel or when another user takes one of several actions on YouTube, such
 /// as uploading a video, rating a video, or commenting on a video.
-@JsonSerializable(explicitToJson: true)
-class Subscription {
-  /// Identifies the API resource's type. The value will be youtube#Subscription.
-  final String kind;
-
-  /// The Etag of this resource.
-  final String etag;
-
+@JsonSerializable()
+class Subscription extends ResponseMetadata {
   /// The ID that YouTube uses to uniquely identify the Subscription.
   final String id;
 
@@ -33,8 +28,8 @@ class Subscription {
   final SubscriberSnippet? subscriberSnippet;
 
   Subscription(
-      {required this.kind,
-      required this.etag,
+      {required super.kind,
+      required super.etag,
       required this.id,
       this.snippet,
       this.contentDetails,

@@ -19,6 +19,6 @@ Map<String, dynamic> _$SearchResultToJson(SearchResult instance) =>
     <String, dynamic>{
       'kind': instance.kind,
       'etag': instance.etag,
-      'id': instance.id.toJson(),
-      'snippet': instance.snippet?.toJson(),
+      'id': instance.id,
+      'snippet': instance.snippet,
     };

@@ -91,7 +91,7 @@ class YoutubeSetWatermarksCommand extends YtHelperCommand {
       throw UsageException('API usage error:', err.usage);
     }
 
-    disconnectYt();
+    done();
   }
 }
 
@@ -123,6 +123,6 @@ class YoutubeUnsetWatermarksCommand extends YtHelperCommand {
       throw UsageException('API usage error:', err.usage);
     }
 
-    disconnectYt();
+    done();
   }
 }

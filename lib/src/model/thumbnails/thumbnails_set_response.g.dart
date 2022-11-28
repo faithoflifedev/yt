@@ -24,7 +24,5 @@ Map<String, dynamic> _$ThumbnailsSetResponseToJson(
     <String, dynamic>{
       'kind': instance.kind,
       'etag': instance.etag,
-      'items': instance.items
-          .map((e) => e.map((k, e) => MapEntry(k, e.toJson())))
-          .toList(),
+      'items': instance.items,
     };

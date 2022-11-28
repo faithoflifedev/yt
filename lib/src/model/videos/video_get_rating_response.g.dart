@@ -9,10 +9,10 @@ part of 'video_get_rating_response.dart';
 VideoGetRatingResponse _$VideoGetRatingResponseFromJson(
         Map<String, dynamic> json) =>
     VideoGetRatingResponse(
-      json['kind'] as String,
-      json['etag'] as String,
-      (json['items'] as List<dynamic>)
-          .map((e) => Rating.fromJson(e as Map<String, dynamic>))
+      kind: json['kind'] as String,
+      etag: json['etag'] as String,
+      ratingItems: (json['items'] as List<dynamic>?)
+          ?.map((e) => Rating.fromJson(e as Map<String, dynamic>))
           .toList(),
     );
 
@@ -21,5 +21,5 @@ Map<String, dynamic> _$VideoGetRatingResponseToJson(
     <String, dynamic>{
       'kind': instance.kind,
       'etag': instance.etag,
-      'items': instance.items.map((e) => e.toJson()).toList(),
+      'items': instance.ratingItems,
     };

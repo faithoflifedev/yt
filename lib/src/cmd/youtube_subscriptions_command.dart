@@ -111,7 +111,7 @@ Note that the maximum number of subscribers returned through this API might be l
       throw UsageException('API usage error:', err.usage);
     }
 
-    disconnectYt();
+    done();
   }
 }
 
@@ -169,7 +169,7 @@ The following list contains the part names that you can include in the parameter
       throw UsageException('API usage error:', err.usage);
     }
 
-    disconnectYt();
+    done();
   }
 }
 
@@ -199,6 +199,6 @@ class YoutubeDeleteSubscriptionsCommand extends YtHelperCommand {
       throw UsageException('API usage error:', err.usage);
     }
 
-    disconnectYt();
+    done();
   }
 }

@@ -8,14 +8,12 @@ part of 'oauth_credentials.dart';
 
 OAuthCredentials _$OAuthCredentialsFromJson(Map<String, dynamic> json) =>
     OAuthCredentials(
-      clientId: json['clientId'] as String,
-      clientSecret: json['clientSecret'] as String,
-      code: json['code'] as String?,
+      json['identifier'] as String,
+      json['secret'] as String,
     );
 
 Map<String, dynamic> _$OAuthCredentialsToJson(OAuthCredentials instance) =>
     <String, dynamic>{
-      'clientId': instance.clientId,
-      'clientSecret': instance.clientSecret,
-      'code': instance.code,
+      'identifier': instance.identifier,
+      'secret': instance.secret,
     };

@@ -21,5 +21,5 @@ Map<String, dynamic> _$VideoCategoryToJson(VideoCategory instance) =>
       'kind': instance.kind,
       'etag': instance.etag,
       'id': instance.id,
-      'snippet': instance.snippet?.toJson(),
+      'snippet': instance.snippet,
     };

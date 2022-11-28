@@ -3,38 +3,27 @@ import 'dart:convert';
 import 'package:json_annotation/json_annotation.dart';
 
 import '../page_info.dart';
+import '../list_response.dart';
 import 'live_broadcast_item.dart';
 
 part 'live_broadcast_response.g.dart';
 
 ///LiveBroadcastResponse
 @JsonSerializable(explicitToJson: true)
-class LiveBroadcastResponse {
-  ///Identifies the API resource's type. The value will be youtube#liveBroadcastListResponse.
-  final String kind;
-
-  ///The Etag of this resource.
-  final String etag;
-
-  ///The token that can be used as the value of the pageToken parameter to retrieve the next page in the result set.
-  final String? nextPageToken;
-
-  ///The token that can be used as the value of the pageToken parameter to retrieve the previous page in the result set.
-  final String? prevPageToken;
-
-  ///The pageInfo object encapsulates paging information for the result set.
-  final PageInfo pageInfo;
-
+class LiveBroadcastResponse extends ListResponse {
   ///A list of broadcasts that match the request criteria.
-  final List<LiveBroadcastItem> items;
+  @JsonKey(name: 'items')
+  final List<LiveBroadcastItem>? broadcastItems;
 
   LiveBroadcastResponse(
-      {required this.kind,
-      required this.etag,
-      this.nextPageToken,
-      this.prevPageToken,
-      required this.pageInfo,
-      required this.items});
+      {required super.kind,
+      required super.etag,
+      super.nextPageToken,
+      super.prevPageToken,
+      required super.pageInfo,
+      this.broadcastItems});
+
+  List<LiveBroadcastItem> get items => broadcastItems ?? [];
 
   factory LiveBroadcastResponse.fromJson(Map<String, dynamic> json) =>
       _$LiveBroadcastResponseFromJson(json);

@@ -6,7 +6,7 @@ homepage: https://github.com/faithoflifedev/yt
 publish_to: none
 
 environment:
-  sdk: ">=2.12.0 <3.0.0"
+  sdk: ">=2.17.0 <3.0.0"
 
 dependencies:
   googleapis: ^9.1.0

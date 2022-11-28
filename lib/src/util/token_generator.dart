@@ -48,14 +48,13 @@ class OAuthGenerator implements TokenGenerator {
       tokenStore.addAll(json.decode(tokenFile.readAsStringSync()));
     }
 
-    if (tokenStore.containsKey(oauthCredentials.clientId)) {
-      refreshToken = tokenStore[oauthCredentials.clientId];
+    if (tokenStore.containsKey(oauthCredentials.identifier)) {
+      refreshToken = tokenStore[oauthCredentials.identifier];
     } else {
       try {
         final token = await oAuthClient.getToken({
-          'client_id': oauthCredentials.clientId,
-          'client_secret': oauthCredentials.clientSecret,
-          'code': oauthCredentials.code,
+          'client_id': oauthCredentials.identifier,
+          'client_secret': oauthCredentials.secret,
           'redirect_uri': 'urn:ietf:wg:oauth:2.0:oob',
           'grant_type': 'authorization_code'
         });
@@ -69,15 +68,15 @@ class OAuthGenerator implements TokenGenerator {
         throw AuthorizationException(err.response.toString(), err);
       }
 
-      tokenStore[oauthCredentials.clientId] = refreshToken;
+      tokenStore[oauthCredentials.identifier] = refreshToken;
 
       tokenFile.writeAsStringSync(json.encode(tokenStore));
     }
 
     try {
       final token = await oAuthClient.getToken({
-        'client_id': oauthCredentials.clientId,
-        'client_secret': oauthCredentials.clientSecret,
+        'client_id': oauthCredentials.identifier,
+        'client_secret': oauthCredentials.secret,
         'refresh_token': refreshToken,
         'grant_type': 'refresh_token'
       });

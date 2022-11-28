@@ -28,7 +28,7 @@ Map<String, dynamic> _$SubscriptionToJson(Subscription instance) =>
       'kind': instance.kind,
       'etag': instance.etag,
       'id': instance.id,
-      'snippet': instance.snippet?.toJson(),
-      'contentDetails': instance.contentDetails?.toJson(),
-      'subscriberSnippet': instance.subscriberSnippet?.toJson(),
+      'snippet': instance.snippet,
+      'contentDetails': instance.contentDetails,
+      'subscriberSnippet': instance.subscriberSnippet,
     };

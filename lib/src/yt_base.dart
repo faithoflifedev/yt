@@ -130,14 +130,17 @@ class Yt with UiLoggy {
     return yt;
   }
 
+  /// Close the http connection to the API server
+  void close() => Yt.httpClient.close();
+
   void setModules({bool? useToken, String? apiKey}) {
     if (useToken != null && useToken) {
-      ///A liveBroadcast resource represents an event that will be streamed, via live video, on YouTube.
+      /// A liveBroadcast resource represents an event that will be streamed, via live video, on YouTube.
       _broadcast = Broadcast(dio);
 
-      ///A liveChatMessage resource represents a chat message in a YouTube live chat. The resource can contain details about several types of messages, including a newly posted text message or fan funding event.
+      /// A liveChatMessage resource represents a chat message in a YouTube live chat. The resource can contain details about several types of messages, including a newly posted text message or fan funding event.
       ///
-      ///The live chat feature is enabled by default for live broadcasts and is available while the live event is active. (After the event ends, live chat is no longer available for that event.)
+      /// The live chat feature is enabled by default for live broadcasts and is available while the live event is active. (After the event ends, live chat is no longer available for that event.)
       _chat = Chat(dio);
 
       ///A liveStream resource contains information about the video stream that you are transmitting to YouTube. The stream provides the content that will be broadcast to YouTube users. Once created, a [LiveStreamItem] resource can be bound to one or more [LiveBroadcastItem] resources.

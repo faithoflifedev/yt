@@ -1,4 +1,4 @@
-name: flutter_playlist
+name: flutter_youtube
 description: A new Flutter project.
 
 # The following line prevents the package from being accidentally published to
@@ -11,8 +11,8 @@ environment:
   sdk: ">=2.12.0 <3.0.0"
 
 dependencies:
-  google_sign_in: ^5.3.0
-  loggy: ^2.0.1+1
+  google_sign_in: ^5.4.2
+  loggy: ^2.0.3
   yt:
     path: ../../../yt
     # git: https://github.com/faithoflifedev/yt.git
@@ -22,9 +22,7 @@ dependencies:
   cupertino_icons: ^1.0.2
 
 dev_dependencies:
-  lints: ^1.0.1
-  flutter_test:
-    sdk: flutter
+  lints: ^2.0.1
 
 # The following section is specific to Flutter.
 flutter:

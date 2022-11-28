@@ -65,7 +65,7 @@ auditDetails, brandingSettings, contentDetails, contentOwnerDetails, id, localiz
       throw UsageException('API usage error:', err.usage);
     }
 
-    disconnectYt();
+    done();
   }
 }
 
@@ -109,6 +109,6 @@ Note that this method overrides the existing values for all of the mutable prope
       throw UsageException('API usage error:', err.usage);
     }
 
-    disconnectYt();
+    done();
   }
 }

@@ -6,19 +6,14 @@ import 'snippet.dart';
 import 'content_details.dart';
 import 'statistics.dart';
 
+import '../response_metadata.dart';
 import 'branding_settings.dart';
 
 part 'channel_item.g.dart';
 
 ///A channel resource contains information about a YouTube channel.
-@JsonSerializable(explicitToJson: true)
-class ChannelItem {
-  ///Identifies the API resource's type. The value will be youtube#channel.
-  final String kind;
-
-  ///The Etag of this resource.
-  final String etag;
-
+@JsonSerializable()
+class ChannelItem extends ResponseMetadata {
   ///The ID that YouTube uses to uniquely identify the channel
   final String id;
 
@@ -35,8 +30,8 @@ class ChannelItem {
   final BrandingSettings? brandingSettings;
 
   ChannelItem(
-      {required this.kind,
-      required this.etag,
+      {required super.kind,
+      required super.etag,
       required this.id,
       this.snippet,
       this.contentDetails,

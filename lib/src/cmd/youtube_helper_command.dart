@@ -4,29 +4,29 @@ import 'package:yt/src/util/util.dart';
 import 'package:yt/yt.dart';
 
 abstract class YtHelperCommand extends Command {
-  Yt? _yt;
+  late final Yt _yt;
 
-  Broadcast get broadcast => _yt!.broadcast;
+  Broadcast get broadcast => _yt.broadcast;
 
-  Chat get chat => _yt!.chat;
+  Chat get chat => _yt.chat;
 
-  LiveStream get liveStream => _yt!.liveStream;
+  LiveStream get liveStream => _yt.liveStream;
 
-  Channels get channels => _yt!.channels;
+  Channels get channels => _yt.channels;
 
-  Playlists get playlists => _yt!.playlists;
+  Playlists get playlists => _yt.playlists;
 
-  Search get search => _yt!.search;
+  Search get search => _yt.search;
 
-  Subscriptions get subscriptions => _yt!.subscriptions;
+  Subscriptions get subscriptions => _yt.subscriptions;
 
-  Thumbnails get thumbnails => _yt!.thumbnails;
+  Thumbnails get thumbnails => _yt.thumbnails;
 
-  Videos get videos => _yt!.videos;
+  Videos get videos => _yt.videos;
 
-  VideoCategories get videoCategories => _yt!.videoCategories;
+  VideoCategories get videoCategories => _yt.videoCategories;
 
-  Watermarks get watermarks => _yt!.watermarks;
+  Watermarks get watermarks => _yt.watermarks;
 
   Future<void> initializeYt() async {
     final File configFile = Util.defaultCredentialsFile;
@@ -41,7 +41,5 @@ abstract class YtHelperCommand extends Command {
     );
   }
 
-  disconnectYt() {
-    Yt.httpClient.close();
-  }
+  done() => _yt.close();
 }

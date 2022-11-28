@@ -176,7 +176,7 @@ Note: This parameter is supported for use in conjunction with the myRating param
       throw UsageException('API usage error:', err.usage);
     }
 
-    disconnectYt();
+    done();
   }
 }
 
@@ -232,7 +232,7 @@ Accepted Media MIME types: video/*, application/octet-stream''')
       throw UsageException('API usage error:', err.usage);
     }
 
-    disconnectYt();
+    done();
   }
 }
 
@@ -262,7 +262,7 @@ class YoutubeDeleteVideosCommand extends YtHelperCommand {
       throw UsageException('API usage error:', err.usage);
     }
 
-    disconnectYt();
+    done();
   }
 }
 
@@ -306,7 +306,7 @@ contentDetails, fileDetails, id, liveStreamingDetails, localizations, player, pr
       throw UsageException('API usage error:', err.usage);
     }
 
-    disconnectYt();
+    done();
   }
 }
 

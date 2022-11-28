@@ -2,18 +2,20 @@ import 'dart:convert';
 
 import 'package:json_annotation/json_annotation.dart';
 
+import '../response_metadata.dart';
 import '../thumbnail.dart';
 
 part 'thumbnails_set_response.g.dart';
 
-@JsonSerializable(explicitToJson: true)
-class ThumbnailsSetResponse {
-  final String kind;
-  final String etag;
+@JsonSerializable()
+class ThumbnailsSetResponse extends ResponseMetadata {
   final List<Map<String, Thumbnail>> items;
 
-  ThumbnailsSetResponse(
-      {required this.kind, required this.etag, required this.items});
+  ThumbnailsSetResponse({
+    required super.kind,
+    required super.etag,
+    required this.items,
+  });
 
   factory ThumbnailsSetResponse.fromJson(Map<String, dynamic> json) =>
       _$ThumbnailsSetResponseFromJson(json);

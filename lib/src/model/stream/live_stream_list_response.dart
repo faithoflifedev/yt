@@ -3,20 +3,27 @@ import 'dart:convert';
 import 'package:json_annotation/json_annotation.dart';
 
 import '../page_info.dart';
+import '../list_response.dart';
 import 'live_stream_item.dart';
 
 part 'live_stream_list_response.g.dart';
 
-@JsonSerializable(explicitToJson: true)
-class LiveStreamListResponse {
-  final String kind;
-  final String etag;
-  final PageInfo pageInfo;
-  final List<LiveStreamItem> items;
-  final String? id;
+@JsonSerializable()
+class LiveStreamListResponse extends ListResponse {
+  /// A list of live streams that match the request criteria.
+  @JsonKey(name: 'items')
+  final List<LiveStreamItem>? liveStreamItems;
 
-  LiveStreamListResponse(
-      this.kind, this.etag, this.pageInfo, this.items, this.id);
+  LiveStreamListResponse({
+    required super.kind,
+    required super.etag,
+    super.nextPageToken,
+    super.prevPageToken,
+    required super.pageInfo,
+    this.liveStreamItems,
+  });
+
+  List<LiveStreamItem> get items => liveStreamItems ?? [];
 
   factory LiveStreamListResponse.fromJson(Map<String, dynamic> json) =>
       _$LiveStreamListResponseFromJson(json);

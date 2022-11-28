@@ -2,22 +2,17 @@ import 'dart:convert';
 
 import 'package:json_annotation/json_annotation.dart';
 
-import 'snippet.dart';
-import 'status.dart';
+import '../response_metadata.dart';
 import 'content_details.dart';
+import 'snippet.dart';
 import 'statistics.dart';
+import 'status.dart';
 
 part 'live_broadcast_item.g.dart';
 
 ///[LiveBroadcastItem] Resource
 @JsonSerializable(explicitToJson: true)
-class LiveBroadcastItem extends Comparable {
-  ///Identifies the API resource's type. The value will be youtube#liveBroadcast.
-  final String kind;
-
-  ///The Etag of this resource.
-  final String etag;
-
+class LiveBroadcastItem extends ResponseMetadata with Comparable {
   ///The ID that YouTube assigns to uniquely identify the broadcast.
   final String id;
 
@@ -34,8 +29,8 @@ class LiveBroadcastItem extends Comparable {
   final Statistics? statistics;
 
   LiveBroadcastItem(
-      {required this.kind,
-      required this.etag,
+      {required super.kind,
+      required super.etag,
       required this.id,
       this.snippet,
       this.status,

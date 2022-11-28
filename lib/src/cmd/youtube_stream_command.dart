@@ -74,7 +74,7 @@ class YoutubeListStreamCommand extends YtHelperCommand {
       throw UsageException('API usage error:', err.usage);
     }
 
-    disconnectYt();
+    done();
   }
 }
 
@@ -115,7 +115,7 @@ class YoutubeInsertStreamCommand extends YtHelperCommand {
       throw UsageException('API usage error:', err.usage);
     }
 
-    disconnectYt();
+    done();
   }
 }
 
@@ -160,7 +160,7 @@ Note that this method will override the existing values for all of the mutable p
       throw UsageException('API usage error:', err.usage);
     }
 
-    disconnectYt();
+    done();
   }
 }
 
@@ -190,6 +190,6 @@ class YoutubeDeleteStreamCommand extends YtHelperCommand {
       throw UsageException('API usage error:', err.usage);
     }
 
-    disconnectYt();
+    done();
   }
 }

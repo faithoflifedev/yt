@@ -23,6 +23,6 @@ Map<String, dynamic> _$LiveChatMessageToJson(LiveChatMessage instance) =>
       'kind': instance.kind,
       'etag': instance.etag,
       'id': instance.id,
-      'snippet': instance.snippet.toJson(),
-      'authorDetails': instance.authorDetails?.toJson(),
+      'snippet': instance.snippet,
+      'authorDetails': instance.authorDetails,
     };

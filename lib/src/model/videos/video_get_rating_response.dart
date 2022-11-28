@@ -2,17 +2,24 @@ import 'dart:convert';
 
 import 'package:json_annotation/json_annotation.dart';
 
+import '../response_metadata.dart';
 import 'rating.dart';
 
 part 'video_get_rating_response.g.dart';
 
-@JsonSerializable(explicitToJson: true)
-class VideoGetRatingResponse {
-  final String kind;
-  final String etag;
-  final List<Rating> items;
+@JsonSerializable()
+class VideoGetRatingResponse extends ResponseMetadata {
+  /// A list of ratings that match the request criteria.
+  @JsonKey(name: 'items')
+  final List<Rating>? ratingItems;
 
-  VideoGetRatingResponse(this.kind, this.etag, this.items);
+  VideoGetRatingResponse({
+    required super.kind,
+    required super.etag,
+    this.ratingItems,
+  });
+
+  List<Rating> get items => ratingItems ?? [];
 
   factory VideoGetRatingResponse.fromJson(Map<String, dynamic> json) =>
       _$VideoGetRatingResponseFromJson(json);

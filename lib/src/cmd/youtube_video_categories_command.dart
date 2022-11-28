@@ -55,6 +55,6 @@ class YoutubeListVideoCategoriesCommand extends YtHelperCommand {
       throw UsageException('API usage error:', err.usage);
     }
 
-    disconnectYt();
+    done();
   }
 }

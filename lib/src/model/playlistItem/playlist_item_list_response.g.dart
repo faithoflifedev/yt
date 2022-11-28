@@ -14,8 +14,8 @@ PlaylistItemListResponse _$PlaylistItemListResponseFromJson(
       nextPageToken: json['nextPageToken'] as String?,
       prevPageToken: json['prevPageToken'] as String?,
       pageInfo: PageInfo.fromJson(json['pageInfo'] as Map<String, dynamic>),
-      items: (json['items'] as List<dynamic>)
-          .map((e) => PlaylistItem.fromJson(e as Map<String, dynamic>))
+      playlistItemItems: (json['items'] as List<dynamic>?)
+          ?.map((e) => PlaylistItem.fromJson(e as Map<String, dynamic>))
           .toList(),
     );
 
@@ -26,6 +26,6 @@ Map<String, dynamic> _$PlaylistItemListResponseToJson(
       'etag': instance.etag,
       'nextPageToken': instance.nextPageToken,
       'prevPageToken': instance.prevPageToken,
-      'pageInfo': instance.pageInfo.toJson(),
-      'items': instance.items.map((e) => e.toJson()).toList(),
+      'pageInfo': instance.pageInfo,
+      'items': instance.playlistItemItems,
     };

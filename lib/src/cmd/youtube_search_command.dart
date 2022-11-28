@@ -291,6 +291,6 @@ Your request can also use the Boolean NOT (-) and OR (|) operators to exclude vi
       throw UsageException('API usage error:', err.usage);
     }
 
-    disconnectYt();
+    done();
   }
 }

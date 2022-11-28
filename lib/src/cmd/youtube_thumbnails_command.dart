@@ -77,6 +77,6 @@ class YoutubeSetThumbnailsCommand extends YtHelperCommand {
       throw UsageException('API usage error:', err.usage);
     }
 
-    disconnectYt();
+    done();
   }
 }

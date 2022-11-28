@@ -27,7 +27,7 @@ Map<String, dynamic> _$LiveStreamItemToJson(LiveStreamItem instance) =>
       'kind': instance.kind,
       'etag': instance.etag,
       'id': instance.id,
-      'snippet': instance.snippet?.toJson(),
-      'status': instance.status?.toJson(),
-      'cdn': instance.cdn?.toJson(),
+      'snippet': instance.snippet,
+      'cdn': instance.cdn,
+      'status': instance.status,
     };

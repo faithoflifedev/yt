@@ -2,7 +2,7 @@ import 'dart:convert';
 
 import 'package:json_annotation/json_annotation.dart';
 
-part 'live_streaming_details.g.dart';
+part '../videos/live_streaming_details.g.dart';
 
 @JsonSerializable()
 class LiveStreamingDetails {

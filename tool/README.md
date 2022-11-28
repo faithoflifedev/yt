@@ -64,18 +64,28 @@ dependencies:
 
 YouTube API access requires an access token or API key depending on the API and the type of information being accessed. As a general rule of thumb, read-only public information and be accessed through an API key, otherwise an access token is required.
 
-The yt library supports two mechanisms for authentication. All of the authentication schemes require some configuration in the [Google API console](https://developers.google.com/youtube/v3/live/registering_an_application). The document [Obtaining authorization credentials](https://developers.google.com/youtube/v3/live/registering_an_application) covers authentication with [OAuth 2.0](https://developers.google.com/identity/protocols/OAuth2) which works for both the Data API and the Live Streaming API the same document also covers authenticating with API keys which works only with the Data API.
+The `yt` library supports multiple mechanisms for authentication. All of the authentication schemes require some configuration in the [Google API console](https://developers.google.com/youtube/v3/live/registering_an_application). The document [Obtaining authorization credentials](https://developers.google.com/youtube/v3/live/registering_an_application) covers authentication with [OAuth 2.0](https://developers.google.com/identity/protocols/OAuth2) which works for both the Data API and the Live Streaming API the same document also covers authenticating with API keys which works only with the Data API.
 
-More in depth documentation on how OAuth2 works within the **yt library** is available in the [OAuth 2.0 for Mobile & Desktop Apps](https://developers.google.com/identity/protocols/oauth2/native-app) document. Overall, for OAuth2 the library takes a provided single use auth code and generates a long lived OAuth2 refresh token that is persisted as a hidden file.
+More in depth documentation on how OAuth2 works within the `yt` library is available in the [OAuth 2.0 for Mobile & Desktop Apps](https://developers.google.com/identity/protocols/oauth2/native-app) document. Overall, for OAuth2 the library takes a provided single use auth code and generates a long lived OAuth2 refresh token that is persisted as a hidden file.
 
 Both of the above authentication methods will work for Flutter apps as well, however you may want to instead allow your app's users to use their own YouTube credentials. Instructions for authenticating this way are included at the end of this document in the _Usage within Flutter_ section.
 
-A number of the examples use OAuth 2.0 for authentication. The examples have the OAuth2 credentials made available to sample the code though a **.json** or **.yaml** file that contains these lines:
+Some of the included examples use OAuth 2.0 for authentication. The examples have the OAuth2 credentials made available to the code though a **.json** or **.yaml** file that contains these lines:
+
+### yaml
 
 ```yaml
-clientId: [client id from the API console]
-clientSecret: [client secret from the API console]
-code: [single use auth code]
+identifier: [client id from the API console]
+secret: [client secret from the API console]
+```
+
+### json
+
+```json
+{
+  "identifier": "[client id from the API console]",
+  "secret": "[client secret from the API console]"
+}
 ```
 
 The **.json** version of this file can be generated using the cli utility:
@@ -90,19 +100,11 @@ yt authorize
 #authenticate and generate the one-time code
 ```
 
-After following the steps provided by the **_cli_** command, your credential file will be auto created as `$HOME/.yt/credentials.json`
-
-Alternatively, if you want to manually create your credentials file, then you will need to use a browser to generate the required one-time **_code_**. Once you have followed the instructions outlined in the YouTube docs for creating the app instance and obtaining the OAuth2 credentials, then the next step is to enter this url into a desktop browser:
-
-```txt
-https://accounts.google.com/o/oauth2/auth?client_id=[client_id_from_the_API_console]&redirect_uri=urn:ietf:wg:oauth:2.0:oob&scope=https://www.googleapis.com/auth/youtube&response_type=code
-```
-
-After following the steps to authorize the provided account with the app created in the API console, you will be presented with an single use authorization code. The code is entered as the **_code_** line in the _yaml_ or _json_file referenced above.
+After following the steps provided by the above **_cli_** command, your credential file will be auto created as `$HOME/.yt/credentials.json`
 
 ## Using of the Data API
 
-Youtube provides multiple methods for API authentication. The Data API can use both API key and OAuth for authentication the example below shows how both of these
+YouTube provides multiple methods for API authentication. The Data API can use both API key and OAuth for authentication the example below shows how both of these
 
 ```dart
 import 'package:yt/yt.dart';
@@ -256,7 +258,6 @@ import 'package:yt/yt.dart';
 class YtLoginGenerator implements TokenGenerator {
   final GoogleSignIn _googleSignIn = GoogleSignIn(
     scopes: [
-      'email',
       'https://www.googleapis.com/auth/youtube',
     ],
   );

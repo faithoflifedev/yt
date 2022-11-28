@@ -1,7 +1,9 @@
 import 'package:yt/yt.dart';
 
 void main() async {
-  final yt = await Yt.withOAuth();
+  final yt = await Yt.withOAuth(
+      oAuthClientId:
+          OAuthCredentials.fromYaml('credentials.yaml').oAuthClientId);
 
   final searchListResponse = await yt.search
       .list(q: 'reddit', part: 'snippet', type: 'video'); //the Flutter channel
@@ -41,4 +43,6 @@ relatedPlaylists: ${channelItem.contentDetails?.relatedPlaylists.uploads}''');
 thumbnail: ${broadcastItem.snippet?.thumbnails?.thumbnailsDefault.url}
 status: ${broadcastItem.status?.lifeCycleStatus}''');
   }
+
+  yt.close();
 }
