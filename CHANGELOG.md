@@ -1,3 +1,8 @@
+## 2.0.6+9
+
+* badge update
+* README tweaks
+
 ## 2.0.6+8
 
 * more relevant flutter example

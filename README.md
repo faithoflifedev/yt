@@ -1,6 +1,6 @@
 # Youtube REST API Client
 
-[![pub package](https://img.shields.io/pub/v/yt.svg)](https://pub.dartlang.org/packages/yt)
+[![pub package](https://img.shields.io/pub/v/yt.svg)](https://pub.dartlang.org/packages/yt) [![Build Status](https://github.com/faithoflifedev/yt/workflows/Dart/badge.svg)](https://github.com/faithoflifedev/yt/actions) [![github last commit](https://shields.io/github/last-commit/faithoflifedev/yt)](https://shields.io/github/last-commit/faithoflifedev/yt) [![github build](https://img.shields.io/github/actions/workflow/status/faithoflifedev/yt/dart.yml?branch=main)](https://shields.io/github/workflow/status/faithoflifedev/yt/Dart) [![github issues](https://shields.io/github/issues/faithoflifedev/yt)](https://shields.io/github/issues/faithoflifedev/yt)
 
 Native [Dart](https://dart.dev/) interface to multiple Google REST APIs, including:
 
@@ -8,10 +8,13 @@ Native [Dart](https://dart.dev/) interface to multiple Google REST APIs, includi
 - [YouTube Live Streaming API](https://developers.google.com/youtube/v3/live/docs)
 
 ## Table of Contents
+
 - [How does this package differ from the googleapis package?](#how-does-this-package-differ-from-the-googleapis-package)
-- [New for version 2.0.0](#new-for-version-200)
+- [New for version 2.0.x](#new-for-version-20x)
 - [Getting Started](#getting-started)
 - [Obtaining Authorization Credentials](#obtaining-authorization-credentials)
+  - [yaml](#yaml)
+  - [json](#json)
 - [Using of the Data API](#using-of-the-data-api)
 - [Upload a Video](#upload-a-video)
 - [Using the Live Streaming API](#using-the-live-streaming-api)
@@ -25,8 +28,10 @@ Native [Dart](https://dart.dev/) interface to multiple Google REST APIs, includi
   - [Live Streaming API](#live-streaming-api)
   - [Custom Features (experimental)](#custom-features-experimental)
 - [What's Next?](#whats-next)
-- [Breaking change in v2.0.x from v1.2.x](#breaking-change-in-v200-from-v12x)
+- [Breaking change in v2.0.x from v1.2.x](#breaking-change-in-v20x-from-v12x)
 - [Breaking change in v1.1.0 from v1.0.x](#breaking-change-in-v110-from-v10x)
+- [Contributing](#contributing)
+
 
 [![Buy me a coffee](https://www.buymeacoffee.com/assets/img/guidelines/download-assets-1.svg)](https://www.buymeacoffee.com/faithoflif2)
 
@@ -57,7 +62,7 @@ To use this package, add the dependency to your pubspec.yaml file:
 ```yaml
 dependencies:
   ...
-  yt: ^2.0.6+8
+  yt: ^2.0.6+9
 ```
 
 ## Obtaining Authorization Credentials
@@ -444,11 +449,30 @@ In v1.1.x the code has been simplified and matches the API definition:
 ```dart
 
 ///upload the thumbnail
-final th = await yt.thumbnails;
+final th = yt.thumbnails;
 
 await th.set(
     videoId: broadcastItem.id,
     thumbnail: File('[path to an image to upload]'));
 ```
 
-[![Buy me a coffee](https://www.buymeacoffee.com/assets/img/guidelines/download-assets-1.svg)](https://www.buymeacoffee.com/faithoflif2)
+## Contributing
+
+Any help from the open-source community is always welcome and needed:
+- Found an issue?
+    - Please fill a bug report with details.
+- Need a feature?
+    - Open a feature request with use cases.
+- Are you using and liking the project?
+    - Promote the project: create an article or post about it
+    - Make a donation
+- Do you have a project that uses this package
+    - let's cross promote, let me know and I'll add a link to your project
+- Are you a developer?
+    - Fix a bug and send a pull request.
+    - Implement a new feature.
+    - Improve the Unit Tests.
+- Have you already helped in any way?
+    - **Many thanks from me, the contributors and everybody that uses this project!**
+
+*If you donate 1 hour of your time, you can contribute a lot, because others will do the same, just be part and start with your 1 hour.*
