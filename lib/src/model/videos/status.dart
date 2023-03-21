@@ -2,7 +2,7 @@ import 'dart:convert';
 
 import 'package:json_annotation/json_annotation.dart';
 
-part '../videos/status.g.dart';
+part 'status.g.dart';
 
 @JsonSerializable(explicitToJson: true)
 class Status {

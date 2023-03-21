@@ -14,6 +14,10 @@ abstract class YtHelperCommand extends Command {
 
   Channels get channels => _yt.channels;
 
+  Comments get comments => _yt.comments;
+
+  CommentThreads get commentThreads => _yt.commentThreads;
+
   Playlists get playlists => _yt.playlists;
 
   Search get search => _yt.search;
@@ -36,7 +40,7 @@ abstract class YtHelperCommand extends Command {
           'File: ${configFile.path} could not be found.  This is a required file.');
     }
 
-    _yt = await Yt.withOAuth(
+    _yt = Yt.withOAuth(
       logOptions: Util.convertToLogOptions(globalResults!['log-level']),
     );
   }

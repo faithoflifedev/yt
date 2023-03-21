@@ -7,11 +7,14 @@ name: Dart
 
 on:
   push:
-    branches: [ "main" ]
+    branches: ["main"]
   pull_request:
-    branches: [ "main" ]
+    branches: ["main"]
 
 jobs:
+  pana:
+    uses: VeryGoodOpenSource/very_good_workflows/.github/workflows/pana.yml@v1
+
   build:
     runs-on: ubuntu-latest
 
@@ -35,8 +38,8 @@ jobs:
 #       - name: Analyze project source
 #         run: dart analyze
 
-      # Your project will need to have tests in test/ and a dependency on
-      # package:test for this step to succeed. Note that Flutter projects will
-      # want to change this to 'flutter test'.
+# Your project will need to have tests in test/ and a dependency on
+# package:test for this step to succeed. Note that Flutter projects will
+# want to change this to 'flutter test'.
 #       - name: Run tests
 #         run: dart test

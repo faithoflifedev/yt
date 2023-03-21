@@ -13,7 +13,9 @@ SubscriptionListResponse _$SubscriptionListResponseFromJson(
       etag: json['etag'] as String,
       nextPageToken: json['nextPageToken'] as String?,
       prevPageToken: json['prevPageToken'] as String?,
-      pageInfo: PageInfo.fromJson(json['pageInfo'] as Map<String, dynamic>),
+      pageInfo: json['pageInfo'] == null
+          ? null
+          : PageInfo.fromJson(json['pageInfo'] as Map<String, dynamic>),
       subscriptionItems: (json['items'] as List<dynamic>?)
           ?.map((e) => Subscription.fromJson(e as Map<String, dynamic>))
           .toList(),

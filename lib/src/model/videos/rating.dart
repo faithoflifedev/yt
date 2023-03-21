@@ -2,7 +2,7 @@ import 'dart:convert';
 
 import 'package:json_annotation/json_annotation.dart';
 
-part '../videos/rating.g.dart';
+part 'rating.g.dart';
 
 @JsonSerializable()
 class Rating {

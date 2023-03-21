@@ -1,7 +1,7 @@
 import 'package:yt/yt.dart';
 
 void main() async {
-  final yt = await Yt.withOAuth(
+  final yt = Yt.withOAuth(
       oAuthClientId:
           OAuthCredentials.fromYaml('credentials.yaml').oAuthClientId);
 

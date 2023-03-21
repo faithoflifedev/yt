@@ -13,7 +13,9 @@ LiveBroadcastResponse _$LiveBroadcastResponseFromJson(
       etag: json['etag'] as String,
       nextPageToken: json['nextPageToken'] as String?,
       prevPageToken: json['prevPageToken'] as String?,
-      pageInfo: PageInfo.fromJson(json['pageInfo'] as Map<String, dynamic>),
+      pageInfo: json['pageInfo'] == null
+          ? null
+          : PageInfo.fromJson(json['pageInfo'] as Map<String, dynamic>),
       broadcastItems: (json['items'] as List<dynamic>?)
           ?.map((e) => LiveBroadcastItem.fromJson(e as Map<String, dynamic>))
           .toList(),
@@ -26,6 +28,6 @@ Map<String, dynamic> _$LiveBroadcastResponseToJson(
       'etag': instance.etag,
       'nextPageToken': instance.nextPageToken,
       'prevPageToken': instance.prevPageToken,
-      'pageInfo': instance.pageInfo.toJson(),
+      'pageInfo': instance.pageInfo?.toJson(),
       'items': instance.broadcastItems?.map((e) => e.toJson()).toList(),
     };

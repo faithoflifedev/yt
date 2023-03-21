@@ -16,7 +16,9 @@ LiveChatMessageListResponse _$LiveChatMessageListResponseFromJson(
       offlineAt: json['offlineAt'] == null
           ? null
           : DateTime.parse(json['offlineAt'] as String),
-      pageInfo: PageInfo.fromJson(json['pageInfo'] as Map<String, dynamic>),
+      pageInfo: json['pageInfo'] == null
+          ? null
+          : PageInfo.fromJson(json['pageInfo'] as Map<String, dynamic>),
       liveChatMessageItems: (json['items'] as List<dynamic>?)
           ?.map((e) => LiveChatMessage.fromJson(e as Map<String, dynamic>))
           .toList(),

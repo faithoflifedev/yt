@@ -11,12 +11,10 @@ class Channels extends YouTubeHelper {
 
   final ChannelClient _rest;
 
-  final String? _authHeader;
-
   Channels({required this.dio, this.token, this.apiKey})
-      : _authHeader = token != null ? 'Bearer $token' : null,
-        _rest = ChannelClient(dio);
+      : _rest = ChannelClient(dio);
 
+  /// Returns a collection of zero or more channel resources that match the request criteria.
   Future<ChannelResponse> list(
       {String part =
           'contentDetails,id,localizations,snippet,status,brandingSettings',
@@ -30,25 +28,29 @@ class Channels extends YouTubeHelper {
       int? maxResults,
       String? onBehalfOfContentOwner,
       String? pageToken}) async {
-    return _rest.list(_authHeader, apiKey, accept, buildParts(partList, part),
-        categoryId: categoryId,
-        forUsername: forUsername,
-        id: id,
-        managedByMe: managedByMe,
-        mine: mine,
-        hl: hl,
-        maxResults: maxResults,
-        onBehalfOfContentOwner: onBehalfOfContentOwner,
-        pageToken: pageToken);
+    return _rest.list(
+      apiKey,
+      accept,
+      buildParts(partList, part),
+      categoryId: categoryId,
+      forUsername: forUsername,
+      id: id,
+      managedByMe: managedByMe,
+      mine: mine,
+      hl: hl,
+      maxResults: maxResults,
+      onBehalfOfContentOwner: onBehalfOfContentOwner,
+      pageToken: pageToken,
+    );
   }
 
-  ///Modifies a Channels For example, you could change a Channelss title, description, or privacy status.
+  /// Modifies a Channels For example, you could change a Channels title, description, or privacy status.
   Future<ChannelItem> update(
       {String part = 'contentDetails,id,localizations,player,snippet,status',
       List<String> partList = const [],
       required Map<String, dynamic> body,
       String? onBehalfOfContentOwner}) async {
     return await _rest.update(
-        _authHeader, accept, contentType, buildParts(partList, part), body);
+        accept, contentType, buildParts(partList, part), body);
   }
 }

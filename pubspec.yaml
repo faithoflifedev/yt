@@ -1,24 +1,24 @@
 name: yt
-version: 2.0.6+9
+version: 2.1.0
 description: Native Dart interface to multiple YouTube REST APIs including the Data API, Live Streaming API and Cloud Vision API.
 repository: https://github.com/faithoflifedev/yt
 homepage: https://github.com/faithoflifedev/yt
 
 environment:
-  sdk: ">=2.17.0 <3.0.0"
+  sdk: ">=2.19.2 <4.0.0"
 
 dependencies:
   args: ^2.3.1
   csv: ^5.0.1
-  dio: ^4.0.6
+  dio: ^5.0.3
   fling_pickle: ^0.4.1
   googleapis_auth: ^1.3.1
   http: ^0.13.5
   http_parser: ^4.0.2
-  json_annotation: ^4.7.0
+  json_annotation: ^4.8.0
   loggy: ^2.0.3
   process_run: ^0.12.3+2
-  retrofit: ^3.3.1
+  retrofit: ^4.0.1
   stemmer: ^2.2.0
   universal_io: ^2.0.4
   yaml: ^3.1.1
@@ -31,7 +31,7 @@ dev_dependencies:
   pub_semver: ^2.1.3
   publish_tools: ^0.1.0+9
   pubspec: ^2.3.0
-  retrofit_generator: ^4.2.0
+  retrofit_generator: ^6.0.0+1
 
 executables:
   yt:

@@ -5,7 +5,7 @@ import 'package:json_annotation/json_annotation.dart';
 import '../localized.dart';
 import '../thumbnails.dart';
 
-part '../videos/snippet.g.dart';
+part 'snippet.g.dart';
 
 /// The [Snippet] object contains basic details about the video, such as its title, description, and category.
 @JsonSerializable(explicitToJson: true)

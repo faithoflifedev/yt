@@ -12,11 +12,8 @@ class Search extends YouTubeHelper {
 
   final SearchClient _rest;
 
-  final String? _authHeader;
-
   Search({required this.dio, this.token, this.apiKey})
-      : _authHeader = token != null ? 'Bearer $token' : null,
-        _rest = SearchClient(dio);
+      : _rest = SearchClient(dio);
 
   ///Returns a collection of search results that match the query parameters specified in the API request. By default, a search result set identifies matching video, channel, and [Playlist] resources, but you can also configure queries to only retrieve a specific type of resource.
   Future<SearchListResponse> list(
@@ -51,35 +48,39 @@ class Search extends YouTubeHelper {
       String? videoLicense,
       String? videoSyndicated,
       String? videoType}) async {
-    return _rest.list(_authHeader, apiKey, accept, buildParts(partList, part),
-        channelId: channelId,
-        channelType: channelType,
-        eventType: eventType,
-        forContentOwner: forContentOwner,
-        forDeveloper: forDeveloper,
-        forMine: forMine,
-        location: location,
-        locationRadius: locationRadius,
-        maxResults: maxResults,
-        onBehalfOfContentOwner: onBehalfOfContentOwner,
-        order: order,
-        pageToken: pageToken,
-        publishedAfter: publishedAfter,
-        publishedBefore: publishedBefore,
-        q: q,
-        regionCode: regionCode,
-        relevanceLanguage: relevanceLanguage,
-        safeSearch: safeSearch,
-        topicId: topicId,
-        type: type,
-        videoCaption: videoCaption,
-        videoCategoryId: videoCategoryId,
-        videoDefinition: videoDefinition,
-        videoDimension: videoDimension,
-        videoDuration: videoDuration,
-        videoEmbeddable: videoEmbeddable,
-        videoLicense: videoLicense,
-        videoSyndicated: videoSyndicated,
-        videoType: videoType);
+    return _rest.list(
+      apiKey,
+      accept,
+      buildParts(partList, part),
+      channelId: channelId,
+      channelType: channelType,
+      eventType: eventType,
+      forContentOwner: forContentOwner,
+      forDeveloper: forDeveloper,
+      forMine: forMine,
+      location: location,
+      locationRadius: locationRadius,
+      maxResults: maxResults,
+      onBehalfOfContentOwner: onBehalfOfContentOwner,
+      order: order,
+      pageToken: pageToken,
+      publishedAfter: publishedAfter,
+      publishedBefore: publishedBefore,
+      q: q,
+      regionCode: regionCode,
+      relevanceLanguage: relevanceLanguage,
+      safeSearch: safeSearch,
+      topicId: topicId,
+      type: type,
+      videoCaption: videoCaption,
+      videoCategoryId: videoCategoryId,
+      videoDefinition: videoDefinition,
+      videoDimension: videoDimension,
+      videoDuration: videoDuration,
+      videoEmbeddable: videoEmbeddable,
+      videoLicense: videoLicense,
+      videoSyndicated: videoSyndicated,
+      videoType: videoType,
+    );
   }
 }

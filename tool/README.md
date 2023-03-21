@@ -1,11 +1,12 @@
 # Youtube REST API Client
 
-[![pub package](https://img.shields.io/pub/v/yt.svg)](https://pub.dartlang.org/packages/yt) [![Build Status](https://github.com/faithoflifedev/yt/workflows/Dart/badge.svg)](https://github.com/faithoflifedev/yt/actions) [![github last commit](https://shields.io/github/last-commit/faithoflifedev/yt)](https://shields.io/github/last-commit/faithoflifedev/yt) [![github build](https://img.shields.io/github/actions/workflow/status/faithoflifedev/yt/dart.yml?branch=main)](https://shields.io/github/workflow/status/faithoflifedev/yt/Dart) [![github issues](https://shields.io/github/issues/faithoflifedev/yt)](https://shields.io/github/issues/faithoflifedev/yt)
-
 Native [Dart](https://dart.dev/) interface to multiple Google REST APIs, including:
 
 - [YouTube Data API](https://developers.google.com/youtube/v3/docs)
 - [YouTube Live Streaming API](https://developers.google.com/youtube/v3/live/docs)
+
+[![pub package](https://img.shields.io/pub/v/yt.svg)](https://pub.dartlang.org/packages/yt) 
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
 ## Table of Contents
 
@@ -23,15 +24,20 @@ Native [Dart](https://dart.dev/) interface to multiple Google REST APIs, includi
 - [Usage within Flutter](#usage-within-flutter)
 - [Available Examples](#available-examples)
 - [Youtube REST API cli (Youtube at the command prompt)](#youtube-rest-api-cli-youtube-at-the-command-prompt)
+  - [dart pub install](#dart-pub-install)
+  - [homebrew install](#homebrew-install)
 - [API Commands Supported](#api-commands-supported)
   - [Data API](#data-api)
   - [Live Streaming API](#live-streaming-api)
   - [Custom Features (experimental)](#custom-features-experimental)
 - [What's Next?](#whats-next)
-- [Breaking change in v2.0.x from v1.2.x](#breaking-change-in-v20x-from-v12x)
-- [Breaking change in v1.1.0 from v1.0.x](#breaking-change-in-v110-from-v10x)
+- [Breaking Changes](#breaking-changes)
+  - [v2.0.x 2.1.x](#v20x-21x)
+  - [v2.0.x from v1.2.x](#v20x-from-v12x)
 - [Contributing](#contributing)
 
+
+[![Build Status](https://github.com/faithoflifedev/yt/workflows/Dart/badge.svg)](https://github.com/faithoflifedev/yt/actions) [![github last commit](https://shields.io/github/last-commit/faithoflifedev/yt)](https://shields.io/github/last-commit/faithoflifedev/yt) [![github build](https://img.shields.io/github/actions/workflow/status/faithoflifedev/yt/dart.yml?branch=main)](https://shields.io/github/workflow/status/faithoflifedev/yt/Dart) [![github issues](https://shields.io/github/issues/faithoflifedev/yt)](https://shields.io/github/issues/faithoflifedev/yt)
 
 [![Buy me a coffee](https://www.buymeacoffee.com/assets/img/guidelines/download-assets-1.svg)](https://www.buymeacoffee.com/faithoflif2)
 
@@ -53,7 +59,7 @@ yt --help
 
 Please see the cli documentation [README.md](https://github.com/faithoflifedev/yt/tree/main/bin) for more detailed usage information.
 
-**NOTE:** Cloud Vision API support has been permanently removed from this package and will be available as it's own package.  Additionally, cache support has been temporarily removed.
+**NOTE:** Cloud Vision API support has been permanently removed from this package and will be available as it's own [package](https://pub.dev/packages/google_vision).  Additionally, cache support has been temporarily removed.
 
 ## Getting Started
 
@@ -115,13 +121,13 @@ YouTube provides multiple methods for API authentication. The Data API can use b
 import 'package:yt/yt.dart';
 
 //if you used "yt authorize" to generate a credentials file
-final yt = await Yt.withOAuth();
+final yt = Yt.withOAuth();
 
 //authenticate using OAuth - manually created file
-//final yt = await Yt.withOAuth(OAuthCredentials.fromYaml('example/youtube.yaml'));
+//final yt = Yt.withOAuth(OAuthCredentials.fromYaml('example/youtube.yaml'));
 
 //some APIs can use an API Key for authentication
-//final yt = await Yt.withKey('[youtube api key]');
+//final yt = Yt.withKey('[youtube api key]');
 
 // List of videos from playlist
 var playlistResponse = await yt.playlists.list(
@@ -330,15 +336,27 @@ With the generator in place, it becomes quite easy to include _google sign-in_ f
 - [livechat_example.dart](https://github.com/faithoflifedev/yt/blob/main/example/livechat_example.dart) - (command line) chatbot will answer a set of questions in a liveChat session
 - [flutter_playlist](https://github.com/faithoflifedev/yt/tree/main/example/flutter_playlist) - display a YouTube playlist in a ListView
   
-# Youtube REST API cli (Youtube at the command prompt)
+## Youtube REST API cli (Youtube at the command prompt)
 
 A command line interface for broadcasting to Youtube through OBS
+
+### dart pub install
 
 To install using `dart pub`:
 
 ```sh
 pub global activate yt
 ```
+
+If the above shows an error like:
+
+```text
+-bash: webdev: command not found
+```
+
+Then this section of the Dart SDK doc might fix the problem - [running-a-script-from-your-path](https://dart.dev/tools/pub/cmd/pub-global#running-a-script-from-your-path)
+
+### homebrew install
 
 Install using `brew`:
 
@@ -378,7 +396,8 @@ Available commands:
 
 ### Data API
 
-- [Channels](https://developers.google.com/youtube/v3/docs/channels) (partial)
+- [Channels](https://developers.google.com/youtube/v3/docs/channels)
+- [Comments](https://developers.google.com/youtube/v3/docs/comments) (partial)
 - [PlaylistItems](https://developers.google.com/youtube/v3/docs/playlistItems)
 - [Playlists](https://developers.google.com/youtube/v3/docs/playlists)
 - [Search](https://developers.google.com/youtube/v3/docs/search)
@@ -402,7 +421,25 @@ Available commands:
 - ~~A working sample Flutter app~~
 - Expanded API Commands
 
-## Breaking change in v2.0.x from v1.2.x
+## Breaking changes
+
+### v2.0.x 2.1.x
+
+`Yt.withOAuth` and `Yt.withKey` now return a `Yt` object not `Future<Yt>`.
+
+```dart
+// now do this
+final yt = Yt.withOAuth(
+    oAuthClientId:
+        OAuthCredentials.fromYaml('credentials.yaml').oAuthClientId);
+
+// since this won't work
+final yt = await Yt.withOAuth(
+    oAuthClientId:
+        OAuthCredentials.fromYaml('credentials.yaml').oAuthClientId);
+```
+
+### v2.0.x from v1.2.x
 
 The `Yt` object now returns a `Future` and the reference to a specific API module is no longer a `Future`.  So now you can use the following code:
 
@@ -425,35 +462,6 @@ final playlists = await yt.playlists;
 var playlistResponse = await yt.playlists.list(
       channelId: '[youtube channel id]', maxResults: 25);
 
-```
-
-## Breaking change in v1.1.0 from v1.0.x
-
-The latest revision has been updated so that it better matches the actual Youtube Data API for thumbnail upload. So, whereas in v1.0.x you would use this code to upload a thumbnail:
-
-```dart
-final th = await yt.thumbnails;
-
-///get info on where to upload your thumbnail for the broadcast
-final locationUrl = await th.location(videoId: broadcastItem.id);
-
-///upload the thumbnail
-await th.set(
-    videoId: broadcastItem.id,
-    uploadId: Uri.parse(locationUrl).queryParameters['upload_id']!,
-    thumbnail: File('[path to an image to upload]'));
-```
-
-In v1.1.x the code has been simplified and matches the API definition:
-
-```dart
-
-///upload the thumbnail
-final th = yt.thumbnails;
-
-await th.set(
-    videoId: broadcastItem.id,
-    thumbnail: File('[path to an image to upload]'));
 ```
 
 ## Contributing

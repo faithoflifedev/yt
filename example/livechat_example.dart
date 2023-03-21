@@ -3,7 +3,7 @@ import 'dart:io';
 import 'package:yt/yt.dart';
 
 void main() async {
-  final yt = await Yt.withOAuth();
+  final yt = Yt.withOAuth();
 
   ///the live streaming broadcast API client
   final br = yt.broadcast;

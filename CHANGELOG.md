@@ -1,3 +1,13 @@
+## 2.1.0
+
+* implements `commentThreads` (partial)
+* implements `comments` (partial)
+* manipulate dio interceptor order
+* dependency bump
+* update auth scope
+* Authentication header in dio `Interceptor`
+* updated scope
+
 ## 2.0.6+9
 
 * badge update

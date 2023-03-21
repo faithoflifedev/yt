@@ -37,7 +37,7 @@ class _WatermarksClient implements WatermarksClient {
       r'Accept': accept,
     };
     _headers.removeWhere((k, v) => v == null);
-    final _data = <String, dynamic>{};
+    final Map<String, dynamic>? _data = null;
     final _result =
         await _dio.fetch(_setStreamType<HttpResponse<dynamic>>(Options(
       method: 'POST',
@@ -92,7 +92,7 @@ class _WatermarksClient implements WatermarksClient {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{r'channelId': channelId};
     final _headers = <String, dynamic>{};
-    final _data = <String, dynamic>{};
+    final Map<String, dynamic>? _data = null;
     final _result =
         await _dio.fetch(_setStreamType<HttpResponse<dynamic>>(Options(
       method: 'POST',

@@ -39,8 +39,9 @@ class OAuthAccessControl {
           await refreshCredentials(clientId, accessCredentials, httpClient);
     } else {
       accessCredentials = await obtainAccessCredentialsViaUserConsent(
-          clientId, ['https://www.googleapis.com/auth/youtube'], httpClient,
-          (String url) {
+          clientId,
+          ['https://www.googleapis.com/auth/youtube.force-ssl'],
+          httpClient, (String url) {
         print('Please go to the following URL and grant access:');
         print('  => $url');
       });

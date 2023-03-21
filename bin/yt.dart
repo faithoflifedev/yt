@@ -11,6 +11,8 @@ void main(List<String> arguments) async {
     ..addCommand(YoutubeBroadcastCommand())
     ..addCommand(YoutubeChannelsCommand())
     ..addCommand(YoutubeChatCommand())
+    ..addCommand(YoutubeCommentsCommand())
+    ..addCommand(YoutubeCommentThreadsCommand())
     ..addCommand(YoutubePlaylistsCommand())
     ..addCommand(YoutubeSearchCommand())
     ..addCommand(YoutubeStreamCommand())

@@ -2,11 +2,65 @@
 
 A command line interface for broadcasting to Youtube through OBS
 
+  - [Installation](#installation)
+    - [dart pub](#dart-pub)
+    - [homebrew](#homebrew)
+  - [Usage](#usage)
+  - [Quick start](#quick-start)
+  - [authorize](#authorize)
+  - [broadcast](#broadcast)
+    - [broadcast bind](#broadcast-bind)
+    - [broadcast delete](#broadcast-delete)
+    - [broadcast insert](#broadcast-insert)
+    - [broadcast list](#broadcast-list)
+    - [broadcast transition](#broadcast-transition)
+    - [broadcast update](#broadcast-update)
+  - [channels](#channels)
+    - [channels list](#channels-list)
+    - [channels update](#channels-update)
+  - [chat](#chat)
+    - [chat answer](#chat-answer)
+    - [chat delete](#chat-delete)
+    - [chat insert](#chat-insert)
+    - [chat list](#chat-list)
+  - [comment-threads](#comment-threads)
+    - [comment-threads list](#comment-threads-list)
+  - [comments](#comments)
+    - [comments list](#comments-list)
+  - [playlists](#playlists)
+    - [playlists delete](#playlists-delete)
+    - [playlists insert](#playlists-insert)
+    - [playlists list](#playlists-list)
+    - [playlists update](#playlists-update)
+  - [search](#search)
+    - [search list](#search-list)
+  - [stream](#stream)
+    - [stream delete](#stream-delete)
+    - [stream insert](#stream-insert)
+    - [stream list](#stream-list)
+    - [stream update](#stream-update)
+  - [subscriptions](#subscriptions)
+    - [subscriptions list](#subscriptions-list)
+    - [subscriptions insert](#subscriptions-insert)
+    - [subscriptions delete](#subscriptions-delete)
+  - [thumbnails](#thumbnails)
+    - [thumbnails set](#thumbnails-set)
+  - [version](#version)
+
+## Installation
+
+### dart pub
+
 To install using `dart pub`:
 
 ```sh
 pub global activate yt
 ```
+
+You may need to modify your path environment for the above to work, please see [running-a-script-from-your-path](https://dart.dev/tools/pub/cmd/pub-global#running-a-script-from-your-path).
+
+
+### homebrew
 
 Install using `brew`:
 
@@ -16,10 +70,15 @@ brew tap faithoflifedev/yt
 brew install yt
 ```
 
+## Usage
+
 Usage:
 
 ```sh
-prompt>yt --help
+yt --help
+```
+
+```text
 A command line interface for connecting to Youtube
 
 Usage: yt <command> [arguments]
@@ -33,27 +92,33 @@ Available commands:
   broadcast          A liveBroadcast resource represents an event that will be streamed, via live video, on YouTube.
   channels           A channel resource contains information about a YouTube channel.
   chat               A liveChatMessage resource represents a chat message in a YouTube live chat. The resource can contain details about several types of messages, including a newly posted text message or fan funding event.
+  comment-threads    A commentThread resource contains information about a YouTube comment thread, which comprises a top-level comment and replies, if any exist, to that comment.
+  comments           A comment resource contains information about a single YouTube comment.
   playlists          A playlist resource represents a YouTube playlist. A playlist is a collection of videos that can be viewed sequentially and shared with other users. By default, playlists are publicly visible to other users, but playlists can be public or private.
   search             A search result contains information about a YouTube video, channel, or playlist that matches the search parameters specified in an API request. While a search result points to a uniquely identifiable resource, like a video, it does not have its own persistent data.
   stream             A liveStream resource contains information about the video stream that you are transmitting to YouTube. The stream provides the content that will be broadcast to YouTube users. Once created, a liveStream resource can be bound to one or more liveBroadcast resources.
   subscriptions      A subscription resource contains information about a YouTube user subscription. A subscription notifies a user when new videos are added to a channel or when another user takes one of several actions on YouTube, such as uploading a video, rating a video, or commenting on a video.
   thumbnails         A thumbnail resource identifies different thumbnail image sizes associated with a resource.
+  version            Display the package name and version
   video-categories   A videoCategory resource identifies a category that has been or could be associated with uploaded videos.
   videos             A video resource represents a YouTube video.
+  watermarks         A watermark resource identifies an image that displays during playbacks of a specified channel's videos.
 ```
 
 Available commands:
 |command|description|
 |--- |--- |
 |[authorize](#authorize)|Generate a refresh token used to authenticate the command line API requests|
-|[broadcast](#broadcast)|A liveBroadcast resource represents an event that will be streamed, via live video, on YouTube.|
-|[channels](#channels)|A channel resource contains information about a YouTube channel.|
-|[chat](#chat)|A liveChatMessage resource represents a chat message in a YouTube live chat. The resource can contain details about several types of messages, including a newly posted text message or fan funding event.|
-|[playlists](#playlists)|A playlist resource represents a YouTube playlist. A playlist is a collection of videos that can be viewed sequentially and shared with other users. By default, playlists are publicly visible to other users, but playlists can be public or private.|
-|[search](#search)|A search result contains information about a YouTube video, channel, or playlist that matches the search parameters specified in an API request. While a search result points to a uniquely identifiable resource, like a video, it does not have its own persistent data.|
-|[stream](#stream)|A liveStream resource contains information about the video stream that you are transmitting to YouTube. The stream provides the content that will be broadcast to YouTube users. Once created, a liveStream resource can be bound to one or more liveBroadcast resources.|
-|[subscriptions](#subscriptions)|A subscription resource contains information about a YouTube user subscription. A subscription notifies a user when new videos are added to a channel or when another user takes one of several actions on YouTube, such as uploading a video, rating a video, or commenting on a video.|
-|[thumbnails](#thumbnails)|A thumbnail resource identifies different thumbnail image sizes associated with a resource.|
+|[broadcast](#broadcast)|A `liveBroadcast` resource represents an event that will be streamed, via live video, on YouTube.|
+|[channels](#channels)|A `channel` resource contains information about a YouTube channel.|
+|[chat](#chat)|A `liveChatMessage` resource represents a chat message in a YouTube live chat. The resource can contain details about several types of messages, including a newly posted text message or fan funding event.|
+|[comment-threads](#comment-threads)|A `commentThread` resource contains information about a YouTube comment thread, which comprises a top-level comment and replies, if any exist, to that comment.|
+|[comments](#comments)|A `comment` resource contains information about a single YouTube comment.|
+|[playlists](#playlists)|A `playlist` resource represents a YouTube playlist. A playlist is a collection of videos that can be viewed sequentially and shared with other users. By default, playlists are publicly visible to other users, but playlists can be public or private.|
+|[search](#search)|A `search` result contains information about a YouTube video, channel, or playlist that matches the search parameters specified in an API request. While a search result points to a uniquely identifiable resource, like a video, it does not have its own persistent data.|
+|[stream](#stream)|A `liveStream` resource contains information about the video stream that you are transmitting to YouTube. The stream provides the content that will be broadcast to YouTube users. Once created, a liveStream resource can be bound to one or more liveBroadcast resources.|
+|[subscriptions](#subscriptions)|A `subscription` resource contains information about a YouTube user subscription. A subscription notifies a user when new videos are added to a channel or when another user takes one of several actions on YouTube, such as uploading a video, rating a video, or commenting on a video.|
+|[thumbnails](#thumbnails)|A `thumbnail` resource identifies different thumbnail image sizes associated with a resource.|
 
 Just like the main library, any responses provided by the above commands will be given in the JSON format.  So ideally, you will want to use a command line json parser to interpret the results.  The recommended json parser for this purpose is [_jq_](https://stedolan.github.io/jq/).  With _jq_ you can process the results of a command as follows:
 
@@ -74,7 +139,7 @@ thumbnail: https://i.ytimg.com/vi/IdrCyS7EF8M/default.jpg
 ## authorize
 
 ```sh
-prompt>yt authorize --help
+yt authorize --help
 ```
 
 ```text
@@ -90,7 +155,7 @@ Use this command to generate a refresh token that will allow authentication for 
 ## broadcast
 
 ```sh
-prompt>yt broadcast --help
+yt broadcast --help
 ```
 
 ```text
@@ -110,7 +175,7 @@ Available subcommands:
 ### broadcast bind
 
 ```sh
-prompt>yt broadcast bind --help
+yt broadcast bind --help
 ```
 
 ```text
@@ -127,7 +192,7 @@ Usage: yt broadcast bind [arguments]
 ### broadcast delete
 
 ```sh
-prompt>yt broadcast delete --help
+yt broadcast delete --help
 ```
 
 ```text
@@ -141,7 +206,7 @@ Usage: yt broadcast delete [arguments]
 ### broadcast insert
 
 ```sh
-prompt>yt help broadcast insert
+yt help broadcast insert
 ```
 
 ```text
@@ -159,7 +224,7 @@ Usage: yt broadcast insert [arguments]
 ### broadcast list
 
 ```sh
-prompt>yt broadcast list --help
+yt broadcast list --help
 ```
 
 ```text
@@ -190,7 +255,7 @@ Usage: yt broadcast list [arguments]
 ### broadcast transition
 
 ```sh
-prompt>yt broadcast transition --help
+yt broadcast transition --help
 ```
 
 ```text
@@ -212,7 +277,7 @@ Usage: yt broadcast transition [arguments]
 ### broadcast update
 
 ```sh
-prompt>yt broadcast update --help
+yt broadcast update --help
 ```
 
 ```text
@@ -232,7 +297,7 @@ Usage: yt broadcast update [arguments]
 ## channels
 
 ```sh
-prompt>yt channels --help
+yt channels --help
 ```
 
 ```text
@@ -249,7 +314,7 @@ Available subcommands:
 ### channels list
 
 ```sh
-prompt>yt channels list --help
+yt channels list --help
 ```
 
 ```text
@@ -270,7 +335,7 @@ Usage: yt channels list [arguments]
 ### channels update
 
 ```sh
-prompt>yt channels update --help
+yt channels update --help
 ```
 
 ```text
@@ -289,7 +354,7 @@ Usage: yt channels update [arguments]
 ## chat
 
 ```sh
-prompt>yt chat --help
+yt chat --help
 ```
 
 ```text
@@ -310,7 +375,7 @@ Available subcommands:
 ### chat answer
 
 ```sh
-prompt>yt chat answer --help
+yt chat answer --help
 ```
 
 ```text
@@ -325,7 +390,7 @@ Usage: yt chat answer [arguments]
 ### chat delete
 
 ```sh
-prompt>yt chat delete --help
+yt chat delete --help
 ```
 
 ```text
@@ -339,7 +404,7 @@ Usage: yt chat delete [arguments]
 ### chat insert
 
 ```sh
-prompt>yt chat insert --help
+yt chat insert --help
 ```
 
 ```text
@@ -355,7 +420,7 @@ Usage: yt chat insert [arguments]
 ### chat list
 
 ```sh
-prompt>yt chat list --help
+yt chat list --help
 ```
 
 ```text
@@ -373,10 +438,102 @@ Usage: yt chat list [arguments]
                                              (defaults to "88")
 ```
 
+## comment-threads
+
+```sh
+yt comment-threads --help
+```
+
+```text
+A commentThread resource contains information about a YouTube comment thread, which comprises a top-level comment and replies, if any exist, to that comment.
+
+Usage: yt comment-threads <subcommand> [arguments]
+-h, --help    Print this usage information.
+
+Available subcommands:
+  list   Returns a list of comment threads that match the API request parameters. 
+```
+
+### comment-threads list
+
+```sh
+yt comment-threads list --help
+```
+
+```text
+Returns a list of comment threads that match the API request parameters. 
+
+Usage: yt comment-threads list [arguments]
+-h, --help                                          Print this usage information.
+    --part                                          The part parameter specifies a comma-separated list of one or more commentThread resource properties that the API response will include.
+                                                    
+                                                    The following list contains the part names that you can include in the parameter value:
+                                                    id, replies, snippet
+                                                    (defaults to "id,snippet")
+    --all-threads-related-to-channel-id=<string>    The allThreadsRelatedToChannelId parameter instructs the API to return all comment threads associated with the specified channel. The response can include comments about the channel or about the channel's videos.
+    --channel-id=<string>                           The channelId parameter instructs the API to return comment threads containing comments about the specified channel. (The response will not include comments left on videos that the channel uploaded.)
+    --id=<string>                                   The id parameter specifies a comma-separated list of comment thread IDs for the resources that should be retrieved.
+    --video-id=<string>                             The videoId parameter instructs the API to return comment threads associated with the specified video ID.
+    --max-results=<number>                          The maxResults parameter specifies the maximum number of items that should be returned in the result set.
+                                                    
+                                                    Note: This parameter is not supported for use in conjunction with the id parameter. Acceptable values are 1 to 100, inclusive. The default value is 20.
+                                                    (defaults to "5")
+    --moderation-status=<string>                    This parameter can only be used in a properly authorized request. Set this parameter to limit the returned comment threads to a particular moderation state.
+                                                    
+                                                    Note: This parameter is not supported for use in conjunction with the id parameter. The default value is published.
+                                                    [heldForReview, likelySpam, published]
+    --order=<string>                                The order parameter specifies the order in which the API response should list comment threads.
+                                                    [time, relevance]
+    --page-token=<string>                           The pageToken parameter identifies a specific page in the result set that should be returned. In an API response, the nextPageToken property identifies the next page of the result that can be retrieved.
+                                                    
+                                                    Note: This parameter is not supported for use in conjunction with the id parameter.
+    --search-terms=<string>                         The searchTerms parameter instructs the API to limit the API response to only contain comments that contain the specified search terms.
+                                                    
+                                                    Note: This parameter is not supported for use in conjunction with the id parameter.
+    --text-format=<string>                          Set this parameter's value to html or plainText to instruct the API to return the comments left by users in html formatted or in plain text. The default value is html.
+                                                    [html, plainText]
+```
+
+## comments
+
+```sh
+yt comments --help
+```
+
+```text
+A comment resource contains information about a single YouTube comment.
+
+Usage: yt comments <subcommand> [arguments]
+-h, --help    Print this usage information.
+
+Available subcommands:
+  list   Returns a list of comments that match the API request parameters.
+```
+
+### comments list
+
+```sh
+yt comments list --help
+```
+
+```text
+Returns a list of comments that match the API request parameters.
+
+Usage: yt comments list [arguments]
+-h, --help                  Print this usage information.
+    --part                  The part parameter specifies a comma-separated list of one or more comment resource properties that the API response will include.
+                            
+                            The following list contains the part names that you can include in the parameter value:
+                            id, snippet
+                            (defaults to "id,snippet")
+    --id=<string>           The id parameter specifies a comma-separated list of comment IDs for the resources that are being retrieved. In a comment resource, the id property specifies the comment's ID.
+    --parent-id=<string>    The parentId parameter specifies the ID of the comment for which replies should be retrieved.
+```
+
 ## playlists
 
 ```sh
-prompt>yt playlists --help
+yt playlists --help
 ```
 
 ```text
@@ -395,7 +552,7 @@ Available subcommands:
 ### playlists delete
 
 ```sh
-prompt>yt playlists delete --help
+yt playlists delete --help
 ```
 
 ```text
@@ -409,7 +566,7 @@ Usage: yt playlists delete [arguments]
 ### playlists insert
 
 ```sh
-prompt>yt playlists insert --help
+yt playlists insert --help
 ```
 
 ```text
@@ -427,7 +584,7 @@ Usage: yt playlists insert [arguments]
 ### playlists list
 
 ```sh
-prompt>yt playlists list --help
+yt playlists list --help
 ```
 
 ```text
@@ -452,7 +609,7 @@ Usage: yt playlists list [arguments]
 ### playlists update
 
 ```sh
-prompt>yt playlists update --help
+yt playlists update --help
 ```
 
 ```text
@@ -472,7 +629,7 @@ Usage: yt playlists update [arguments]
 ## search
 
 ```sh
-prompt>yt search --help
+yt search --help
 ```
 
 ```text
@@ -488,7 +645,7 @@ Available subcommands:
 ### search list
 
 ```sh
-prompt>yt search list --help
+yt search list --help
 ```
 
 ```text
@@ -592,7 +749,7 @@ Usage: yt search list [arguments]
 ## stream
 
 ```sh
-prompt>yt stream --help
+yt stream --help
 ```
 
 ```text
@@ -611,7 +768,7 @@ Available subcommands:
 ### stream delete
 
 ```sh
-prompt>yt stream delete --help
+yt stream delete --help
 ```
 
 ```text
@@ -625,7 +782,7 @@ Usage: yt stream delete [arguments]
 ### stream insert
 
 ```sh
-prompt>yt stream insert --help
+yt stream insert --help
 ```
 
 ```text
@@ -641,7 +798,7 @@ Usage: yt stream insert [arguments]
 ### stream list
 
 ```sh
-prompt>yt stream list --help
+yt stream list --help
 ```
 
 ```text
@@ -662,7 +819,7 @@ Usage: yt stream list [arguments]
 ### stream update
 
 ```sh
-prompt>yt stream update --help
+yt stream update --help
 ```
 
 ```text
@@ -679,10 +836,10 @@ Usage: yt stream update [arguments]
     --body (mandatory)    Provide a liveBroadcast resource [https://developers.google.com/youtube/v3/live/docs/liveBroadcasts#resource] in the request body.
 ```
 
-### subscriptions
+## subscriptions
 
 ```sh
-prompt>yt subscriptions --help
+yt subscriptions --help
 ```
 
 ```text
@@ -697,10 +854,10 @@ Available subcommands:
   list     Returns subscription resources that match the API request criteria.
 ```
 
-## subscriptions list
+### subscriptions list
 
 ```sh
-prompt>yt subscriptions list --help
+yt subscriptions list --help
 ```
 
 ```text
@@ -735,10 +892,10 @@ Usage: yt subscriptions list [arguments]
           [unread]                     Sort by order of activity.
 ```
 
-## subscriptions insert
+### subscriptions insert
 
 ```sh
-prompt>yt subscriptions insert --help
+yt subscriptions insert --help
 ```
 
 ```text
@@ -761,10 +918,10 @@ Usage: yt subscriptions insert [arguments]
     --channel-id=<string> (mandatory)    The value that YouTube uses to uniquely identify the channel that the user subscribed to.
 ```
 
-## subscriptions delete
+### subscriptions delete
 
 ```sh
-prompt>yt subscriptions delete --help
+yt subscriptions delete --help
 ```
 
 ```text
@@ -778,7 +935,7 @@ Usage: yt subscriptions delete [arguments]
 ## thumbnails
 
 ```sh
-prompt>yt thumbnails --help
+yt thumbnails --help
 ```
 
 ```text
@@ -794,7 +951,7 @@ Available subcommands:
 ### thumbnails set
 
 ```sh
-prompt>yt thumbnails set --help
+yt thumbnails set --help
 ```
 
 ```text
@@ -810,7 +967,7 @@ Usage: yt thumbnails set [arguments]
 
 
 ```sh
-prompt>yt version --help
+yt version --help
 ```
 
 ```text

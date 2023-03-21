@@ -22,7 +22,6 @@ class _ChannelClient implements ChannelClient {
 
   @override
   Future<ChannelResponse> list(
-    authorization,
     apiKey,
     accept,
     parts, {
@@ -51,12 +50,9 @@ class _ChannelClient implements ChannelClient {
       r'pageToken': pageToken,
     };
     queryParameters.removeWhere((k, v) => v == null);
-    final _headers = <String, dynamic>{
-      r'Authorization': authorization,
-      r'Accept': accept,
-    };
+    final _headers = <String, dynamic>{r'Accept': accept};
     _headers.removeWhere((k, v) => v == null);
-    final _data = <String, dynamic>{};
+    final Map<String, dynamic>? _data = null;
     final _result = await _dio
         .fetch<Map<String, dynamic>>(_setStreamType<ChannelResponse>(Options(
       method: 'GET',
@@ -76,7 +72,6 @@ class _ChannelClient implements ChannelClient {
 
   @override
   Future<ChannelItem> update(
-    authorization,
     accept,
     contentType,
     parts,
@@ -90,7 +85,6 @@ class _ChannelClient implements ChannelClient {
     };
     queryParameters.removeWhere((k, v) => v == null);
     final _headers = <String, dynamic>{
-      r'Authorization': authorization,
       r'Accept': accept,
       r'Content-Type': contentType,
     };

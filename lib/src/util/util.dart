@@ -76,3 +76,5 @@ class Util {
   static File get accessCredentialsFile =>
       File('${Util.userHome}/.yt/access_credentials.json');
 }
+
+enum ListPosition { start, end }

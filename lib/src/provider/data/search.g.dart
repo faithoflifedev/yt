@@ -22,7 +22,6 @@ class _SearchClient implements SearchClient {
 
   @override
   Future<SearchListResponse> list(
-    authorization,
     apiKey,
     accept,
     parts, {
@@ -91,12 +90,9 @@ class _SearchClient implements SearchClient {
       r'videoType': videoType,
     };
     queryParameters.removeWhere((k, v) => v == null);
-    final _headers = <String, dynamic>{
-      r'Authorization': authorization,
-      r'Accept': accept,
-    };
+    final _headers = <String, dynamic>{r'Accept': accept};
     _headers.removeWhere((k, v) => v == null);
-    final _data = <String, dynamic>{};
+    final Map<String, dynamic>? _data = null;
     final _result = await _dio
         .fetch<Map<String, dynamic>>(_setStreamType<SearchListResponse>(Options(
       method: 'GET',

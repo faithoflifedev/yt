@@ -22,7 +22,6 @@ class _PlaylistItemsClient implements PlaylistItemsClient {
 
   @override
   Future<PlaylistItemListResponse> list(
-    authorization,
     apiKey,
     accept,
     parts, {
@@ -45,12 +44,9 @@ class _PlaylistItemsClient implements PlaylistItemsClient {
       r'videoId': videoId,
     };
     queryParameters.removeWhere((k, v) => v == null);
-    final _headers = <String, dynamic>{
-      r'Authorization': authorization,
-      r'Accept': accept,
-    };
+    final _headers = <String, dynamic>{r'Accept': accept};
     _headers.removeWhere((k, v) => v == null);
-    final _data = <String, dynamic>{};
+    final Map<String, dynamic>? _data = null;
     final _result = await _dio.fetch<Map<String, dynamic>>(
         _setStreamType<PlaylistItemListResponse>(Options(
       method: 'GET',
@@ -70,7 +66,6 @@ class _PlaylistItemsClient implements PlaylistItemsClient {
 
   @override
   Future<Playlist> insert(
-    authorization,
     accept,
     contentType,
     part,
@@ -84,7 +79,6 @@ class _PlaylistItemsClient implements PlaylistItemsClient {
     };
     queryParameters.removeWhere((k, v) => v == null);
     final _headers = <String, dynamic>{
-      r'Authorization': authorization,
       r'Accept': accept,
       r'Content-Type': contentType,
     };
@@ -111,7 +105,6 @@ class _PlaylistItemsClient implements PlaylistItemsClient {
 
   @override
   Future<Playlist> update(
-    authorization,
     accept,
     contentType,
     parts,
@@ -125,7 +118,6 @@ class _PlaylistItemsClient implements PlaylistItemsClient {
     };
     queryParameters.removeWhere((k, v) => v == null);
     final _headers = <String, dynamic>{
-      r'Authorization': authorization,
       r'Accept': accept,
       r'Content-Type': contentType,
     };
@@ -152,7 +144,6 @@ class _PlaylistItemsClient implements PlaylistItemsClient {
 
   @override
   Future<void> delete(
-    authorization,
     accept,
     id, {
     onBehalfOfContentOwner,
@@ -163,12 +154,9 @@ class _PlaylistItemsClient implements PlaylistItemsClient {
       r'onBehalfOfContentOwner': onBehalfOfContentOwner,
     };
     queryParameters.removeWhere((k, v) => v == null);
-    final _headers = <String, dynamic>{
-      r'Authorization': authorization,
-      r'Accept': accept,
-    };
+    final _headers = <String, dynamic>{r'Accept': accept};
     _headers.removeWhere((k, v) => v == null);
-    final _data = <String, dynamic>{};
+    final Map<String, dynamic>? _data = null;
     await _dio.fetch<void>(_setStreamType<void>(Options(
       method: 'DELETE',
       headers: _headers,
@@ -181,7 +169,6 @@ class _PlaylistItemsClient implements PlaylistItemsClient {
           data: _data,
         )
         .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
-    return null;
   }
 
   RequestOptions _setStreamType<T>(RequestOptions requestOptions) {

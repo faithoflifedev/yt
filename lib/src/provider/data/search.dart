@@ -11,11 +11,8 @@ abstract class SearchClient {
 
   ///Returns a collection of search results that match the query parameters specified in the API request. By default, a search result set identifies matching video, channel, and [Playlist] resources, but you can also configure queries to only retrieve a specific type of resource.
   @GET('/search')
-  Future<SearchListResponse> list(
-      @Header('Authorization') String? authorization,
-      @Query('key') String? apiKey,
-      @Header('Accept') String accept,
-      @Query('part') String? parts,
+  Future<SearchListResponse> list(@Query('key') String? apiKey,
+      @Header('Accept') String accept, @Query('part') String? parts,
       {@Query('channelId') String? channelId,
       @Query('channelType') String? channelType,
       @Query('eventType') String? eventType,

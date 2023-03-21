@@ -12,7 +12,6 @@ abstract class ChannelClient {
   ///Returns a collection of zero or more channel resources that match the request criteria.
   @GET('/channels')
   Future<ChannelResponse> list(
-    @Header('Authorization') String? authorization,
     @Query('key') String? apiKey,
     @Header('Accept') String accept,
     @Query('part') String parts, {
@@ -29,7 +28,6 @@ abstract class ChannelClient {
 
   @PUT('/channels')
   Future<ChannelItem> update(
-      @Header('Authorization') String? authorization,
       @Header('Accept') String accept,
       @Header('Content-Type') String contentType,
       @Query('part') String parts,

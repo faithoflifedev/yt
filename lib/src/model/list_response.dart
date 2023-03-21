@@ -10,13 +10,13 @@ abstract class ListResponse extends ResponseMetadata {
   final String? prevPageToken;
 
   /// The pageInfo object encapsulates paging information for the result set.
-  final PageInfo pageInfo;
+  final PageInfo? pageInfo;
 
   ListResponse({
     required super.kind,
     required super.etag,
     this.nextPageToken,
     this.prevPageToken,
-    required this.pageInfo,
+    this.pageInfo,
   });
 }

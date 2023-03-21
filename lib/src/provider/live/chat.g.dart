@@ -42,7 +42,7 @@ class _ChatClient implements ChatClient {
     queryParameters.removeWhere((k, v) => v == null);
     final _headers = <String, dynamic>{r'Accept': accept};
     _headers.removeWhere((k, v) => v == null);
-    final _data = <String, dynamic>{};
+    final Map<String, dynamic>? _data = null;
     final _result = await _dio.fetch<Map<String, dynamic>>(
         _setStreamType<LiveChatMessageListResponse>(Options(
       method: 'GET',
@@ -103,7 +103,7 @@ class _ChatClient implements ChatClient {
     final queryParameters = <String, dynamic>{r'id': id};
     final _headers = <String, dynamic>{r'Accept': accept};
     _headers.removeWhere((k, v) => v == null);
-    final _data = <String, dynamic>{};
+    final Map<String, dynamic>? _data = null;
     await _dio.fetch<void>(_setStreamType<void>(Options(
       method: 'DELETE',
       headers: _headers,
@@ -116,7 +116,6 @@ class _ChatClient implements ChatClient {
           data: _data,
         )
         .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
-    return null;
   }
 
   RequestOptions _setStreamType<T>(RequestOptions requestOptions) {

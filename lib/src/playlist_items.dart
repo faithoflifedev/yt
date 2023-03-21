@@ -11,11 +11,8 @@ class PlaylistItems extends YouTubeHelper {
 
   final PlaylistItemsClient _rest;
 
-  final String? _authHeader;
-
   PlaylistItems({required this.dio, this.token, this.apiKey})
-      : _authHeader = token != null ? 'Bearer $token' : null,
-        _rest = PlaylistItemsClient(dio);
+      : _rest = PlaylistItemsClient(dio);
 
   ///Returns a collection of playlists that match the API request parameters. For example, you can retrieve all playlists that the authenticated user owns, or you can retrieve one or more playlists by their unique IDs.
   Future<PlaylistItemListResponse> list(
@@ -27,13 +24,17 @@ class PlaylistItems extends YouTubeHelper {
       String? onBehalfOfContentOwner,
       String? videoId,
       String? pageToken}) async {
-    return _rest.list(_authHeader, apiKey, accept, buildParts(partList, part),
-        playlistId: playlistId,
-        id: id,
-        maxResults: maxResults,
-        onBehalfOfContentOwner: onBehalfOfContentOwner,
-        pageToken: pageToken,
-        videoId: videoId);
+    return _rest.list(
+      apiKey,
+      accept,
+      buildParts(partList, part),
+      playlistId: playlistId,
+      id: id,
+      maxResults: maxResults,
+      onBehalfOfContentOwner: onBehalfOfContentOwner,
+      pageToken: pageToken,
+      videoId: videoId,
+    );
   }
 
   ///Creates a playlist.
@@ -45,7 +46,11 @@ class PlaylistItems extends YouTubeHelper {
     String? onBehalfOfContentOwnerChannel,
   }) async {
     return await _rest.insert(
-        _authHeader, accept, contentType, buildParts(partList, part), body);
+      accept,
+      contentType,
+      buildParts(partList, part),
+      body,
+    );
   }
 
   ///Modifies a playlist. For example, you could change a playlist's title, description, or privacy status.
@@ -57,7 +62,11 @@ class PlaylistItems extends YouTubeHelper {
     String? onBehalfOfContentOwnerChannel,
   }) async {
     return await _rest.update(
-        _authHeader, accept, contentType, buildParts(partList, part), body);
+      accept,
+      contentType,
+      buildParts(partList, part),
+      body,
+    );
   }
 
   ///Deletes a playlist.
@@ -66,6 +75,6 @@ class PlaylistItems extends YouTubeHelper {
     String? onBehalfOfContentOwner,
     String? onBehalfOfContentOwnerChannel,
   }) async {
-    return await _rest.delete(_authHeader, accept, id);
+    return await _rest.delete(accept, id);
   }
 }

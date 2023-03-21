@@ -13,7 +13,9 @@ SearchListResponse _$SearchListResponseFromJson(Map<String, dynamic> json) =>
       nextPageToken: json['nextPageToken'] as String?,
       prevPageToken: json['prevPageToken'] as String?,
       regionCode: json['regionCode'] as String?,
-      pageInfo: PageInfo.fromJson(json['pageInfo'] as Map<String, dynamic>),
+      pageInfo: json['pageInfo'] == null
+          ? null
+          : PageInfo.fromJson(json['pageInfo'] as Map<String, dynamic>),
       searchItems: (json['items'] as List<dynamic>?)
           ?.map((e) => SearchResult.fromJson(e as Map<String, dynamic>))
           .toList(),
