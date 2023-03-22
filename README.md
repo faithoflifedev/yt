@@ -10,8 +10,11 @@ Native [Dart](https://dart.dev/) interface to multiple Google REST APIs, includi
 
 ## Table of Contents
 
+- [Table of Contents](#table-of-contents)
 - [How does this package differ from the googleapis package?](#how-does-this-package-differ-from-the-googleapis-package)
-- [New for version 2.0.x](#new-for-version-20x)
+- [Release News](#release-news)
+  - [New for v2.2.x (pre-release)](#new-for-v22x-pre-release)
+  - [New for v2.0.x](#new-for-v20x)
 - [Getting Started](#getting-started)
 - [Obtaining Authorization Credentials](#obtaining-authorization-credentials)
   - [yaml](#yaml)
@@ -31,11 +34,10 @@ Native [Dart](https://dart.dev/) interface to multiple Google REST APIs, includi
   - [Live Streaming API](#live-streaming-api)
   - [Custom Features (experimental)](#custom-features-experimental)
 - [What's Next?](#whats-next)
-- [Breaking Changes](#breaking-changes)
+- [Breaking changes](#breaking-changes)
   - [v2.0.x 2.1.x](#v20x-21x)
   - [v2.0.x from v1.2.x](#v20x-from-v12x)
 - [Contributing](#contributing)
-
 
 [![Build Status](https://github.com/faithoflifedev/yt/workflows/Dart/badge.svg)](https://github.com/faithoflifedev/yt/actions) [![github last commit](https://shields.io/github/last-commit/faithoflifedev/yt)](https://shields.io/github/last-commit/faithoflifedev/yt) [![github build](https://img.shields.io/github/actions/workflow/status/faithoflifedev/yt/dart.yml?branch=main)](https://shields.io/github/workflow/status/faithoflifedev/yt/Dart) [![github issues](https://shields.io/github/issues/faithoflifedev/yt)](https://shields.io/github/issues/faithoflifedev/yt)
 
@@ -47,7 +49,17 @@ Native [Dart](https://dart.dev/) interface to multiple Google REST APIs, includi
 - Since it's not generated the package includes additional useful features like a cli (Command Line Interface) and the experimental Chatbot
 - A tighter focus to the package means focused documentation and focused examples
 
-## New for version 2.0.x
+## Release News
+
+### New for v2.2.x (pre-release)
+
+For the 2.2.x release the oauth code has been refactored to remove the `dart:io` dependencies that prevented the package from being used as part of a Flutter app running in a browser.  With this release the package can now be used by all Dart/Flutter supported platforms.  
+
+Please **NOTE** that this package uses the [google_sign_in](https://pub.dev/packages/google_sign_in) package for authentication in Flutter, which auto-magically defers to [google_sign_in_web](https://pub.dev/packages/google_sign_in_web) for browser apps.  You must follow the [usage](https://pub.dev/packages/google_sign_in_web#usage) instructions to the letter if you want to the included `flutter_youtube` app to function without errors in a browser.
+
+The first line in the usage instructions states,  "First, go through the instructions [here](https://developers.google.com/identity/gsi/web/guides/get-google-api-clientid) to create your Google Sign-In OAuth client ID.".  If you don't follow these steps properly, your web application will not work.  **DO NOT** submit GitHub issues around this, they will be ignored.
+
+### New for v2.0.x
 
 As of the 2.0.x release of this package there is a cli utility included that can be used to return data for any API call currently supported by the package. If you want to get started quickly with the cli utility run these commands in a terminal session:
 
@@ -68,7 +80,7 @@ To use this package, add the dependency to your pubspec.yaml file:
 ```yaml
 dependencies:
   ...
-  yt: ^2.1.0
+  yt: ^2.2.0-dev.1
 ```
 
 ## Obtaining Authorization Credentials
@@ -120,14 +132,14 @@ YouTube provides multiple methods for API authentication. The Data API can use b
 ```dart
 import 'package:yt/yt.dart';
 
-//if you used "yt authorize" to generate a credentials file
+// if you used "yt authorize" to generate a credentials file
 final yt = Yt.withOAuth();
 
-//authenticate using OAuth - manually created file
-//final yt = Yt.withOAuth(OAuthCredentials.fromYaml('example/youtube.yaml'));
+// authenticate using OAuth - manually created file
+// final yt = Yt.withOAuth(OAuthCredentials.fromYaml('example/youtube.yaml'));
 
-//some APIs can use an API Key for authentication
-//final yt = Yt.withKey('[youtube api key]');
+// some APIs can use an API Key for authentication
+// final yt = Yt.withKey('[youtube api key]');
 
 // List of videos from playlist
 var playlistResponse = await yt.playlists.list(
@@ -172,13 +184,13 @@ import 'package:yt/yt.dart';
 
 final yt = await Yt.withOAuth();
 
-///the live streaming broadcast API client
+// the live streaming broadcast API client
 final br = yt.broadcast;
 
-///the thumbnail data API client
+// the thumbnail data API client
 final th = yt.thumbnails;
 
-///create a private broadcast for 2 hours from now
+// create a private broadcast for 2 hours from now
 final broadcastItem = await br.insert(body: {
   'snippet': {
     'title': 'TEST Broadcast',
@@ -200,12 +212,12 @@ final broadcastItem = await br.insert(body: {
   }
 }, part: 'snippet,status,contentDetails');
 
-///bind the broadcast to an existing stream
+// bind the broadcast to an existing stream
 await br.bind(
     broadcastId: broadcastItem.id,
     streamId: '[one of your valid stream ids]');
 
-///upload the thumbnail
+// upload the thumbnail
 await th.set(
     videoId: broadcastItem.id,
     thumbnail: File('[path to an image to upload]'));
@@ -221,7 +233,7 @@ final yt = await Yt.withOAuth();
 var broadcastResponse = await yt.broadcast.list(broadcastStatus: 'active');
 
 if (broadcastResponse.items.isNotEmpty) {
-  //will download and output to stdout
+  // will download and output to stdout
   await yt.chat.downloadHistory(liveBroadcastItem: broadcastResponse.items.first);
 }
 ```
@@ -231,13 +243,13 @@ if (broadcastResponse.items.isNotEmpty) {
 ```dart
 final yt = await Yt.withOAuth();
 
-//the live streaming broadcast API client
+// the live streaming broadcast API client
 final br = yt.broadcast;
 
-//look for an active broadcast
+// look for an active broadcast
 var broadcastResponse = await br.list(broadcastStatus: 'active');
 
-//get an upcoming broadcast, if there's no active
+// get an upcoming broadcast, if there's no active
 if (broadcastResponse.items.isEmpty) {
   broadcastResponse =
       await br.list(broadcastStatus: 'upcoming', maxResults: 1);
@@ -246,11 +258,11 @@ if (broadcastResponse.items.isEmpty) {
 if (broadcastResponse.items.isNotEmpty) {
   final liveBroadcastItem = broadcastResponse.items.first;
 
-  //setup the chatbot with a custom dialog
+  // setup the chatbot with a custom dialog
   final chatbot = Chatbot.fromYaml(File('chatbot.yaml'));
 
-  //if being run periodically you will want to provide a TimeStore to persist
-  //a timestamp that will ensure the chatbot doesn't repeat answers
+  // if being run periodically you will want to provide a TimeStore to persist
+  // a timestamp that will ensure the chatbot doesn't repeat answers
   await yt.chat
       .answerBot(liveBroadcastItem: liveBroadcastItem, chatbot: chatbot);
 }
@@ -292,7 +304,7 @@ class YtLoginGenerator implements TokenGenerator {
 With the generator in place, it becomes quite easy to include _google sign-in_ for YouTube into your Flutter app. In one of your controllers you would include code like:
 
 ```dart
-  //class definitions for a Flutter app
+  // class definitions for a Flutter app
   ...
   final items = <Playlist>[];
 
@@ -321,7 +333,7 @@ With the generator in place, it becomes quite easy to include _google sign-in_ f
 
     @override
   Widget build(BuildContext context) {
-    //ListView.builder
+    // ListView.builder
     ...
     floatingActionButton: FloatingActionButton(
         onPressed: _getPlaylists,
@@ -334,7 +346,7 @@ With the generator in place, it becomes quite easy to include _google sign-in_ f
 
 - [example.dart](https://github.com/faithoflifedev/yt/blob/main/example/example.dart) - (command line) display various YouTube data
 - [livechat_example.dart](https://github.com/faithoflifedev/yt/blob/main/example/livechat_example.dart) - (command line) chatbot will answer a set of questions in a liveChat session
-- [flutter_playlist](https://github.com/faithoflifedev/yt/tree/main/example/flutter_playlist) - display a YouTube playlist in a ListView
+- [flutter_youtube](https://github.com/faithoflifedev/yt/tree/main/example/flutter_youtube) - a simple flutter app that can function on web and mobile platforms that allows the user to type a keyword to get matching youtube videos with image and title
   
 ## Youtube REST API cli (Youtube at the command prompt)
 

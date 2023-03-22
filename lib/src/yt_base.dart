@@ -1,10 +1,10 @@
 import 'package:dio/dio.dart';
-import 'package:dio/io.dart';
-import 'package:googleapis_auth/auth_io.dart';
-import 'package:http/io_client.dart' show IOClient;
+import 'package:googleapis_auth/googleapis_auth.dart';
+
 import 'package:loggy/loggy.dart';
 import 'package:universal_io/io.dart';
-import 'package:yt/src/util/oauth_access_control.dart';
+import 'package:yt/oauth.dart';
+
 import 'package:yt/src/util/util.dart';
 import 'package:yt/yt.dart';
 
@@ -60,9 +60,6 @@ class Yt with UiLoggy {
       LoggingInterceptors(),
       position: ListPosition.end,
     );
-
-    (dio.httpClientAdapter as IOHttpClientAdapter).onHttpClientCreate =
-        (client) => httpClient;
   }
 
   static Yt withKey(String apiKey) {
@@ -83,8 +80,7 @@ class Yt with UiLoggy {
       )}) {
     oAuthClientId ??= Util.defaultClientId();
 
-    final oauthAccessControl = OAuthAccessControl(
-        clientId: oAuthClientId, httpClient: IOClient(httpClient));
+    final oauthAccessControl = OAuthAccessControl(oAuthClientId);
 
     final yt = Yt(
         logOptions: logOptions,

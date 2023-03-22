@@ -2,9 +2,8 @@ import 'dart:convert';
 
 import 'package:args/command_runner.dart';
 import 'package:googleapis_auth/googleapis_auth.dart';
-import 'package:http/io_client.dart';
 import 'package:universal_io/io.dart';
-import 'package:yt/src/util/oauth_access_control.dart';
+import 'package:yt/oauth.dart';
 import 'package:yt/src/util/util.dart';
 
 ///Generate a refresh token used to authenticate the command line API requests
@@ -63,8 +62,7 @@ class YoutubeAuthorizeCommand extends Command {
       oAuthClientId = Util.defaultClientId();
     }
 
-    final accessControl = OAuthAccessControl(
-        clientId: oAuthClientId, httpClient: IOClient(httpClient));
+    final accessControl = OAuthAccessControl(oAuthClientId);
 
     await accessControl.init();
 

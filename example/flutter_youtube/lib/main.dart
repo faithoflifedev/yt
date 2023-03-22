@@ -1,3 +1,6 @@
+// import 'package:flutter/foundation.dart' show kIsWeb;
+// import 'package:desktop_webview_auth/desktop_webview_auth.dart';
+// import 'package:desktop_webview_auth/google.dart';
 import 'package:flutter/material.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:loggy/loggy.dart';
@@ -44,6 +47,7 @@ class MyHomePageState extends State<MyHomePage> {
 
   void _init() async {
     yt = await Yt.withGenerator(
+      // kIsWeb ? YtLoginGenerator() : DesktopLoginGenerator(),
       YtLoginGenerator(),
       logOptions: const LogOptions(
         LogLevel.debug,
@@ -111,6 +115,33 @@ class MyHomePageState extends State<MyHomePage> {
     );
   }
 }
+
+// class DesktopLoginGenerator implements TokenGenerator {
+//   final googleSignInArgs = GoogleSignInArgs(
+//     clientId:
+//         '272818670197-tdflak2ot0up7l29c4dr80kfvq6c3ui2.apps.googleusercontent.com',
+//     redirectUri: 'https://localhost:5544',
+//     scope: 'https://www.googleapis.com/auth/youtube.force-ssl',
+//   );
+
+//   @override
+//   Future<Token> generate() async {
+//     AuthResult? result;
+//     try {
+//       result = await DesktopWebviewAuth.signIn(googleSignInArgs);
+//     } catch (err) {
+//       // something went wrong
+//     }
+
+//     if (result == null) throw Exception();
+
+//     return Token(
+//         accessToken: result.accessToken!,
+//         expiresIn: 3599,
+//         scope: null,
+//         tokenType: '');
+//   }
+// }
 
 class YtLoginGenerator implements TokenGenerator {
   final GoogleSignIn _googleSignIn = GoogleSignIn(
