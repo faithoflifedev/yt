@@ -119,7 +119,7 @@ class MyHomePageState extends State<MyHomePage> {
 // class DesktopLoginGenerator implements TokenGenerator {
 //   final googleSignInArgs = GoogleSignInArgs(
 //     clientId:
-//         '272818670197-tdflak2ot0up7l29c4dr80kfvq6c3ui2.apps.googleusercontent.com',
+//         '[a Google OAUTH client ID]',
 //     redirectUri: 'https://localhost:5544',
 //     scope: 'https://www.googleapis.com/auth/youtube.force-ssl',
 //   );

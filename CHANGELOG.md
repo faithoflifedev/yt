@@ -2,6 +2,10 @@
 
 * new oauth implmentation that supports io versus browser usage
 
+## 2.2.0-dev.1
+
+* new oauth implmentation that supports io versus browser usage
+
 ## 2.1.0
 
 * implements `commentThreads` (partial)
