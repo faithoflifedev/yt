@@ -3,7 +3,7 @@ import 'package:yt/src/help.dart';
 
 import 'provider/data/watermarks.dart';
 
-/// A [Watermark] resource identifies an image that displays during playbacks of
+/// A [Watermarks] resource identifies an image that displays during playbacks of
 /// a specified channel's videos. You can also specify a target channel to which
 /// the image will link as well as timing details that determine when the
 /// watermark appears during video playbacks and the length of time it is

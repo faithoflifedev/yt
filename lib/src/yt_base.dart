@@ -14,7 +14,7 @@ class Yt with UiLoggy {
   static final tokenExpiry = DateTime(2000, 0, 0);
   static final _interceptors = <Interceptor>[];
 
-  static TokenGenerator? tokenGenerator;
+  static RefreshTokenGenerator? refreshTokenGenerator;
 
   Broadcast? _broadcast;
   Channels? _channels;
@@ -103,14 +103,14 @@ class Yt with UiLoggy {
     return yt;
   }
 
-  static Future<Yt> withGenerator(TokenGenerator generator,
+  static Future<Yt> withGenerator(RefreshTokenGenerator refreshTokenGenerator,
       {LogOptions logOptions = const LogOptions(
         LogLevel.error,
         stackTraceLevel: LogLevel.off,
       )}) async {
     final yt = Yt(logOptions: logOptions);
 
-    Token token = await generator.generate();
+    Token token = await refreshTokenGenerator.generate();
 
     addInterceptor(InterceptorsWrapper(onRequest: (options, handler) async {
       options.headers['Authorization'] = 'Bearer ${token.accessToken}';

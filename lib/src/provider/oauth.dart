@@ -1,6 +1,6 @@
 import 'package:retrofit/retrofit.dart';
 import 'package:dio/dio.dart' hide Headers;
-import 'package:yt/src/model/util/token.dart';
+import 'package:yt/yt.dart';
 
 part 'oauth.g.dart';
 

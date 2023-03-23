@@ -4,6 +4,7 @@
 import 'package:flutter/material.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:loggy/loggy.dart';
+import 'package:yt/oauth.dart';
 import 'package:yt/yt.dart';
 
 void main() {
@@ -92,21 +93,24 @@ class MyHomePageState extends State<MyHomePage> {
                 itemCount: items.length,
                 itemBuilder: (context, index) {
                   if (items[index].snippet == null) throw Exception();
-                  return ListTile(
-                    leading: ConstrainedBox(
-                      constraints: BoxConstraints(
-                        minWidth: 44,
-                        minHeight: 44,
-                        maxWidth: 64,
-                        maxHeight: 64,
+                  return Padding(
+                    padding: const EdgeInsets.all(2.0),
+                    child: ListTile(
+                      leading: ConstrainedBox(
+                        constraints: BoxConstraints(
+                          minWidth: 44,
+                          minHeight: 44,
+                          maxWidth: 64,
+                          maxHeight: 64,
+                        ),
+                        child: Image.network(items[index]
+                            .snippet!
+                            .thumbnails
+                            .thumbnailsDefault
+                            .url),
                       ),
-                      child: Image.network(items[index]
-                          .snippet!
-                          .thumbnails
-                          .thumbnailsDefault
-                          .url),
+                      title: Text(items[index].snippet!.title),
                     ),
-                    title: Text(items[index].snippet!.title),
                   );
                 }),
           ),
@@ -143,7 +147,7 @@ class MyHomePageState extends State<MyHomePage> {
 //   }
 // }
 
-class YtLoginGenerator implements TokenGenerator {
+class YtLoginGenerator implements RefreshTokenGenerator {
   final GoogleSignIn _googleSignIn = GoogleSignIn(
     scopes: [
       'https://www.googleapis.com/auth/youtube.force-ssl',
