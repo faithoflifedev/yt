@@ -43,6 +43,4 @@ relatedPlaylists: ${channelItem.contentDetails?.relatedPlaylists.uploads}''');
 thumbnail: ${broadcastItem.snippet?.thumbnails?.thumbnailsDefault.url}
 status: ${broadcastItem.status?.lifeCycleStatus}''');
   }
-
-  yt.close();
 }

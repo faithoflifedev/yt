@@ -3,16 +3,15 @@ import 'dart:convert';
 import 'package:args/command_runner.dart';
 import 'package:dio/dio.dart';
 import 'package:universal_io/io.dart';
-import 'package:yt/src/util/util.dart';
 import 'package:yt/yt.dart';
 
-///A liveChatMessage resource represents a chat message in a YouTube live chat.
-///The resource can contain details about several types of messages, including a
-///newly posted text message or fan funding event.
+/// A liveChatMessage resource represents a chat message in a YouTube live chat.
+/// The resource can contain details about several types of messages, including
+/// a newly posted text message or fan funding event.
 ///
-///The live chat feature is enabled by default for live broadcasts and is
-///available while the live event is active. (After the event ends, live chat is
-///no longer available for that event.)
+/// The live chat feature is enabled by default for live broadcasts and is
+/// available while the live event is active. (After the event ends, live chat
+/// is no longer available for that event.)
 class YoutubeChatCommand extends Command {
   @override
   String get description =>
@@ -79,11 +78,9 @@ class YoutubeListChatCommand extends YtHelperCommand {
           profileImageSize: int.parse(argResults!['profile-image-size']));
 
       print(liveChatMessageListResponse);
-    } on DioError catch (err) {
+    } on DioException catch (err) {
       throw UsageException('API usage error:', err.usage);
     }
-
-    done();
   }
 }
 
@@ -118,11 +115,9 @@ class YoutubeInsertChatCommand extends YtHelperCommand {
           body: json.decode(argResults!['body']), part: argResults!['part']);
 
       print(liveChatMessage);
-    } on DioError catch (err) {
+    } on DioException catch (err) {
       throw UsageException('API usage error:', err.usage);
     }
-
-    done();
   }
 }
 
@@ -150,15 +145,16 @@ class YoutubeDeleteChatCommand extends YtHelperCommand {
 
     try {
       await chat.delete(id: argResults!['id']);
-    } on DioError catch (err) {
+    } on DioException catch (err) {
       throw UsageException('API usage error:', err.usage);
     }
-
-    done();
   }
 }
 
 class YoutubeAnswerChatCommand extends YtHelperCommand {
+  String? userHome =
+      Platform.environment['HOME'] ?? Platform.environment['USERPROFILE'];
+
   @override
   String get description =>
       'Process chat messages and provided canned answers to set questions (not part of the documented API).';
@@ -170,7 +166,7 @@ class YoutubeAnswerChatCommand extends YtHelperCommand {
     argParser.addOption('chatbot-config',
         valueHelp: 'path',
         help: 'The path to a "yaml" file with the Chatbot configuration.',
-        defaultsTo: '${Util.userHome}/.yt/chatbot.yaml');
+        defaultsTo: '$userHome/.yt/chatbot.yaml');
   }
 
   @override
@@ -191,10 +187,8 @@ class YoutubeAnswerChatCommand extends YtHelperCommand {
     try {
       await chat.answerBot(
           liveBroadcastItem: liveBroadcastItem, chatbot: chatbot);
-    } on DioError catch (err) {
+    } on DioException catch (err) {
       throw UsageException('API usage error:', err.usage);
     }
-
-    done();
   }
 }

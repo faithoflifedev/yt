@@ -91,8 +91,7 @@ class _VideoClient implements VideoClient {
     queryParameters.removeWhere((k, v) => v == null);
     final _headers = <String, dynamic>{r'Accept': accept};
     _headers.removeWhere((k, v) => v == null);
-    final _data =
-        Stream.fromIterable(videoFile.readAsBytesSync().map((i) => [i]));
+    final _data = videoFile;
     final _result = await _dio
         .fetch<Map<String, dynamic>>(_setStreamType<VideoItem>(Options(
       method: 'POST',

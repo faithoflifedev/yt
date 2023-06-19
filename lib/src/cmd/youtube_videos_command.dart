@@ -58,7 +58,7 @@ class YoutubeRateVideosCommand extends YtHelperCommand {
 
     try {
       await videos.rate(id: argResults!['id'], rating: argResults!['rating']);
-    } on DioError catch (err) {
+    } on DioException catch (err) {
       throw UsageException('API usage error:', err.usage);
     }
   }
@@ -172,11 +172,9 @@ Note: This parameter is supported for use in conjunction with the myRating param
           videoCategoryId: argResults?['video-category-id']);
 
       print(videoListResponse);
-    } on DioError catch (err) {
+    } on DioException catch (err) {
       throw UsageException('API usage error:', err.usage);
     }
-
-    done();
   }
 }
 
@@ -228,11 +226,9 @@ Accepted Media MIME types: video/*, application/octet-stream''')
           part: argResults!['part']);
 
       print(liveBroadcastItem);
-    } on DioError catch (err) {
+    } on DioException catch (err) {
       throw UsageException('API usage error:', err.usage);
     }
-
-    done();
   }
 }
 
@@ -258,11 +254,9 @@ class YoutubeDeleteVideosCommand extends YtHelperCommand {
 
     try {
       await videos.delete(id: argResults!['id']);
-    } on DioError catch (err) {
+    } on DioException catch (err) {
       throw UsageException('API usage error:', err.usage);
     }
-
-    done();
   }
 }
 
@@ -302,11 +296,9 @@ contentDetails, fileDetails, id, liveStreamingDetails, localizations, player, pr
           body: json.decode(argResults!['body']), part: argResults!['part']);
 
       print(videoItem);
-    } on DioError catch (err) {
+    } on DioException catch (err) {
       throw UsageException('API usage error:', err.usage);
     }
-
-    done();
   }
 }
 
@@ -349,7 +341,7 @@ class YoutubeGetRatingVideosCommand extends YtHelperCommand {
           streamId: argResults!['stream-id']);
 
       print(liveBroadcastItem);
-    } on DioError catch (err) {
+    } on DioException catch (err) {
       throw UsageException('API usage error:', err.usage);
     }
   }

@@ -29,7 +29,6 @@ scratch/
 tool/publish_tools.yaml
 
 .pubspec.yaml.bak
-.refreshToken.json
 notes.txt
 
 .pubignore

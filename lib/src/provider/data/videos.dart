@@ -1,16 +1,16 @@
 import 'package:dio/dio.dart';
 import 'package:retrofit/retrofit.dart';
-import 'package:universal_io/io.dart' show File;
+import 'package:universal_io/io.dart';
 import 'package:yt/yt.dart';
 
 part 'videos.g.dart';
 
-///A video resource represents a YouTube video.
+/// A video resource represents a YouTube video.
 @RestApi(baseUrl: 'https://www.googleapis.com')
 abstract class VideoClient {
   factory VideoClient(Dio dio, {String baseUrl}) = _VideoClient;
 
-  ///Returns a list of [VideoItem]s that match the API request parameters.
+  /// Returns a list of [VideoItem]s that match the API request parameters.
   @GET('/youtube/v3/videos')
   Future<VideoListResponse> list(
     @Header('Accept') String accept,
@@ -28,7 +28,7 @@ abstract class VideoClient {
     @Query('videoCategoryId') String? videoCategoryId,
   });
 
-  //////Uploads a video to YouTube.
+  /// Uploads a video to YouTube.
   @POST('/upload/youtube/v3/videos')
   Future<VideoItem> upload(
       @Header('Accept') String accept,
@@ -38,7 +38,7 @@ abstract class VideoClient {
       @Query('uploadType') String uploadType,
       {@Query('notifySubscribers') bool? notifySubscribers});
 
-  ///Retrieve the url used to upload the thumbnail image
+  /// Retrieve the url used to upload the thumbnail image
   @POST('/upload/youtube/v3/videos')
   Future<HttpResponse<dynamic>> location(
     @Header('Content-Type') String contentType,
@@ -50,10 +50,10 @@ abstract class VideoClient {
     @Query('notifySubscribers') bool? notifySubscribers,
     @Query('onBehalfOfContentOwner') String? onBehalfOfContentOwner,
     @Query('onBehalfOfContentOwnerChannel')
-        String? onBehalfOfContentOwnerChannel,
+    String? onBehalfOfContentOwnerChannel,
   });
 
-  ///Updates a [VideoItem]'s metadata.
+  /// Updates a [VideoItem]'s metadata.
   @PUT('/youtube/v3/videos')
   Future<VideoItem> update(
     @Header('Accept') String accept,
@@ -61,10 +61,10 @@ abstract class VideoClient {
     @Body() Map<String, dynamic> body, {
     @Query('onBehalfOfContentOwner') String? onBehalfOfContentOwner,
     @Query('onBehalfOfContentOwnerChannel')
-        String? onBehalfOfContentOwnerChannel,
+    String? onBehalfOfContentOwnerChannel,
   });
 
-  ///Add a like or dislike rating to a [VideoItem] or remove a rating from a [VideoItem].
+  /// Add a like or dislike rating to a [VideoItem] or remove a rating from a [VideoItem].
   @POST('/youtube/v3/videos/rate')
   Future<void> rate(
     @Header('Accept') String accept,
@@ -72,7 +72,7 @@ abstract class VideoClient {
     @Query('rating') String rating,
   );
 
-  ///Retrieves the ratings that the authorized user gave to a list of specified videos.
+  /// Retrieves the ratings that the authorized user gave to a list of specified videos.
   @GET('/youtube/v3/videos/getRating')
   Future<VideoGetRatingResponse> getRating(
     @Header('Accept') String accept,
@@ -80,7 +80,7 @@ abstract class VideoClient {
     @Query('onBehalfOfContentOwner') String? onBehalfOfContentOwner,
   });
 
-  ///Report a video for containing abusive content.
+  /// Report a video for containing abusive content.
   @POST('/youtube/v3/videos/reportAbuse')
   Future<void> reportAbuse(
     @Header('Accept') String accept,
@@ -88,7 +88,7 @@ abstract class VideoClient {
     @Query('onBehalfOfContentOwner') String? onBehalfOfContentOwner,
   });
 
-  ///Deletes a YouTube video.
+  /// Deletes a YouTube video.
   @DELETE('/youtube/v3/videos')
   Future<void> delete(
     @Header('Accept') String accept,

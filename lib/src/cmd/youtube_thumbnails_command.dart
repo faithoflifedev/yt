@@ -73,10 +73,8 @@ class YoutubeSetThumbnailsCommand extends YtHelperCommand {
           videoId: argResults!['video-id'],
           thumbnail: File(argResults!['file']));
       print(thumbnailSetResponse);
-    } on DioError catch (err) {
+    } on DioException catch (err) {
       throw UsageException('API usage error:', err.usage);
     }
-
-    done();
   }
 }

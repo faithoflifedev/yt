@@ -6,8 +6,17 @@ import 'package:universal_io/io.dart';
 import 'package:yt/oauth.dart';
 import 'package:yt/src/util/util.dart';
 
-///Generate a refresh token used to authenticate the command line API requests
+/// Generate a refresh token used to authenticate the command line API requests
 class YoutubeAuthorizeCommand extends Command {
+  static String? get userHome =>
+      Platform.environment['HOME'] ?? Platform.environment['USERPROFILE'];
+
+  static File get defaultCredentialsFile =>
+      File('$userHome/${Util.defaultCredentialsFilePath}');
+
+  static final accessCredentialsFile =
+      File('$userHome/${Util.accessCredentialsFilePath}');
+
   @override
   String get description =>
       'Generate a refresh token used to authenticate the command line API requests';
@@ -26,16 +35,19 @@ class YoutubeAuthorizeCommand extends Command {
 
   @override
   void run() async {
-    final credFile = Util.defaultCredentialsFile;
+    final overwrite = argResults!['overwrite-credentials'];
 
-    final hasCred =
-        !argResults!['overwrite-credentials'] && credFile.existsSync();
+    final hasCred = overwrite && defaultCredentialsFile.existsSync();
 
     final httpClient = HttpClient();
 
     final credentials = <String, dynamic>{};
 
-    ClientId oAuthClientId;
+    ClientId? oAuthClientId;
+
+    if (overwrite && accessCredentialsFile.existsSync()) {
+      accessCredentialsFile.deleteSync();
+    }
 
     if (!hasCred) {
       print('Enter clientId:');
@@ -55,11 +67,9 @@ class YoutubeAuthorizeCommand extends Command {
       oAuthClientId =
           ClientId(credentials['identifier'], credentials['secret']);
 
-      credFile.createSync(recursive: true);
+      defaultCredentialsFile.createSync(recursive: true);
 
-      credFile.writeAsStringSync(json.encode(credentials));
-    } else {
-      oAuthClientId = Util.defaultClientId();
+      defaultCredentialsFile.writeAsStringSync(json.encode(credentials));
     }
 
     final accessControl = OAuthAccessControl(oAuthClientId);

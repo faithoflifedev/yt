@@ -107,11 +107,9 @@ Note that the maximum number of subscribers returned through this API might be l
           order: argResults!['order']);
 
       print(subscriptionsResponse);
-    } on DioError catch (err) {
+    } on DioException catch (err) {
       throw UsageException('API usage error:', err.usage);
     }
-
-    done();
   }
 }
 
@@ -165,11 +163,9 @@ The following list contains the part names that you can include in the parameter
       });
 
       print(subscription);
-    } on DioError catch (err) {
+    } on DioException catch (err) {
       throw UsageException('API usage error:', err.usage);
     }
-
-    done();
   }
 }
 
@@ -195,10 +191,8 @@ class YoutubeDeleteSubscriptionsCommand extends YtHelperCommand {
 
     try {
       await subscriptions.delete(id: argResults!['id']);
-    } on DioError catch (err) {
+    } on DioException catch (err) {
       throw UsageException('API usage error:', err.usage);
     }
-
-    done();
   }
 }

@@ -89,7 +89,7 @@ contentDetails, id, localizations, player, snippet, status''')
           pageToken: argResults?['page-token']);
 
       print(playlistResponse);
-    } on DioError catch (err) {
+    } on DioException catch (err) {
       throw UsageException('API usage error:', err.usage);
     }
   }
@@ -126,11 +126,9 @@ class YoutubeInsertPlaylistsCommand extends YtHelperCommand {
           body: json.decode(argResults!['body']), part: argResults!['part']);
 
       print(playlist);
-    } on DioError catch (err) {
+    } on DioException catch (err) {
       throw UsageException('API usage error:', err.usage);
     }
-
-    done();
   }
 }
 
@@ -170,11 +168,9 @@ contentDetails, id, localizations, player, snippet, status''')
           body: json.decode(argResults!['body']), part: argResults!['part']);
 
       print(playlist);
-    } on DioError catch (err) {
+    } on DioException catch (err) {
       throw UsageException('API usage error:', err.usage);
     }
-
-    done();
   }
 }
 
@@ -200,10 +196,8 @@ class YoutubeDeletePlaylistsCommand extends YtHelperCommand {
 
     try {
       await playlists.delete(id: argResults!['id']);
-    } on DioError catch (err) {
+    } on DioException catch (err) {
       throw UsageException('API usage error:', err.usage);
     }
-
-    done();
   }
 }

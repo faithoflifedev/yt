@@ -2,7 +2,6 @@ import 'package:dio/dio.dart';
 import 'package:googleapis_auth/googleapis_auth.dart';
 
 import 'package:loggy/loggy.dart';
-import 'package:universal_io/io.dart';
 import 'package:yt/oauth.dart';
 
 import 'package:yt/src/util/util.dart';
@@ -10,7 +9,6 @@ import 'package:yt/yt.dart';
 
 class Yt with UiLoggy {
   static final dio = Dio();
-  static final httpClient = HttpClient();
   static final tokenExpiry = DateTime(2000, 0, 0);
   static final _interceptors = <Interceptor>[];
 
@@ -78,10 +76,6 @@ class Yt with UiLoggy {
         LogLevel.error,
         stackTraceLevel: LogLevel.off,
       )}) {
-    oAuthClientId ??= Util.defaultClientId();
-
-    final oauthAccessControl = OAuthAccessControl(oAuthClientId);
-
     final yt = Yt(
         logOptions: logOptions,
         printer: const PrettyPrinter(
@@ -89,6 +83,8 @@ class Yt with UiLoggy {
         ));
 
     addInterceptor(InterceptorsWrapper(onRequest: (options, handler) async {
+      final oauthAccessControl = OAuthAccessControl(oAuthClientId);
+
       await oauthAccessControl.checkAccessToken();
 
       options.headers['Authorization'] = 'Bearer ${oauthAccessControl.token}';
@@ -138,9 +134,6 @@ class Yt with UiLoggy {
         break;
     }
   }
-
-  /// Close the http connection to the API server
-  void close() => Yt.httpClient.close();
 
   void setModules({bool? useToken, String? apiKey}) {
     if (useToken != null && useToken) {

@@ -15,48 +15,30 @@ abstract class SubscriptionsClient {
   /// Returns subscription resources that match the API request criteria.
   @GET('/subscriptions')
   Future<SubscriptionListResponse> list(
-      @Header('Accept')
-          String accept,
-      @Query('part')
-          String parts,
-      {@Query('channelId')
-          String? channelId,
-      @Query('id')
-          String? id,
-      @Query('mine')
-          bool? mine,
-      @Query('myRecentSubscribers')
-          bool? myRecentSubscribers,
-      @Query('mySubscribers')
-          bool? mySubscribers,
-      @Query('forChannelId')
-          String? forChannelId,
-      @Query('maxResults')
-          int? maxResults,
-      @Query('onBehalfOfContentOwner')
-          String? onBehalfOfContentOwner,
+      @Header('Accept') String accept, @Query('part') String parts,
+      {@Query('channelId') String? channelId,
+      @Query('id') String? id,
+      @Query('mine') bool? mine,
+      @Query('myRecentSubscribers') bool? myRecentSubscribers,
+      @Query('mySubscribers') bool? mySubscribers,
+      @Query('forChannelId') String? forChannelId,
+      @Query('maxResults') int? maxResults,
+      @Query('onBehalfOfContentOwner') String? onBehalfOfContentOwner,
       @Query('onBehalfOfContentOwnerChannel')
-          String? onBehalfOfContentOwnerChannel,
-      @Query('order')
-          String? order,
-      @Query('pageToken')
-          String? pageToken});
+      String? onBehalfOfContentOwnerChannel,
+      @Query('order') String? order,
+      @Query('pageToken') String? pageToken});
 
   /// Adds a subscription for the authenticated user's channel.
   @POST('/subscriptions')
   Future<Subscription> insert(
-      @Header('Accept')
-          String accept,
-      @Header('Content-Type')
-          String contentType,
-      @Query('part')
-          String part,
-      @Body()
-          Map<String, dynamic> body,
-      {@Query('onBehalfOfContentOwner')
-          String? onBehalfOfContentOwner,
+      @Header('Accept') String accept,
+      @Header('Content-Type') String contentType,
+      @Query('part') String part,
+      @Body() Map<String, dynamic> body,
+      {@Query('onBehalfOfContentOwner') String? onBehalfOfContentOwner,
       @Query('onBehalfOfContentOwnerChannel')
-          String? onBehalfOfContentOwnerChannel});
+      String? onBehalfOfContentOwnerChannel});
 
   /// Deletes a subscription.
   @DELETE('/subscriptions')

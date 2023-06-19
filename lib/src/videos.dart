@@ -6,7 +6,7 @@ import 'package:yt/yt.dart';
 
 import 'provider/data/videos.dart';
 
-///Returns a list of [VideoItem]s that match the API request parameters.
+/// Returns a list of [VideoItem]s that match the API request parameters.
 class Videos extends YouTubeHelper {
   final Dio dio;
 
@@ -14,7 +14,7 @@ class Videos extends YouTubeHelper {
 
   Videos(this.dio) : _rest = VideoClient(dio);
 
-  ///Uploads a [VideoItem] to YouTube and optionally sets the video's metadata.
+  /// Uploads a [VideoItem] to YouTube and optionally sets the video's metadata.
   Future<VideoListResponse> list({
     String part = 'snippet,status,contentDetails',
     List<String> partList = const [],
@@ -47,7 +47,7 @@ class Videos extends YouTubeHelper {
     );
   }
 
-  ///Uploads a video to YouTube and optionally sets the video's metadata.
+  /// Uploads a video to YouTube and optionally sets the video's metadata.
   Future<VideoItem> insert({
     required Map<String, dynamic> body,
     required File videoFile,
@@ -88,7 +88,7 @@ class Videos extends YouTubeHelper {
     );
   }
 
-  ///Updates a [VideoItem]'s metadata.
+  /// Updates a [VideoItem]'s metadata.
   Future<VideoItem> update({
     required Map<String, dynamic> body,
     String part = 'snippet,status,contentDetails',
@@ -101,7 +101,7 @@ class Videos extends YouTubeHelper {
     );
   }
 
-  ///Add a like or dislike rating to a [VideoItem] or remove a rating from a [VideoItem].
+  /// Add a like or dislike rating to a [VideoItem] or remove a rating from a [VideoItem].
   Future<void> rate({
     required String id,
     required String rating,
@@ -113,7 +113,7 @@ class Videos extends YouTubeHelper {
     );
   }
 
-  ///Retrieves the ratings that the authorized user gave to a list of specified videos.
+  /// Retrieves the ratings that the authorized user gave to a list of specified videos.
   Future<VideoGetRatingResponse> getRating({
     required String id,
     String? onBehalfOfContentOwner,
@@ -125,7 +125,7 @@ class Videos extends YouTubeHelper {
     );
   }
 
-  ///Report a video for containing abusive content.
+  /// Report a video for containing abusive content.
   Future<void> reportAbuse({
     required ReportAbuse body,
     String? onBehalfOfContentOwner,
@@ -137,7 +137,7 @@ class Videos extends YouTubeHelper {
     );
   }
 
-  ///Deletes a YouTube video.
+  /// Deletes a YouTube video.
   Future<void> delete({
     required String id,
     String? onBehalfOfContentOwner,

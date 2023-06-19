@@ -87,4 +87,3 @@ export 'src/util/emoji_formatter.dart';
 export 'src/util/extras.dart';
 export 'src/util/logging_interceptors.dart';
 export 'src/util/phrase_match.dart';
-export 'src/util/time_store.dart';

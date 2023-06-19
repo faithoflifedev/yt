@@ -1,8 +1,6 @@
 import 'dart:convert';
 
-import 'package:googleapis_auth/googleapis_auth.dart';
 import 'package:loggy/loggy.dart';
-import 'package:universal_io/io.dart';
 
 class Util {
   static LogOptions convertToLogOptions(String logLevel) {
@@ -35,12 +33,6 @@ class Util {
 
   static Encoding defaultEncoding() => Encoding.getByName('utf-8')!;
 
-  static ClientId defaultClientId() =>
-      clientIdFromFileSpec(defaultCredentialsFileSpec);
-
-  static ClientId clientIdFromFileSpec(String fileSpec) =>
-      ClientId.fromJson(json.decode(File(fileSpec).readAsStringSync()));
-
   static String base64GCloudString(String data) =>
       Util.base64GCloudList(utf8.encode(data));
 
@@ -65,16 +57,27 @@ class Util {
     return locationUri.queryParameters['upload_id']!;
   }
 
-  static String? get userHome =>
-      Platform.environment['HOME'] ?? Platform.environment['USERPROFILE'];
+  static final String defaultCredentialsFilePath = '.yt/credentials.json';
 
-  static String get defaultCredentialsFileSpec =>
-      '${Util.userHome}/.yt/credentials.json';
+  static final String accessCredentialsFilePath = '.yt/access_credentials.json';
 
-  static File get defaultCredentialsFile => File(defaultCredentialsFileSpec);
+  // static ClientId defaultClientId() =>
+  //     clientIdFromFileSpec(defaultCredentialsFileSpec);
 
-  static File get accessCredentialsFile =>
-      File('${Util.userHome}/.yt/access_credentials.json');
+  // static ClientId clientIdFromFileSpec(String fileSpec) =>
+
+  //     ClientId.fromJson(json.decode(File(fileSpec).readAsStringSync()));
+
+  // static String? get userHome =>
+  //     Platform.environment['HOME'] ?? Platform.environment['USERPROFILE'];
+
+  // static String get defaultCredentialsFileSpec =>
+  //     '${Util.userHome}/.yt/credentials.json';
+
+  // static String get defaultCredentialsKey => 'credentials';
+
+  // static File get accessCredentialsFile =>
+  //     File('${Util.userHome}/.yt/access_credentials.json');
 }
 
 enum ListPosition { start, end }

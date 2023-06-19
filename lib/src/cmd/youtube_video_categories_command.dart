@@ -51,10 +51,8 @@ class YoutubeListVideoCategoriesCommand extends YtHelperCommand {
           hl: argResults?['hl']);
 
       print(videoCategoryListResponse);
-    } on DioError catch (err) {
+    } on DioException catch (err) {
       throw UsageException('API usage error:', err.usage);
     }
-
-    done();
   }
 }

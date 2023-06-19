@@ -1,3 +1,8 @@
+## 2.2.1
+
+* remove dart:io dependency from library to enable web platform support
+* api doc updates
+
 ## 2.2.0-dev.2
 
 * remove dart:io dependency from library to enable web platform support

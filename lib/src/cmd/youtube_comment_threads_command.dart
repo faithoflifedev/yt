@@ -108,10 +108,8 @@ Note: This parameter is not supported for use in conjunction with the id paramet
       );
 
       print(commentThreadListResponse);
-    } on DioError catch (err) {
+    } on DioException catch (err) {
       throw UsageException('API usage error:', err.usage);
     }
-
-    done();
   }
 }

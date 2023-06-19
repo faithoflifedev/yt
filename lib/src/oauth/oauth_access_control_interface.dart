@@ -7,7 +7,7 @@ import 'oauth_access_control.dart'
 abstract class OAuthAccessControl {
   String get token;
 
-  factory OAuthAccessControl(ClientId clientId) =>
+  factory OAuthAccessControl(ClientId? clientId) =>
       getOAuthAccessControl(clientId);
 
   Future<void> init();
@@ -16,7 +16,7 @@ abstract class OAuthAccessControl {
 }
 
 abstract class BaseOAuthAccessControl implements OAuthAccessControl {
-  final ClientId clientId;
+  ClientId? clientId;
 
   bool initialized = false;
 

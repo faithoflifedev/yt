@@ -287,10 +287,8 @@ Your request can also use the Boolean NOT (-) and OR (|) operators to exclude vi
       );
 
       print(searchListResponse);
-    } on DioError catch (err) {
+    } on DioException catch (err) {
       throw UsageException('API usage error:', err.usage);
     }
-
-    done();
   }
 }

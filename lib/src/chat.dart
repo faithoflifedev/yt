@@ -1,14 +1,15 @@
 import 'package:csv/csv.dart';
 import 'package:dio/dio.dart';
+import 'package:fling_pickle/fling_pickle.dart';
 import 'package:universal_io/io.dart';
 import 'package:yt/src/help.dart';
 import 'package:yt/yt.dart';
 
 import 'provider/live/chat.dart';
 
-///A liveChatMessage resource represents a chat message in a YouTube live chat. The resource can contain details about several types of messages, including a newly posted text message or fan funding event.
+/// A liveChatMessage resource represents a chat message in a YouTube live chat. The resource can contain details about several types of messages, including a newly posted text message or fan funding event.
 ///
-///The live chat feature is enabled by default for live broadcasts and is available while the live event is active. (After the event ends, live chat is no longer available for that event.)
+/// The live chat feature is enabled by default for live broadcasts and is available while the live event is active. (After the event ends, live chat is no longer available for that event.)
 class Chat extends YouTubeHelper {
   final Dio dio;
 
@@ -189,4 +190,40 @@ class Chat extends YouTubeHelper {
           });
         });
   }
+}
+
+class TimeStore implements Pickleable {
+  DateTime timeStamp = DateTime.now();
+
+  bool reset;
+
+  String instanceName;
+
+  TimeStore(
+      {required this.timeStamp,
+      this.reset = false,
+      this.instanceName = 'instance'});
+
+  factory TimeStore.fromMillis(int millis, {bool reset = false}) => TimeStore(
+      timeStamp: DateTime.fromMillisecondsSinceEpoch(millis), reset: reset);
+
+  factory TimeStore.fromStorage(String type, {bool reset = false}) =>
+      File('.$type-chat.ts').existsSync()
+          ? TimeStore.fromMillis(
+              BinaryPickler()
+                  .readSync(File('.$type-chat.ts').readAsBytesSync())
+                  .readInt('dateTime'),
+              reset: reset)
+          : TimeStore(timeStamp: DateTime(2000));
+
+  factory TimeStore.fromPickle(final Pickle pickle) =>
+      TimeStore.fromMillis(pickle.readInt('dateTime'));
+
+  @override
+  Pickle asPickle() => PickleBuilder()
+      .withInt('dateTime', timeStamp.millisecondsSinceEpoch)
+      .build();
+
+  void persist() => File('.$instanceName.ts')
+      .writeAsBytesSync(BinaryPickler().writeSync(asPickle()));
 }

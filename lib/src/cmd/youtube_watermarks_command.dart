@@ -87,11 +87,9 @@ class YoutubeSetWatermarksCommand extends YtHelperCommand {
       );
 
       print(success);
-    } on DioError catch (err) {
+    } on DioException catch (err) {
       throw UsageException('API usage error:', err.usage);
     }
-
-    done();
   }
 }
 
@@ -119,10 +117,8 @@ class YoutubeUnsetWatermarksCommand extends YtHelperCommand {
       final success =
           await watermarks.unset(channelId: argResults!['channel-id']);
       print(success);
-    } on DioError catch (err) {
+    } on DioException catch (err) {
       throw UsageException('API usage error:', err.usage);
     }
-
-    done();
   }
 }
