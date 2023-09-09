@@ -1,5 +1,5 @@
 name: yt
-version: 2.2.3
+version: 2.2.4
 description: Native Dart interface to multiple YouTube REST APIs including the Data API.
 repository: https://github.com/faithoflifedev/yt
 homepage: https://github.com/faithoflifedev/yt

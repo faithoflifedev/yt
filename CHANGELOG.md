@@ -1,11 +1,6 @@
-## 2.2.3
+## 2.2.4
 
 * dependency bump
-
-## 2.2.1
-
-* remove dart:io dependency from library to enable web platform support
-* api doc updates
 
 ## 2.2.1
 
