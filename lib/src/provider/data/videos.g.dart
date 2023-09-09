@@ -22,19 +22,19 @@ class _VideoClient implements VideoClient {
 
   @override
   Future<VideoListResponse> list(
-    accept,
-    parts, {
-    chart,
-    id,
-    myRating,
-    hl,
-    maxHeight,
-    maxResults,
-    maxWidth,
-    onBehalfOfContentOwner,
-    pageToken,
-    regionCode,
-    videoCategoryId,
+    String accept,
+    String parts, {
+    String? chart,
+    String? id,
+    String? myRating,
+    bool? hl,
+    int? maxHeight,
+    int? maxResults,
+    int? maxWidth,
+    String? onBehalfOfContentOwner,
+    String? pageToken,
+    String? regionCode,
+    String? videoCategoryId,
   }) async {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{
@@ -67,19 +67,23 @@ class _VideoClient implements VideoClient {
               queryParameters: queryParameters,
               data: _data,
             )
-            .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
+            .copyWith(
+                baseUrl: _combineBaseUrls(
+              _dio.options.baseUrl,
+              baseUrl,
+            ))));
     final value = VideoListResponse.fromJson(_result.data!);
     return value;
   }
 
   @override
   Future<VideoItem> upload(
-    accept,
-    uploadId,
-    parts,
-    videoFile,
-    uploadType, {
-    notifySubscribers,
+    String accept,
+    String uploadId,
+    String parts,
+    File videoFile,
+    String uploadType, {
+    bool? notifySubscribers,
   }) async {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{
@@ -91,7 +95,8 @@ class _VideoClient implements VideoClient {
     queryParameters.removeWhere((k, v) => v == null);
     final _headers = <String, dynamic>{r'Accept': accept};
     _headers.removeWhere((k, v) => v == null);
-    final _data = videoFile;
+    final _data =
+        Stream.fromIterable(videoFile.readAsBytesSync().map((i) => [i]));
     final _result = await _dio
         .fetch<Map<String, dynamic>>(_setStreamType<VideoItem>(Options(
       method: 'POST',
@@ -104,22 +109,26 @@ class _VideoClient implements VideoClient {
               queryParameters: queryParameters,
               data: _data,
             )
-            .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
+            .copyWith(
+                baseUrl: _combineBaseUrls(
+              _dio.options.baseUrl,
+              baseUrl,
+            ))));
     final value = VideoItem.fromJson(_result.data!);
     return value;
   }
 
   @override
   Future<HttpResponse<dynamic>> location(
-    contentType,
-    xUploadContentLength,
-    xUploadContentType,
-    body,
-    parts,
-    uploadType, {
-    notifySubscribers,
-    onBehalfOfContentOwner,
-    onBehalfOfContentOwnerChannel,
+    String contentType,
+    int xUploadContentLength,
+    String xUploadContentType,
+    Map<String, dynamic> body,
+    String parts,
+    String uploadType, {
+    bool? notifySubscribers,
+    String? onBehalfOfContentOwner,
+    String? onBehalfOfContentOwnerChannel,
   }) async {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{
@@ -151,7 +160,11 @@ class _VideoClient implements VideoClient {
               queryParameters: queryParameters,
               data: _data,
             )
-            .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
+            .copyWith(
+                baseUrl: _combineBaseUrls(
+              _dio.options.baseUrl,
+              baseUrl,
+            ))));
     final value = _result.data;
     final httpResponse = HttpResponse(value, _result);
     return httpResponse;
@@ -159,11 +172,11 @@ class _VideoClient implements VideoClient {
 
   @override
   Future<VideoItem> update(
-    accept,
-    parts,
-    body, {
-    onBehalfOfContentOwner,
-    onBehalfOfContentOwnerChannel,
+    String accept,
+    String parts,
+    Map<String, dynamic> body, {
+    String? onBehalfOfContentOwner,
+    String? onBehalfOfContentOwnerChannel,
   }) async {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{
@@ -188,16 +201,20 @@ class _VideoClient implements VideoClient {
               queryParameters: queryParameters,
               data: _data,
             )
-            .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
+            .copyWith(
+                baseUrl: _combineBaseUrls(
+              _dio.options.baseUrl,
+              baseUrl,
+            ))));
     final value = VideoItem.fromJson(_result.data!);
     return value;
   }
 
   @override
   Future<void> rate(
-    accept,
-    id,
-    rating,
+    String accept,
+    String id,
+    String rating,
   ) async {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{
@@ -218,14 +235,18 @@ class _VideoClient implements VideoClient {
           queryParameters: queryParameters,
           data: _data,
         )
-        .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
+        .copyWith(
+            baseUrl: _combineBaseUrls(
+          _dio.options.baseUrl,
+          baseUrl,
+        ))));
   }
 
   @override
   Future<VideoGetRatingResponse> getRating(
-    accept,
-    id, {
-    onBehalfOfContentOwner,
+    String accept,
+    String id, {
+    String? onBehalfOfContentOwner,
   }) async {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{
@@ -248,16 +269,20 @@ class _VideoClient implements VideoClient {
               queryParameters: queryParameters,
               data: _data,
             )
-            .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
+            .copyWith(
+                baseUrl: _combineBaseUrls(
+              _dio.options.baseUrl,
+              baseUrl,
+            ))));
     final value = VideoGetRatingResponse.fromJson(_result.data!);
     return value;
   }
 
   @override
   Future<void> reportAbuse(
-    accept,
-    body, {
-    onBehalfOfContentOwner,
+    String accept,
+    ReportAbuse body, {
+    String? onBehalfOfContentOwner,
   }) async {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{
@@ -279,14 +304,18 @@ class _VideoClient implements VideoClient {
           queryParameters: queryParameters,
           data: _data,
         )
-        .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
+        .copyWith(
+            baseUrl: _combineBaseUrls(
+          _dio.options.baseUrl,
+          baseUrl,
+        ))));
   }
 
   @override
   Future<void> delete(
-    accept,
-    id, {
-    onBehalfOfContentOwner,
+    String accept,
+    String id, {
+    String? onBehalfOfContentOwner,
   }) async {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{
@@ -308,7 +337,11 @@ class _VideoClient implements VideoClient {
           queryParameters: queryParameters,
           data: _data,
         )
-        .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
+        .copyWith(
+            baseUrl: _combineBaseUrls(
+          _dio.options.baseUrl,
+          baseUrl,
+        ))));
   }
 
   RequestOptions _setStreamType<T>(RequestOptions requestOptions) {
@@ -322,5 +355,22 @@ class _VideoClient implements VideoClient {
       }
     }
     return requestOptions;
+  }
+
+  String _combineBaseUrls(
+    String dioBaseUrl,
+    String? baseUrl,
+  ) {
+    if (baseUrl == null || baseUrl.trim().isEmpty) {
+      return dioBaseUrl;
+    }
+
+    final url = Uri.parse(baseUrl);
+
+    if (url.isAbsolute) {
+      return url.toString();
+    }
+
+    return Uri.parse(dioBaseUrl).resolveUri(url).toString();
   }
 }

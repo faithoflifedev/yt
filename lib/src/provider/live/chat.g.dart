@@ -22,13 +22,13 @@ class _ChatClient implements ChatClient {
 
   @override
   Future<LiveChatMessageListResponse> list(
-    accept,
-    parts,
-    liveChatId, {
-    hl,
-    maxResults,
-    pageToken,
-    profileImageSize,
+    String accept,
+    String parts,
+    String liveChatId, {
+    String? hl,
+    int? maxResults,
+    String? pageToken,
+    int? profileImageSize,
   }) async {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{
@@ -55,17 +55,21 @@ class _ChatClient implements ChatClient {
               queryParameters: queryParameters,
               data: _data,
             )
-            .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
+            .copyWith(
+                baseUrl: _combineBaseUrls(
+              _dio.options.baseUrl,
+              baseUrl,
+            ))));
     final value = LiveChatMessageListResponse.fromJson(_result.data!);
     return value;
   }
 
   @override
   Future<LiveChatMessage> insert(
-    accept,
-    contentType,
-    part,
-    data,
+    String accept,
+    String contentType,
+    String part,
+    Map<String, dynamic> data,
   ) async {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{r'part': part};
@@ -89,15 +93,19 @@ class _ChatClient implements ChatClient {
               queryParameters: queryParameters,
               data: _data,
             )
-            .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
+            .copyWith(
+                baseUrl: _combineBaseUrls(
+              _dio.options.baseUrl,
+              baseUrl,
+            ))));
     final value = LiveChatMessage.fromJson(_result.data!);
     return value;
   }
 
   @override
   Future<void> delete(
-    accept,
-    id,
+    String accept,
+    String id,
   ) async {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{r'id': id};
@@ -115,7 +123,11 @@ class _ChatClient implements ChatClient {
           queryParameters: queryParameters,
           data: _data,
         )
-        .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
+        .copyWith(
+            baseUrl: _combineBaseUrls(
+          _dio.options.baseUrl,
+          baseUrl,
+        ))));
   }
 
   RequestOptions _setStreamType<T>(RequestOptions requestOptions) {
@@ -129,5 +141,22 @@ class _ChatClient implements ChatClient {
       }
     }
     return requestOptions;
+  }
+
+  String _combineBaseUrls(
+    String dioBaseUrl,
+    String? baseUrl,
+  ) {
+    if (baseUrl == null || baseUrl.trim().isEmpty) {
+      return dioBaseUrl;
+    }
+
+    final url = Uri.parse(baseUrl);
+
+    if (url.isAbsolute) {
+      return url.toString();
+    }
+
+    return Uri.parse(dioBaseUrl).resolveUri(url).toString();
   }
 }

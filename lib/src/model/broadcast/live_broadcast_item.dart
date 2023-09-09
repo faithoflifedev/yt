@@ -10,22 +10,22 @@ import 'status.dart';
 
 part 'live_broadcast_item.g.dart';
 
-///[LiveBroadcastItem] Resource
+/// [LiveBroadcastItem] Resource
 @JsonSerializable(explicitToJson: true)
-class LiveBroadcastItem extends ResponseMetadata with Comparable {
-  ///The ID that YouTube assigns to uniquely identify the broadcast.
+class LiveBroadcastItem extends ResponseMetadata implements Comparable {
+  /// The ID that YouTube assigns to uniquely identify the broadcast.
   final String id;
 
-  ///The [Snippet] object contains basic details about the event, including its [Snippet.title], [Snippet.description], [Snippet.scheduledStartTime], and [Snippet.scheduledEndTime].
+  /// The [Snippet] object contains basic details about the event, including its [Snippet.title], [Snippet.description], [Snippet.scheduledStartTime], and [Snippet.scheduledEndTime].
   final Snippet? snippet;
 
-  ///The [Status] object contains information about the event's status.
+  /// The [Status] object contains information about the event's status.
   final Status? status;
 
-  ///The [ContentDetails] object contains information about the event's video content, such as whether the content can be shown in an embedded video player or if it will be archived and therefore available for viewing after the event has concluded.
+  /// The [ContentDetails] object contains information about the event's video content, such as whether the content can be shown in an embedded video player or if it will be archived and therefore available for viewing after the event has concluded.
   final ContentDetails? contentDetails;
 
-  ///The [Statistics] object contains statistics related to a live broadcast. The values for these statistics can change during the broadcast and can only be retrieved while the broadcast is live.
+  /// The [Statistics] object contains statistics related to a live broadcast. The values for these statistics can change during the broadcast and can only be retrieved while the broadcast is live.
   final Statistics? statistics;
 
   LiveBroadcastItem(

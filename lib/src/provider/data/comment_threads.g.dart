@@ -22,19 +22,19 @@ class _CommentThreadsClient implements CommentThreadsClient {
 
   @override
   Future<CommentThreadListResponse> list(
-    apiKey,
-    accept,
-    parts, {
-    allThreadsRelatedToChannelId,
-    channelId,
-    id,
-    videoId,
-    maxResults,
-    moderationStatus,
-    order,
-    pageToken,
-    searchTerms,
-    textFormat,
+    String? apiKey,
+    String accept,
+    String parts, {
+    String? allThreadsRelatedToChannelId,
+    String? channelId,
+    String? id,
+    String? videoId,
+    int? maxResults,
+    String? moderationStatus,
+    String? order,
+    String? pageToken,
+    String? searchTerms,
+    String? textFormat,
   }) async {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{
@@ -67,7 +67,11 @@ class _CommentThreadsClient implements CommentThreadsClient {
               queryParameters: queryParameters,
               data: _data,
             )
-            .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
+            .copyWith(
+                baseUrl: _combineBaseUrls(
+              _dio.options.baseUrl,
+              baseUrl,
+            ))));
     final value = CommentThreadListResponse.fromJson(_result.data!);
     return value;
   }
@@ -83,5 +87,22 @@ class _CommentThreadsClient implements CommentThreadsClient {
       }
     }
     return requestOptions;
+  }
+
+  String _combineBaseUrls(
+    String dioBaseUrl,
+    String? baseUrl,
+  ) {
+    if (baseUrl == null || baseUrl.trim().isEmpty) {
+      return dioBaseUrl;
+    }
+
+    final url = Uri.parse(baseUrl);
+
+    if (url.isAbsolute) {
+      return url.toString();
+    }
+
+    return Uri.parse(dioBaseUrl).resolveUri(url).toString();
   }
 }

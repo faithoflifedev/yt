@@ -22,14 +22,14 @@ class _StreamClient implements StreamClient {
 
   @override
   Future<LiveStreamListResponse> list(
-    accept,
-    parts, {
-    id,
-    mine,
-    maxResults,
-    onBehalfOfContentOwner,
-    onBehalfOfContentOwnerChannel,
-    pageToken,
+    String accept,
+    String parts, {
+    String? id,
+    bool? mine,
+    int? maxResults,
+    String? onBehalfOfContentOwner,
+    String? onBehalfOfContentOwnerChannel,
+    String? pageToken,
   }) async {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{
@@ -57,19 +57,23 @@ class _StreamClient implements StreamClient {
               queryParameters: queryParameters,
               data: _data,
             )
-            .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
+            .copyWith(
+                baseUrl: _combineBaseUrls(
+              _dio.options.baseUrl,
+              baseUrl,
+            ))));
     final value = LiveStreamListResponse.fromJson(_result.data!);
     return value;
   }
 
   @override
   Future<LiveStreamItem> insert(
-    accept,
-    contentType,
-    parts,
-    body, {
-    onBehalfOfContentOwner,
-    onBehalfOfContentOwnerChannel,
+    String accept,
+    String contentType,
+    String parts,
+    Map<String, dynamic> body, {
+    String? onBehalfOfContentOwner,
+    String? onBehalfOfContentOwnerChannel,
   }) async {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{
@@ -98,19 +102,23 @@ class _StreamClient implements StreamClient {
               queryParameters: queryParameters,
               data: _data,
             )
-            .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
+            .copyWith(
+                baseUrl: _combineBaseUrls(
+              _dio.options.baseUrl,
+              baseUrl,
+            ))));
     final value = LiveStreamItem.fromJson(_result.data!);
     return value;
   }
 
   @override
   Future<LiveStreamItem> update(
-    accept,
-    contentType,
-    parts,
-    body, {
-    onBehalfOfContentOwner,
-    onBehalfOfContentOwnerChannel,
+    String accept,
+    String contentType,
+    String parts,
+    Map<String, dynamic> body, {
+    String? onBehalfOfContentOwner,
+    String? onBehalfOfContentOwnerChannel,
   }) async {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{
@@ -139,17 +147,21 @@ class _StreamClient implements StreamClient {
               queryParameters: queryParameters,
               data: _data,
             )
-            .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
+            .copyWith(
+                baseUrl: _combineBaseUrls(
+              _dio.options.baseUrl,
+              baseUrl,
+            ))));
     final value = LiveStreamItem.fromJson(_result.data!);
     return value;
   }
 
   @override
   Future<void> delete(
-    accept,
-    id, {
-    onBehalfOfContentOwner,
-    onBehalfOfContentOwnerChannel,
+    String accept,
+    String id, {
+    String? onBehalfOfContentOwner,
+    String? onBehalfOfContentOwnerChannel,
   }) async {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{
@@ -172,7 +184,11 @@ class _StreamClient implements StreamClient {
           queryParameters: queryParameters,
           data: _data,
         )
-        .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
+        .copyWith(
+            baseUrl: _combineBaseUrls(
+          _dio.options.baseUrl,
+          baseUrl,
+        ))));
   }
 
   RequestOptions _setStreamType<T>(RequestOptions requestOptions) {
@@ -186,5 +202,22 @@ class _StreamClient implements StreamClient {
       }
     }
     return requestOptions;
+  }
+
+  String _combineBaseUrls(
+    String dioBaseUrl,
+    String? baseUrl,
+  ) {
+    if (baseUrl == null || baseUrl.trim().isEmpty) {
+      return dioBaseUrl;
+    }
+
+    final url = Uri.parse(baseUrl);
+
+    if (url.isAbsolute) {
+      return url.toString();
+    }
+
+    return Uri.parse(dioBaseUrl).resolveUri(url).toString();
   }
 }

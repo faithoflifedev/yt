@@ -22,9 +22,9 @@ class _ThumbnailsClient implements ThumbnailsClient {
 
   @override
   Future<HttpResponse<dynamic>> location(
-    accept,
-    videoId,
-    uploadType,
+    String accept,
+    String videoId,
+    String uploadType,
   ) async {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{
@@ -46,7 +46,11 @@ class _ThumbnailsClient implements ThumbnailsClient {
               queryParameters: queryParameters,
               data: _data,
             )
-            .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
+            .copyWith(
+                baseUrl: _combineBaseUrls(
+              _dio.options.baseUrl,
+              baseUrl,
+            ))));
     final value = _result.data;
     final httpResponse = HttpResponse(value, _result);
     return httpResponse;
@@ -54,11 +58,11 @@ class _ThumbnailsClient implements ThumbnailsClient {
 
   @override
   Future<ThumbnailsSetResponse> upload(
-    contentType,
-    videoId,
-    uploadId,
-    image,
-    uploadType,
+    String contentType,
+    String videoId,
+    String uploadId,
+    File image,
+    String uploadType,
   ) async {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{
@@ -82,7 +86,11 @@ class _ThumbnailsClient implements ThumbnailsClient {
               queryParameters: queryParameters,
               data: _data,
             )
-            .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
+            .copyWith(
+                baseUrl: _combineBaseUrls(
+              _dio.options.baseUrl,
+              baseUrl,
+            ))));
     final value = ThumbnailsSetResponse.fromJson(_result.data!);
     return value;
   }
@@ -98,5 +106,22 @@ class _ThumbnailsClient implements ThumbnailsClient {
       }
     }
     return requestOptions;
+  }
+
+  String _combineBaseUrls(
+    String dioBaseUrl,
+    String? baseUrl,
+  ) {
+    if (baseUrl == null || baseUrl.trim().isEmpty) {
+      return dioBaseUrl;
+    }
+
+    final url = Uri.parse(baseUrl);
+
+    if (url.isAbsolute) {
+      return url.toString();
+    }
+
+    return Uri.parse(dioBaseUrl).resolveUri(url).toString();
   }
 }

@@ -22,10 +22,10 @@ class _WatermarksClient implements WatermarksClient {
 
   @override
   Future<HttpResponse<dynamic>> location(
-    authorization,
-    accept,
-    channelId,
-    uploadType,
+    String authorization,
+    String accept,
+    String channelId,
+    String uploadType,
   ) async {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{
@@ -50,7 +50,11 @@ class _WatermarksClient implements WatermarksClient {
               queryParameters: queryParameters,
               data: _data,
             )
-            .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
+            .copyWith(
+                baseUrl: _combineBaseUrls(
+              _dio.options.baseUrl,
+              baseUrl,
+            ))));
     final value = _result.data;
     final httpResponse = HttpResponse(value, _result);
     return httpResponse;
@@ -58,9 +62,9 @@ class _WatermarksClient implements WatermarksClient {
 
   @override
   Future<HttpResponse<dynamic>> set(
-    contentType,
-    channelId,
-    watermarksResource,
+    String contentType,
+    String channelId,
+    WatermarksResource watermarksResource,
   ) async {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{r'channelId': channelId};
@@ -81,14 +85,18 @@ class _WatermarksClient implements WatermarksClient {
               queryParameters: queryParameters,
               data: _data,
             )
-            .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
+            .copyWith(
+                baseUrl: _combineBaseUrls(
+              _dio.options.baseUrl,
+              baseUrl,
+            ))));
     final value = _result.data;
     final httpResponse = HttpResponse(value, _result);
     return httpResponse;
   }
 
   @override
-  Future<HttpResponse<dynamic>> unset(channelId) async {
+  Future<HttpResponse<dynamic>> unset(String channelId) async {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{r'channelId': channelId};
     final _headers = <String, dynamic>{};
@@ -105,7 +113,11 @@ class _WatermarksClient implements WatermarksClient {
               queryParameters: queryParameters,
               data: _data,
             )
-            .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
+            .copyWith(
+                baseUrl: _combineBaseUrls(
+              _dio.options.baseUrl,
+              baseUrl,
+            ))));
     final value = _result.data;
     final httpResponse = HttpResponse(value, _result);
     return httpResponse;
@@ -122,5 +134,22 @@ class _WatermarksClient implements WatermarksClient {
       }
     }
     return requestOptions;
+  }
+
+  String _combineBaseUrls(
+    String dioBaseUrl,
+    String? baseUrl,
+  ) {
+    if (baseUrl == null || baseUrl.trim().isEmpty) {
+      return dioBaseUrl;
+    }
+
+    final url = Uri.parse(baseUrl);
+
+    if (url.isAbsolute) {
+      return url.toString();
+    }
+
+    return Uri.parse(dioBaseUrl).resolveUri(url).toString();
   }
 }

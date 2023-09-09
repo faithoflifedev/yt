@@ -22,38 +22,38 @@ class _SearchClient implements SearchClient {
 
   @override
   Future<SearchListResponse> list(
-    apiKey,
-    accept,
-    parts, {
-    channelId,
-    channelType,
-    eventType,
-    forContentOwner,
-    forDeveloper,
-    forMine,
-    location,
-    locationRadius,
-    maxResults,
-    onBehalfOfContentOwner,
-    order,
-    pageToken,
-    publishedAfter,
-    publishedBefore,
-    q,
-    regionCode,
-    relevanceLanguage,
-    safeSearch,
-    topicId,
-    type,
-    videoCaption,
-    videoCategoryId,
-    videoDefinition,
-    videoDimension,
-    videoDuration,
-    videoEmbeddable,
-    videoLicense,
-    videoSyndicated,
-    videoType,
+    String? apiKey,
+    String accept,
+    String? parts, {
+    String? channelId,
+    String? channelType,
+    String? eventType,
+    bool? forContentOwner,
+    bool? forDeveloper,
+    bool? forMine,
+    String? location,
+    String? locationRadius,
+    int? maxResults,
+    String? onBehalfOfContentOwner,
+    String? order,
+    String? pageToken,
+    String? publishedAfter,
+    String? publishedBefore,
+    String? q,
+    String? regionCode,
+    String? relevanceLanguage,
+    String? safeSearch,
+    String? topicId,
+    String? type,
+    String? videoCaption,
+    String? videoCategoryId,
+    String? videoDefinition,
+    String? videoDimension,
+    String? videoDuration,
+    String? videoEmbeddable,
+    String? videoLicense,
+    String? videoSyndicated,
+    String? videoType,
   }) async {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{
@@ -105,7 +105,11 @@ class _SearchClient implements SearchClient {
               queryParameters: queryParameters,
               data: _data,
             )
-            .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
+            .copyWith(
+                baseUrl: _combineBaseUrls(
+              _dio.options.baseUrl,
+              baseUrl,
+            ))));
     final value = SearchListResponse.fromJson(_result.data!);
     return value;
   }
@@ -121,5 +125,22 @@ class _SearchClient implements SearchClient {
       }
     }
     return requestOptions;
+  }
+
+  String _combineBaseUrls(
+    String dioBaseUrl,
+    String? baseUrl,
+  ) {
+    if (baseUrl == null || baseUrl.trim().isEmpty) {
+      return dioBaseUrl;
+    }
+
+    final url = Uri.parse(baseUrl);
+
+    if (url.isAbsolute) {
+      return url.toString();
+    }
+
+    return Uri.parse(dioBaseUrl).resolveUri(url).toString();
   }
 }

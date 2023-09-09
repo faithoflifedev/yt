@@ -22,19 +22,19 @@ class _SubscriptionsClient implements SubscriptionsClient {
 
   @override
   Future<SubscriptionListResponse> list(
-    accept,
-    parts, {
-    channelId,
-    id,
-    mine,
-    myRecentSubscribers,
-    mySubscribers,
-    forChannelId,
-    maxResults,
-    onBehalfOfContentOwner,
-    onBehalfOfContentOwnerChannel,
-    order,
-    pageToken,
+    String accept,
+    String parts, {
+    String? channelId,
+    String? id,
+    bool? mine,
+    bool? myRecentSubscribers,
+    bool? mySubscribers,
+    String? forChannelId,
+    int? maxResults,
+    String? onBehalfOfContentOwner,
+    String? onBehalfOfContentOwnerChannel,
+    String? order,
+    String? pageToken,
   }) async {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{
@@ -67,19 +67,23 @@ class _SubscriptionsClient implements SubscriptionsClient {
               queryParameters: queryParameters,
               data: _data,
             )
-            .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
+            .copyWith(
+                baseUrl: _combineBaseUrls(
+              _dio.options.baseUrl,
+              baseUrl,
+            ))));
     final value = SubscriptionListResponse.fromJson(_result.data!);
     return value;
   }
 
   @override
   Future<Subscription> insert(
-    accept,
-    contentType,
-    part,
-    body, {
-    onBehalfOfContentOwner,
-    onBehalfOfContentOwnerChannel,
+    String accept,
+    String contentType,
+    String part,
+    Map<String, dynamic> body, {
+    String? onBehalfOfContentOwner,
+    String? onBehalfOfContentOwnerChannel,
   }) async {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{
@@ -108,16 +112,20 @@ class _SubscriptionsClient implements SubscriptionsClient {
               queryParameters: queryParameters,
               data: _data,
             )
-            .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
+            .copyWith(
+                baseUrl: _combineBaseUrls(
+              _dio.options.baseUrl,
+              baseUrl,
+            ))));
     final value = Subscription.fromJson(_result.data!);
     return value;
   }
 
   @override
   Future<void> delete(
-    accept,
-    id, {
-    onBehalfOfContentOwner,
+    String accept,
+    String id, {
+    String? onBehalfOfContentOwner,
   }) async {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{
@@ -139,7 +147,11 @@ class _SubscriptionsClient implements SubscriptionsClient {
           queryParameters: queryParameters,
           data: _data,
         )
-        .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
+        .copyWith(
+            baseUrl: _combineBaseUrls(
+          _dio.options.baseUrl,
+          baseUrl,
+        ))));
   }
 
   RequestOptions _setStreamType<T>(RequestOptions requestOptions) {
@@ -153,5 +165,22 @@ class _SubscriptionsClient implements SubscriptionsClient {
       }
     }
     return requestOptions;
+  }
+
+  String _combineBaseUrls(
+    String dioBaseUrl,
+    String? baseUrl,
+  ) {
+    if (baseUrl == null || baseUrl.trim().isEmpty) {
+      return dioBaseUrl;
+    }
+
+    final url = Uri.parse(baseUrl);
+
+    if (url.isAbsolute) {
+      return url.toString();
+    }
+
+    return Uri.parse(dioBaseUrl).resolveUri(url).toString();
   }
 }

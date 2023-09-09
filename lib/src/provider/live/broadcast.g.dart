@@ -22,16 +22,16 @@ class _BroadcastClient implements BroadcastClient {
 
   @override
   Future<LiveBroadcastResponse> list(
-    accept,
-    parts, {
-    broadcastStatus,
-    broadcastType,
-    id,
-    maxResults,
-    mine,
-    onBehalfOfContentOwner,
-    onBehalfOfContentOwnerChannel,
-    pageToken,
+    String accept,
+    String parts, {
+    String? broadcastStatus,
+    String? broadcastType,
+    String? id,
+    int? maxResults,
+    bool? mine,
+    String? onBehalfOfContentOwner,
+    String? onBehalfOfContentOwnerChannel,
+    String? pageToken,
   }) async {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{
@@ -61,19 +61,23 @@ class _BroadcastClient implements BroadcastClient {
               queryParameters: queryParameters,
               data: _data,
             )
-            .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
+            .copyWith(
+                baseUrl: _combineBaseUrls(
+              _dio.options.baseUrl,
+              baseUrl,
+            ))));
     final value = LiveBroadcastResponse.fromJson(_result.data!);
     return value;
   }
 
   @override
   Future<LiveBroadcastItem> insert(
-    accept,
-    contentType,
-    part,
-    body, {
-    onBehalfOfContentOwner,
-    onBehalfOfContentOwnerChannel,
+    String accept,
+    String contentType,
+    String part,
+    Map<String, dynamic> body, {
+    String? onBehalfOfContentOwner,
+    String? onBehalfOfContentOwnerChannel,
   }) async {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{
@@ -102,19 +106,23 @@ class _BroadcastClient implements BroadcastClient {
               queryParameters: queryParameters,
               data: _data,
             )
-            .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
+            .copyWith(
+                baseUrl: _combineBaseUrls(
+              _dio.options.baseUrl,
+              baseUrl,
+            ))));
     final value = LiveBroadcastItem.fromJson(_result.data!);
     return value;
   }
 
   @override
   Future<LiveBroadcastItem> update(
-    accept,
-    contentType,
-    parts,
-    body, {
-    onBehalfOfContentOwner,
-    onBehalfOfContentOwnerChannel,
+    String accept,
+    String contentType,
+    String parts,
+    Map<String, dynamic> body, {
+    String? onBehalfOfContentOwner,
+    String? onBehalfOfContentOwnerChannel,
   }) async {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{
@@ -143,19 +151,23 @@ class _BroadcastClient implements BroadcastClient {
               queryParameters: queryParameters,
               data: _data,
             )
-            .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
+            .copyWith(
+                baseUrl: _combineBaseUrls(
+              _dio.options.baseUrl,
+              baseUrl,
+            ))));
     final value = LiveBroadcastItem.fromJson(_result.data!);
     return value;
   }
 
   @override
   Future<LiveBroadcastItem> bind(
-    accept,
-    id,
-    streamId,
-    parts, {
-    onBehalfOfContentOwner,
-    onBehalfOfContentOwnerChannel,
+    String accept,
+    String id,
+    String? streamId,
+    String parts, {
+    String? onBehalfOfContentOwner,
+    String? onBehalfOfContentOwnerChannel,
   }) async {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{
@@ -181,19 +193,23 @@ class _BroadcastClient implements BroadcastClient {
               queryParameters: queryParameters,
               data: _data,
             )
-            .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
+            .copyWith(
+                baseUrl: _combineBaseUrls(
+              _dio.options.baseUrl,
+              baseUrl,
+            ))));
     final value = LiveBroadcastItem.fromJson(_result.data!);
     return value;
   }
 
   @override
   Future<LiveBroadcastItem> transition(
-    accept,
-    id,
-    parts, {
-    broadcastStatus,
-    onBehalfOfContentOwner,
-    onBehalfOfContentOwnerChannel,
+    String accept,
+    String id,
+    String parts, {
+    String? broadcastStatus,
+    String? onBehalfOfContentOwner,
+    String? onBehalfOfContentOwnerChannel,
   }) async {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{
@@ -219,17 +235,21 @@ class _BroadcastClient implements BroadcastClient {
               queryParameters: queryParameters,
               data: _data,
             )
-            .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
+            .copyWith(
+                baseUrl: _combineBaseUrls(
+              _dio.options.baseUrl,
+              baseUrl,
+            ))));
     final value = LiveBroadcastItem.fromJson(_result.data!);
     return value;
   }
 
   @override
   Future<void> delete(
-    accept,
-    id, {
-    onBehalfOfContentOwner,
-    onBehalfOfContentOwnerChannel,
+    String accept,
+    String id, {
+    String? onBehalfOfContentOwner,
+    String? onBehalfOfContentOwnerChannel,
   }) async {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{
@@ -252,7 +272,11 @@ class _BroadcastClient implements BroadcastClient {
           queryParameters: queryParameters,
           data: _data,
         )
-        .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
+        .copyWith(
+            baseUrl: _combineBaseUrls(
+          _dio.options.baseUrl,
+          baseUrl,
+        ))));
   }
 
   RequestOptions _setStreamType<T>(RequestOptions requestOptions) {
@@ -266,5 +290,22 @@ class _BroadcastClient implements BroadcastClient {
       }
     }
     return requestOptions;
+  }
+
+  String _combineBaseUrls(
+    String dioBaseUrl,
+    String? baseUrl,
+  ) {
+    if (baseUrl == null || baseUrl.trim().isEmpty) {
+      return dioBaseUrl;
+    }
+
+    final url = Uri.parse(baseUrl);
+
+    if (url.isAbsolute) {
+      return url.toString();
+    }
+
+    return Uri.parse(dioBaseUrl).resolveUri(url).toString();
   }
 }

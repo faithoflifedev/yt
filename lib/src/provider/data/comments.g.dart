@@ -22,14 +22,14 @@ class _CommentsClient implements CommentsClient {
 
   @override
   Future<CommentListResponse> list(
-    apiKey,
-    accept,
-    parts, {
-    id,
-    parentId,
-    maxResults,
-    pageToken,
-    textFormat,
+    String? apiKey,
+    String accept,
+    String parts, {
+    String? id,
+    String? parentId,
+    int? maxResults,
+    String? pageToken,
+    String? textFormat,
   }) async {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{
@@ -57,7 +57,11 @@ class _CommentsClient implements CommentsClient {
               queryParameters: queryParameters,
               data: _data,
             )
-            .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
+            .copyWith(
+                baseUrl: _combineBaseUrls(
+              _dio.options.baseUrl,
+              baseUrl,
+            ))));
     final value = CommentListResponse.fromJson(_result.data!);
     return value;
   }
@@ -73,5 +77,22 @@ class _CommentsClient implements CommentsClient {
       }
     }
     return requestOptions;
+  }
+
+  String _combineBaseUrls(
+    String dioBaseUrl,
+    String? baseUrl,
+  ) {
+    if (baseUrl == null || baseUrl.trim().isEmpty) {
+      return dioBaseUrl;
+    }
+
+    final url = Uri.parse(baseUrl);
+
+    if (url.isAbsolute) {
+      return url.toString();
+    }
+
+    return Uri.parse(dioBaseUrl).resolveUri(url).toString();
   }
 }

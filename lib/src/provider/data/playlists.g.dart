@@ -22,17 +22,17 @@ class _PlaylistClient implements PlaylistClient {
 
   @override
   Future<PlaylistResponse> list(
-    apiKey,
-    accept,
-    parts, {
-    channelId,
-    id,
-    mine,
-    hl,
-    maxResults,
-    onBehalfOfContentOwner,
-    onBehalfOfContentOwnerChannel,
-    pageToken,
+    String? apiKey,
+    String accept,
+    String parts, {
+    String? channelId,
+    String? id,
+    bool? mine,
+    int? hl,
+    int? maxResults,
+    String? onBehalfOfContentOwner,
+    String? onBehalfOfContentOwnerChannel,
+    String? pageToken,
   }) async {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{
@@ -63,19 +63,23 @@ class _PlaylistClient implements PlaylistClient {
               queryParameters: queryParameters,
               data: _data,
             )
-            .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
+            .copyWith(
+                baseUrl: _combineBaseUrls(
+              _dio.options.baseUrl,
+              baseUrl,
+            ))));
     final value = PlaylistResponse.fromJson(_result.data!);
     return value;
   }
 
   @override
   Future<Playlist> insert(
-    accept,
-    contentType,
-    part,
-    body, {
-    onBehalfOfContentOwner,
-    onBehalfOfContentOwnerChannel,
+    String accept,
+    String contentType,
+    String part,
+    Map<String, dynamic> body, {
+    String? onBehalfOfContentOwner,
+    String? onBehalfOfContentOwnerChannel,
   }) async {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{
@@ -104,18 +108,22 @@ class _PlaylistClient implements PlaylistClient {
               queryParameters: queryParameters,
               data: _data,
             )
-            .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
+            .copyWith(
+                baseUrl: _combineBaseUrls(
+              _dio.options.baseUrl,
+              baseUrl,
+            ))));
     final value = Playlist.fromJson(_result.data!);
     return value;
   }
 
   @override
   Future<Playlist> update(
-    accept,
-    contentType,
-    parts,
-    body, {
-    onBehalfOfContentOwner,
+    String accept,
+    String contentType,
+    String parts,
+    Map<String, dynamic> body, {
+    String? onBehalfOfContentOwner,
   }) async {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{
@@ -143,16 +151,20 @@ class _PlaylistClient implements PlaylistClient {
               queryParameters: queryParameters,
               data: _data,
             )
-            .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
+            .copyWith(
+                baseUrl: _combineBaseUrls(
+              _dio.options.baseUrl,
+              baseUrl,
+            ))));
     final value = Playlist.fromJson(_result.data!);
     return value;
   }
 
   @override
   Future<void> delete(
-    accept,
-    id, {
-    onBehalfOfContentOwner,
+    String accept,
+    String id, {
+    String? onBehalfOfContentOwner,
   }) async {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{
@@ -174,7 +186,11 @@ class _PlaylistClient implements PlaylistClient {
           queryParameters: queryParameters,
           data: _data,
         )
-        .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
+        .copyWith(
+            baseUrl: _combineBaseUrls(
+          _dio.options.baseUrl,
+          baseUrl,
+        ))));
   }
 
   RequestOptions _setStreamType<T>(RequestOptions requestOptions) {
@@ -188,5 +204,22 @@ class _PlaylistClient implements PlaylistClient {
       }
     }
     return requestOptions;
+  }
+
+  String _combineBaseUrls(
+    String dioBaseUrl,
+    String? baseUrl,
+  ) {
+    if (baseUrl == null || baseUrl.trim().isEmpty) {
+      return dioBaseUrl;
+    }
+
+    final url = Uri.parse(baseUrl);
+
+    if (url.isAbsolute) {
+      return url.toString();
+    }
+
+    return Uri.parse(dioBaseUrl).resolveUri(url).toString();
   }
 }

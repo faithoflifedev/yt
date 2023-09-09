@@ -22,18 +22,18 @@ class _ChannelClient implements ChannelClient {
 
   @override
   Future<ChannelResponse> list(
-    apiKey,
-    accept,
-    parts, {
-    categoryId,
-    forUsername,
-    id,
-    managedByMe,
-    mine,
-    hl,
-    maxResults,
-    onBehalfOfContentOwner,
-    pageToken,
+    String? apiKey,
+    String accept,
+    String parts, {
+    String? categoryId,
+    String? forUsername,
+    String? id,
+    bool? managedByMe,
+    bool? mine,
+    String? hl,
+    int? maxResults,
+    String? onBehalfOfContentOwner,
+    String? pageToken,
   }) async {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{
@@ -65,18 +65,22 @@ class _ChannelClient implements ChannelClient {
               queryParameters: queryParameters,
               data: _data,
             )
-            .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
+            .copyWith(
+                baseUrl: _combineBaseUrls(
+              _dio.options.baseUrl,
+              baseUrl,
+            ))));
     final value = ChannelResponse.fromJson(_result.data!);
     return value;
   }
 
   @override
   Future<ChannelItem> update(
-    accept,
-    contentType,
-    parts,
-    body, {
-    onBehalfOfContentOwner,
+    String accept,
+    String contentType,
+    String parts,
+    Map<String, dynamic> body, {
+    String? onBehalfOfContentOwner,
   }) async {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{
@@ -104,7 +108,11 @@ class _ChannelClient implements ChannelClient {
               queryParameters: queryParameters,
               data: _data,
             )
-            .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
+            .copyWith(
+                baseUrl: _combineBaseUrls(
+              _dio.options.baseUrl,
+              baseUrl,
+            ))));
     final value = ChannelItem.fromJson(_result.data!);
     return value;
   }
@@ -120,5 +128,22 @@ class _ChannelClient implements ChannelClient {
       }
     }
     return requestOptions;
+  }
+
+  String _combineBaseUrls(
+    String dioBaseUrl,
+    String? baseUrl,
+  ) {
+    if (baseUrl == null || baseUrl.trim().isEmpty) {
+      return dioBaseUrl;
+    }
+
+    final url = Uri.parse(baseUrl);
+
+    if (url.isAbsolute) {
+      return url.toString();
+    }
+
+    return Uri.parse(dioBaseUrl).resolveUri(url).toString();
   }
 }
