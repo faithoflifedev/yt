@@ -1,3 +1,7 @@
+## 2.2.5+1
+
+* dependency bump
+
 ## 2.2.5
 
 * dependency bump

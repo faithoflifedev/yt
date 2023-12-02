@@ -1,8 +1,13 @@
+import 'package:cli_pkg/cli_pkg.dart' as pkg;
 import 'package:grinder/grinder.dart';
 import 'package:publish_tools/publish_tools.dart';
 
 main(args) async {
   PublishTools.addAllTasks();
+
+  pkg.executables.value = {'yt': 'bin/yt.dart'};
+
+  pkg.addNpmTasks();
 
   grind(args);
 }

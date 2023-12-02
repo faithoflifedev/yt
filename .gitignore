@@ -24,11 +24,12 @@ doc/api/
 *.js.map
 
 bin/config.yaml
+build/
 sh/
 scratch/
 tool/publish_tools.yaml
 
-.pubspec.yaml.bak
+package.json
 notes.txt
 
 .pubignore
