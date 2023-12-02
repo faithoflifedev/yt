@@ -1,3 +1,7 @@
+## 2.2.5+2
+
+* fix pubspec
+
 ## 2.2.5+1
 
 * dependency bump
