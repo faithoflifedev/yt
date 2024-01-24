@@ -1,3 +1,7 @@
+## 2.2.5+3
+
+* better error handling&#x2F;messages
+
 ## 2.2.5+2
 
 * fix pubspec

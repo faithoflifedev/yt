@@ -14,6 +14,9 @@ class Yt with UiLoggy {
 
   static RefreshTokenGenerator? refreshTokenGenerator;
 
+  static final String _moduleUnavailableMessage =
+      'This feature is not available when using API Key authentication';
+
   Broadcast? _broadcast;
   Channels? _channels;
   Chat? _chat;
@@ -29,20 +32,47 @@ class Yt with UiLoggy {
   VideoCategories? _videoCategories;
   Watermarks? _watermarks;
 
-  Broadcast get broadcast => _broadcast!;
+  Broadcast get broadcast => _broadcast == null
+      ? throw Exception(_moduleUnavailableMessage)
+      : _broadcast!;
+
   Channels get channels => _channels!;
-  Chat get chat => _chat!;
+
+  Chat get chat =>
+      _chat == null ? throw Exception(_moduleUnavailableMessage) : _chat!;
+
   Comments get comments => _comments!;
+
   CommentThreads get commentThreads => _commentThreads!;
-  LiveStream get liveStream => _liveStream!;
+
+  LiveStream get liveStream => _liveStream == null
+      ? throw Exception(_moduleUnavailableMessage)
+      : _liveStream!;
+
   Playlists get playlists => _playlists!;
+
   PlaylistItems get playlistItems => _playlistItems!;
+
   Search get search => _search!;
-  Subscriptions get subscriptions => _subscriptions!;
-  Thumbnails get thumbnails => _thumbnails!;
-  Videos get videos => _videos!;
-  VideoCategories get videoCategories => _videoCategories!;
-  Watermarks get watermarks => _watermarks!;
+
+  Subscriptions get subscriptions => _subscriptions == null
+      ? throw Exception(_moduleUnavailableMessage)
+      : _subscriptions!;
+
+  Thumbnails get thumbnails => _thumbnails == null
+      ? throw Exception(_moduleUnavailableMessage)
+      : _thumbnails!;
+
+  Videos get videos =>
+      _videos == null ? throw Exception(_moduleUnavailableMessage) : _videos!;
+
+  VideoCategories get videoCategories => _videoCategories == null
+      ? throw Exception(_moduleUnavailableMessage)
+      : _videoCategories!;
+
+  Watermarks get watermarks => _watermarks == null
+      ? throw Exception(_moduleUnavailableMessage)
+      : _watermarks!;
 
   Yt(
       {LogOptions logOptions = const LogOptions(
@@ -92,7 +122,7 @@ class Yt with UiLoggy {
       return handler.next(options);
     }));
 
-    yt.setModules(useToken: true);
+    yt.setModules(useTokenAuth: true);
 
     dio.interceptors.addAll(_interceptors);
 
@@ -114,7 +144,7 @@ class Yt with UiLoggy {
       return handler.next(options);
     }));
 
-    yt.setModules(useToken: true);
+    yt.setModules(useTokenAuth: true);
 
     dio.interceptors.addAll(_interceptors);
 
@@ -135,8 +165,8 @@ class Yt with UiLoggy {
     }
   }
 
-  void setModules({bool? useToken, String? apiKey}) {
-    if (useToken != null && useToken) {
+  void setModules({bool? useTokenAuth, String? apiKey}) {
+    if (useTokenAuth != null && useTokenAuth) {
       /// A liveBroadcast resource represents an event that will be streamed, via live video, on YouTube.
       _broadcast = Broadcast(dio);
 
