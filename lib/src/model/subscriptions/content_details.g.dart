@@ -8,8 +8,8 @@ part of 'content_details.dart';
 
 ContentDetails _$ContentDetailsFromJson(Map<String, dynamic> json) =>
     ContentDetails(
-      totalItemCount: json['totalItemCount'] as int,
-      newItemCount: json['newItemCount'] as int,
+      totalItemCount: (json['totalItemCount'] as num).toInt(),
+      newItemCount: (json['newItemCount'] as num).toInt(),
       activityType: json['activityType'] as String,
     );
 

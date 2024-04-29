@@ -27,7 +27,7 @@ class _WatermarksClient implements WatermarksClient {
     String channelId,
     String uploadType,
   ) async {
-    const _extra = <String, dynamic>{};
+    final _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{
       r'videoId': channelId,
       r'uploadType': uploadType,
@@ -37,7 +37,7 @@ class _WatermarksClient implements WatermarksClient {
       r'Accept': accept,
     };
     _headers.removeWhere((k, v) => v == null);
-    final Map<String, dynamic>? _data = null;
+    const Map<String, dynamic>? _data = null;
     final _result =
         await _dio.fetch(_setStreamType<HttpResponse<dynamic>>(Options(
       method: 'POST',
@@ -66,7 +66,7 @@ class _WatermarksClient implements WatermarksClient {
     String channelId,
     WatermarksResource watermarksResource,
   ) async {
-    const _extra = <String, dynamic>{};
+    final _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{r'channelId': channelId};
     final _headers = <String, dynamic>{r'Content-Type': contentType};
     _headers.removeWhere((k, v) => v == null);
@@ -97,10 +97,10 @@ class _WatermarksClient implements WatermarksClient {
 
   @override
   Future<HttpResponse<dynamic>> unset(String channelId) async {
-    const _extra = <String, dynamic>{};
+    final _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{r'channelId': channelId};
     final _headers = <String, dynamic>{};
-    final Map<String, dynamic>? _data = null;
+    const Map<String, dynamic>? _data = null;
     final _result =
         await _dio.fetch(_setStreamType<HttpResponse<dynamic>>(Options(
       method: 'POST',

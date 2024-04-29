@@ -12,7 +12,7 @@ Snippet _$SnippetFromJson(Map<String, dynamic> json) => Snippet(
       topLevelComment:
           Comment.fromJson(json['topLevelComment'] as Map<String, dynamic>),
       canReply: json['canReply'] as bool,
-      totalReplyCount: json['totalReplyCount'] as int,
+      totalReplyCount: (json['totalReplyCount'] as num).toInt(),
       isPublic: json['isPublic'] as bool,
       replies: json['replies'] == null
           ? null

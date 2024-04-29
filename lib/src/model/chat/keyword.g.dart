@@ -10,7 +10,7 @@ Keyword _$KeywordFromJson(Map<String, dynamic> json) => Keyword(
       patterns: (json['patterns'] as List<dynamic>)
           .map((e) => (e as List<dynamic>).map((e) => e as String).toList())
           .toList(),
-      score: json['score'] as int,
+      score: (json['score'] as num).toInt(),
     );
 
 Map<String, dynamic> _$KeywordToJson(Keyword instance) => <String, dynamic>{

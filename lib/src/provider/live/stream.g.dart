@@ -31,7 +31,7 @@ class _StreamClient implements StreamClient {
     String? onBehalfOfContentOwnerChannel,
     String? pageToken,
   }) async {
-    const _extra = <String, dynamic>{};
+    final _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{
       r'part': parts,
       r'id': id,
@@ -44,7 +44,7 @@ class _StreamClient implements StreamClient {
     queryParameters.removeWhere((k, v) => v == null);
     final _headers = <String, dynamic>{r'Accept': accept};
     _headers.removeWhere((k, v) => v == null);
-    final Map<String, dynamic>? _data = null;
+    const Map<String, dynamic>? _data = null;
     final _result = await _dio.fetch<Map<String, dynamic>>(
         _setStreamType<LiveStreamListResponse>(Options(
       method: 'GET',
@@ -75,7 +75,7 @@ class _StreamClient implements StreamClient {
     String? onBehalfOfContentOwner,
     String? onBehalfOfContentOwnerChannel,
   }) async {
-    const _extra = <String, dynamic>{};
+    final _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{
       r'part': parts,
       r'onBehalfOfContentOwner': onBehalfOfContentOwner,
@@ -120,7 +120,7 @@ class _StreamClient implements StreamClient {
     String? onBehalfOfContentOwner,
     String? onBehalfOfContentOwnerChannel,
   }) async {
-    const _extra = <String, dynamic>{};
+    final _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{
       r'part': parts,
       r'onBehalfOfContentOwner': onBehalfOfContentOwner,
@@ -163,7 +163,7 @@ class _StreamClient implements StreamClient {
     String? onBehalfOfContentOwner,
     String? onBehalfOfContentOwnerChannel,
   }) async {
-    const _extra = <String, dynamic>{};
+    final _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{
       r'id': id,
       r'onBehalfOfContentOwner': onBehalfOfContentOwner,
@@ -172,7 +172,7 @@ class _StreamClient implements StreamClient {
     queryParameters.removeWhere((k, v) => v == null);
     final _headers = <String, dynamic>{r'Accept': accept};
     _headers.removeWhere((k, v) => v == null);
-    final Map<String, dynamic>? _data = null;
+    const Map<String, dynamic>? _data = null;
     await _dio.fetch<void>(_setStreamType<void>(Options(
       method: 'DELETE',
       headers: _headers,

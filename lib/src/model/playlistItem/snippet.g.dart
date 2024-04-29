@@ -17,7 +17,7 @@ Snippet _$SnippetFromJson(Map<String, dynamic> json) => Snippet(
       videoOwnerChannelTitle: json['videoOwnerChannelTitle'] as String,
       videoOwnerChannelId: json['videoOwnerChannelId'] as String,
       playlistId: json['playlistId'] as String,
-      position: json['position'] as int,
+      position: (json['position'] as num).toInt(),
       resourceId:
           ResourceId.fromJson(json['resourceId'] as Map<String, dynamic>),
     );

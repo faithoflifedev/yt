@@ -11,7 +11,7 @@ UserBannedDetails _$UserBannedDetailsFromJson(Map<String, dynamic> json) =>
       bannedUserDetails: BannedUserDetails.fromJson(
           json['bannedUserDetails'] as Map<String, dynamic>),
       banType: json['banType'] as String?,
-      banDurationSeconds: json['banDurationSeconds'] as int?,
+      banDurationSeconds: (json['banDurationSeconds'] as num?)?.toInt(),
     );
 
 Map<String, dynamic> _$UserBannedDetailsToJson(UserBannedDetails instance) =>

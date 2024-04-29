@@ -7,7 +7,7 @@ part of 'statistics.dart';
 // **************************************************************************
 
 Statistics _$StatisticsFromJson(Map<String, dynamic> json) => Statistics(
-      totalChatCount: json['totalChatCount'] as int?,
+      totalChatCount: (json['totalChatCount'] as num?)?.toInt(),
     );
 
 Map<String, dynamic> _$StatisticsToJson(Statistics instance) =>

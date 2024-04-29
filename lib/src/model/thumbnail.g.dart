@@ -8,8 +8,8 @@ part of 'thumbnail.dart';
 
 Thumbnail _$ThumbnailFromJson(Map<String, dynamic> json) => Thumbnail(
       url: json['url'] as String,
-      width: json['width'] as int?,
-      height: json['height'] as int?,
+      width: (json['width'] as num?)?.toInt(),
+      height: (json['height'] as num?)?.toInt(),
     );
 
 Map<String, dynamic> _$ThumbnailToJson(Thumbnail instance) => <String, dynamic>{

@@ -19,7 +19,7 @@ Snippet _$SnippetFromJson(Map<String, dynamic> json) => Snippet(
       parentId: json['parentId'] as String?,
       canRate: json['canRate'] as bool,
       viewerRating: json['viewerRating'] as String,
-      likeCount: json['likeCount'] as int,
+      likeCount: (json['likeCount'] as num).toInt(),
       moderationStatus: json['moderationStatus'] as String?,
       publishedAt: DateTime.parse(json['publishedAt'] as String),
       updatedAt: DateTime.parse(json['updatedAt'] as String),

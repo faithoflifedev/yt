@@ -33,7 +33,7 @@ class _BroadcastClient implements BroadcastClient {
     String? onBehalfOfContentOwnerChannel,
     String? pageToken,
   }) async {
-    const _extra = <String, dynamic>{};
+    final _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{
       r'part': parts,
       r'broadcastStatus': broadcastStatus,
@@ -48,7 +48,7 @@ class _BroadcastClient implements BroadcastClient {
     queryParameters.removeWhere((k, v) => v == null);
     final _headers = <String, dynamic>{r'Accept': accept};
     _headers.removeWhere((k, v) => v == null);
-    final Map<String, dynamic>? _data = null;
+    const Map<String, dynamic>? _data = null;
     final _result = await _dio.fetch<Map<String, dynamic>>(
         _setStreamType<LiveBroadcastResponse>(Options(
       method: 'GET',
@@ -79,7 +79,7 @@ class _BroadcastClient implements BroadcastClient {
     String? onBehalfOfContentOwner,
     String? onBehalfOfContentOwnerChannel,
   }) async {
-    const _extra = <String, dynamic>{};
+    final _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{
       r'part': part,
       r'onBehalfOfContentOwner': onBehalfOfContentOwner,
@@ -124,7 +124,7 @@ class _BroadcastClient implements BroadcastClient {
     String? onBehalfOfContentOwner,
     String? onBehalfOfContentOwnerChannel,
   }) async {
-    const _extra = <String, dynamic>{};
+    final _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{
       r'part': parts,
       r'onBehalfOfContentOwner': onBehalfOfContentOwner,
@@ -169,7 +169,7 @@ class _BroadcastClient implements BroadcastClient {
     String? onBehalfOfContentOwner,
     String? onBehalfOfContentOwnerChannel,
   }) async {
-    const _extra = <String, dynamic>{};
+    final _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{
       r'id': id,
       r'streamId': streamId,
@@ -180,7 +180,7 @@ class _BroadcastClient implements BroadcastClient {
     queryParameters.removeWhere((k, v) => v == null);
     final _headers = <String, dynamic>{r'Accept': accept};
     _headers.removeWhere((k, v) => v == null);
-    final Map<String, dynamic>? _data = null;
+    const Map<String, dynamic>? _data = null;
     final _result = await _dio
         .fetch<Map<String, dynamic>>(_setStreamType<LiveBroadcastItem>(Options(
       method: 'POST',
@@ -211,7 +211,7 @@ class _BroadcastClient implements BroadcastClient {
     String? onBehalfOfContentOwner,
     String? onBehalfOfContentOwnerChannel,
   }) async {
-    const _extra = <String, dynamic>{};
+    final _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{
       r'id': id,
       r'part': parts,
@@ -222,7 +222,7 @@ class _BroadcastClient implements BroadcastClient {
     queryParameters.removeWhere((k, v) => v == null);
     final _headers = <String, dynamic>{r'Accept': accept};
     _headers.removeWhere((k, v) => v == null);
-    final Map<String, dynamic>? _data = null;
+    const Map<String, dynamic>? _data = null;
     final _result = await _dio
         .fetch<Map<String, dynamic>>(_setStreamType<LiveBroadcastItem>(Options(
       method: 'POST',
@@ -251,7 +251,7 @@ class _BroadcastClient implements BroadcastClient {
     String? onBehalfOfContentOwner,
     String? onBehalfOfContentOwnerChannel,
   }) async {
-    const _extra = <String, dynamic>{};
+    final _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{
       r'id': id,
       r'onBehalfOfContentOwner': onBehalfOfContentOwner,
@@ -260,7 +260,7 @@ class _BroadcastClient implements BroadcastClient {
     queryParameters.removeWhere((k, v) => v == null);
     final _headers = <String, dynamic>{r'Accept': accept};
     _headers.removeWhere((k, v) => v == null);
-    final Map<String, dynamic>? _data = null;
+    const Map<String, dynamic>? _data = null;
     await _dio.fetch<void>(_setStreamType<void>(Options(
       method: 'DELETE',
       headers: _headers,

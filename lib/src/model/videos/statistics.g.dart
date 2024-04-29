@@ -7,11 +7,11 @@ part of 'statistics.dart';
 // **************************************************************************
 
 Statistics _$StatisticsFromJson(Map<String, dynamic> json) => Statistics(
-      viewCount: json['viewCount'] as int?,
-      likeCount: json['likeCount'] as int?,
-      dislikeCount: json['dislikeCount'] as int?,
-      favoriteCount: json['favoriteCount'] as int?,
-      commentCount: json['commentCount'] as int?,
+      viewCount: (json['viewCount'] as num?)?.toInt(),
+      likeCount: (json['likeCount'] as num?)?.toInt(),
+      dislikeCount: (json['dislikeCount'] as num?)?.toInt(),
+      favoriteCount: (json['favoriteCount'] as num?)?.toInt(),
+      commentCount: (json['commentCount'] as num?)?.toInt(),
     );
 
 Map<String, dynamic> _$StatisticsToJson(Statistics instance) =>

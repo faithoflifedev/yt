@@ -12,7 +12,7 @@ LiveChatMessageListResponse _$LiveChatMessageListResponseFromJson(
       kind: json['kind'] as String,
       etag: json['etag'] as String,
       nextPageToken: json['nextPageToken'] as String?,
-      pollingIntervalMillis: json['pollingIntervalMillis'] as int?,
+      pollingIntervalMillis: (json['pollingIntervalMillis'] as num?)?.toInt(),
       offlineAt: json['offlineAt'] == null
           ? null
           : DateTime.parse(json['offlineAt'] as String),

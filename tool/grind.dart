@@ -1,13 +1,24 @@
-import 'package:cli_pkg/cli_pkg.dart' as pkg;
-import 'package:grinder/grinder.dart';
+// import 'dart:convert';
+
+// import 'package:cli_pkg/cli_pkg.dart' as pkg;
 import 'package:publish_tools/publish_tools.dart';
+// import 'package:universal_io/io.dart';
 
 main(args) async {
   PublishTools.addAllTasks();
 
-  pkg.executables.value = {'yt': 'bin/yt.dart'};
+  // pkg.humanName.value = "yt";
 
-  pkg.addNpmTasks();
+  // pkg.executables.value = {'yt': 'bin/yt.dart'};
+
+  // pkg.githubUser.fn = () => Platform.environment["GH_USER"];
+  // pkg.githubPassword.fn = () => Platform.environment["GH_TOKEN"];
+
+  // pkg.npmPackageJson.fn = () =>
+  //     json.decode(File('package/package.json').readAsStringSync())
+  //         as Map<String, dynamic>;
+
+  // pkg.addAllTasks();
 
   grind(args);
 }

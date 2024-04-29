@@ -11,8 +11,8 @@ environment:
   sdk: ">=2.19.2 <4.0.0"
 
 dependencies:
-  desktop_webview_auth: ^0.0.13
-  google_sign_in: ^6.1.5
+  desktop_webview_auth: ^0.0.15
+  google_sign_in: ^6.2.1
   loggy: ^2.0.3
   yt:
     path: ../../../yt
@@ -20,7 +20,7 @@ dependencies:
   flutter:
     sdk: flutter
 
-  cupertino_icons: ^1.0.2
+  # cupertino_icons: ^1.0.2
 
 dev_dependencies:
   lints: ^2.0.1

@@ -30,7 +30,7 @@ class _ChatClient implements ChatClient {
     String? pageToken,
     int? profileImageSize,
   }) async {
-    const _extra = <String, dynamic>{};
+    final _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{
       r'part': parts,
       r'liveChatId': liveChatId,
@@ -42,7 +42,7 @@ class _ChatClient implements ChatClient {
     queryParameters.removeWhere((k, v) => v == null);
     final _headers = <String, dynamic>{r'Accept': accept};
     _headers.removeWhere((k, v) => v == null);
-    final Map<String, dynamic>? _data = null;
+    const Map<String, dynamic>? _data = null;
     final _result = await _dio.fetch<Map<String, dynamic>>(
         _setStreamType<LiveChatMessageListResponse>(Options(
       method: 'GET',
@@ -71,7 +71,7 @@ class _ChatClient implements ChatClient {
     String part,
     Map<String, dynamic> data,
   ) async {
-    const _extra = <String, dynamic>{};
+    final _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{r'part': part};
     final _headers = <String, dynamic>{
       r'Accept': accept,
@@ -107,11 +107,11 @@ class _ChatClient implements ChatClient {
     String accept,
     String id,
   ) async {
-    const _extra = <String, dynamic>{};
+    final _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{r'id': id};
     final _headers = <String, dynamic>{r'Accept': accept};
     _headers.removeWhere((k, v) => v == null);
-    final Map<String, dynamic>? _data = null;
+    const Map<String, dynamic>? _data = null;
     await _dio.fetch<void>(_setStreamType<void>(Options(
       method: 'DELETE',
       headers: _headers,

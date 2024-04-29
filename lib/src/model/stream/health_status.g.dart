@@ -8,7 +8,7 @@ part of 'health_status.dart';
 
 HealthStatus _$HealthStatusFromJson(Map<String, dynamic> json) => HealthStatus(
       status: json['status'] as String,
-      lastUpdateTimeSeconds: json['lastUpdateTimeSeconds'] as int?,
+      lastUpdateTimeSeconds: (json['lastUpdateTimeSeconds'] as num?)?.toInt(),
       configurationIssues: (json['configurationIssues'] as List<dynamic>?)
           ?.map((e) => ConfigurationIssue.fromJson(e as Map<String, dynamic>))
           .toList(),

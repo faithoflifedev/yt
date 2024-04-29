@@ -36,7 +36,7 @@ class _SubscriptionsClient implements SubscriptionsClient {
     String? order,
     String? pageToken,
   }) async {
-    const _extra = <String, dynamic>{};
+    final _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{
       r'part': parts,
       r'channelId': channelId,
@@ -54,7 +54,7 @@ class _SubscriptionsClient implements SubscriptionsClient {
     queryParameters.removeWhere((k, v) => v == null);
     final _headers = <String, dynamic>{r'Accept': accept};
     _headers.removeWhere((k, v) => v == null);
-    final Map<String, dynamic>? _data = null;
+    const Map<String, dynamic>? _data = null;
     final _result = await _dio.fetch<Map<String, dynamic>>(
         _setStreamType<SubscriptionListResponse>(Options(
       method: 'GET',
@@ -85,7 +85,7 @@ class _SubscriptionsClient implements SubscriptionsClient {
     String? onBehalfOfContentOwner,
     String? onBehalfOfContentOwnerChannel,
   }) async {
-    const _extra = <String, dynamic>{};
+    final _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{
       r'part': part,
       r'onBehalfOfContentOwner': onBehalfOfContentOwner,
@@ -127,7 +127,7 @@ class _SubscriptionsClient implements SubscriptionsClient {
     String id, {
     String? onBehalfOfContentOwner,
   }) async {
-    const _extra = <String, dynamic>{};
+    final _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{
       r'id': id,
       r'onBehalfOfContentOwner': onBehalfOfContentOwner,
@@ -135,7 +135,7 @@ class _SubscriptionsClient implements SubscriptionsClient {
     queryParameters.removeWhere((k, v) => v == null);
     final _headers = <String, dynamic>{r'Accept': accept};
     _headers.removeWhere((k, v) => v == null);
-    final Map<String, dynamic>? _data = null;
+    const Map<String, dynamic>? _data = null;
     await _dio.fetch<void>(_setStreamType<void>(Options(
       method: 'DELETE',
       headers: _headers,

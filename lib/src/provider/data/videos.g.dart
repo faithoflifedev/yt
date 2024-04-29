@@ -36,7 +36,7 @@ class _VideoClient implements VideoClient {
     String? regionCode,
     String? videoCategoryId,
   }) async {
-    const _extra = <String, dynamic>{};
+    final _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{
       r'part': parts,
       r'chart': chart,
@@ -54,7 +54,7 @@ class _VideoClient implements VideoClient {
     queryParameters.removeWhere((k, v) => v == null);
     final _headers = <String, dynamic>{r'Accept': accept};
     _headers.removeWhere((k, v) => v == null);
-    final Map<String, dynamic>? _data = null;
+    const Map<String, dynamic>? _data = null;
     final _result = await _dio
         .fetch<Map<String, dynamic>>(_setStreamType<VideoListResponse>(Options(
       method: 'GET',
@@ -85,7 +85,7 @@ class _VideoClient implements VideoClient {
     String uploadType, {
     bool? notifySubscribers,
   }) async {
-    const _extra = <String, dynamic>{};
+    final _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{
       r'upload_id': uploadId,
       r'part': parts,
@@ -130,7 +130,7 @@ class _VideoClient implements VideoClient {
     String? onBehalfOfContentOwner,
     String? onBehalfOfContentOwnerChannel,
   }) async {
-    const _extra = <String, dynamic>{};
+    final _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{
       r'part': parts,
       r'uploadType': uploadType,
@@ -178,7 +178,7 @@ class _VideoClient implements VideoClient {
     String? onBehalfOfContentOwner,
     String? onBehalfOfContentOwnerChannel,
   }) async {
-    const _extra = <String, dynamic>{};
+    final _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{
       r'part': parts,
       r'onBehalfOfContentOwner': onBehalfOfContentOwner,
@@ -216,14 +216,14 @@ class _VideoClient implements VideoClient {
     String id,
     String rating,
   ) async {
-    const _extra = <String, dynamic>{};
+    final _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{
       r'id': id,
       r'rating': rating,
     };
     final _headers = <String, dynamic>{r'Accept': accept};
     _headers.removeWhere((k, v) => v == null);
-    final Map<String, dynamic>? _data = null;
+    const Map<String, dynamic>? _data = null;
     await _dio.fetch<void>(_setStreamType<void>(Options(
       method: 'POST',
       headers: _headers,
@@ -248,7 +248,7 @@ class _VideoClient implements VideoClient {
     String id, {
     String? onBehalfOfContentOwner,
   }) async {
-    const _extra = <String, dynamic>{};
+    final _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{
       r'id': id,
       r'onBehalfOfContentOwner': onBehalfOfContentOwner,
@@ -256,7 +256,7 @@ class _VideoClient implements VideoClient {
     queryParameters.removeWhere((k, v) => v == null);
     final _headers = <String, dynamic>{r'Accept': accept};
     _headers.removeWhere((k, v) => v == null);
-    final Map<String, dynamic>? _data = null;
+    const Map<String, dynamic>? _data = null;
     final _result = await _dio.fetch<Map<String, dynamic>>(
         _setStreamType<VideoGetRatingResponse>(Options(
       method: 'GET',
@@ -284,7 +284,7 @@ class _VideoClient implements VideoClient {
     ReportAbuse body, {
     String? onBehalfOfContentOwner,
   }) async {
-    const _extra = <String, dynamic>{};
+    final _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{
       r'onBehalfOfContentOwner': onBehalfOfContentOwner
     };
@@ -317,7 +317,7 @@ class _VideoClient implements VideoClient {
     String id, {
     String? onBehalfOfContentOwner,
   }) async {
-    const _extra = <String, dynamic>{};
+    final _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{
       r'id': id,
       r'onBehalfOfContentOwner': onBehalfOfContentOwner,
@@ -325,7 +325,7 @@ class _VideoClient implements VideoClient {
     queryParameters.removeWhere((k, v) => v == null);
     final _headers = <String, dynamic>{r'Accept': accept};
     _headers.removeWhere((k, v) => v == null);
-    final Map<String, dynamic>? _data = null;
+    const Map<String, dynamic>? _data = null;
     await _dio.fetch<void>(_setStreamType<void>(Options(
       method: 'DELETE',
       headers: _headers,

@@ -26,14 +26,14 @@ class _ThumbnailsClient implements ThumbnailsClient {
     String videoId,
     String uploadType,
   ) async {
-    const _extra = <String, dynamic>{};
+    final _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{
       r'videoId': videoId,
       r'uploadType': uploadType,
     };
     final _headers = <String, dynamic>{r'Accept': accept};
     _headers.removeWhere((k, v) => v == null);
-    final Map<String, dynamic>? _data = null;
+    const Map<String, dynamic>? _data = null;
     final _result =
         await _dio.fetch(_setStreamType<HttpResponse<dynamic>>(Options(
       method: 'POST',
@@ -64,7 +64,7 @@ class _ThumbnailsClient implements ThumbnailsClient {
     File image,
     String uploadType,
   ) async {
-    const _extra = <String, dynamic>{};
+    final _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{
       r'videoId': videoId,
       r'upload_id': uploadId,

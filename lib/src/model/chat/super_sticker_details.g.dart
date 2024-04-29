@@ -12,10 +12,10 @@ SuperStickerDetails _$SuperStickerDetailsFromJson(Map<String, dynamic> json) =>
           ? null
           : SuperStickerMetadata.fromJson(
               json['superStickerMetadata'] as Map<String, dynamic>),
-      amountMicros: json['amountMicros'] as int?,
+      amountMicros: (json['amountMicros'] as num?)?.toInt(),
       currency: json['currency'] as String?,
       amountDisplayString: json['amountDisplayString'] as String?,
-      tier: json['tier'] as int?,
+      tier: (json['tier'] as num?)?.toInt(),
     );
 
 Map<String, dynamic> _$SuperStickerDetailsToJson(

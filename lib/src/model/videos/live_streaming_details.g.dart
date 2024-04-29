@@ -13,7 +13,7 @@ LiveStreamingDetails _$LiveStreamingDetailsFromJson(
       actualEndTime: DateTime.parse(json['actualEndTime'] as String),
       scheduledStartTime: DateTime.parse(json['scheduledStartTime'] as String),
       scheduledEndTime: DateTime.parse(json['scheduledEndTime'] as String),
-      concurrentViewers: json['concurrentViewers'] as int,
+      concurrentViewers: (json['concurrentViewers'] as num).toInt(),
       activeLiveChatId: json['activeLiveChatId'] as String?,
     );
 

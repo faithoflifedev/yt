@@ -1,3 +1,8 @@
+## 2.2.5+4
+
+* more nullable fields
+* dependency bump
+
 ## 2.2.5+3
 
 * better error handling&#x2F;messages

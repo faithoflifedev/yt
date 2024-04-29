@@ -9,7 +9,7 @@ part of 'monitor_stream.dart';
 MonitorStream _$MonitorStreamFromJson(Map<String, dynamic> json) =>
     MonitorStream(
       enableMonitorStream: json['enableMonitorStream'] as bool,
-      broadcastStreamDelayMs: json['broadcastStreamDelayMs'] as int?,
+      broadcastStreamDelayMs: (json['broadcastStreamDelayMs'] as num?)?.toInt(),
       embedHtml: json['embedHtml'] as String?,
     );
 

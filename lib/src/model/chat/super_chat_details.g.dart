@@ -8,11 +8,11 @@ part of 'super_chat_details.dart';
 
 SuperChatDetails _$SuperChatDetailsFromJson(Map<String, dynamic> json) =>
     SuperChatDetails(
-      amountMicros: json['amountMicros'] as int?,
+      amountMicros: (json['amountMicros'] as num?)?.toInt(),
       currency: json['currency'] as String?,
       amountDisplayString: json['amountDisplayString'] as String?,
       userComment: json['userComment'] as String?,
-      tier: json['tier'] as int?,
+      tier: (json['tier'] as num?)?.toInt(),
     );
 
 Map<String, dynamic> _$SuperChatDetailsToJson(SuperChatDetails instance) =>

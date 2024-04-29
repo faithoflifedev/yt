@@ -36,7 +36,7 @@ class _CommentThreadsClient implements CommentThreadsClient {
     String? searchTerms,
     String? textFormat,
   }) async {
-    const _extra = <String, dynamic>{};
+    final _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{
       r'key': apiKey,
       r'part': parts,
@@ -54,7 +54,7 @@ class _CommentThreadsClient implements CommentThreadsClient {
     queryParameters.removeWhere((k, v) => v == null);
     final _headers = <String, dynamic>{r'Accept': accept};
     _headers.removeWhere((k, v) => v == null);
-    final Map<String, dynamic>? _data = null;
+    const Map<String, dynamic>? _data = null;
     final _result = await _dio.fetch<Map<String, dynamic>>(
         _setStreamType<CommentThreadListResponse>(Options(
       method: 'GET',
