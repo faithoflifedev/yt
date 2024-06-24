@@ -1,3 +1,7 @@
+## 2.2.5+5
+
+* dependency bump
+
 ## 2.2.5+4
 
 * more nullable fields
