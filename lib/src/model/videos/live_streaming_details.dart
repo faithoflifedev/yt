@@ -7,7 +7,7 @@ part 'live_streaming_details.g.dart';
 @JsonSerializable()
 class LiveStreamingDetails {
   final DateTime actualStartTime;
-  final DateTime actualEndTime;
+  final DateTime? actualEndTime;
   final DateTime scheduledStartTime;
   final DateTime scheduledEndTime;
   final int concurrentViewers;

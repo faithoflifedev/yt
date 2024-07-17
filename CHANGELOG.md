@@ -1,3 +1,7 @@
+## 2.2.5+6
+
+* Issue #11
+
 ## 2.2.5+5
 
 * dependency bump
