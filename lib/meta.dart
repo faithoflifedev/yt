@@ -6,5 +6,5 @@ library;
 import 'dart:convert' show json;
 
 final pubSpec = json.decode(
-  '{"description":"Native Dart interface to multiple YouTube REST APIs including the Data and Live Streaming API.","homepage":"https://github.com/faithoflifedev/yt","documentation":"null","repository":"https://github.com/faithoflifedev/yt","issueTracker":"null","name":"yt","publish_to":"null","version":"2.2.6"}',
+  '{"description":"Native Dart interface to multiple YouTube REST APIs including the Data and Live Streaming API.","homepage":"https://github.com/faithoflifedev/yt","documentation":"null","repository":"https://github.com/faithoflifedev/yt","issueTracker":"null","name":"yt","publish_to":"null","version":"2.2.6+1"}',
 );

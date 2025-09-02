@@ -1,3 +1,6 @@
+## 2.2.6+1
+
+* improved pub.dev listing
 ## 2.2.6
 
 * dep bump
