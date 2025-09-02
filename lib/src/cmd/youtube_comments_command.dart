@@ -35,23 +35,29 @@ class YoutubeListCommentsCommand extends YtHelperCommand {
 
   YoutubeListCommentsCommand() {
     argParser
-      ..addOption('part',
-          defaultsTo: 'id,snippet',
-          help:
-              '''The part parameter specifies a comma-separated list of one or more comment resource properties that the API response will include.
+      ..addOption(
+        'part',
+        defaultsTo: 'id,snippet',
+        help:
+            '''The part parameter specifies a comma-separated list of one or more comment resource properties that the API response will include.
 
 The following list contains the part names that you can include in the parameter value:
-id, snippet''')
-      ..addOption('id',
-          abbr: 'i',
-          aliases: ['ID', 'Id'],
-          valueHelp: 'string',
-          help:
-              'The id parameter specifies a comma-separated list of comment IDs for the resources that are being retrieved. In a comment resource, the id property specifies the comment\'s ID.')
-      ..addOption('parent-id',
-          valueHelp: 'string',
-          help:
-              'The parentId parameter specifies the ID of the comment for which replies should be retrieved.');
+id, snippet''',
+      )
+      ..addOption(
+        'id',
+        abbr: 'i',
+        aliases: ['ID', 'Id'],
+        valueHelp: 'string',
+        help:
+            'The id parameter specifies a comma-separated list of comment IDs for the resources that are being retrieved. In a comment resource, the id property specifies the comment\'s ID.',
+      )
+      ..addOption(
+        'parent-id',
+        valueHelp: 'string',
+        help:
+            'The parentId parameter specifies the ID of the comment for which replies should be retrieved.',
+      );
   }
 
   @override
@@ -83,25 +89,31 @@ class YoutubeListByIdsCommentsCommand extends YtHelperCommand {
 
   YoutubeListByIdsCommentsCommand() {
     argParser
-      ..addOption('ids',
-          abbr: 'i',
-          aliases: ['ID', 'Id', 'IDS', 'Ids'],
-          valueHelp: 'string (comma-separated)',
-          help:
-              'The id parameter specifies a comma-separated list of comment IDs for the resources that are being retrieved. In a comment resource, the id property specifies the comment\'s ID.')
-      ..addOption('max-results',
-          valueHelp: 'number',
-          defaultsTo: '5',
-          help:
-              '''The maxResults parameter specifies the maximum number of items that should be returned in the result set.
+      ..addOption(
+        'ids',
+        abbr: 'i',
+        aliases: ['ID', 'Id', 'IDS', 'Ids'],
+        valueHelp: 'string (comma-separated)',
+        help:
+            'The id parameter specifies a comma-separated list of comment IDs for the resources that are being retrieved. In a comment resource, the id property specifies the comment\'s ID.',
+      )
+      ..addOption(
+        'max-results',
+        valueHelp: 'number',
+        defaultsTo: '5',
+        help:
+            '''The maxResults parameter specifies the maximum number of items that should be returned in the result set.
 
-Note: This parameter is not supported for use in conjunction with the id parameter. Acceptable values are 1 to 100, inclusive. The default value is 20.''')
-      ..addOption('page-token',
-          valueHelp: 'string',
-          help:
-              '''The pageToken parameter identifies a specific page in the result set that should be returned. In an API response, the nextPageToken property identifies the next page of the result that can be retrieved.
+Note: This parameter is not supported for use in conjunction with the id parameter. Acceptable values are 1 to 100, inclusive. The default value is 20.''',
+      )
+      ..addOption(
+        'page-token',
+        valueHelp: 'string',
+        help:
+            '''The pageToken parameter identifies a specific page in the result set that should be returned. In an API response, the nextPageToken property identifies the next page of the result that can be retrieved.
 
-Note: This parameter is not supported for use in conjunction with the id parameter.''')
+Note: This parameter is not supported for use in conjunction with the id parameter.''',
+      )
       ..addOption(
         'text-format',
         valueHelp: 'string',
@@ -141,26 +153,32 @@ class YoutubeListByIdCommentsCommand extends YtHelperCommand {
 
   YoutubeListByIdCommentsCommand() {
     argParser
-      ..addOption('id',
-          abbr: 'i',
-          aliases: ['ID', 'Id'],
-          valueHelp: 'string',
-          mandatory: true,
-          help:
-              'The id parameter specifies an ID for the resource that is to be retrieved. In a comment resource, the id property specifies the comment\'s ID.')
-      ..addOption('max-results',
-          valueHelp: 'number',
-          defaultsTo: '5',
-          help:
-              '''The maxResults parameter specifies the maximum number of items that should be returned in the result set.
+      ..addOption(
+        'id',
+        abbr: 'i',
+        aliases: ['ID', 'Id'],
+        valueHelp: 'string',
+        mandatory: true,
+        help:
+            'The id parameter specifies an ID for the resource that is to be retrieved. In a comment resource, the id property specifies the comment\'s ID.',
+      )
+      ..addOption(
+        'max-results',
+        valueHelp: 'number',
+        defaultsTo: '5',
+        help:
+            '''The maxResults parameter specifies the maximum number of items that should be returned in the result set.
 
-Note: This parameter is not supported for use in conjunction with the id parameter. Acceptable values are 1 to 100, inclusive. The default value is 20.''')
-      ..addOption('page-token',
-          valueHelp: 'string',
-          help:
-              '''The pageToken parameter identifies a specific page in the result set that should be returned. In an API response, the nextPageToken property identifies the next page of the result that can be retrieved.
+Note: This parameter is not supported for use in conjunction with the id parameter. Acceptable values are 1 to 100, inclusive. The default value is 20.''',
+      )
+      ..addOption(
+        'page-token',
+        valueHelp: 'string',
+        help:
+            '''The pageToken parameter identifies a specific page in the result set that should be returned. In an API response, the nextPageToken property identifies the next page of the result that can be retrieved.
 
-Note: This parameter is not supported for use in conjunction with the id parameter.''')
+Note: This parameter is not supported for use in conjunction with the id parameter.''',
+      )
       ..addOption(
         'text-format',
         valueHelp: 'string',

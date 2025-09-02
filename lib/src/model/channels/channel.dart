@@ -33,15 +33,16 @@ class Channel {
   ///The country with which the channel is associated. Update this property to set the value of the snippet.country property.
   final String? country;
 
-  Channel(
-      {required this.title,
-      required this.description,
-      this.keywords,
-      this.trackingAnalyticsAccountId,
-      this.moderateComments = false,
-      this.unsubscribedTrailer,
-      this.defaultLanguage,
-      this.country});
+  Channel({
+    required this.title,
+    required this.description,
+    this.keywords,
+    this.trackingAnalyticsAccountId,
+    this.moderateComments = false,
+    this.unsubscribedTrailer,
+    this.defaultLanguage,
+    this.country,
+  });
 
   factory Channel.fromJson(Map<String, dynamic> json) =>
       _$ChannelFromJson(json);

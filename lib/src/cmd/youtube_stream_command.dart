@@ -35,26 +35,36 @@ class YoutubeListStreamCommand extends YtHelperCommand {
 
   YoutubeListStreamCommand() {
     argParser
-      ..addOption('part',
-          defaultsTo: 'id,snippet,cdn,status',
-          help:
-              'The part parameter specifies a comma-separated list of one or more liveStream resource properties that the API response will include. The part names that you can include in the parameter value are id, snippet, cdn, and status.')
-      ..addOption('id',
-          valueHelp: 'id',
-          help:
-              'The id parameter specifies a comma-separated list of YouTube stream IDs that identify the streams being retrieved. In a liveStream resource, the id property specifies the stream\'s ID.')
-      ..addFlag('mine',
-          help:
-              'This parameter can only be used in a properly authorized request. The mine parameter can be used to instruct the API to only return streams owned by the authenticated user. Set the parameter value to true to only retrieve your own streams.')
-      ..addOption('max-results',
-          defaultsTo: '5',
-          valueHelp: 'number',
-          help:
-              'The maxResults parameter specifies the maximum number of items that should be returned in the result set. Acceptable values are 0 to 50, inclusive. The default value is 5.')
-      ..addOption('page-token',
-          valueHelp: 'token',
-          help:
-              'The pageToken parameter identifies a specific page in the result set that should be returned. In an API response, the nextPageToken and prevPageToken properties identify other pages that could be retrieved.');
+      ..addOption(
+        'part',
+        defaultsTo: 'id,snippet,cdn,status',
+        help:
+            'The part parameter specifies a comma-separated list of one or more liveStream resource properties that the API response will include. The part names that you can include in the parameter value are id, snippet, cdn, and status.',
+      )
+      ..addOption(
+        'id',
+        valueHelp: 'id',
+        help:
+            'The id parameter specifies a comma-separated list of YouTube stream IDs that identify the streams being retrieved. In a liveStream resource, the id property specifies the stream\'s ID.',
+      )
+      ..addFlag(
+        'mine',
+        help:
+            'This parameter can only be used in a properly authorized request. The mine parameter can be used to instruct the API to only return streams owned by the authenticated user. Set the parameter value to true to only retrieve your own streams.',
+      )
+      ..addOption(
+        'max-results',
+        defaultsTo: '5',
+        valueHelp: 'number',
+        help:
+            'The maxResults parameter specifies the maximum number of items that should be returned in the result set. Acceptable values are 0 to 50, inclusive. The default value is 5.',
+      )
+      ..addOption(
+        'page-token',
+        valueHelp: 'token',
+        help:
+            'The pageToken parameter identifies a specific page in the result set that should be returned. In an API response, the nextPageToken and prevPageToken properties identify other pages that could be retrieved.',
+      );
   }
 
   @override
@@ -90,14 +100,18 @@ class YoutubeInsertStreamCommand extends YtHelperCommand {
 
   YoutubeInsertStreamCommand() {
     argParser
-      ..addOption('part',
-          defaultsTo: 'id,snippet,cdn,contentDetails,status',
-          help:
-              '''The part parameter serves two purposes in this operation. It identifies the properties that the write operation will set as well as the properties that the API response will include.''')
-      ..addOption('body',
-          mandatory: true,
-          help:
-              'Provide a liveBroadcast resource [https://developers.google.com/youtube/v3/live/docs/liveBroadcasts#resource] in the request body');
+      ..addOption(
+        'part',
+        defaultsTo: 'id,snippet,cdn,contentDetails,status',
+        help:
+            '''The part parameter serves two purposes in this operation. It identifies the properties that the write operation will set as well as the properties that the API response will include.''',
+      )
+      ..addOption(
+        'body',
+        mandatory: true,
+        help:
+            'Provide a liveBroadcast resource [https://developers.google.com/youtube/v3/live/docs/liveBroadcasts#resource] in the request body',
+      );
   }
 
   @override
@@ -131,18 +145,22 @@ class YoutubeUpdateStreamCommand extends YtHelperCommand {
 
   YoutubeUpdateStreamCommand() {
     argParser
-      ..addOption('part',
-          defaultsTo: 'id,snippet,cdn,status',
-          help:
-              '''The part parameter serves two purposes in this operation. It identifies the properties that the write operation will set as well as the properties that the API response will include.
+      ..addOption(
+        'part',
+        defaultsTo: 'id,snippet,cdn,status',
+        help:
+            '''The part parameter serves two purposes in this operation. It identifies the properties that the write operation will set as well as the properties that the API response will include.
 
 The part properties that you can include in the parameter value are id, snippet, cdn, and status.
 
-Note that this method will override the existing values for all of the mutable properties that are contained in any parts that the parameter value specifies. If the request body does not specify a value for a mutable property, the existing value for that property will be removed.''')
-      ..addOption('body',
-          mandatory: true,
-          help:
-              'Provide a liveBroadcast resource [https://developers.google.com/youtube/v3/live/docs/liveBroadcasts#resource] in the request body.');
+Note that this method will override the existing values for all of the mutable properties that are contained in any parts that the parameter value specifies. If the request body does not specify a value for a mutable property, the existing value for that property will be removed.''',
+      )
+      ..addOption(
+        'body',
+        mandatory: true,
+        help:
+            'Provide a liveBroadcast resource [https://developers.google.com/youtube/v3/live/docs/liveBroadcasts#resource] in the request body.',
+      );
   }
 
   @override
@@ -173,11 +191,13 @@ class YoutubeDeleteStreamCommand extends YtHelperCommand {
   String get name => 'delete';
 
   YoutubeDeleteStreamCommand() {
-    argParser.addOption('id',
-        mandatory: true,
-        valueHelp: 'id',
-        help:
-            'The id parameter specifies the YouTube live stream ID for the resource that is being deleted.');
+    argParser.addOption(
+      'id',
+      mandatory: true,
+      valueHelp: 'id',
+      help:
+          'The id parameter specifies the YouTube live stream ID for the resource that is being deleted.',
+    );
   }
 
   @override

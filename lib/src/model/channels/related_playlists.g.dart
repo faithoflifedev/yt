@@ -13,7 +13,4 @@ RelatedPlaylists _$RelatedPlaylistsFromJson(Map<String, dynamic> json) =>
     );
 
 Map<String, dynamic> _$RelatedPlaylistsToJson(RelatedPlaylists instance) =>
-    <String, dynamic>{
-      'likes': instance.likes,
-      'uploads': instance.uploads,
-    };
+    <String, dynamic>{'likes': instance.likes, 'uploads': instance.uploads};

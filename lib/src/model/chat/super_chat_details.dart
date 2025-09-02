@@ -26,12 +26,13 @@ class SuperChatDetails {
   ///The Super Chat tiers are documented in the YouTube Help Center. (See the expandable section about Super Chat purchase details.) In that list, the tier with the lowest purchase amount is tier 1, the next lowest amount is tier 2, and so forth.
   final int? tier;
 
-  SuperChatDetails(
-      {this.amountMicros,
-      this.currency,
-      this.amountDisplayString,
-      this.userComment,
-      this.tier});
+  SuperChatDetails({
+    this.amountMicros,
+    this.currency,
+    this.amountDisplayString,
+    this.userComment,
+    this.tier,
+  });
 
   factory SuperChatDetails.fromJson(Map<String, dynamic> json) =>
       _$SuperChatDetailsFromJson(json);

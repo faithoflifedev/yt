@@ -11,8 +11,9 @@ SubscriberSnippet _$SubscriberSnippetFromJson(Map<String, dynamic> json) =>
       title: json['title'] as String,
       description: json['description'] as String,
       channelId: json['channelId'] as String,
-      thumbnails:
-          Thumbnails.fromJson(json['thumbnails'] as Map<String, dynamic>),
+      thumbnails: Thumbnails.fromJson(
+        json['thumbnails'] as Map<String, dynamic>,
+      ),
     );
 
 Map<String, dynamic> _$SubscriberSnippetToJson(SubscriberSnippet instance) =>

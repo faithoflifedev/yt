@@ -22,24 +22,28 @@ class Broadcast extends YouTubeApiHelper {
     String? onBehalfOfContentOwnerChannel,
     String? pageToken,
   }) {
-    return _rest.list(accept, buildParts(partList, part),
-        broadcastStatus: broadcastStatus,
-        broadcastType: broadcastType,
-        id: id,
-        maxResults: maxResults,
-        mine: mine,
-        onBehalfOfContentOwner: onBehalfOfContentOwner,
-        onBehalfOfContentOwnerChannel: onBehalfOfContentOwnerChannel,
-        pageToken: pageToken);
+    return _rest.list(
+      accept,
+      buildParts(partList, part),
+      broadcastStatus: broadcastStatus,
+      broadcastType: broadcastType,
+      id: id,
+      maxResults: maxResults,
+      mine: mine,
+      onBehalfOfContentOwner: onBehalfOfContentOwner,
+      onBehalfOfContentOwnerChannel: onBehalfOfContentOwnerChannel,
+      pageToken: pageToken,
+    );
   }
 
   ///Creates a broadcast.
-  Future<LiveBroadcastItem> insert(
-      {required Map<String, dynamic> body,
-      String part = 'snippet,status,contentDetails',
-      List<String> partList = const [],
-      String? onBehalfOfContentOwner,
-      String? onBehalfOfContentOwnerChannel}) {
+  Future<LiveBroadcastItem> insert({
+    required Map<String, dynamic> body,
+    String part = 'snippet,status,contentDetails',
+    List<String> partList = const [],
+    String? onBehalfOfContentOwner,
+    String? onBehalfOfContentOwnerChannel,
+  }) {
     return _rest.insert(
       // _authHeader,
       accept,
@@ -52,12 +56,13 @@ class Broadcast extends YouTubeApiHelper {
   }
 
   ///Updates a broadcast. For example, you could modify the broadcast settings defined in the [LiveBroadcastItem] resource's [LiveBroadcastItem.contentDetails] object.
-  Future<LiveBroadcastItem> update(
-      {required Map<String, dynamic> body,
-      String part = 'snippet,status,contentDetails',
-      List<String> partList = const [],
-      String? onBehalfOfContentOwner,
-      String? onBehalfOfContentOwnerChannel}) {
+  Future<LiveBroadcastItem> update({
+    required Map<String, dynamic> body,
+    String part = 'snippet,status,contentDetails',
+    List<String> partList = const [],
+    String? onBehalfOfContentOwner,
+    String? onBehalfOfContentOwnerChannel,
+  }) {
     return _rest.update(
       // _authHeader,
       accept,
@@ -135,13 +140,17 @@ class Broadcast extends YouTubeApiHelper {
 
     LiveBroadcastResponse liveBroadcastResponse;
 
-    liveBroadcastResponse =
-        await list(broadcastStatus: 'upcoming', maxResults: 50);
+    liveBroadcastResponse = await list(
+      broadcastStatus: 'upcoming',
+      maxResults: 50,
+    );
 
     liveBroadcastList.addAll(liveBroadcastResponse.items);
 
-    liveBroadcastResponse =
-        await list(broadcastStatus: 'active', maxResults: 50);
+    liveBroadcastResponse = await list(
+      broadcastStatus: 'active',
+      maxResults: 50,
+    );
 
     liveBroadcastList.addAll(liveBroadcastResponse.items);
 

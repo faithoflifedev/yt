@@ -16,13 +16,14 @@ class ChannelResponse extends ListResponse {
   @JsonKey(name: 'items')
   final List<ChannelItem>? channelItems;
 
-  ChannelResponse(
-      {required super.kind,
-      required super.etag,
-      super.nextPageToken,
-      super.prevPageToken,
-      required super.pageInfo,
-      this.channelItems});
+  ChannelResponse({
+    required super.kind,
+    required super.etag,
+    super.nextPageToken,
+    super.prevPageToken,
+    required super.pageInfo,
+    this.channelItems,
+  });
 
   List<ChannelItem> get items => channelItems ?? [];
 

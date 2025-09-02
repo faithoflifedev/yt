@@ -14,13 +14,14 @@ class CommentThreadListResponse extends ListResponse {
   @JsonKey(name: 'items')
   final List<CommentThread>? commentThreadItems;
 
-  CommentThreadListResponse(
-      {required super.kind,
-      required super.etag,
-      super.nextPageToken,
-      super.prevPageToken,
-      required super.pageInfo,
-      this.commentThreadItems});
+  CommentThreadListResponse({
+    required super.kind,
+    required super.etag,
+    super.nextPageToken,
+    super.prevPageToken,
+    required super.pageInfo,
+    this.commentThreadItems,
+  });
 
   List<CommentThread> get items => commentThreadItems ?? [];
 

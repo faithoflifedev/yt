@@ -13,11 +13,12 @@ class Cdn {
   final String resolution;
   final String frameRate;
 
-  Cdn(
-      {required this.ingestionType,
-      required this.ingestionInfo,
-      required this.resolution,
-      required this.frameRate});
+  Cdn({
+    required this.ingestionType,
+    required this.ingestionInfo,
+    required this.resolution,
+    required this.frameRate,
+  });
 
   factory Cdn.fromJson(Map<String, dynamic> json) => _$CdnFromJson(json);
 

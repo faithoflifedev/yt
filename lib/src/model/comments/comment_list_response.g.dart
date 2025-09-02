@@ -21,12 +21,12 @@ CommentListResponse _$CommentListResponseFromJson(Map<String, dynamic> json) =>
     );
 
 Map<String, dynamic> _$CommentListResponseToJson(
-        CommentListResponse instance) =>
-    <String, dynamic>{
-      'kind': instance.kind,
-      'etag': instance.etag,
-      'nextPageToken': instance.nextPageToken,
-      'prevPageToken': instance.prevPageToken,
-      'pageInfo': instance.pageInfo,
-      'items': instance.commentItems,
-    };
+  CommentListResponse instance,
+) => <String, dynamic>{
+  'kind': instance.kind,
+  'etag': instance.etag,
+  'nextPageToken': instance.nextPageToken,
+  'prevPageToken': instance.prevPageToken,
+  'pageInfo': instance.pageInfo,
+  'items': instance.commentItems,
+};

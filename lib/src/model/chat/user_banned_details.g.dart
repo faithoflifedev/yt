@@ -9,7 +9,8 @@ part of 'user_banned_details.dart';
 UserBannedDetails _$UserBannedDetailsFromJson(Map<String, dynamic> json) =>
     UserBannedDetails(
       bannedUserDetails: BannedUserDetails.fromJson(
-          json['bannedUserDetails'] as Map<String, dynamic>),
+        json['bannedUserDetails'] as Map<String, dynamic>,
+      ),
       banType: json['banType'] as String?,
       banDurationSeconds: (json['banDurationSeconds'] as num?)?.toInt(),
     );

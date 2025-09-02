@@ -7,13 +7,13 @@ part of 'search_result.dart';
 // **************************************************************************
 
 SearchResult _$SearchResultFromJson(Map<String, dynamic> json) => SearchResult(
-      kind: json['kind'] as String,
-      etag: json['etag'] as String,
-      id: Id.fromJson(json['id'] as Map<String, dynamic>),
-      snippet: json['snippet'] == null
-          ? null
-          : Snippet.fromJson(json['snippet'] as Map<String, dynamic>),
-    );
+  kind: json['kind'] as String,
+  etag: json['etag'] as String,
+  id: Id.fromJson(json['id'] as Map<String, dynamic>),
+  snippet: json['snippet'] == null
+      ? null
+      : Snippet.fromJson(json['snippet'] as Map<String, dynamic>),
+);
 
 Map<String, dynamic> _$SearchResultToJson(SearchResult instance) =>
     <String, dynamic>{

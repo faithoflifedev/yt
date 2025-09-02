@@ -14,35 +14,43 @@ abstract class PlaylistItemsClient {
 
   ///Returns a collection of playlist items that match the API request parameters. You can retrieve all of the playlist items in a specified playlist or retrieve one or more playlist items by their unique IDs.
   @GET('/playlistItems')
-  Future<PlaylistItemListResponse> list(@Query('key') String? apiKey,
-      @Header('Accept') String accept, @Query('part') String parts,
-      {@Query('id') String? id,
-      @Query('playlistId') String? playlistId,
-      @Query('maxResults') int? maxResults,
-      @Query('onBehalfOfContentOwner') String? onBehalfOfContentOwner,
-      @Query('pageToken') String? pageToken,
-      @Query('videoId') String? videoId});
+  Future<PlaylistItemListResponse> list(
+    @Query('key') String? apiKey,
+    @Header('Accept') String accept,
+    @Query('part') String parts, {
+    @Query('id') String? id,
+    @Query('playlistId') String? playlistId,
+    @Query('maxResults') int? maxResults,
+    @Query('onBehalfOfContentOwner') String? onBehalfOfContentOwner,
+    @Query('pageToken') String? pageToken,
+    @Query('videoId') String? videoId,
+  });
 
   ///Creates a playlist.
   @POST('/playlistItems')
   Future<Playlist> insert(
-      @Header('Accept') String accept,
-      @Header('Content-Type') String contentType,
-      @Query('part') String part,
-      @Body() Map<String, dynamic> body,
-      {@Query('onBehalfOfContentOwner') String? onBehalfOfContentOwner});
+    @Header('Accept') String accept,
+    @Header('Content-Type') String contentType,
+    @Query('part') String part,
+    @Body() Map<String, dynamic> body, {
+    @Query('onBehalfOfContentOwner') String? onBehalfOfContentOwner,
+  });
 
   ///Modifies a playlist. For example, you could change a playlist's title, description, or privacy status.
   @PUT('/playlistItems')
   Future<Playlist> update(
-      @Header('Accept') String accept,
-      @Header('Content-Type') String contentType,
-      @Query('part') String parts,
-      @Body() Map<String, dynamic> body,
-      {@Query('onBehalfOfContentOwner') String? onBehalfOfContentOwner});
+    @Header('Accept') String accept,
+    @Header('Content-Type') String contentType,
+    @Query('part') String parts,
+    @Body() Map<String, dynamic> body, {
+    @Query('onBehalfOfContentOwner') String? onBehalfOfContentOwner,
+  });
 
   ///Deletes a playlist
   @DELETE('/playlistItems')
-  Future<void> delete(@Header('Accept') String accept, @Query('id') String id,
-      {@Query('onBehalfOfContentOwner') String? onBehalfOfContentOwner});
+  Future<void> delete(
+    @Header('Accept') String accept,
+    @Query('id') String id, {
+    @Query('onBehalfOfContentOwner') String? onBehalfOfContentOwner,
+  });
 }

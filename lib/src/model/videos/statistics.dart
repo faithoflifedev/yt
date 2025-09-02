@@ -12,12 +12,13 @@ class Statistics {
   final int? favoriteCount;
   final int? commentCount;
 
-  Statistics(
-      {this.viewCount,
-      this.likeCount,
-      this.dislikeCount,
-      this.favoriteCount,
-      this.commentCount});
+  Statistics({
+    this.viewCount,
+    this.likeCount,
+    this.dislikeCount,
+    this.favoriteCount,
+    this.commentCount,
+  });
 
   factory Statistics.fromJson(Map<String, dynamic> json) =>
       _$StatisticsFromJson(json);

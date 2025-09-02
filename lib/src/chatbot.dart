@@ -16,7 +16,7 @@ class Chatbot {
   String get nameFormatted => EmojiFormatter.format(botName);
 
   Chatbot({required this.botName, required this.dialogs})
-      : phraseMatch = PhraseMatch();
+    : phraseMatch = PhraseMatch();
 
   factory Chatbot.fromYaml(File yamlFile) {
     final jsonString = json.encode(loadYaml(yamlFile.readAsStringSync()));
@@ -24,13 +24,15 @@ class Chatbot {
     return Chatbot.fromJson(json.decode(jsonString));
   }
 
-  Future<void> checkDialog(
-      {required LiveChatMessage liveChatMessage,
-      required Function onFound}) async {
+  Future<void> checkDialog({
+    required LiveChatMessage liveChatMessage,
+    required Function onFound,
+  }) async {
     for (Dialog dialog in dialogs) {
       var success = phraseMatch.checkQuestion(
-          question: liveChatMessage.snippet.textMessageDetails!.messageText,
-          keyword: dialog.keyword);
+        question: liveChatMessage.snippet.textMessageDetails!.messageText,
+        keyword: dialog.keyword,
+      );
 
       if (success) {
         var recipient = liveChatMessage.authorDetails?.displayName ?? '';

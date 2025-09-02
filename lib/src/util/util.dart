@@ -64,11 +64,12 @@ class Util {
 
   static final String accessCredentialsFilePath = '.yt/access_credentials.json';
 
-  static int maxResults(int? maxResults,
-          {int defaultValue = responseMaxResults}) =>
-      (maxResults != null && (maxResults < 1 || maxResults > 100))
-          ? defaultValue
-          : maxResults!;
+  static int maxResults(
+    int? maxResults, {
+    int defaultValue = responseMaxResults,
+  }) => (maxResults != null && (maxResults < 1 || maxResults > 100))
+      ? defaultValue
+      : maxResults!;
 
   // static ClientId defaultClientId() =>
   //     clientIdFromFileSpec(defaultCredentialsFileSpec);
@@ -89,10 +90,7 @@ class Util {
   //     File('${Util.userHome}/.yt/access_credentials.json');
 }
 
-enum ListPosition {
-  start,
-  end,
-}
+enum ListPosition { start, end }
 
 /// This parameter indicates whether the API should return comments formatted as
 /// HTML or as plain text. The default value is html.

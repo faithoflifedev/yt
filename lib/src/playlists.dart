@@ -15,24 +15,22 @@ import 'provider/data/playlists.dart';
 class Playlists extends YouTubeApiHelper {
   final PlaylistClient _rest;
 
-  Playlists({
-    required super.dio,
-    super.apiKey,
-  }) : _rest = PlaylistClient(dio);
+  Playlists({required super.dio, super.apiKey}) : _rest = PlaylistClient(dio);
 
   ///Returns a collection of playlists that match the API request parameters.
   ///For example, you can retrieve all playlists that the authenticated user
   ///owns, or you can retrieve one or more playlists by their unique IDs.
-  Future<PlaylistResponse> list(
-      {String part = 'contentDetails,id,localizations,player,snippet,status',
-      List<String> partList = const [],
-      String? channelId,
-      String? id,
-      bool? mine,
-      int? maxResults,
-      String? onBehalfOfContentOwner,
-      String? onBehalfOfContentOwnerChannel,
-      String? pageToken}) async {
+  Future<PlaylistResponse> list({
+    String part = 'contentDetails,id,localizations,player,snippet,status',
+    List<String> partList = const [],
+    String? channelId,
+    String? id,
+    bool? mine,
+    int? maxResults,
+    String? onBehalfOfContentOwner,
+    String? onBehalfOfContentOwnerChannel,
+    String? pageToken,
+  }) async {
     return _rest.list(
       apiKey,
       accept,
@@ -85,9 +83,6 @@ class Playlists extends YouTubeApiHelper {
     String? onBehalfOfContentOwner,
     String? onBehalfOfContentOwnerChannel,
   }) async {
-    return await _rest.delete(
-      accept,
-      id,
-    );
+    return await _rest.delete(accept, id);
   }
 }

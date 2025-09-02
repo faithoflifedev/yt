@@ -7,11 +7,11 @@ part of 'rating.dart';
 // **************************************************************************
 
 Rating _$RatingFromJson(Map<String, dynamic> json) => Rating(
-      videoId: json['videoId'] as String,
-      rating: json['rating'] as String,
-    );
+  videoId: json['videoId'] as String,
+  rating: json['rating'] as String,
+);
 
 Map<String, dynamic> _$RatingToJson(Rating instance) => <String, dynamic>{
-      'videoId': instance.videoId,
-      'rating': instance.rating,
-    };
+  'videoId': instance.videoId,
+  'rating': instance.rating,
+};

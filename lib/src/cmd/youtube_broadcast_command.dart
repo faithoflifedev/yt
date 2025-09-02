@@ -41,29 +41,35 @@ class YoutubeTransitionBroadcastCommand extends YtHelperCommand {
 
   YoutubeTransitionBroadcastCommand() {
     argParser
-      ..addOption('broadcast-status',
-          allowed: ['complete', 'live', 'testing'],
-          valueHelp: 'status',
-          mandatory: true,
-          allowedHelp: {
-            'complete':
-                'The broadcast is over. YouTube stops transmitting video.',
-            'live':
-                'The broadcast is visible to its audience. YouTube transmits video to the broadcast\'s monitor stream and its broadcast stream.',
-            'testing':
-                'Start testing the broadcast. YouTube transmits video to the broadcast\'s monitor stream. Note that you can only transition a broadcast to the testing state if its contentDetails.monitorStream.enableMonitorStream property is set to true.'
-          },
-          help:
-              'The broadcastStatus parameter identifies the state to which the broadcast is changing. Note that to transition a broadcast to either the testing or live state, the status.streamStatus must be active for the stream that the broadcast is bound to.')
-      ..addOption('part',
-          defaultsTo: 'id,snippet,contentDetails,status',
-          help:
-              'The part parameter specifies a comma-separated list of one or more liveBroadcast resource properties that the API response will include. The part names that you can include in the parameter value are id, snippet, contentDetails, and status.')
-      ..addOption('id',
-          mandatory: true,
-          valueHelp: 'id',
-          help:
-              'The id parameter specifies the unique ID of the broadcast that is transitioning to another status.');
+      ..addOption(
+        'broadcast-status',
+        allowed: ['complete', 'live', 'testing'],
+        valueHelp: 'status',
+        mandatory: true,
+        allowedHelp: {
+          'complete':
+              'The broadcast is over. YouTube stops transmitting video.',
+          'live':
+              'The broadcast is visible to its audience. YouTube transmits video to the broadcast\'s monitor stream and its broadcast stream.',
+          'testing':
+              'Start testing the broadcast. YouTube transmits video to the broadcast\'s monitor stream. Note that you can only transition a broadcast to the testing state if its contentDetails.monitorStream.enableMonitorStream property is set to true.',
+        },
+        help:
+            'The broadcastStatus parameter identifies the state to which the broadcast is changing. Note that to transition a broadcast to either the testing or live state, the status.streamStatus must be active for the stream that the broadcast is bound to.',
+      )
+      ..addOption(
+        'part',
+        defaultsTo: 'id,snippet,contentDetails,status',
+        help:
+            'The part parameter specifies a comma-separated list of one or more liveBroadcast resource properties that the API response will include. The part names that you can include in the parameter value are id, snippet, contentDetails, and status.',
+      )
+      ..addOption(
+        'id',
+        mandatory: true,
+        valueHelp: 'id',
+        help:
+            'The id parameter specifies the unique ID of the broadcast that is transitioning to another status.',
+      );
   }
 
   @override
@@ -72,9 +78,10 @@ class YoutubeTransitionBroadcastCommand extends YtHelperCommand {
 
     try {
       final liveBroadcastItem = await broadcast.transition(
-          part: argResults!['part'],
-          broadcastStatus: argResults?['broadcast-status'],
-          id: argResults?['id']);
+        part: argResults!['part'],
+        broadcastStatus: argResults?['broadcast-status'],
+        id: argResults?['id'],
+      );
 
       print(liveBroadcastItem);
 
@@ -96,44 +103,56 @@ class YoutubeListBroadcastCommand extends YtHelperCommand {
 
   YoutubeListBroadcastCommand() {
     argParser
-      ..addOption('part',
-          defaultsTo: 'snippet,status,contentDetails',
-          help: 'The type of a pre-built template for the broadcast to start')
-      ..addOption('broadcast-status',
-          // defaultsTo: 'all',
-          allowed: ['active', 'all', 'completed', 'upcoming'],
-          help:
-              'The broadcastStatus parameter filters the API response to only include broadcasts with the specified status.',
-          // valueHelp: 'status',
-          allowedHelp: {
-            'active': 'Return current live broadcasts.',
-            'all': 'Return all broadcasts.',
-            'completed': 'Return broadcasts that have already ended.',
-            'upcoming': 'Return broadcasts that have not yet started.'
-          })
-      ..addOption('id',
-          valueHelp: 'id',
-          help:
-              'The id parameter specifies a comma-separated list of YouTube broadcast IDs that identify the broadcasts being retrieved. In a liveBroadcast resource, the id property specifies the broadcast\'s ID.')
-      ..addOption('broadcast-type',
-          defaultsTo: 'event',
-          allowed: ['all', 'event', 'persistent'],
-          help:
-              'The broadcastType parameter filters the API response to only include broadcasts with the specified type. The parameter should be used in requests that set the mine parameter to true or that use the broadcastStatus parameter. The default value is event.',
-          allowedHelp: {
-            'all': 'Return all broadcasts.',
-            'event': 'Return only scheduled event broadcasts.',
-            'persistent': 'Return only persistent broadcasts.'
-          })
-      ..addOption('max-results',
-          defaultsTo: '5',
-          valueHelp: 'number',
-          help:
-              'The maxResults parameter specifies the maximum number of items that should be returned in the result set. Acceptable values are 0 to 50, inclusive. The default value is 5.')
-      ..addOption('pageToken',
-          valueHelp: 'string',
-          help:
-              'The pageToken parameter identifies a specific page in the result set that should be returned. In an API response, the nextPageToken and prevPageToken properties identify other pages that could be retrieved.');
+      ..addOption(
+        'part',
+        defaultsTo: 'snippet,status,contentDetails',
+        help: 'The type of a pre-built template for the broadcast to start',
+      )
+      ..addOption(
+        'broadcast-status',
+        // defaultsTo: 'all',
+        allowed: ['active', 'all', 'completed', 'upcoming'],
+        help:
+            'The broadcastStatus parameter filters the API response to only include broadcasts with the specified status.',
+        // valueHelp: 'status',
+        allowedHelp: {
+          'active': 'Return current live broadcasts.',
+          'all': 'Return all broadcasts.',
+          'completed': 'Return broadcasts that have already ended.',
+          'upcoming': 'Return broadcasts that have not yet started.',
+        },
+      )
+      ..addOption(
+        'id',
+        valueHelp: 'id',
+        help:
+            'The id parameter specifies a comma-separated list of YouTube broadcast IDs that identify the broadcasts being retrieved. In a liveBroadcast resource, the id property specifies the broadcast\'s ID.',
+      )
+      ..addOption(
+        'broadcast-type',
+        defaultsTo: 'event',
+        allowed: ['all', 'event', 'persistent'],
+        help:
+            'The broadcastType parameter filters the API response to only include broadcasts with the specified type. The parameter should be used in requests that set the mine parameter to true or that use the broadcastStatus parameter. The default value is event.',
+        allowedHelp: {
+          'all': 'Return all broadcasts.',
+          'event': 'Return only scheduled event broadcasts.',
+          'persistent': 'Return only persistent broadcasts.',
+        },
+      )
+      ..addOption(
+        'max-results',
+        defaultsTo: '5',
+        valueHelp: 'number',
+        help:
+            'The maxResults parameter specifies the maximum number of items that should be returned in the result set. Acceptable values are 0 to 50, inclusive. The default value is 5.',
+      )
+      ..addOption(
+        'pageToken',
+        valueHelp: 'string',
+        help:
+            'The pageToken parameter identifies a specific page in the result set that should be returned. In an API response, the nextPageToken and prevPageToken properties identify other pages that could be retrieved.',
+      );
   }
 
   @override
@@ -168,16 +187,20 @@ class YoutubeInsertBroadcastCommand extends YtHelperCommand {
 
   YoutubeInsertBroadcastCommand() {
     argParser
-      ..addOption('part',
-          defaultsTo: 'snippet,contentDetails,status',
-          help:
-              '''The part parameter serves two purposes in this operation. It identifies the properties that the write operation will set as well as the properties that the API response will include.
+      ..addOption(
+        'part',
+        defaultsTo: 'snippet,contentDetails,status',
+        help:
+            '''The part parameter serves two purposes in this operation. It identifies the properties that the write operation will set as well as the properties that the API response will include.
               
-              The part properties that you can include in the parameter value are id, snippet, contentDetails, and status.''')
-      ..addOption('body',
-          mandatory: true,
-          help:
-              'Provide a json formatted `liveBroadcast` resource [https://developers.google.com/youtube/v3/live/docs/liveBroadcasts#resource] in the request body or provide the `file name` of a json file that contains the `liveBroadcast` resource.');
+              The part properties that you can include in the parameter value are id, snippet, contentDetails, and status.''',
+      )
+      ..addOption(
+        'body',
+        mandatory: true,
+        help:
+            'Provide a json formatted `liveBroadcast` resource [https://developers.google.com/youtube/v3/live/docs/liveBroadcasts#resource] in the request body or provide the `file name` of a json file that contains the `liveBroadcast` resource.',
+      );
   }
 
   @override
@@ -193,7 +216,9 @@ class YoutubeInsertBroadcastCommand extends YtHelperCommand {
 
     try {
       final liveBroadcastItem = await broadcast.insert(
-          body: json.decode(body), part: argResults!['part']);
+        body: json.decode(body),
+        part: argResults!['part'],
+      );
 
       print(liveBroadcastItem);
 
@@ -213,11 +238,13 @@ class YoutubeDeleteBroadcastCommand extends YtHelperCommand {
   String get name => 'delete';
 
   YoutubeDeleteBroadcastCommand() {
-    argParser.addOption('id',
-        mandatory: true,
-        valueHelp: 'id',
-        help:
-            'The id parameter specifies the YouTube live broadcast ID for the resource that is being deleted.');
+    argParser.addOption(
+      'id',
+      mandatory: true,
+      valueHelp: 'id',
+      help:
+          'The id parameter specifies the YouTube live broadcast ID for the resource that is being deleted.',
+    );
   }
 
   @override
@@ -246,18 +273,22 @@ class YoutubeUpdateBroadcastCommand extends YtHelperCommand {
 
   YoutubeUpdateBroadcastCommand() {
     argParser
-      ..addOption('part',
-          defaultsTo: 'snippet,contentDetails,status',
-          help:
-              '''The part parameter serves two purposes in this operation. It identifies the properties that the write operation will set as well as the properties that the API response will include.
+      ..addOption(
+        'part',
+        defaultsTo: 'snippet,contentDetails,status',
+        help:
+            '''The part parameter serves two purposes in this operation. It identifies the properties that the write operation will set as well as the properties that the API response will include.
 
 The part properties that you can include in the parameter value are id, snippet, contentDetails, and status.
 
-Note that this method will override the existing values for all of the mutable properties that are contained in any parts that the parameter value specifies. For example, a broadcast's privacy status is defined in the status part. As such, if your request is updating a private or unlisted broadcast, and the request's part parameter value includes the status part, the broadcast's privacy setting will be updated to whatever value the request body specifies. If the request body does not specify a value, the existing privacy setting will be removed and the broadcast will revert to the default privacy setting.''')
-      ..addOption('body',
-          mandatory: true,
-          help:
-              'Provide a json formatted `liveBroadcast` resource [https://developers.google.com/youtube/v3/live/docs/liveBroadcasts#resource] in the request body or provide the `file name` of a json file that contains the `liveBroadcast` resource.');
+Note that this method will override the existing values for all of the mutable properties that are contained in any parts that the parameter value specifies. For example, a broadcast's privacy status is defined in the status part. As such, if your request is updating a private or unlisted broadcast, and the request's part parameter value includes the status part, the broadcast's privacy setting will be updated to whatever value the request body specifies. If the request body does not specify a value, the existing privacy setting will be removed and the broadcast will revert to the default privacy setting.''',
+      )
+      ..addOption(
+        'body',
+        mandatory: true,
+        help:
+            'Provide a json formatted `liveBroadcast` resource [https://developers.google.com/youtube/v3/live/docs/liveBroadcasts#resource] in the request body or provide the `file name` of a json file that contains the `liveBroadcast` resource.',
+      );
   }
 
   @override
@@ -273,7 +304,9 @@ Note that this method will override the existing values for all of the mutable p
 
     try {
       final liveBroadcastItem = await broadcast.update(
-          body: json.decode(body), part: argResults!['part']);
+        body: json.decode(body),
+        part: argResults!['part'],
+      );
 
       print(liveBroadcastItem);
 
@@ -297,19 +330,25 @@ class YoutubeBindBroadcastCommand extends YtHelperCommand {
 
   YoutubeBindBroadcastCommand() {
     argParser
-      ..addOption('id',
-          mandatory: true,
-          valueHelp: 'id',
-          help:
-              'The id parameter specifies the unique ID of the broadcast that is being bound to a video stream.')
-      ..addOption('part',
-          defaultsTo: 'id,snippet,contentDetails,status',
-          help:
-              'The part parameter specifies a comma-separated list of one or more liveBroadcast resource properties that the API response will include. The part names that you can include in the parameter value are id, snippet, contentDetails, and status.')
-      ..addOption('stream-id',
-          valueHelp: 'stream-id',
-          help:
-              'The streamId parameter specifies the unique ID of the video stream that is being bound to a broadcast. If this parameter is omitted, the API will remove any existing binding between the broadcast and a video stream.');
+      ..addOption(
+        'id',
+        mandatory: true,
+        valueHelp: 'id',
+        help:
+            'The id parameter specifies the unique ID of the broadcast that is being bound to a video stream.',
+      )
+      ..addOption(
+        'part',
+        defaultsTo: 'id,snippet,contentDetails,status',
+        help:
+            'The part parameter specifies a comma-separated list of one or more liveBroadcast resource properties that the API response will include. The part names that you can include in the parameter value are id, snippet, contentDetails, and status.',
+      )
+      ..addOption(
+        'stream-id',
+        valueHelp: 'stream-id',
+        help:
+            'The streamId parameter specifies the unique ID of the video stream that is being bound to a broadcast. If this parameter is omitted, the API will remove any existing binding between the broadcast and a video stream.',
+      );
   }
 
   @override
@@ -318,9 +357,10 @@ class YoutubeBindBroadcastCommand extends YtHelperCommand {
 
     try {
       final liveBroadcastItem = await broadcast.bind(
-          id: argResults!['id'],
-          part: argResults!['part'],
-          streamId: argResults!['stream-id']);
+        id: argResults!['id'],
+        part: argResults!['part'],
+        streamId: argResults!['stream-id'],
+      );
 
       print(liveBroadcastItem);
 

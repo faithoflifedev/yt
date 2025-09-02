@@ -52,11 +52,13 @@ class YoutubeSetThumbnailsCommand extends YtHelperCommand {
 
   YoutubeSetThumbnailsCommand() {
     argParser
-      ..addOption('video-id',
-          valueHelp: 'YouTube video id',
-          mandatory: true,
-          help:
-              'The videoId parameter specifies a YouTube video ID for which the custom video thumbnail is being provided.')
+      ..addOption(
+        'video-id',
+        valueHelp: 'YouTube video id',
+        mandatory: true,
+        help:
+            'The videoId parameter specifies a YouTube video ID for which the custom video thumbnail is being provided.',
+      )
       ..addOption(
         'file',
         valueHelp: 'file name',
@@ -73,9 +75,7 @@ class YoutubeSetThumbnailsCommand extends YtHelperCommand {
     try {
       final thumbnailSetResponse = await thumbnails.set(
         videoId: argResults!['video-id'],
-        thumbnail: File(
-          argResults!['file'],
-        ),
+        thumbnail: File(argResults!['file']),
       );
 
       print(thumbnailSetResponse);

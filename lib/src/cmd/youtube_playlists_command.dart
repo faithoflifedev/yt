@@ -42,35 +42,47 @@ class YoutubeListPlaylistsCommand extends YtHelperCommand {
 
   YoutubeListPlaylistsCommand() {
     argParser
-      ..addOption('part',
-          mandatory: true,
-          help:
-              '''The part parameter specifies a comma-separated list of one or more playlist resource properties that the API response will include.
+      ..addOption(
+        'part',
+        mandatory: true,
+        help:
+            '''The part parameter specifies a comma-separated list of one or more playlist resource properties that the API response will include.
 
 If the parameter identifies a property that contains child properties, the child properties will be included in the response. For example, in a playlist resource, the snippet property contains properties like author, title, description, and timeCreated. As such, if you set part=snippet, the API response will contain all of those properties.
 
 The following list contains the part names that you can include in the parameter value:
-contentDetails, id, localizations, player, snippet, status''')
-      ..addOption('channel-id',
-          help:
-              'This value indicates that the API should only return the specified channel\'s playlists.',
-          valueHelp: 'YouTube username')
-      ..addOption('id',
-          valueHelp: 'id',
-          help:
-              'The id parameter specifies a comma-separated list of the YouTube playlist ID(s) for the resource(s) that are being retrieved. In a playlist resource, the id property specifies the playlist\'s YouTube playlist ID.')
-      ..addOption('mine',
-          help:
-              'This parameter can only be used in a properly authorized request. Set this parameter\'s value to true to instruct the API to only return playlists owned by the authenticated user.')
-      ..addOption('max-results',
-          defaultsTo: '5',
-          valueHelp: 'number',
-          help:
-              'The maxResults parameter specifies the maximum number of items that should be returned in the result set. Acceptable values are 0 to 50, inclusive. The default value is 5.')
-      ..addOption('page-token',
-          valueHelp: 'token',
-          help:
-              'The pageToken parameter identifies a specific page in the result set that should be returned. In an API response, the nextPageToken and prevPageToken properties identify other pages that could be retrieved.');
+contentDetails, id, localizations, player, snippet, status''',
+      )
+      ..addOption(
+        'channel-id',
+        help:
+            'This value indicates that the API should only return the specified channel\'s playlists.',
+        valueHelp: 'YouTube username',
+      )
+      ..addOption(
+        'id',
+        valueHelp: 'id',
+        help:
+            'The id parameter specifies a comma-separated list of the YouTube playlist ID(s) for the resource(s) that are being retrieved. In a playlist resource, the id property specifies the playlist\'s YouTube playlist ID.',
+      )
+      ..addOption(
+        'mine',
+        help:
+            'This parameter can only be used in a properly authorized request. Set this parameter\'s value to true to instruct the API to only return playlists owned by the authenticated user.',
+      )
+      ..addOption(
+        'max-results',
+        defaultsTo: '5',
+        valueHelp: 'number',
+        help:
+            'The maxResults parameter specifies the maximum number of items that should be returned in the result set. Acceptable values are 0 to 50, inclusive. The default value is 5.',
+      )
+      ..addOption(
+        'page-token',
+        valueHelp: 'token',
+        help:
+            'The pageToken parameter identifies a specific page in the result set that should be returned. In an API response, the nextPageToken and prevPageToken properties identify other pages that could be retrieved.',
+      );
   }
 
   @override
@@ -79,14 +91,15 @@ contentDetails, id, localizations, player, snippet, status''')
 
     try {
       final playlistResponse = await playlists.list(
-          part: argResults!['part'],
-          channelId: argResults?['channel-id'],
-          id: argResults?['id'],
-          mine: argResults?['mine'] != null && argResults!['mine'] != "false"
-              ? true
-              : null,
-          maxResults: int.parse(argResults!['max-results']),
-          pageToken: argResults?['page-token']);
+        part: argResults!['part'],
+        channelId: argResults?['channel-id'],
+        id: argResults?['id'],
+        mine: argResults?['mine'] != null && argResults!['mine'] != "false"
+            ? true
+            : null,
+        maxResults: int.parse(argResults!['max-results']),
+        pageToken: argResults?['page-token'],
+      );
 
       print(playlistResponse);
 
@@ -107,16 +120,20 @@ class YoutubeInsertPlaylistsCommand extends YtHelperCommand {
 
   YoutubeInsertPlaylistsCommand() {
     argParser
-      ..addOption('part',
-          defaultsTo: 'snippet,contentDetails,status',
-          help:
-              '''The part parameter serves two purposes in this operation. It identifies the properties that the write operation will set as well as the properties that the API response will include.
+      ..addOption(
+        'part',
+        defaultsTo: 'snippet,contentDetails,status',
+        help:
+            '''The part parameter serves two purposes in this operation. It identifies the properties that the write operation will set as well as the properties that the API response will include.
               
-              The part properties that you can include in the parameter value are id, snippet, contentDetails, and status.''')
-      ..addOption('body',
-          mandatory: true,
-          help:
-              'Provide a liveBroadcast resource [https://developers.google.com/youtube/v3/live/docs/liveBroadcasts#resource] in the request body');
+              The part properties that you can include in the parameter value are id, snippet, contentDetails, and status.''',
+      )
+      ..addOption(
+        'body',
+        mandatory: true,
+        help:
+            'Provide a liveBroadcast resource [https://developers.google.com/youtube/v3/live/docs/liveBroadcasts#resource] in the request body',
+      );
   }
 
   @override
@@ -125,7 +142,9 @@ class YoutubeInsertPlaylistsCommand extends YtHelperCommand {
 
     try {
       final playlist = await playlists.insert(
-          body: json.decode(argResults!['body']), part: argResults!['part']);
+        body: json.decode(argResults!['body']),
+        part: argResults!['part'],
+      );
 
       print(playlist);
 
@@ -148,19 +167,23 @@ class YoutubeUpdatePlaylistsCommand extends YtHelperCommand {
 
   YoutubeUpdatePlaylistsCommand() {
     argParser
-      ..addOption('part',
-          mandatory: true,
-          help:
-              '''The part parameter serves two purposes in this operation. It identifies the properties that the write operation will set as well as the properties that the API response will include.
+      ..addOption(
+        'part',
+        mandatory: true,
+        help:
+            '''The part parameter serves two purposes in this operation. It identifies the properties that the write operation will set as well as the properties that the API response will include.
 
 Note that this method will override the existing values for mutable properties that are contained in any parts that the request body specifies. For example, a playlist's description is contained in the snippet part, which must be included in the request body. If the request does not specify a value for the snippet.description property, the playlist's existing description will be deleted.
 
 The following list contains the part names that you can include in the parameter value:
-contentDetails, id, localizations, player, snippet, status''')
-      ..addOption('body',
-          mandatory: true,
-          help:
-              'Provide a liveBroadcast resource [https://developers.google.com/youtube/v3/live/docs/liveBroadcasts#resource] in the request body');
+contentDetails, id, localizations, player, snippet, status''',
+      )
+      ..addOption(
+        'body',
+        mandatory: true,
+        help:
+            'Provide a liveBroadcast resource [https://developers.google.com/youtube/v3/live/docs/liveBroadcasts#resource] in the request body',
+      );
   }
 
   @override
@@ -169,7 +192,9 @@ contentDetails, id, localizations, player, snippet, status''')
 
     try {
       final playlist = await playlists.update(
-          body: json.decode(argResults!['body']), part: argResults!['part']);
+        body: json.decode(argResults!['body']),
+        part: argResults!['part'],
+      );
 
       print(playlist);
 
@@ -189,11 +214,13 @@ class YoutubeDeletePlaylistsCommand extends YtHelperCommand {
   String get name => 'delete';
 
   YoutubeDeletePlaylistsCommand() {
-    argParser.addOption('id',
-        mandatory: true,
-        valueHelp: 'id',
-        help:
-            'The id parameter specifies the YouTube playlist ID for the playlist that is being deleted. In a playlist resource, the id property specifies the playlist\'s ID.');
+    argParser.addOption(
+      'id',
+      mandatory: true,
+      valueHelp: 'id',
+      help:
+          'The id parameter specifies the YouTube playlist ID for the playlist that is being deleted. In a playlist resource, the id property specifies the playlist\'s ID.',
+    );
   }
 
   @override

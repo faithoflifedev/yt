@@ -14,33 +14,44 @@ class OAuthAccessControlIo extends BaseOAuthAccessControl {
   static final _userHome =
       Platform.environment['HOME'] ?? Platform.environment['USERPROFILE'];
 
-  static final _credentialsFile =
-      File('$_userHome/${Util.accessCredentialsFilePath}');
+  static final _credentialsFile = File(
+    '$_userHome/${Util.accessCredentialsFilePath}',
+  );
 
   final httpClient = IOClient();
 
   OAuthAccessControlIo(super.identifier) {
-    clientId ??= ClientId.fromJson(json.decode(
-        File('$_userHome/${Util.defaultCredentialsFilePath}')
-            .readAsStringSync()));
+    clientId ??= ClientId.fromJson(
+      json.decode(
+        File(
+          '$_userHome/${Util.defaultCredentialsFilePath}',
+        ).readAsStringSync(),
+      ),
+    );
   }
 
   @override
   Future<void> init() async {
     if (_credentialsFile.existsSync()) {
       nullableAccessCredentials = AccessCredentials.fromJson(
-          json.decode(_credentialsFile.readAsStringSync()));
+        json.decode(_credentialsFile.readAsStringSync()),
+      );
 
       nullableAccessCredentials = await refreshCredentials(
-          clientId!, nullableAccessCredentials!, httpClient);
+        clientId!,
+        nullableAccessCredentials!,
+        httpClient,
+      );
     } else {
       nullableAccessCredentials = await obtainAccessCredentialsViaUserConsent(
-          clientId!,
-          ['https://www.googleapis.com/auth/youtube.force-ssl'],
-          httpClient, (String url) {
-        print('Please go to the following URL and grant access:');
-        print('  => $url');
-      });
+        clientId!,
+        ['https://www.googleapis.com/auth/youtube.force-ssl'],
+        httpClient,
+        (String url) {
+          print('Please go to the following URL and grant access:');
+          print('  => $url');
+        },
+      );
 
       _credentialsFile.writeAsStringSync(
         json.encode(nullableAccessCredentials),
@@ -58,8 +69,11 @@ class OAuthAccessControlIo extends BaseOAuthAccessControl {
     }
 
     if (accessCredentials.accessToken.expiry.isBefore(DateTime.now())) {
-      nullableAccessCredentials =
-          await refreshCredentials(clientId!, accessCredentials, httpClient);
+      nullableAccessCredentials = await refreshCredentials(
+        clientId!,
+        accessCredentials,
+        httpClient,
+      );
     }
   }
 }

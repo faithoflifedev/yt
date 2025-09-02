@@ -31,23 +31,29 @@ class YoutubeListChannelsCommand extends YtHelperCommand {
 
   YoutubeListChannelsCommand() {
     argParser
-      ..addOption('part',
-          mandatory: true,
-          help:
-              '''The part parameter specifies a comma-separated list of one or more channel resource properties that the API response will include.
+      ..addOption(
+        'part',
+        mandatory: true,
+        help:
+            '''The part parameter specifies a comma-separated list of one or more channel resource properties that the API response will include.
 
 If the parameter identifies a property that contains child properties, the child properties will be included in the response. For example, in a channel resource, the contentDetails property contains other properties, such as the uploads properties. As such, if you set part=contentDetails, the API response will also contain all of those nested properties.
 
 The following list contains the part names that you can include in the parameter value:
-auditDetails, brandingSettings, contentDetails, contentOwnerDetails, id, localizations, snippet, statistics, status, topicDetails''')
-      ..addOption('for-username',
-          help:
-              'The forUsername parameter specifies a YouTube username, thereby requesting the channel associated with that username.',
-          valueHelp: 'YouTube username')
-      ..addOption('id',
-          valueHelp: 'id',
-          help:
-              'The id parameter specifies a comma-separated list of the YouTube channel ID(s) for the resource(s) that are being retrieved. In a channel resource, the id property specifies the channel\'s YouTube channel ID.');
+auditDetails, brandingSettings, contentDetails, contentOwnerDetails, id, localizations, snippet, statistics, status, topicDetails''',
+      )
+      ..addOption(
+        'for-username',
+        help:
+            'The forUsername parameter specifies a YouTube username, thereby requesting the channel associated with that username.',
+        valueHelp: 'YouTube username',
+      )
+      ..addOption(
+        'id',
+        valueHelp: 'id',
+        help:
+            'The id parameter specifies a comma-separated list of the YouTube channel ID(s) for the resource(s) that are being retrieved. In a channel resource, the id property specifies the channel\'s YouTube channel ID.',
+      );
   }
 
   @override
@@ -56,9 +62,10 @@ auditDetails, brandingSettings, contentDetails, contentOwnerDetails, id, localiz
 
     try {
       final channelResponse = await channels.list(
-          part: argResults!['part'],
-          forUsername: argResults?['for-username'],
-          id: argResults?['id']);
+        part: argResults!['part'],
+        forUsername: argResults?['for-username'],
+        id: argResults?['id'],
+      );
 
       print(channelResponse);
 
@@ -82,18 +89,22 @@ class YoutubeUpdateChannelsCommand extends YtHelperCommand {
 
   YoutubeUpdateChannelsCommand() {
     argParser
-      ..addOption('part',
-          mandatory: true,
-          help:
-              '''The part parameter serves two purposes in this operation. It identifies the properties that the write operation will set as well as the properties that the API response will include.
+      ..addOption(
+        'part',
+        mandatory: true,
+        help:
+            '''The part parameter serves two purposes in this operation. It identifies the properties that the write operation will set as well as the properties that the API response will include.
 
 The API currently only allows the parameter value to be set to either brandingSettings, invideoPromotion, or localizations. (You can only update any one of those parts with a single request.)
 
-Note that this method overrides the existing values for all of the mutable properties that are contained in the part that the parameter value specifies.''')
-      ..addOption('body',
-          mandatory: true,
-          help:
-              'Provide a liveBroadcast resource [https://developers.google.com/youtube/v3/live/docs/liveBroadcasts#resource] in the request body');
+Note that this method overrides the existing values for all of the mutable properties that are contained in the part that the parameter value specifies.''',
+      )
+      ..addOption(
+        'body',
+        mandatory: true,
+        help:
+            'Provide a liveBroadcast resource [https://developers.google.com/youtube/v3/live/docs/liveBroadcasts#resource] in the request body',
+      );
   }
 
   @override
@@ -102,7 +113,9 @@ Note that this method overrides the existing values for all of the mutable prope
 
     try {
       final channelItem = await channels.update(
-          body: json.decode(argResults!['body']), part: argResults!['part']);
+        body: json.decode(argResults!['body']),
+        part: argResults!['part'],
+      );
 
       print(channelItem);
 

@@ -22,12 +22,13 @@ class ReportAbuse {
   ///Identifies a language spoken by the reporter.
   final String? language;
 
-  ReportAbuse(
-      {required this.videoId,
-      required this.reasonId,
-      this.secondaryReasonId,
-      this.comments,
-      this.language});
+  ReportAbuse({
+    required this.videoId,
+    required this.reasonId,
+    this.secondaryReasonId,
+    this.comments,
+    this.language,
+  });
 
   factory ReportAbuse.fromJson(Map<String, dynamic> json) =>
       _$ReportAbuseFromJson(json);

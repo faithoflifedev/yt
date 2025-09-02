@@ -19,11 +19,12 @@ class Statistics {
   ///The number of public videos uploaded to the channel. Note that the value reflects the count of the channel's public videos only, even to owners. This behavior is consistent with counts shown on the YouTube website.
   final int videoCount;
 
-  Statistics(
-      {required this.viewCount,
-      required this.subscriberCount,
-      required this.hiddenSubscriberCount,
-      required this.videoCount});
+  Statistics({
+    required this.viewCount,
+    required this.subscriberCount,
+    required this.hiddenSubscriberCount,
+    required this.videoCount,
+  });
 
   factory Statistics.fromJson(Map<String, dynamic> json) =>
       _$StatisticsFromJson(json);

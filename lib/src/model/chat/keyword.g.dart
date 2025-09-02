@@ -7,13 +7,13 @@ part of 'keyword.dart';
 // **************************************************************************
 
 Keyword _$KeywordFromJson(Map<String, dynamic> json) => Keyword(
-      patterns: (json['patterns'] as List<dynamic>)
-          .map((e) => (e as List<dynamic>).map((e) => e as String).toList())
-          .toList(),
-      score: (json['score'] as num).toInt(),
-    );
+  patterns: (json['patterns'] as List<dynamic>)
+      .map((e) => (e as List<dynamic>).map((e) => e as String).toList())
+      .toList(),
+  score: (json['score'] as num).toInt(),
+);
 
 Map<String, dynamic> _$KeywordToJson(Keyword instance) => <String, dynamic>{
-      'patterns': instance.patterns,
-      'score': instance.score,
-    };
+  'patterns': instance.patterns,
+  'score': instance.score,
+};

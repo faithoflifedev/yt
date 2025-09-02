@@ -28,9 +28,10 @@ abstract class ChannelClient {
 
   @PUT('/channels')
   Future<ChannelItem> update(
-      @Header('Accept') String accept,
-      @Header('Content-Type') String contentType,
-      @Query('part') String parts,
-      @Body() Map<String, dynamic> body,
-      {@Query('onBehalfOfContentOwner') String? onBehalfOfContentOwner});
+    @Header('Accept') String accept,
+    @Header('Content-Type') String contentType,
+    @Query('part') String parts,
+    @Body() Map<String, dynamic> body, {
+    @Query('onBehalfOfContentOwner') String? onBehalfOfContentOwner,
+  });
 }

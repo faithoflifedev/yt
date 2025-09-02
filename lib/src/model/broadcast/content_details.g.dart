@@ -20,8 +20,9 @@ ContentDetails _$ContentDetailsFromJson(Map<String, dynamic> json) =>
       enableEmbed: json['enableEmbed'] as bool?,
       enableLowLatency: json['enableLowLatency'] as bool?,
       latencyPreference: json['latencyPreference'] as String,
-      monitorStream:
-          MonitorStream.fromJson(json['monitorStream'] as Map<String, dynamic>),
+      monitorStream: MonitorStream.fromJson(
+        json['monitorStream'] as Map<String, dynamic>,
+      ),
       projection: json['projection'] as String,
       recordFromStart: json['recordFromStart'] as bool?,
       startWithSlate: json['startWithSlate'] as bool?,
@@ -30,8 +31,8 @@ ContentDetails _$ContentDetailsFromJson(Map<String, dynamic> json) =>
 Map<String, dynamic> _$ContentDetailsToJson(ContentDetails instance) =>
     <String, dynamic>{
       'boundStreamId': instance.boundStreamId,
-      'boundStreamLastUpdateTimeMs':
-          instance.boundStreamLastUpdateTimeMs?.toIso8601String(),
+      'boundStreamLastUpdateTimeMs': instance.boundStreamLastUpdateTimeMs
+          ?.toIso8601String(),
       'closedCaptionsType': instance.closedCaptionsType,
       'enableAutoStart': instance.enableAutoStart,
       'enableAutoStop': instance.enableAutoStop,

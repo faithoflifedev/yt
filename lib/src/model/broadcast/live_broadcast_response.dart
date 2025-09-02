@@ -15,13 +15,14 @@ class LiveBroadcastResponse extends ListResponse {
   @JsonKey(name: 'items')
   final List<LiveBroadcastItem>? broadcastItems;
 
-  LiveBroadcastResponse(
-      {required super.kind,
-      required super.etag,
-      super.nextPageToken,
-      super.prevPageToken,
-      required super.pageInfo,
-      this.broadcastItems});
+  LiveBroadcastResponse({
+    required super.kind,
+    required super.etag,
+    super.nextPageToken,
+    super.prevPageToken,
+    required super.pageInfo,
+    this.broadcastItems,
+  });
 
   List<LiveBroadcastItem> get items => broadcastItems ?? [];
 
@@ -33,13 +34,16 @@ class LiveBroadcastResponse extends ListResponse {
   @override
   String toString() => jsonEncode(toJson());
 
-  static LiveBroadcastItem closestTo(List<LiveBroadcastItem> items,
-      {DateTime? dateTime}) {
+  static LiveBroadcastItem closestTo(
+    List<LiveBroadcastItem> items, {
+    DateTime? dateTime,
+  }) {
     final check = dateTime ?? DateTime.now().toUtc();
 
     return items.reduce((a, b) {
       print(
-          'a: ${a.defaultStartTime().difference(check).abs().inSeconds}, b: ${b.defaultStartTime().difference(check).abs().inSeconds}');
+        'a: ${a.defaultStartTime().difference(check).abs().inSeconds}, b: ${b.defaultStartTime().difference(check).abs().inSeconds}',
+      );
 
       return a.defaultStartTime().difference(check).abs() <
               b.defaultStartTime().difference(check).abs()

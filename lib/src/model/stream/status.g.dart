@@ -7,12 +7,13 @@ part of 'status.dart';
 // **************************************************************************
 
 Status _$StatusFromJson(Map<String, dynamic> json) => Status(
-      streamStatus: json['streamStatus'] as String,
-      healthStatus:
-          HealthStatus.fromJson(json['healthStatus'] as Map<String, dynamic>),
-    );
+  streamStatus: json['streamStatus'] as String,
+  healthStatus: HealthStatus.fromJson(
+    json['healthStatus'] as Map<String, dynamic>,
+  ),
+);
 
 Map<String, dynamic> _$StatusToJson(Status instance) => <String, dynamic>{
-      'streamStatus': instance.streamStatus,
-      'healthStatus': instance.healthStatus.toJson(),
-    };
+  'streamStatus': instance.streamStatus,
+  'healthStatus': instance.healthStatus.toJson(),
+};

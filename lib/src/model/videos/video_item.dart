@@ -39,16 +39,17 @@ class VideoItem extends ResponseMetadata {
   final LiveStreamingDetails? liveStreamingDetails;
   // final Localizations? localizations;
 
-  VideoItem(
-      {required super.kind,
-      required super.etag,
-      required this.id,
-      this.snippet,
-      this.status,
-      this.contentDetails,
-      this.statistics,
-      this.player,
-      this.liveStreamingDetails});
+  VideoItem({
+    required super.kind,
+    required super.etag,
+    required this.id,
+    this.snippet,
+    this.status,
+    this.contentDetails,
+    this.statistics,
+    this.player,
+    this.liveStreamingDetails,
+  });
 
   factory VideoItem.fromJson(Map<String, dynamic> json) =>
       _$VideoItemFromJson(json);

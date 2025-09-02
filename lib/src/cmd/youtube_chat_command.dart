@@ -40,29 +40,39 @@ class YoutubeListChatCommand extends YtHelperCommand {
 
   YoutubeListChatCommand() {
     argParser
-      ..addOption('liveChatId',
-          mandatory: true,
-          valueHelp: 'liveChatId',
-          help:
-              'The liveChatId parameter specifies the ID of the chat whose messages will be returned. The live chat ID associated with a broadcast is returned in the liveBroadcast resource\'s snippet.liveChatId property.')
-      ..addOption('part',
-          defaultsTo: 'id,snippet,authorDetails',
-          help:
-              'The part parameter specifies the liveChatMessage resource parts that the API response will include. Supported values are id, snippet, and authorDetails.')
-      ..addOption('max-results',
-          defaultsTo: '500',
-          valueHelp: 'number',
-          help:
-              'The maxResults parameter specifies the maximum number of messages that should be returned in the result set. Acceptable values are 200 to 2000, inclusive. The default value is 500.')
-      ..addOption('page-token',
-          valueHelp: 'token',
-          help:
-              'The pageToken parameter identifies a specific page in the result set that should be returned. In an API response, the nextPageToken property identify other pages that could be retrieved.')
-      ..addOption('profile-image-size',
-          defaultsTo: '88',
-          valueHelp: 'number',
-          help:
-              'The profileImageSize parameter specifies the size of the user profile pictures that should be returned in the result set. The images are square. The default value is 88, meaning pictures will be 88px by 88px. Acceptable values are in the range 16 to 720, inclusive.');
+      ..addOption(
+        'liveChatId',
+        mandatory: true,
+        valueHelp: 'liveChatId',
+        help:
+            'The liveChatId parameter specifies the ID of the chat whose messages will be returned. The live chat ID associated with a broadcast is returned in the liveBroadcast resource\'s snippet.liveChatId property.',
+      )
+      ..addOption(
+        'part',
+        defaultsTo: 'id,snippet,authorDetails',
+        help:
+            'The part parameter specifies the liveChatMessage resource parts that the API response will include. Supported values are id, snippet, and authorDetails.',
+      )
+      ..addOption(
+        'max-results',
+        defaultsTo: '500',
+        valueHelp: 'number',
+        help:
+            'The maxResults parameter specifies the maximum number of messages that should be returned in the result set. Acceptable values are 200 to 2000, inclusive. The default value is 500.',
+      )
+      ..addOption(
+        'page-token',
+        valueHelp: 'token',
+        help:
+            'The pageToken parameter identifies a specific page in the result set that should be returned. In an API response, the nextPageToken property identify other pages that could be retrieved.',
+      )
+      ..addOption(
+        'profile-image-size',
+        defaultsTo: '88',
+        valueHelp: 'number',
+        help:
+            'The profileImageSize parameter specifies the size of the user profile pictures that should be returned in the result set. The images are square. The default value is 88, meaning pictures will be 88px by 88px. Acceptable values are in the range 16 to 720, inclusive.',
+      );
   }
 
   @override
@@ -71,11 +81,12 @@ class YoutubeListChatCommand extends YtHelperCommand {
 
     try {
       final liveChatMessageListResponse = await chat.list(
-          liveChatId: argResults!['liveChatId'],
-          part: argResults!['part'],
-          maxResults: int.parse(argResults!['max-results']),
-          pageToken: argResults?['page-token'],
-          profileImageSize: int.parse(argResults!['profile-image-size']));
+        liveChatId: argResults!['liveChatId'],
+        part: argResults!['part'],
+        maxResults: int.parse(argResults!['max-results']),
+        pageToken: argResults?['page-token'],
+        profileImageSize: int.parse(argResults!['profile-image-size']),
+      );
 
       print(liveChatMessageListResponse);
 
@@ -98,14 +109,18 @@ class YoutubeInsertChatCommand extends YtHelperCommand {
 
   YoutubeInsertChatCommand() {
     argParser
-      ..addOption('part',
-          defaultsTo: 'snippet',
-          help:
-              'The part parameter serves two purposes. It identifies the properties that the write operation will set as well as the properties that the API response will include. Set the parameter value to snippet.')
-      ..addOption('body',
-          mandatory: true,
-          help:
-              'Provide a liveChatMessage resource [https://developers.google.com/youtube/v3/live/docs/liveChatMessages#resource] in the request body.');
+      ..addOption(
+        'part',
+        defaultsTo: 'snippet',
+        help:
+            'The part parameter serves two purposes. It identifies the properties that the write operation will set as well as the properties that the API response will include. Set the parameter value to snippet.',
+      )
+      ..addOption(
+        'body',
+        mandatory: true,
+        help:
+            'Provide a liveChatMessage resource [https://developers.google.com/youtube/v3/live/docs/liveChatMessages#resource] in the request body.',
+      );
   }
 
   @override
@@ -114,7 +129,9 @@ class YoutubeInsertChatCommand extends YtHelperCommand {
 
     try {
       final liveChatMessage = await chat.insert(
-          body: json.decode(argResults!['body']), part: argResults!['part']);
+        body: json.decode(argResults!['body']),
+        part: argResults!['part'],
+      );
 
       print(liveChatMessage);
 
@@ -136,11 +153,13 @@ class YoutubeDeleteChatCommand extends YtHelperCommand {
   String get name => 'delete';
 
   YoutubeDeleteChatCommand() {
-    argParser.addOption('id',
-        mandatory: true,
-        valueHelp: 'id',
-        help:
-            'The id parameter specifies the YouTube chat message ID of the resource that is being deleted.');
+    argParser.addOption(
+      'id',
+      mandatory: true,
+      valueHelp: 'id',
+      help:
+          'The id parameter specifies the YouTube chat message ID of the resource that is being deleted.',
+    );
   }
 
   @override
@@ -169,10 +188,12 @@ class YoutubeAnswerChatCommand extends YtHelperCommand {
   String get name => 'answer';
 
   YoutubeAnswerChatCommand() {
-    argParser.addOption('chatbot-config',
-        valueHelp: 'path',
-        help: 'The path to a "yaml" file with the Chatbot configuration.',
-        defaultsTo: '$userHome/.yt/chatbot.yaml');
+    argParser.addOption(
+      'chatbot-config',
+      valueHelp: 'path',
+      help: 'The path to a "yaml" file with the Chatbot configuration.',
+      defaultsTo: '$userHome/.yt/chatbot.yaml',
+    );
   }
 
   @override
@@ -181,7 +202,8 @@ class YoutubeAnswerChatCommand extends YtHelperCommand {
 
     if (!configFile.existsSync()) {
       throw Exception(
-          'File: ${configFile.path} could not be found.  This is a required file.');
+        'File: ${configFile.path} could not be found.  This is a required file.',
+      );
     }
 
     await initializeYt();
@@ -192,7 +214,9 @@ class YoutubeAnswerChatCommand extends YtHelperCommand {
 
     try {
       await chat.answerBot(
-          liveBroadcastItem: liveBroadcastItem, chatbot: chatbot);
+        liveBroadcastItem: liveBroadcastItem,
+        chatbot: chatbot,
+      );
 
       close();
     } on DioException catch (err) {

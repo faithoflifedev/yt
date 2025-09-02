@@ -20,15 +20,19 @@ abstract class ThumbnailsClient {
 
   ///Supply the [videoId] and retrieve the url used to upload the thumbnail image
   @POST('/set')
-  Future<HttpResponse<dynamic>> location(@Header('Accept') String accept,
-      @Query('videoId') String videoId, @Query('uploadType') String uploadType);
+  Future<HttpResponse<dynamic>> location(
+    @Header('Accept') String accept,
+    @Query('videoId') String videoId,
+    @Query('uploadType') String uploadType,
+  );
 
   ///Uploads a custom video thumbnail to YouTube and sets it for a video.
   @POST('/set')
   Future<ThumbnailsSetResponse> upload(
-      @Header('Content-Type') String contentType,
-      @Query('videoId') String videoId,
-      @Query('upload_id') String uploadId,
-      @Body() File image,
-      @Query('uploadType') String uploadType);
+    @Header('Content-Type') String contentType,
+    @Query('videoId') String videoId,
+    @Query('upload_id') String uploadId,
+    @Body() File image,
+    @Query('uploadType') String uploadType,
+  );
 }

@@ -27,14 +27,17 @@ class PhraseMatch {
     'the',
     'to',
     'we',
-    'yes'
+    'yes',
   ];
 
   bool checkQuestion({required String question, required Keyword keyword}) {
     List<List<String>> stemmedKeywords = [];
 
-    keyword.patterns.cast<List>().forEach((element) => stemmedKeywords
-        .add(element.map((word) => _stemmer.stem(word.toString())).toList()));
+    keyword.patterns.cast<List>().forEach(
+      (element) => stemmedKeywords.add(
+        element.map((word) => _stemmer.stem(word.toString())).toList(),
+      ),
+    );
 
     final questionListStemmed = question
         .split(_wordSplitter)

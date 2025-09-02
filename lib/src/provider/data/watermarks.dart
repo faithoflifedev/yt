@@ -16,10 +16,11 @@ abstract class WatermarksClient {
   ///Supply the [channelId] and retrieve the url used to upload the thumbnail image
   @POST('/set')
   Future<HttpResponse<dynamic>> location(
-      @Header('Authorization') String authorization,
-      @Header('Accept') String accept,
-      @Query('videoId') String channelId,
-      @Query('uploadType') String uploadType);
+    @Header('Authorization') String authorization,
+    @Header('Accept') String accept,
+    @Query('videoId') String channelId,
+    @Query('uploadType') String uploadType,
+  );
 
   /// Uploads a watermark image to YouTube and sets it for a channel.
   ///
@@ -46,7 +47,5 @@ abstract class WatermarksClient {
 
   ///Uploads a custom video thumbnail to YouTube and sets it for a video.
   @POST('/unset')
-  Future<HttpResponse<dynamic>> unset(
-    @Query('channelId') String channelId,
-  );
+  Future<HttpResponse<dynamic>> unset(@Query('channelId') String channelId);
 }

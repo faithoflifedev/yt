@@ -35,38 +35,41 @@ class WatermarksResource {
   /// The YouTube channel ID of the channel that the watermark image links to.
   final String targetChannelId;
 
-  WatermarksResource(
-      {required this.timing,
-      required this.position,
-      this.imageUrl = '',
-      required this.imageBytes,
-      required this.targetChannelId});
+  WatermarksResource({
+    required this.timing,
+    required this.position,
+    this.imageUrl = '',
+    required this.imageBytes,
+    required this.targetChannelId,
+  });
 
-  factory WatermarksResource.fromFile(
-          {required Timing timing,
-          required Position position,
-          String? imageUrl = '',
-          required File imageFile,
-          required String targetChannelId}) =>
-      WatermarksResource(
-          timing: timing,
-          position: position,
-          imageUrl: imageUrl,
-          imageBytes: imageFile.readAsBytesSync(),
-          targetChannelId: targetChannelId);
+  factory WatermarksResource.fromFile({
+    required Timing timing,
+    required Position position,
+    String? imageUrl = '',
+    required File imageFile,
+    required String targetChannelId,
+  }) => WatermarksResource(
+    timing: timing,
+    position: position,
+    imageUrl: imageUrl,
+    imageBytes: imageFile.readAsBytesSync(),
+    targetChannelId: targetChannelId,
+  );
 
-  factory WatermarksResource.fromFilePath(
-          {required Timing timing,
-          required Position position,
-          String? imageUrl = '',
-          required String imageFileName,
-          required String targetChannelId}) =>
-      WatermarksResource.fromFile(
-          timing: timing,
-          position: position,
-          imageUrl: imageUrl,
-          imageFile: File(imageFileName),
-          targetChannelId: targetChannelId);
+  factory WatermarksResource.fromFilePath({
+    required Timing timing,
+    required Position position,
+    String? imageUrl = '',
+    required String imageFileName,
+    required String targetChannelId,
+  }) => WatermarksResource.fromFile(
+    timing: timing,
+    position: position,
+    imageUrl: imageUrl,
+    imageFile: File(imageFileName),
+    targetChannelId: targetChannelId,
+  );
 
   factory WatermarksResource.fromJson(Map<String, dynamic> json) =>
       _$WatermarksResourceFromJson(json);

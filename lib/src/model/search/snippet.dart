@@ -17,15 +17,16 @@ class Snippet {
   final String liveBroadcastContent;
   final DateTime publishTime;
 
-  Snippet(
-      {required this.publishedAt,
-      required this.channelId,
-      required this.title,
-      required this.description,
-      required this.thumbnails,
-      required this.channelTitle,
-      required this.liveBroadcastContent,
-      required this.publishTime});
+  Snippet({
+    required this.publishedAt,
+    required this.channelId,
+    required this.title,
+    required this.description,
+    required this.thumbnails,
+    required this.channelTitle,
+    required this.liveBroadcastContent,
+    required this.publishTime,
+  });
 
   factory Snippet.fromJson(Map<String, dynamic> json) =>
       _$SnippetFromJson(json);

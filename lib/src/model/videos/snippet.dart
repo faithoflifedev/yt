@@ -61,19 +61,20 @@ class Snippet {
   ///The default_audio_language property specifies the language spoken in the video's default audio track.
   final String? defaultAudioLanguage;
 
-  Snippet(
-      {this.publishedAt,
-      this.channelId,
-      required this.title,
-      required this.description,
-      this.thumbnails,
-      this.channelTitle,
-      this.tags,
-      this.categoryId,
-      required this.liveBroadcastContent,
-      this.defaultLanguage,
-      this.localized,
-      this.defaultAudioLanguage});
+  Snippet({
+    this.publishedAt,
+    this.channelId,
+    required this.title,
+    required this.description,
+    this.thumbnails,
+    this.channelTitle,
+    this.tags,
+    this.categoryId,
+    required this.liveBroadcastContent,
+    this.defaultLanguage,
+    this.localized,
+    this.defaultAudioLanguage,
+  });
 
   factory Snippet.fromJson(Map<String, dynamic> json) =>
       _$SnippetFromJson(json);

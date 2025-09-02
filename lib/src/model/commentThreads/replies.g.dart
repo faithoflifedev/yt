@@ -7,11 +7,11 @@ part of 'replies.dart';
 // **************************************************************************
 
 Replies _$RepliesFromJson(Map<String, dynamic> json) => Replies(
-      value: (json['value'] as List<dynamic>)
-          .map((e) => Comment.fromJson(e as Map<String, dynamic>))
-          .toList(),
-    );
+  value: (json['value'] as List<dynamic>)
+      .map((e) => Comment.fromJson(e as Map<String, dynamic>))
+      .toList(),
+);
 
 Map<String, dynamic> _$RepliesToJson(Replies instance) => <String, dynamic>{
-      'value': instance.value,
-    };
+  'value': instance.value,
+};

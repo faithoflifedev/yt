@@ -28,12 +28,13 @@ class SuperStickerDetails {
   ///The Super Chat tiers, which also cover Super Stickers, are documented in the YouTube Help Center. (See the expandable section about Super Chat purchase details.) In that list, the tier with the lowest purchase amount is tier 1, the next lowest amount is tier 2, and so forth.
   final int? tier;
 
-  SuperStickerDetails(
-      {this.superStickerMetadata,
-      this.amountMicros,
-      this.currency,
-      this.amountDisplayString,
-      this.tier});
+  SuperStickerDetails({
+    this.superStickerMetadata,
+    this.amountMicros,
+    this.currency,
+    this.amountDisplayString,
+    this.tier,
+  });
 
   factory SuperStickerDetails.fromJson(Map<String, dynamic> json) =>
       _$SuperStickerDetailsFromJson(json);

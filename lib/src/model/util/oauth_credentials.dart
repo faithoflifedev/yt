@@ -12,10 +12,7 @@ class OAuthCredentials {
   final String identifier;
   final String secret;
 
-  OAuthCredentials(
-    this.identifier,
-    this.secret,
-  );
+  OAuthCredentials(this.identifier, this.secret);
 
   ClientId get oAuthClientId => ClientId(identifier, secret);
 
@@ -25,14 +22,18 @@ class OAuthCredentials {
 
   factory OAuthCredentials.fromYaml(String yamlFilePath) {
     return OAuthCredentials.fromYamlString(
-        File(yamlFilePath).readAsStringSync());
+      File(yamlFilePath).readAsStringSync(),
+    );
   }
 
   factory OAuthCredentials.fromYamlString(String yaml) {
     final credentialsYaml = loadYaml(yaml) as Map;
 
-    return OAuthCredentials.fromJson(credentialsYaml
-        .map<String, dynamic>((key, value) => MapEntry(key, value)));
+    return OAuthCredentials.fromJson(
+      credentialsYaml.map<String, dynamic>(
+        (key, value) => MapEntry(key, value),
+      ),
+    );
   }
 
   factory OAuthCredentials.fromJsonFile(File jsonFile) {

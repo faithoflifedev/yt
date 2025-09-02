@@ -6,8 +6,5 @@ abstract class ResponseMetadata {
   /// The Etag of this resource.
   final String etag;
 
-  ResponseMetadata({
-    required this.kind,
-    required this.etag,
-  });
+  ResponseMetadata({required this.kind, required this.etag});
 }

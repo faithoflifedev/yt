@@ -5,7 +5,6 @@ import 'package:json_annotation/json_annotation.dart';
 part 'snippet.g.dart';
 
 @JsonSerializable(explicitToJson: true)
-
 ///The snippet object contains basic details about the stream, including its channel, title, and description.
 class Snippet {
   ///The date and time that the stream was created. The value is specified in [ISO 8601](https://www.w3.org/TR/NOTE-datetime) (YYYY-MM-DDThh:mm:ss.sZ) format.
@@ -23,12 +22,13 @@ class Snippet {
   @JsonKey(ignore: true)
   final bool? isDefaultStream;
 
-  Snippet(
-      {required this.publishedAt,
-      required this.channelId,
-      required this.title,
-      required this.description,
-      this.isDefaultStream});
+  Snippet({
+    required this.publishedAt,
+    required this.channelId,
+    required this.title,
+    required this.description,
+    this.isDefaultStream,
+  });
 
   factory Snippet.fromJson(Map<String, dynamic> json) =>
       _$SnippetFromJson(json);

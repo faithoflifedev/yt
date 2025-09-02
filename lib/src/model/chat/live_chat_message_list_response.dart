@@ -23,14 +23,15 @@ class LiveChatMessageListResponse extends ListResponse {
   @JsonKey(name: 'items')
   final List<LiveChatMessage>? liveChatMessageItems;
 
-  LiveChatMessageListResponse(
-      {required super.kind,
-      required super.etag,
-      super.nextPageToken,
-      this.pollingIntervalMillis,
-      this.offlineAt,
-      required super.pageInfo,
-      this.liveChatMessageItems});
+  LiveChatMessageListResponse({
+    required super.kind,
+    required super.etag,
+    super.nextPageToken,
+    this.pollingIntervalMillis,
+    this.offlineAt,
+    required super.pageInfo,
+    this.liveChatMessageItems,
+  });
 
   List<LiveChatMessage> get items => liveChatMessageItems ?? [];
 

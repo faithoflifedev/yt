@@ -26,22 +26,21 @@ class Videos extends YouTubeApiHelper {
     String? pageToken,
     String? regionCode,
     String? videoCategoryId,
-  }) async =>
-      await _rest.list(
-        accept,
-        buildParts(partList, part),
-        chart: chart,
-        id: id,
-        myRating: myRating,
-        hl: hl,
-        maxHeight: maxHeight,
-        maxResults: maxResults,
-        maxWidth: maxWidth,
-        onBehalfOfContentOwner: onBehalfOfContentOwner,
-        pageToken: pageToken,
-        regionCode: regionCode,
-        videoCategoryId: videoCategoryId,
-      );
+  }) async => await _rest.list(
+    accept,
+    buildParts(partList, part),
+    chart: chart,
+    id: id,
+    myRating: myRating,
+    hl: hl,
+    maxHeight: maxHeight,
+    maxResults: maxResults,
+    maxWidth: maxWidth,
+    onBehalfOfContentOwner: onBehalfOfContentOwner,
+    pageToken: pageToken,
+    regionCode: regionCode,
+    videoCategoryId: videoCategoryId,
+  );
 
   /// Uploads a video to YouTube and optionally sets the video's metadata.
   Future<VideoItem> insert({
@@ -90,23 +89,12 @@ class Videos extends YouTubeApiHelper {
     String part = 'snippet,status,contentDetails',
     List<String> partList = const [],
   }) async {
-    return await _rest.update(
-      accept,
-      buildParts(partList, part),
-      body,
-    );
+    return await _rest.update(accept, buildParts(partList, part), body);
   }
 
   /// Add a like or dislike rating to a [VideoItem] or remove a rating from a [VideoItem].
-  Future<void> rate({
-    required String id,
-    required String rating,
-  }) async {
-    return await _rest.rate(
-      accept,
-      id,
-      rating,
-    );
+  Future<void> rate({required String id, required String rating}) async {
+    return await _rest.rate(accept, id, rating);
   }
 
   /// Retrieves the ratings that the authorized user gave to a list of specified videos.

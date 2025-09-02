@@ -15,7 +15,8 @@ LiveChatMessage _$LiveChatMessageFromJson(Map<String, dynamic> json) =>
       authorDetails: json['authorDetails'] == null
           ? null
           : AuthorDetails.fromJson(
-              json['authorDetails'] as Map<String, dynamic>),
+              json['authorDetails'] as Map<String, dynamic>,
+            ),
     );
 
 Map<String, dynamic> _$LiveChatMessageToJson(LiveChatMessage instance) =>

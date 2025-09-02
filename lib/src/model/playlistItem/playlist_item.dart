@@ -26,13 +26,14 @@ class PlaylistItem extends ResponseMetadata {
   /// The [ContentDetails] object is included in the resource if the included item is a YouTube video. The object contains additional information about the video.
   final ContentDetails? contentDetails;
 
-  PlaylistItem(
-      {required super.kind,
-      required super.etag,
-      required this.id,
-      this.snippet,
-      this.status,
-      this.contentDetails});
+  PlaylistItem({
+    required super.kind,
+    required super.etag,
+    required this.id,
+    this.snippet,
+    this.status,
+    this.contentDetails,
+  });
 
   factory PlaylistItem.fromJson(Map<String, dynamic> json) =>
       _$PlaylistItemFromJson(json);

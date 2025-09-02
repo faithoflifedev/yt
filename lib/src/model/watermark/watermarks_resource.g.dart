@@ -11,7 +11,9 @@ WatermarksResource _$WatermarksResourceFromJson(Map<String, dynamic> json) =>
       timing: Timing.fromJson(json['timing'] as Map<String, dynamic>),
       position: Position.fromJson(json['position'] as Map<String, dynamic>),
       imageUrl: json['imageUrl'] as String? ?? '',
-      imageBytes: WatermarksResource.stringToUint8List(json['imageBytes']),
+      imageBytes: WatermarksResource.stringToUint8List(
+        json['imageBytes'] as List<int>,
+      ),
       targetChannelId: json['targetChannelId'] as String,
     );
 

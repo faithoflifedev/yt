@@ -62,18 +62,19 @@ class Snippet {
   ///This object contains details about a Super Sticker event. It is only present if the message type is superStickerEvent.
   final SuperStickerDetails? superStickerDetails;
 
-  Snippet(
-      {this.type,
-      this.liveChatId,
-      this.authorChannelId,
-      this.publishedAt,
-      this.hasDisplayContent,
-      this.displayMessage,
-      this.textMessageDetails,
-      this.messageDeletedDetails,
-      this.userBannedDetails,
-      this.superChatDetails,
-      this.superStickerDetails});
+  Snippet({
+    this.type,
+    this.liveChatId,
+    this.authorChannelId,
+    this.publishedAt,
+    this.hasDisplayContent,
+    this.displayMessage,
+    this.textMessageDetails,
+    this.messageDeletedDetails,
+    this.userBannedDetails,
+    this.superChatDetails,
+    this.superStickerDetails,
+  });
 
   factory Snippet.fromJson(Map<String, dynamic> json) =>
       _$SnippetFromJson(json);

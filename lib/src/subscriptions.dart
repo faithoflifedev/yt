@@ -13,35 +13,35 @@ class Subscriptions extends YouTubeApiHelper {
   Subscriptions({required super.dio}) : _rest = SubscriptionsClient(dio);
 
   /// Returns subscription resources that match the API request criteria.
-  Future<SubscriptionListResponse> list(
-          {String part = 'contentDetails,id,snippet,subscriberSnippet',
-          List<String> partList = const [],
-          String? channelId,
-          String? id,
-          bool? mine,
-          bool? myRecentSubscribers,
-          bool? mySubscribers,
-          String? forChannelId,
-          int? maxResults,
-          String? onBehalfOfContentOwner,
-          String? onBehalfOfContentOwnerChannel,
-          String? order,
-          String? pageToken}) async =>
-      _rest.list(
-        // _authHeader,
-        accept,
-        buildParts(partList, part),
-        channelId: channelId,
-        id: id,
-        mine: mine,
-        myRecentSubscribers: myRecentSubscribers,
-        mySubscribers: mySubscribers,
-        forChannelId: forChannelId,
-        maxResults: maxResults,
-        onBehalfOfContentOwner: onBehalfOfContentOwner,
-        onBehalfOfContentOwnerChannel: onBehalfOfContentOwnerChannel,
-        pageToken: pageToken,
-      );
+  Future<SubscriptionListResponse> list({
+    String part = 'contentDetails,id,snippet,subscriberSnippet',
+    List<String> partList = const [],
+    String? channelId,
+    String? id,
+    bool? mine,
+    bool? myRecentSubscribers,
+    bool? mySubscribers,
+    String? forChannelId,
+    int? maxResults,
+    String? onBehalfOfContentOwner,
+    String? onBehalfOfContentOwnerChannel,
+    String? order,
+    String? pageToken,
+  }) async => _rest.list(
+    // _authHeader,
+    accept,
+    buildParts(partList, part),
+    channelId: channelId,
+    id: id,
+    mine: mine,
+    myRecentSubscribers: myRecentSubscribers,
+    mySubscribers: mySubscribers,
+    forChannelId: forChannelId,
+    maxResults: maxResults,
+    onBehalfOfContentOwner: onBehalfOfContentOwner,
+    onBehalfOfContentOwnerChannel: onBehalfOfContentOwnerChannel,
+    pageToken: pageToken,
+  );
 
   /// Adds a subscription for the authenticated user's channel.
   Future<Subscription> insert({

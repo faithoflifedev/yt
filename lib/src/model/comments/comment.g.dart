@@ -7,17 +7,17 @@ part of 'comment.dart';
 // **************************************************************************
 
 Comment _$CommentFromJson(Map<String, dynamic> json) => Comment(
-      kind: json['kind'] as String,
-      etag: json['etag'] as String,
-      id: json['id'] as String,
-      snippet: json['snippet'] == null
-          ? null
-          : Snippet.fromJson(json['snippet'] as Map<String, dynamic>),
-    );
+  kind: json['kind'] as String,
+  etag: json['etag'] as String,
+  id: json['id'] as String,
+  snippet: json['snippet'] == null
+      ? null
+      : Snippet.fromJson(json['snippet'] as Map<String, dynamic>),
+);
 
 Map<String, dynamic> _$CommentToJson(Comment instance) => <String, dynamic>{
-      'kind': instance.kind,
-      'etag': instance.etag,
-      'id': instance.id,
-      'snippet': instance.snippet,
-    };
+  'kind': instance.kind,
+  'etag': instance.etag,
+  'id': instance.id,
+  'snippet': instance.snippet,
+};

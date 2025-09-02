@@ -30,8 +30,11 @@ class OAuthAccessControlWeb extends BaseOAuthAccessControl {
     }
 
     if (accessCredentials.accessToken.expiry.isBefore(DateTime.now())) {
-      nullableAccessCredentials =
-          await refreshCredentials(clientId!, accessCredentials, httpClient);
+      nullableAccessCredentials = await refreshCredentials(
+        clientId!,
+        accessCredentials,
+        httpClient,
+      );
     }
   }
 }

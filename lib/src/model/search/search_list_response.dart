@@ -18,14 +18,15 @@ class SearchListResponse extends ListResponse {
   @JsonKey(name: 'items')
   final List<SearchResult>? searchItems;
 
-  SearchListResponse(
-      {required super.kind,
-      required super.etag,
-      super.nextPageToken,
-      super.prevPageToken,
-      this.regionCode,
-      required super.pageInfo,
-      this.searchItems});
+  SearchListResponse({
+    required super.kind,
+    required super.etag,
+    super.nextPageToken,
+    super.prevPageToken,
+    this.regionCode,
+    required super.pageInfo,
+    this.searchItems,
+  });
 
   List<SearchResult> get items => searchItems ?? [];
 

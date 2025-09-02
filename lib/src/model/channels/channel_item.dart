@@ -29,14 +29,15 @@ class ChannelItem extends ResponseMetadata {
   ///The [BrandingSettings] object encapsulates information about the branding of the channel.
   final BrandingSettings? brandingSettings;
 
-  ChannelItem(
-      {required super.kind,
-      required super.etag,
-      required this.id,
-      this.snippet,
-      this.contentDetails,
-      this.statistics,
-      this.brandingSettings});
+  ChannelItem({
+    required super.kind,
+    required super.etag,
+    required this.id,
+    this.snippet,
+    this.contentDetails,
+    this.statistics,
+    this.brandingSettings,
+  });
 
   factory ChannelItem.fromJson(Map<String, dynamic> json) =>
       _$ChannelItemFromJson(json);

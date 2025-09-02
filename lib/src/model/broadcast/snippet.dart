@@ -40,17 +40,18 @@ class Snippet {
   ///The ID for the broadcast's YouTube live chat. With this ID, you can use the [LiveChatMessage] resource's methods to retrieve, insert, or delete chat messages. You can also add or remove chat moderators, ban users from participating in live chats, or remove existing bans.
   final String? liveChatId;
 
-  Snippet(
-      {required this.publishedAt,
-      required this.channelId,
-      required this.title,
-      required this.description,
-      required this.thumbnails,
-      this.scheduledStartTime,
-      this.scheduledEndTime,
-      this.actualStartTime,
-      this.isDefaultBroadcast,
-      required this.liveChatId});
+  Snippet({
+    required this.publishedAt,
+    required this.channelId,
+    required this.title,
+    required this.description,
+    required this.thumbnails,
+    this.scheduledStartTime,
+    this.scheduledEndTime,
+    this.actualStartTime,
+    this.isDefaultBroadcast,
+    required this.liveChatId,
+  });
 
   factory Snippet.fromJson(Map<String, dynamic> json) =>
       _$SnippetFromJson(json);

@@ -15,13 +15,14 @@ class VideoListResponse extends ListResponse {
   @JsonKey(name: 'items')
   final List<VideoItem>? videoItems;
 
-  VideoListResponse(
-      {required super.kind,
-      required super.etag,
-      super.nextPageToken,
-      super.prevPageToken,
-      required super.pageInfo,
-      this.videoItems});
+  VideoListResponse({
+    required super.kind,
+    required super.etag,
+    super.nextPageToken,
+    super.prevPageToken,
+    required super.pageInfo,
+    this.videoItems,
+  });
 
   List<VideoItem> get items => videoItems ?? [];
 

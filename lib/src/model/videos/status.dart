@@ -17,17 +17,18 @@ class Status {
   final bool? madeForKids;
   final bool? selfDeclaredMadeForKids;
 
-  Status(
-      {required this.uploadStatus,
-      this.failureReason,
-      this.rejectionReason,
-      required this.privacyStatus,
-      this.publishAt,
-      required this.license,
-      required this.embeddable,
-      required this.publicStatsViewable,
-      this.madeForKids,
-      this.selfDeclaredMadeForKids});
+  Status({
+    required this.uploadStatus,
+    this.failureReason,
+    this.rejectionReason,
+    required this.privacyStatus,
+    this.publishAt,
+    required this.license,
+    required this.embeddable,
+    required this.publicStatsViewable,
+    this.madeForKids,
+    this.selfDeclaredMadeForKids,
+  });
 
   factory Status.fromJson(Map<String, dynamic> json) => _$StatusFromJson(json);
 

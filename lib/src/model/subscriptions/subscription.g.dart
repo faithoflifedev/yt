@@ -7,21 +7,21 @@ part of 'subscription.dart';
 // **************************************************************************
 
 Subscription _$SubscriptionFromJson(Map<String, dynamic> json) => Subscription(
-      kind: json['kind'] as String,
-      etag: json['etag'] as String,
-      id: json['id'] as String,
-      snippet: json['snippet'] == null
-          ? null
-          : Snippet.fromJson(json['snippet'] as Map<String, dynamic>),
-      contentDetails: json['contentDetails'] == null
-          ? null
-          : ContentDetails.fromJson(
-              json['contentDetails'] as Map<String, dynamic>),
-      subscriberSnippet: json['subscriberSnippet'] == null
-          ? null
-          : SubscriberSnippet.fromJson(
-              json['subscriberSnippet'] as Map<String, dynamic>),
-    );
+  kind: json['kind'] as String,
+  etag: json['etag'] as String,
+  id: json['id'] as String,
+  snippet: json['snippet'] == null
+      ? null
+      : Snippet.fromJson(json['snippet'] as Map<String, dynamic>),
+  contentDetails: json['contentDetails'] == null
+      ? null
+      : ContentDetails.fromJson(json['contentDetails'] as Map<String, dynamic>),
+  subscriberSnippet: json['subscriberSnippet'] == null
+      ? null
+      : SubscriberSnippet.fromJson(
+          json['subscriberSnippet'] as Map<String, dynamic>,
+        ),
+);
 
 Map<String, dynamic> _$SubscriptionToJson(Subscription instance) =>
     <String, dynamic>{

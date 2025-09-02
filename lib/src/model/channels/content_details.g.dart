@@ -9,10 +9,9 @@ part of 'content_details.dart';
 ContentDetails _$ContentDetailsFromJson(Map<String, dynamic> json) =>
     ContentDetails(
       relatedPlaylists: RelatedPlaylists.fromJson(
-          json['relatedPlaylists'] as Map<String, dynamic>),
+        json['relatedPlaylists'] as Map<String, dynamic>,
+      ),
     );
 
 Map<String, dynamic> _$ContentDetailsToJson(ContentDetails instance) =>
-    <String, dynamic>{
-      'relatedPlaylists': instance.relatedPlaylists,
-    };
+    <String, dynamic>{'relatedPlaylists': instance.relatedPlaylists};

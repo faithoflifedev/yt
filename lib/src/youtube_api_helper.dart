@@ -9,16 +9,13 @@ abstract class YouTubeApiHelper {
 
   final contentType = 'application/json';
 
-  YouTubeApiHelper({
-    required this.dio,
-    this.token,
-    this.apiKey,
-  });
+  YouTubeApiHelper({required this.dio, this.token, this.apiKey});
 
   String buildParts(List<String> partList, String part) {
     if (partList.isEmpty && part == '') {
       throw Exception(
-          'I need either of the partList or part field to have an entry');
+        'I need either of the partList or part field to have an entry',
+      );
     }
 
     final List<String> tmpList = [];

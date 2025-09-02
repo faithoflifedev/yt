@@ -24,11 +24,12 @@ class ConfigurationIssue {
   ///A detailed description of the issue. When possible, the description provides information about how to resolve the issue. The [Configuration Issues for LiveStream Resources](https://developers.google.com/youtube/v3/live/docs/liveStreams/health_status_messages) document lists all of the configuration issue types and their associated descriptions.
   final String description;
 
-  ConfigurationIssue(
-      {required this.type,
-      required this.severity,
-      required this.reason,
-      required this.description});
+  ConfigurationIssue({
+    required this.type,
+    required this.severity,
+    required this.reason,
+    required this.description,
+  });
 
   factory ConfigurationIssue.fromJson(Map<String, dynamic> json) =>
       _$ConfigurationIssueFromJson(json);

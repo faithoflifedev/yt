@@ -18,15 +18,16 @@ class Snippet {
   final String? defaultLanguage;
   final Localized localized;
 
-  Snippet(
-      {required this.publishedAt,
-      required this.channelId,
-      required this.title,
-      required this.description,
-      required this.thumbnails,
-      required this.channelTitle,
-      this.defaultLanguage,
-      required this.localized});
+  Snippet({
+    required this.publishedAt,
+    required this.channelId,
+    required this.title,
+    required this.description,
+    required this.thumbnails,
+    required this.channelTitle,
+    this.defaultLanguage,
+    required this.localized,
+  });
 
   factory Snippet.fromJson(Map<String, dynamic> json) =>
       _$SnippetFromJson(json);

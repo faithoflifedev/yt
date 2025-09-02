@@ -12,6 +12,4 @@ BrandingSettings _$BrandingSettingsFromJson(Map<String, dynamic> json) =>
     );
 
 Map<String, dynamic> _$BrandingSettingsToJson(BrandingSettings instance) =>
-    <String, dynamic>{
-      'channel': instance.channel.toJson(),
-    };
+    <String, dynamic>{'channel': instance.channel.toJson()};

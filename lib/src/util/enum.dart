@@ -8,5 +8,5 @@ enum ModerationStatus {
 
   /// Rejects a comment as being unfit for display. This action also effectively
   /// hides all replies to the rejected comment.
-  rejected;
+  rejected,
 }

@@ -15,13 +15,14 @@ class PlaylistItemListResponse extends ListResponse {
   @JsonKey(name: 'items')
   final List<PlaylistItem>? playlistItemItems;
 
-  PlaylistItemListResponse(
-      {required super.kind,
-      required super.etag,
-      super.nextPageToken,
-      super.prevPageToken,
-      required super.pageInfo,
-      this.playlistItemItems});
+  PlaylistItemListResponse({
+    required super.kind,
+    required super.etag,
+    super.nextPageToken,
+    super.prevPageToken,
+    required super.pageInfo,
+    this.playlistItemItems,
+  });
 
   List<PlaylistItem> get items => playlistItemItems ?? [];
 

@@ -19,29 +19,34 @@ class Thumbnails extends YouTubeApiHelper {
   Thumbnails({required super.dio}) : _rest = ThumbnailsClient(dio);
 
   ///Supply the [videoId] and retrieve the url used to upload the thumbnail image
-  Future<ThumbnailsSetResponse> set(
-      {required String videoId, required File thumbnail}) async {
+  Future<ThumbnailsSetResponse> set({
+    required String videoId,
+    required File thumbnail,
+  }) async {
     final String uploadType = 'resumable';
 
-    final httpResponse = await _rest.location(
-      accept,
-      videoId,
-      uploadType,
-    );
+    final httpResponse = await _rest.location(accept, videoId, uploadType);
 
     if (!httpResponse.response.headers.map.containsKey('location')) {
       throw Exception(
-          'Upload location for the thumbnail could not be determined');
+        'Upload location for the thumbnail could not be determined',
+      );
     }
 
-    final uploadUri =
-        Uri.parse(httpResponse.response.headers.value('location')!);
+    final uploadUri = Uri.parse(
+      httpResponse.response.headers.value('location')!,
+    );
 
     if (!uploadUri.queryParameters.containsKey('upload_id')) {
       throw Exception('Upload Id for the thumbnail could not be determined');
     }
 
-    return await _rest.upload('application/x-www-form-urlencoded', videoId,
-        uploadUri.queryParameters['upload_id']!, thumbnail, uploadType);
+    return await _rest.upload(
+      'application/x-www-form-urlencoded',
+      videoId,
+      uploadUri.queryParameters['upload_id']!,
+      thumbnail,
+      uploadType,
+    );
   }
 }

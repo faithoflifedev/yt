@@ -24,10 +24,11 @@ class HealthStatus {
   ///This object contains a list of configuration issues affecting the stream.
   final List<ConfigurationIssue> configurationIssues;
 
-  HealthStatus(
-      {this.status,
-      this.lastUpdateTimeSeconds,
-      required this.configurationIssues});
+  HealthStatus({
+    this.status,
+    this.lastUpdateTimeSeconds,
+    required this.configurationIssues,
+  });
 
   factory HealthStatus.fromJson(Map<String, dynamic> json) =>
       _$HealthStatusFromJson(json);

@@ -10,28 +10,27 @@ class LiveStream extends YouTubeApiHelper {
   LiveStream({required super.dio}) : _rest = StreamClient(dio);
 
   ///Returns a list of video streams that match the API request parameters.
-  Future<LiveStreamListResponse> list(
-      {String part = 'snippet,status,contentDetails',
-      List<String> partList = const [],
-      String? id,
-      bool? mine,
-      int? maxResults,
-      String? onBehalfOfContentOwner,
-      String? onBehalfOfContentOwnerChannel,
-      String? pageToken}) {
+  Future<LiveStreamListResponse> list({
+    String part = 'snippet,status,contentDetails',
+    List<String> partList = const [],
+    String? id,
+    bool? mine,
+    int? maxResults,
+    String? onBehalfOfContentOwner,
+    String? onBehalfOfContentOwnerChannel,
+    String? pageToken,
+  }) {
     return _rest.list(
-        // _authHeader,
-        accept,
-        buildParts(
-          partList,
-          part,
-        ),
-        id: id,
-        mine: mine,
-        maxResults: maxResults,
-        onBehalfOfContentOwner: onBehalfOfContentOwner,
-        onBehalfOfContentOwnerChannel: onBehalfOfContentOwnerChannel,
-        pageToken: pageToken);
+      // _authHeader,
+      accept,
+      buildParts(partList, part),
+      id: id,
+      mine: mine,
+      maxResults: maxResults,
+      onBehalfOfContentOwner: onBehalfOfContentOwner,
+      onBehalfOfContentOwnerChannel: onBehalfOfContentOwnerChannel,
+      pageToken: pageToken,
+    );
   }
 
   ///Creates a video stream. The stream enables you to send your video to YouTube, which can then broadcast the video to your audience.
@@ -41,14 +40,13 @@ class LiveStream extends YouTubeApiHelper {
     required Map<String, dynamic> body,
     String? onBehalfOfContentOwner,
     String? onBehalfOfContentOwnerChannel,
-  }) =>
-      _rest.insert(
-        // _authHeader,
-        accept,
-        contentType,
-        buildParts(partList, part),
-        body,
-      );
+  }) => _rest.insert(
+    // _authHeader,
+    accept,
+    contentType,
+    buildParts(partList, part),
+    body,
+  );
 
   ///Updates a video stream. If the properties that you want to change cannot be updated, then you need to create a new stream with the proper settings.
   Future<LiveStreamItem> update({

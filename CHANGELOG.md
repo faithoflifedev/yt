@@ -1,3 +1,10 @@
+## 2.2.6
+
+* dep bump
+* remove flutter example
+* new sdk
+* new formatting
+
 ## 2.2.5+7
 
 * Issue #11

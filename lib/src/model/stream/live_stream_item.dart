@@ -24,13 +24,14 @@ class LiveStreamItem extends ResponseMetadata {
   /// The status object contains information about live stream's status.
   final Status? status;
 
-  LiveStreamItem(
-      {required super.kind,
-      required super.etag,
-      required this.id,
-      this.snippet,
-      this.status,
-      this.cdn});
+  LiveStreamItem({
+    required super.kind,
+    required super.etag,
+    required this.id,
+    this.snippet,
+    this.status,
+    this.cdn,
+  });
 
   factory LiveStreamItem.fromJson(Map<String, dynamic> json) =>
       _$LiveStreamItemFromJson(json);

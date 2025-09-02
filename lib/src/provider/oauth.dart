@@ -9,7 +9,8 @@ abstract class OAuthClient {
   factory OAuthClient(Dio dio, {String baseUrl}) = _OAuthClient;
 
   @POST('/token')
-  @Headers(
-      <String, dynamic>{"Content-Type": "application/x-www-form-urlencoded"})
+  @Headers(<String, dynamic>{
+    "Content-Type": "application/x-www-form-urlencoded",
+  })
   Future<Token> getToken(@Body() Map<String, dynamic> params);
 }

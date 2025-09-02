@@ -28,14 +28,15 @@ class LiveBroadcastItem extends ResponseMetadata implements Comparable {
   /// The [Statistics] object contains statistics related to a live broadcast. The values for these statistics can change during the broadcast and can only be retrieved while the broadcast is live.
   final Statistics? statistics;
 
-  LiveBroadcastItem(
-      {required super.kind,
-      required super.etag,
-      required this.id,
-      this.snippet,
-      this.status,
-      this.contentDetails,
-      this.statistics});
+  LiveBroadcastItem({
+    required super.kind,
+    required super.etag,
+    required this.id,
+    this.snippet,
+    this.status,
+    this.contentDetails,
+    this.statistics,
+  });
 
   factory LiveBroadcastItem.fromJson(Map<String, dynamic> json) =>
       _$LiveBroadcastItemFromJson(json);
@@ -47,12 +48,14 @@ class LiveBroadcastItem extends ResponseMetadata implements Comparable {
 
   @override
   int compareTo(other) =>
-      defaultStartTime(DateTime.fromMillisecondsSinceEpoch(0).toUtc())
-          .compareTo(other.defaultStartTime(
-              DateTime.fromMillisecondsSinceEpoch(0).toUtc()));
+      defaultStartTime(
+        DateTime.fromMillisecondsSinceEpoch(0).toUtc(),
+      ).compareTo(
+        other.defaultStartTime(DateTime.fromMillisecondsSinceEpoch(0).toUtc()),
+      );
 
   DateTime defaultStartTime([DateTime? otherwise]) =>
       snippet != null && snippet!.scheduledStartTime != null
-          ? snippet!.scheduledStartTime!
-          : otherwise ?? DateTime.fromMillisecondsSinceEpoch(0).toUtc();
+      ? snippet!.scheduledStartTime!
+      : otherwise ?? DateTime.fromMillisecondsSinceEpoch(0).toUtc();
 }

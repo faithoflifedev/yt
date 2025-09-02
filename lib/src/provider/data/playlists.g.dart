@@ -2,11 +2,13 @@
 
 part of 'playlists.dart';
 
+// dart format off
+
 // **************************************************************************
 // RetrofitGenerator
 // **************************************************************************
 
-// ignore_for_file: unnecessary_brace_in_string_interps,no_leading_underscores_for_local_identifiers,unused_element,unnecessary_string_interpolations
+// ignore_for_file: unnecessary_brace_in_string_interps,no_leading_underscores_for_local_identifiers,unused_element,unnecessary_string_interpolations,unused_element_parameter
 
 class _PlaylistClient implements PlaylistClient {
   _PlaylistClient(this._dio, {this.baseUrl, this.errorLogger}) {
@@ -222,3 +224,5 @@ class _PlaylistClient implements PlaylistClient {
     return Uri.parse(dioBaseUrl).resolveUri(url).toString();
   }
 }
+
+// dart format on

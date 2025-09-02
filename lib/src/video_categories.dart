@@ -20,12 +20,11 @@ class VideoCategories extends YouTubeApiHelper {
     String? id,
     String? regionCode,
     String? hl,
-  }) =>
-      _rest.list(
-        accept,
-        buildParts(partList, part),
-        id: id,
-        regionCode: regionCode,
-        hl: hl,
-      );
+  }) => _rest.list(
+    accept,
+    buildParts(partList, part),
+    id: id,
+    regionCode: regionCode,
+    hl: hl,
+  );
 }

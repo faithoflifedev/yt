@@ -13,13 +13,14 @@ class LiveStreamingDetails {
   final int concurrentViewers;
   final String? activeLiveChatId;
 
-  LiveStreamingDetails(
-      {required this.actualStartTime,
-      required this.actualEndTime,
-      required this.scheduledStartTime,
-      required this.scheduledEndTime,
-      required this.concurrentViewers,
-      this.activeLiveChatId});
+  LiveStreamingDetails({
+    required this.actualStartTime,
+    required this.actualEndTime,
+    required this.scheduledStartTime,
+    required this.scheduledEndTime,
+    required this.concurrentViewers,
+    this.activeLiveChatId,
+  });
 
   factory LiveStreamingDetails.fromJson(Map<String, dynamic> json) =>
       _$LiveStreamingDetailsFromJson(json);

@@ -39,15 +39,16 @@ class Playlist extends ResponseMetadata {
   /// The localizations object encapsulates translations of the playlist's metadata.
   final dynamic localizations;
 
-  Playlist(
-      {required super.kind,
-      required super.etag,
-      required this.id,
-      this.snippet,
-      this.status,
-      this.contentDetails,
-      this.player,
-      this.localizations});
+  Playlist({
+    required super.kind,
+    required super.etag,
+    required this.id,
+    this.snippet,
+    this.status,
+    this.contentDetails,
+    this.player,
+    this.localizations,
+  });
 
   factory Playlist.fromJson(Map<String, dynamic> json) =>
       _$PlaylistFromJson(json);

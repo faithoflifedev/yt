@@ -13,10 +13,7 @@ class PageInfo {
   ///The number of results included in the API response.
   final int resultsPerPage;
 
-  PageInfo({
-    required this.totalResults,
-    required this.resultsPerPage,
-  });
+  PageInfo({required this.totalResults, required this.resultsPerPage});
 
   factory PageInfo.fromJson(Map<String, dynamic> json) =>
       _$PageInfoFromJson(json);

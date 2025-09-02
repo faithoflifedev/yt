@@ -20,7 +20,8 @@ LiveBroadcastItem _$LiveBroadcastItemFromJson(Map<String, dynamic> json) =>
       contentDetails: json['contentDetails'] == null
           ? null
           : ContentDetails.fromJson(
-              json['contentDetails'] as Map<String, dynamic>),
+              json['contentDetails'] as Map<String, dynamic>,
+            ),
       statistics: json['statistics'] == null
           ? null
           : Statistics.fromJson(json['statistics'] as Map<String, dynamic>),

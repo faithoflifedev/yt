@@ -7,11 +7,11 @@ part of 'page_info.dart';
 // **************************************************************************
 
 PageInfo _$PageInfoFromJson(Map<String, dynamic> json) => PageInfo(
-      totalResults: (json['totalResults'] as num).toInt(),
-      resultsPerPage: (json['resultsPerPage'] as num).toInt(),
-    );
+  totalResults: (json['totalResults'] as num).toInt(),
+  resultsPerPage: (json['resultsPerPage'] as num).toInt(),
+);
 
 Map<String, dynamic> _$PageInfoToJson(PageInfo instance) => <String, dynamic>{
-      'totalResults': instance.totalResults,
-      'resultsPerPage': instance.resultsPerPage,
-    };
+  'totalResults': instance.totalResults,
+  'resultsPerPage': instance.resultsPerPage,
+};

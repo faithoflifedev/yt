@@ -20,10 +20,11 @@ class UserBannedDetails {
   ///The duration of the ban. This property is only present if the snippet.userBannedDetails.banType property value is temporary.
   final int? banDurationSeconds;
 
-  UserBannedDetails(
-      {required this.bannedUserDetails,
-      required this.banType,
-      required this.banDurationSeconds});
+  UserBannedDetails({
+    required this.bannedUserDetails,
+    required this.banType,
+    required this.banDurationSeconds,
+  });
 
   factory UserBannedDetails.fromJson(Map<String, dynamic> json) =>
       _$UserBannedDetailsFromJson(json);

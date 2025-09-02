@@ -41,15 +41,16 @@ class Snippet {
   ///The country with which the channel is associated. To set this property's value, update the value of the brandingSettings.channel.country property.
   final String? country;
 
-  Snippet(
-      {required this.title,
-      required this.description,
-      this.customUrl,
-      this.publishedAt,
-      this.thumbnails,
-      this.defaultLanguage,
-      this.localized,
-      this.country});
+  Snippet({
+    required this.title,
+    required this.description,
+    this.customUrl,
+    this.publishedAt,
+    this.thumbnails,
+    this.defaultLanguage,
+    this.localized,
+    this.country,
+  });
 
   factory Snippet.fromJson(Map<String, dynamic> json) =>
       _$SnippetFromJson(json);

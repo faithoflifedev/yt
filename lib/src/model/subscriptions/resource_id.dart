@@ -13,10 +13,7 @@ class ResourceId {
   /// The value that YouTube uses to uniquely identify the channel that the user subscribed to.
   final String channelId;
 
-  ResourceId({
-    required this.kind,
-    required this.channelId,
-  });
+  ResourceId({required this.kind, required this.channelId});
 
   factory ResourceId.fromJson(Map<String, dynamic> json) =>
       _$ResourceIdFromJson(json);

@@ -16,8 +16,11 @@ class ContentDetails {
   ///The date and time that the video was published to YouTube. The value is specified in ISO 8601 format.
   final DateTime videoPublishedAt;
 
-  ContentDetails(
-      {required this.videoId, this.note, required this.videoPublishedAt});
+  ContentDetails({
+    required this.videoId,
+    this.note,
+    required this.videoPublishedAt,
+  });
 
   factory ContentDetails.fromJson(Map<String, dynamic> json) =>
       _$ContentDetailsFromJson(json);

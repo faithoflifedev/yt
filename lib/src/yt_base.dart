@@ -74,24 +74,22 @@ class Yt with UiLoggy {
       ? throw Exception(_moduleUnavailableMessage)
       : _watermarks!;
 
-  Yt(
-      {LogOptions logOptions = const LogOptions(
-        LogLevel.error,
-        stackTraceLevel: LogLevel.off,
-      ),
-      LoggyPrinter printer = const PrettyPrinter(
-        showColors: false,
-      )}) {
+  Yt({
+    LogOptions logOptions = const LogOptions(
+      LogLevel.error,
+      stackTraceLevel: LogLevel.off,
+    ),
+    LoggyPrinter printer = const PrettyPrinter(showColors: false),
+  }) {
     Loggy.initLoggy(logPrinter: printer, logOptions: logOptions);
 
-    addInterceptor(
-      LoggingInterceptors(),
-      position: ListPosition.end,
-    );
+    addInterceptor(LoggingInterceptors(), position: ListPosition.end);
   }
 
-  static Yt withApiKey(String apiKey,
-      {Map<String, String>? additionalHeaders}) {
+  static Yt withApiKey(
+    String apiKey, {
+    Map<String, String>? additionalHeaders,
+  }) {
     final yt = Yt();
 
     yt.setModules(apiKey: apiKey);
@@ -109,27 +107,32 @@ class Yt with UiLoggy {
   static Yt withKey(String apiKey, {Map<String, String>? additionalHeaders}) =>
       withApiKey(apiKey, additionalHeaders: additionalHeaders);
 
-  static Yt withOAuth(
-      {ClientId? oAuthClientId,
-      LogOptions logOptions = const LogOptions(
-        LogLevel.error,
-        stackTraceLevel: LogLevel.off,
-      )}) {
+  static Yt withOAuth({
+    ClientId? oAuthClientId,
+    LogOptions logOptions = const LogOptions(
+      LogLevel.error,
+      stackTraceLevel: LogLevel.off,
+    ),
+  }) {
     final yt = Yt(
-        logOptions: logOptions,
-        printer: const PrettyPrinter(
-          showColors: false,
-        ));
+      logOptions: logOptions,
+      printer: const PrettyPrinter(showColors: false),
+    );
 
-    addInterceptor(InterceptorsWrapper(onRequest: (options, handler) async {
-      final oauthAccessControl = OAuthAccessControl(oAuthClientId);
+    addInterceptor(
+      InterceptorsWrapper(
+        onRequest: (options, handler) async {
+          final oauthAccessControl = OAuthAccessControl(oAuthClientId);
 
-      await oauthAccessControl.checkAccessToken();
+          await oauthAccessControl.checkAccessToken();
 
-      options.headers['Authorization'] = 'Bearer ${oauthAccessControl.token}';
+          options.headers['Authorization'] =
+              'Bearer ${oauthAccessControl.token}';
 
-      return handler.next(options);
-    }));
+          return handler.next(options);
+        },
+      ),
+    );
 
     yt.setModules(useTokenAuth: true);
 
@@ -138,20 +141,26 @@ class Yt with UiLoggy {
     return yt;
   }
 
-  static Future<Yt> withGenerator(RefreshTokenGenerator refreshTokenGenerator,
-      {LogOptions logOptions = const LogOptions(
-        LogLevel.error,
-        stackTraceLevel: LogLevel.off,
-      )}) async {
+  static Future<Yt> withGenerator(
+    RefreshTokenGenerator refreshTokenGenerator, {
+    LogOptions logOptions = const LogOptions(
+      LogLevel.error,
+      stackTraceLevel: LogLevel.off,
+    ),
+  }) async {
     final yt = Yt(logOptions: logOptions);
 
     Token token = await refreshTokenGenerator.generate();
 
-    addInterceptor(InterceptorsWrapper(onRequest: (options, handler) async {
-      options.headers['Authorization'] = 'Bearer ${token.accessToken}';
+    addInterceptor(
+      InterceptorsWrapper(
+        onRequest: (options, handler) async {
+          options.headers['Authorization'] = 'Bearer ${token.accessToken}';
 
-      return handler.next(options);
-    }));
+          return handler.next(options);
+        },
+      ),
+    );
 
     yt.setModules(useTokenAuth: true);
 
@@ -160,8 +169,10 @@ class Yt with UiLoggy {
     return yt;
   }
 
-  static void addInterceptor(Interceptor interceptor,
-      {ListPosition position = ListPosition.start}) {
+  static void addInterceptor(
+    Interceptor interceptor, {
+    ListPosition position = ListPosition.start,
+  }) {
     switch (position) {
       case ListPosition.start:
         _interceptors.insert(0, interceptor);
@@ -216,22 +227,13 @@ class Yt with UiLoggy {
     }
 
     /// A channel resource contains information about a YouTube channel.
-    _channels = Channels(
-      apiKey: apiKey,
-      dio: dio,
-    );
+    _channels = Channels(apiKey: apiKey, dio: dio);
 
     /// A comment resource contains information about a single YouTube comment. A comment resource can represent a comment about either a video or a channel. In addition, the comment could be a top-level comment or a reply to a top-level comment.
-    _comments = Comments(
-      apiKey: apiKey,
-      dio: dio,
-    );
+    _comments = Comments(apiKey: apiKey, dio: dio);
 
     /// A commentThread resource contains information about a YouTube comment thread, which comprises a top-level comment and replies, if any exist, to that comment. A commentThread resource can represent comments about either a video or a channel.
-    _commentThreads = CommentThreads(
-      apiKey: apiKey,
-      dio: dio,
-    );
+    _commentThreads = CommentThreads(apiKey: apiKey, dio: dio);
 
     /// A playlist resource represents a YouTube playlist. A playlist is a collection of videos that can be viewed sequentially and shared with other users. By default, playlists are publicly visible to other users, but playlists can be public or private.
     ///
@@ -242,24 +244,15 @@ class Yt with UiLoggy {
     /// To be more specific, these lists are associated with a channel, which is a collection of a person, group, or company's videos, playlists, and other YouTube information. You can retrieve the playlist IDs for each of these lists from the channel resource for a given channel.
     ///
     /// You can then use the playlistItems.list method to retrieve any of those lists. You can also add or remove items from those lists by calling the playlistItems.insert and playlistItems.delete methods.
-    _playlists = Playlists(
-      apiKey: apiKey,
-      dio: dio,
-    );
+    _playlists = Playlists(apiKey: apiKey, dio: dio);
 
     /// A playlistItem resource identifies another resource, such as a video, that is included in a playlist. In addition, the playlistItem resource contains details about the included resource that pertain specifically to how that resource is used in that playlist.
     ///
     /// YouTube also uses a playlist to identify a channel's list of uploaded videos, with each playlistItem in that list representing one uploaded video. You can retrieve the playlist ID for that list from the channel resource for a given channel. You can then use the playlistItems.list method to the list.
-    _playlistItems = PlaylistItems(
-      apiKey: apiKey,
-      dio: dio,
-    );
+    _playlistItems = PlaylistItems(apiKey: apiKey, dio: dio);
 
     /// A search result contains information about a YouTube video, channel, or playlist that matches the search parameters specified in an API request. While a search result points to a uniquely identifiable resource, like a video, it does not have its own persistent data.
-    _search = Search(
-      apiKey: apiKey,
-      dio: dio,
-    );
+    _search = Search(apiKey: apiKey, dio: dio);
   }
 
   void close() => dio.close();

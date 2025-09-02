@@ -25,8 +25,11 @@ class Timing {
   /// display.
   final int durationMs;
 
-  Timing(
-      {required this.type, required this.offsetMs, required this.durationMs});
+  Timing({
+    required this.type,
+    required this.offsetMs,
+    required this.durationMs,
+  });
 
   factory Timing.fromJson(Map<String, dynamic> json) => _$TimingFromJson(json);
 

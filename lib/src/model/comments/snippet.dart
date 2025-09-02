@@ -7,7 +7,6 @@ import 'author_channel_id.dart';
 part 'snippet.g.dart';
 
 @JsonSerializable()
-
 /// The snippet object contains basic details about the comment.
 class Snippet {
   /// The display name of the user who posted the comment.

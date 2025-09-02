@@ -31,15 +31,16 @@ class AuthorDetails {
   ///This value indicates whether the author is a moderator of the live chat.
   final bool? isChatModerator;
 
-  AuthorDetails(
-      {this.channelId,
-      this.channelUrl,
-      this.displayName,
-      this.profileImageUrl,
-      this.isVerified,
-      this.isChatOwner,
-      this.isChatSponsor,
-      this.isChatModerator});
+  AuthorDetails({
+    this.channelId,
+    this.channelUrl,
+    this.displayName,
+    this.profileImageUrl,
+    this.isVerified,
+    this.isChatOwner,
+    this.isChatSponsor,
+    this.isChatModerator,
+  });
 
   factory AuthorDetails.fromJson(Map<String, dynamic> json) =>
       _$AuthorDetailsFromJson(json);

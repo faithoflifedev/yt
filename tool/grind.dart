@@ -1,8 +1,4 @@
-// import 'dart:convert';
-
-// import 'package:cli_pkg/cli_pkg.dart' as pkg;
 import 'package:publish_tools/publish_tools.dart';
-// import 'package:universal_io/io.dart';
 
 Future<void> main(List<String> args) async {
   PublishTools.addAllTasks();

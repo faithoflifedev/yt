@@ -42,12 +42,13 @@ class Status {
   ///In a [Broadcast.insert] request, this property allows the channel owner to designate the broadcast as being child-directed. In a [Broadcast.list] request, the property value is only returned if the channel owner authorized the API request.
   final bool selfDeclaredMadeForKids;
 
-  Status(
-      {required this.lifeCycleStatus,
-      required this.privacyStatus,
-      required this.recordingStatus,
-      required this.madeForKids,
-      required this.selfDeclaredMadeForKids});
+  Status({
+    required this.lifeCycleStatus,
+    required this.privacyStatus,
+    required this.recordingStatus,
+    required this.madeForKids,
+    required this.selfDeclaredMadeForKids,
+  });
 
   factory Status.fromJson(Map<String, dynamic> json) => _$StatusFromJson(json);
 

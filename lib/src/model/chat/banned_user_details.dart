@@ -19,11 +19,12 @@ class BannedUserDetails {
   ///The avatar of the banned user's YouTube channel.
   final String? profileImageUrl;
 
-  BannedUserDetails(
-      {this.channelId,
-      this.channelUrl,
-      this.displayName,
-      this.profileImageUrl});
+  BannedUserDetails({
+    this.channelId,
+    this.channelUrl,
+    this.displayName,
+    this.profileImageUrl,
+  });
 
   factory BannedUserDetails.fromJson(Map<String, dynamic> json) =>
       _$BannedUserDetailsFromJson(json);

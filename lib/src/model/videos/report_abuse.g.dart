@@ -7,12 +7,12 @@ part of 'report_abuse.dart';
 // **************************************************************************
 
 ReportAbuse _$ReportAbuseFromJson(Map<String, dynamic> json) => ReportAbuse(
-      videoId: json['videoId'] as String,
-      reasonId: json['reasonId'] as String,
-      secondaryReasonId: json['secondaryReasonId'] as String?,
-      comments: json['comments'] as String?,
-      language: json['language'] as String?,
-    );
+  videoId: json['videoId'] as String,
+  reasonId: json['reasonId'] as String,
+  secondaryReasonId: json['secondaryReasonId'] as String?,
+  comments: json['comments'] as String?,
+  language: json['language'] as String?,
+);
 
 Map<String, dynamic> _$ReportAbuseToJson(ReportAbuse instance) =>
     <String, dynamic>{

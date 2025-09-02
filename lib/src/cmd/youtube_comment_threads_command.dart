@@ -32,60 +32,80 @@ class YoutubeListCommentThreadsCommand extends YtHelperCommand {
 
   YoutubeListCommentThreadsCommand() {
     argParser
-      ..addOption('part',
-          defaultsTo: 'id,snippet',
-          help:
-              '''The part parameter specifies a comma-separated list of one or more commentThread resource properties that the API response will include.
+      ..addOption(
+        'part',
+        defaultsTo: 'id,snippet',
+        help:
+            '''The part parameter specifies a comma-separated list of one or more commentThread resource properties that the API response will include.
 
 The following list contains the part names that you can include in the parameter value:
-id, replies, snippet''')
-      ..addOption('all-threads-related-to-channel-id',
-          valueHelp: 'string',
-          help:
-              'The allThreadsRelatedToChannelId parameter instructs the API to return all comment threads associated with the specified channel. The response can include comments about the channel or about the channel\'s videos.')
-      ..addOption('channel-id',
-          valueHelp: 'string',
-          help:
-              'The channelId parameter instructs the API to return comment threads containing comments about the specified channel. (The response will not include comments left on videos that the channel uploaded.)')
-      ..addOption('id',
-          valueHelp: 'string',
-          help:
-              'The id parameter specifies a comma-separated list of comment thread IDs for the resources that should be retrieved.')
-      ..addOption('video-id',
-          valueHelp: 'string',
-          help:
-              'The videoId parameter instructs the API to return comment threads associated with the specified video ID.')
-      ..addOption('max-results',
-          valueHelp: 'number',
-          defaultsTo: '5',
-          help:
-              '''The maxResults parameter specifies the maximum number of items that should be returned in the result set.
+id, replies, snippet''',
+      )
+      ..addOption(
+        'all-threads-related-to-channel-id',
+        valueHelp: 'string',
+        help:
+            'The allThreadsRelatedToChannelId parameter instructs the API to return all comment threads associated with the specified channel. The response can include comments about the channel or about the channel\'s videos.',
+      )
+      ..addOption(
+        'channel-id',
+        valueHelp: 'string',
+        help:
+            'The channelId parameter instructs the API to return comment threads containing comments about the specified channel. (The response will not include comments left on videos that the channel uploaded.)',
+      )
+      ..addOption(
+        'id',
+        valueHelp: 'string',
+        help:
+            'The id parameter specifies a comma-separated list of comment thread IDs for the resources that should be retrieved.',
+      )
+      ..addOption(
+        'video-id',
+        valueHelp: 'string',
+        help:
+            'The videoId parameter instructs the API to return comment threads associated with the specified video ID.',
+      )
+      ..addOption(
+        'max-results',
+        valueHelp: 'number',
+        defaultsTo: '5',
+        help:
+            '''The maxResults parameter specifies the maximum number of items that should be returned in the result set.
 
-Note: This parameter is not supported for use in conjunction with the id parameter. Acceptable values are 1 to 100, inclusive. The default value is 20.''')
-      ..addOption('moderation-status',
-          valueHelp: 'string',
-          allowed: ['heldForReview', 'likelySpam', 'published'],
-          help:
-              '''This parameter can only be used in a properly authorized request. Set this parameter to limit the returned comment threads to a particular moderation state.
+Note: This parameter is not supported for use in conjunction with the id parameter. Acceptable values are 1 to 100, inclusive. The default value is 20.''',
+      )
+      ..addOption(
+        'moderation-status',
+        valueHelp: 'string',
+        allowed: ['heldForReview', 'likelySpam', 'published'],
+        help:
+            '''This parameter can only be used in a properly authorized request. Set this parameter to limit the returned comment threads to a particular moderation state.
 
-Note: This parameter is not supported for use in conjunction with the id parameter. The default value is published.''')
-      ..addOption('order',
-          valueHelp: 'string',
-          allowed: ['time', 'relevance'],
-          help:
-              'The order parameter specifies the order in which the API response should list comment threads.')
-      ..addOption('page-token',
-          valueHelp: 'string',
-          help:
-              '''The pageToken parameter identifies a specific page in the result set that should be returned. In an API response, the nextPageToken property identifies the next page of the result that can be retrieved.
+Note: This parameter is not supported for use in conjunction with the id parameter. The default value is published.''',
+      )
+      ..addOption(
+        'order',
+        valueHelp: 'string',
+        allowed: ['time', 'relevance'],
+        help:
+            'The order parameter specifies the order in which the API response should list comment threads.',
+      )
+      ..addOption(
+        'page-token',
+        valueHelp: 'string',
+        help:
+            '''The pageToken parameter identifies a specific page in the result set that should be returned. In an API response, the nextPageToken property identifies the next page of the result that can be retrieved.
 
-Note: This parameter is not supported for use in conjunction with the id parameter.''')
-      ..addOption('search-terms',
-          valueHelp: 'string',
-          help:
-              '''The searchTerms parameter instructs the API to limit the API response to only contain comments that contain the specified search terms.
+Note: This parameter is not supported for use in conjunction with the id parameter.''',
+      )
+      ..addOption(
+        'search-terms',
+        valueHelp: 'string',
+        help:
+            '''The searchTerms parameter instructs the API to limit the API response to only contain comments that contain the specified search terms.
 
-Note: This parameter is not supported for use in conjunction with the id parameter.''')
+Note: This parameter is not supported for use in conjunction with the id parameter.''',
+      )
       ..addOption(
         'text-format',
         valueHelp: 'string',
@@ -119,10 +139,7 @@ Note: This parameter is not supported for use in conjunction with the id paramet
 
       close();
     } on DioException catch (err) {
-      throw UsageException(
-        'API usage error:',
-        err.usage,
-      );
+      throw UsageException('API usage error:', err.usage);
     }
   }
 }
@@ -137,37 +154,47 @@ class YoutubeListByVideoIdCommentThreadsCommand extends YtHelperCommand {
 
   YoutubeListByVideoIdCommentThreadsCommand() {
     argParser
-      ..addOption('video-id',
-          abbr: 'v',
-          aliases: ['videoid', 'videoId', 'ID', 'Id', 'id'],
-          valueHelp: 'string',
-          mandatory: true,
-          help:
-              'The video-id parameter instructs the API to return comment threads associated with the specified video ID.')
-      ..addOption('max-results',
-          valueHelp: 'number',
-          defaultsTo: '5',
-          help:
-              '''The maxResults parameter specifies the maximum number of items that should be returned in the result set.
+      ..addOption(
+        'video-id',
+        abbr: 'v',
+        aliases: ['videoid', 'videoId', 'ID', 'Id', 'id'],
+        valueHelp: 'string',
+        mandatory: true,
+        help:
+            'The video-id parameter instructs the API to return comment threads associated with the specified video ID.',
+      )
+      ..addOption(
+        'max-results',
+        valueHelp: 'number',
+        defaultsTo: '5',
+        help:
+            '''The maxResults parameter specifies the maximum number of items that should be returned in the result set.
 
-Note: This parameter is not supported for use in conjunction with the id parameter. Acceptable values are 1 to 100, inclusive. The default value is 20.''')
-      ..addOption('order',
-          valueHelp: 'string',
-          allowed: ['time', 'relevance'],
-          help:
-              'The order parameter specifies the order in which the API response should list comment threads.')
-      ..addOption('page-token',
-          valueHelp: 'string',
-          help:
-              '''The pageToken parameter identifies a specific page in the result set that should be returned. In an API response, the nextPageToken property identifies the next page of the result that can be retrieved.
+Note: This parameter is not supported for use in conjunction with the id parameter. Acceptable values are 1 to 100, inclusive. The default value is 20.''',
+      )
+      ..addOption(
+        'order',
+        valueHelp: 'string',
+        allowed: ['time', 'relevance'],
+        help:
+            'The order parameter specifies the order in which the API response should list comment threads.',
+      )
+      ..addOption(
+        'page-token',
+        valueHelp: 'string',
+        help:
+            '''The pageToken parameter identifies a specific page in the result set that should be returned. In an API response, the nextPageToken property identifies the next page of the result that can be retrieved.
 
-Note: This parameter is not supported for use in conjunction with the id parameter.''')
-      ..addOption('search-terms',
-          valueHelp: 'string',
-          help:
-              '''The searchTerms parameter instructs the API to limit the API response to only contain comments that contain the specified search terms.
+Note: This parameter is not supported for use in conjunction with the id parameter.''',
+      )
+      ..addOption(
+        'search-terms',
+        valueHelp: 'string',
+        help:
+            '''The searchTerms parameter instructs the API to limit the API response to only contain comments that contain the specified search terms.
 
-Note: This parameter is not supported for use in conjunction with the id parameter.''')
+Note: This parameter is not supported for use in conjunction with the id parameter.''',
+      )
       ..addOption(
         'text-format',
         valueHelp: 'string',
@@ -195,15 +222,12 @@ Note: This parameter is not supported for use in conjunction with the id paramet
 
       close();
     } on DioException catch (err) {
-      throw UsageException(
-        'API usage error:',
-        err.usage,
-      );
+      throw UsageException('API usage error:', err.usage);
     }
   }
 }
 
-/// The [ids] parameter specifies a list of comment thread IDs for the resources
+/// The *ids* parameter specifies a list of comment thread IDs for the resources
 /// that should be retrieved.
 class YoutubeListByIdsCommentThreadsCommand extends YtHelperCommand {
   @override
@@ -215,37 +239,47 @@ class YoutubeListByIdsCommentThreadsCommand extends YtHelperCommand {
 
   YoutubeListByIdsCommentThreadsCommand() {
     argParser
-      ..addOption('ids',
-          abbr: 'i',
-          aliases: ['IDs', 'IDS', 'Id', 'id'],
-          valueHelp: 'string (comma separated)',
-          mandatory: true,
-          help:
-              'The ids parameters instructs the API to return comment threads associated with the specified IDs.')
-      ..addOption('max-results',
-          valueHelp: 'number',
-          defaultsTo: '5',
-          help:
-              '''The maxResults parameter specifies the maximum number of items that should be returned in the result set.
+      ..addOption(
+        'ids',
+        abbr: 'i',
+        aliases: ['IDs', 'IDS', 'Id', 'id'],
+        valueHelp: 'string (comma separated)',
+        mandatory: true,
+        help:
+            'The ids parameters instructs the API to return comment threads associated with the specified IDs.',
+      )
+      ..addOption(
+        'max-results',
+        valueHelp: 'number',
+        defaultsTo: '5',
+        help:
+            '''The maxResults parameter specifies the maximum number of items that should be returned in the result set.
 
-Note: This parameter is not supported for use in conjunction with the id parameter. Acceptable values are 1 to 100, inclusive. The default value is 20.''')
-      ..addOption('order',
-          valueHelp: 'string',
-          allowed: ['time', 'relevance'],
-          help:
-              'The order parameter specifies the order in which the API response should list comment threads.')
-      ..addOption('page-token',
-          valueHelp: 'string',
-          help:
-              '''The pageToken parameter identifies a specific page in the result set that should be returned. In an API response, the nextPageToken property identifies the next page of the result that can be retrieved.
+Note: This parameter is not supported for use in conjunction with the id parameter. Acceptable values are 1 to 100, inclusive. The default value is 20.''',
+      )
+      ..addOption(
+        'order',
+        valueHelp: 'string',
+        allowed: ['time', 'relevance'],
+        help:
+            'The order parameter specifies the order in which the API response should list comment threads.',
+      )
+      ..addOption(
+        'page-token',
+        valueHelp: 'string',
+        help:
+            '''The pageToken parameter identifies a specific page in the result set that should be returned. In an API response, the nextPageToken property identifies the next page of the result that can be retrieved.
 
-Note: This parameter is not supported for use in conjunction with the id parameter.''')
-      ..addOption('search-terms',
-          valueHelp: 'string',
-          help:
-              '''The searchTerms parameter instructs the API to limit the API response to only contain comments that contain the specified search terms.
+Note: This parameter is not supported for use in conjunction with the id parameter.''',
+      )
+      ..addOption(
+        'search-terms',
+        valueHelp: 'string',
+        help:
+            '''The searchTerms parameter instructs the API to limit the API response to only contain comments that contain the specified search terms.
 
-Note: This parameter is not supported for use in conjunction with the id parameter.''')
+Note: This parameter is not supported for use in conjunction with the id parameter.''',
+      )
       ..addOption(
         'text-format',
         valueHelp: 'string',
@@ -273,10 +307,7 @@ Note: This parameter is not supported for use in conjunction with the id paramet
 
       close();
     } on DioException catch (err) {
-      throw UsageException(
-        'API usage error:',
-        err.usage,
-      );
+      throw UsageException('API usage error:', err.usage);
     }
   }
 }
@@ -293,26 +324,32 @@ class YoutubeListByIdCommentThreadsCommand extends YtHelperCommand {
 
   YoutubeListByIdCommentThreadsCommand() {
     argParser
-      ..addOption('id',
-          abbr: 'i',
-          aliases: ['ID', 'Id'],
-          valueHelp: 'string',
-          mandatory: true,
-          help:
-              'The id parameter instructs the API to return comment threads associated with the specified IDs')
-      ..addOption('moderation-status',
-          valueHelp: 'string',
-          allowed: ['heldForReview', 'likelySpam', 'published'],
-          help:
-              '''This parameter can only be used in a properly authorized request. Set this parameter to limit the returned comment threads to a particular moderation state.
+      ..addOption(
+        'id',
+        abbr: 'i',
+        aliases: ['ID', 'Id'],
+        valueHelp: 'string',
+        mandatory: true,
+        help:
+            'The id parameter instructs the API to return comment threads associated with the specified IDs',
+      )
+      ..addOption(
+        'moderation-status',
+        valueHelp: 'string',
+        allowed: ['heldForReview', 'likelySpam', 'published'],
+        help:
+            '''This parameter can only be used in a properly authorized request. Set this parameter to limit the returned comment threads to a particular moderation state.
 
-Note: This parameter is not supported for use in conjunction with the id parameter. The default value is published.''')
-      ..addOption('search-terms',
-          valueHelp: 'string',
-          help:
-              '''The searchTerms parameter instructs the API to limit the API response to only contain comments that contain the specified search terms.
+Note: This parameter is not supported for use in conjunction with the id parameter. The default value is published.''',
+      )
+      ..addOption(
+        'search-terms',
+        valueHelp: 'string',
+        help:
+            '''The searchTerms parameter instructs the API to limit the API response to only contain comments that contain the specified search terms.
 
-Note: This parameter is not supported for use in conjunction with the id parameter.''')
+Note: This parameter is not supported for use in conjunction with the id parameter.''',
+      )
       ..addOption(
         'text-format',
         valueHelp: 'string',
@@ -338,15 +375,12 @@ Note: This parameter is not supported for use in conjunction with the id paramet
 
       close();
     } on DioException catch (err) {
-      throw UsageException(
-        'API usage error:',
-        err.usage,
-      );
+      throw UsageException('API usage error:', err.usage);
     }
   }
 }
 
-/// The [channelId] parameter instructs the API to return all comment threads
+/// The *channelId* parameter instructs the API to return all comment threads
 /// associated with the specified channel.
 class YoutubeListByChannelIdCommentThreadsCommand extends YtHelperCommand {
   @override
@@ -358,37 +392,47 @@ class YoutubeListByChannelIdCommentThreadsCommand extends YtHelperCommand {
 
   YoutubeListByChannelIdCommentThreadsCommand() {
     argParser
-      ..addOption('channel-id',
-          abbr: 'c',
-          aliases: ['ChannelId', 'channelId', 'ID', 'Id', 'id'],
-          valueHelp: 'string',
-          mandatory: true,
-          help:
-              'The channel-id parameter instructs the API to return all comment threads associated with the specified channel.')
-      ..addOption('max-results',
-          valueHelp: 'number',
-          defaultsTo: '5',
-          help:
-              '''The maxResults parameter specifies the maximum number of items that should be returned in the result set.
+      ..addOption(
+        'channel-id',
+        abbr: 'c',
+        aliases: ['ChannelId', 'channelId', 'ID', 'Id', 'id'],
+        valueHelp: 'string',
+        mandatory: true,
+        help:
+            'The channel-id parameter instructs the API to return all comment threads associated with the specified channel.',
+      )
+      ..addOption(
+        'max-results',
+        valueHelp: 'number',
+        defaultsTo: '5',
+        help:
+            '''The maxResults parameter specifies the maximum number of items that should be returned in the result set.
 
-Note: This parameter is not supported for use in conjunction with the id parameter. Acceptable values are 1 to 100, inclusive. The default value is 20.''')
-      ..addOption('order',
-          valueHelp: 'string',
-          allowed: ['time', 'relevance'],
-          help:
-              'The order parameter specifies the order in which the API response should list comment threads.')
-      ..addOption('page-token',
-          valueHelp: 'string',
-          help:
-              '''The pageToken parameter identifies a specific page in the result set that should be returned. In an API response, the nextPageToken property identifies the next page of the result that can be retrieved.
+Note: This parameter is not supported for use in conjunction with the id parameter. Acceptable values are 1 to 100, inclusive. The default value is 20.''',
+      )
+      ..addOption(
+        'order',
+        valueHelp: 'string',
+        allowed: ['time', 'relevance'],
+        help:
+            'The order parameter specifies the order in which the API response should list comment threads.',
+      )
+      ..addOption(
+        'page-token',
+        valueHelp: 'string',
+        help:
+            '''The pageToken parameter identifies a specific page in the result set that should be returned. In an API response, the nextPageToken property identifies the next page of the result that can be retrieved.
 
-Note: This parameter is not supported for use in conjunction with the id parameter.''')
-      ..addOption('search-terms',
-          valueHelp: 'string',
-          help:
-              '''The searchTerms parameter instructs the API to limit the API response to only contain comments that contain the specified search terms.
+Note: This parameter is not supported for use in conjunction with the id parameter.''',
+      )
+      ..addOption(
+        'search-terms',
+        valueHelp: 'string',
+        help:
+            '''The searchTerms parameter instructs the API to limit the API response to only contain comments that contain the specified search terms.
 
-Note: This parameter is not supported for use in conjunction with the id parameter.''')
+Note: This parameter is not supported for use in conjunction with the id parameter.''',
+      )
       ..addOption(
         'text-format',
         valueHelp: 'string',
@@ -416,10 +460,7 @@ Note: This parameter is not supported for use in conjunction with the id paramet
 
       close();
     } on DioException catch (err) {
-      throw UsageException(
-        'API usage error:',
-        err.usage,
-      );
+      throw UsageException('API usage error:', err.usage);
     }
   }
 }
@@ -434,15 +475,19 @@ class YoutubeInsertCommentThreadsCommand extends YtHelperCommand {
 
   YoutubeInsertCommentThreadsCommand() {
     argParser
-      ..addOption('part',
-          abbr: 'p',
-          defaultsTo: 'snippet',
-          help:
-              'The part parameter identifies the properties that the API response will include. Set the parameter value to snippet. The snippet part has a quota cost of 2 units.')
-      ..addOption('body',
-          mandatory: true,
-          help:
-              'Provide a commentThread resource https://developers.google.com/youtube/v3/docs/commentThreads#resource in the request body.');
+      ..addOption(
+        'part',
+        abbr: 'p',
+        defaultsTo: 'snippet',
+        help:
+            'The part parameter identifies the properties that the API response will include. Set the parameter value to snippet. The snippet part has a quota cost of 2 units.',
+      )
+      ..addOption(
+        'body',
+        mandatory: true,
+        help:
+            'Provide a commentThread resource https://developers.google.com/youtube/v3/docs/commentThreads#resource in the request body.',
+      );
   }
 
   @override
@@ -459,10 +504,7 @@ class YoutubeInsertCommentThreadsCommand extends YtHelperCommand {
 
       close();
     } on DioException catch (err) {
-      throw UsageException(
-        'API usage error:',
-        err.usage,
-      );
+      throw UsageException('API usage error:', err.usage);
     }
   }
 }
@@ -507,10 +549,7 @@ class YoutubeAddCommentThreadsCommand extends YtHelperCommand {
 
       close();
     } on DioException catch (err) {
-      throw UsageException(
-        'API usage error:',
-        err.usage,
-      );
+      throw UsageException('API usage error:', err.usage);
     }
   }
 }

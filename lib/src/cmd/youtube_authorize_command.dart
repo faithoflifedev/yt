@@ -14,8 +14,9 @@ class YoutubeAuthorizeCommand extends Command {
   static File get defaultCredentialsFile =>
       File('$userHome/${Util.defaultCredentialsFilePath}');
 
-  static final accessCredentialsFile =
-      File('$userHome/${Util.accessCredentialsFilePath}');
+  static final accessCredentialsFile = File(
+    '$userHome/${Util.accessCredentialsFilePath}',
+  );
 
   @override
   String get description =>
@@ -52,8 +53,9 @@ class YoutubeAuthorizeCommand extends Command {
     if (!hasCred) {
       print('Enter clientId:');
 
-      credentials['identifier'] =
-          stdin.readLineSync(encoding: Util.defaultEncoding());
+      credentials['identifier'] = stdin.readLineSync(
+        encoding: Util.defaultEncoding(),
+      );
 
       if (credentials['identifier'] == null) {
         throw Exception('Client Identifier not supplied');
@@ -61,11 +63,14 @@ class YoutubeAuthorizeCommand extends Command {
 
       print('Enter clientSecret:');
 
-      credentials['secret'] =
-          stdin.readLineSync(encoding: Util.defaultEncoding());
+      credentials['secret'] = stdin.readLineSync(
+        encoding: Util.defaultEncoding(),
+      );
 
-      oAuthClientId =
-          ClientId(credentials['identifier'], credentials['secret']);
+      oAuthClientId = ClientId(
+        credentials['identifier'],
+        credentials['secret'],
+      );
 
       defaultCredentialsFile.createSync(recursive: true);
 

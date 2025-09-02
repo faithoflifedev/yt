@@ -3,7 +3,7 @@ class EmojiFormatter {
     ':robot:': '🤖',
     ':mosque:': '🕌',
     ':video_camera:': '📹',
-    ':growing_heart:': '💗'
+    ':growing_heart:': '💗',
   };
 
   static final regExp = RegExp('(:[a-zA-Z_]+:)');

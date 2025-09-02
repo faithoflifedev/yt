@@ -7,11 +7,8 @@ import 'provider/data/comments.dart';
 class Comments extends YouTubeApiHelper {
   final CommentsClient _rest;
 
-  Comments({
-    required super.dio,
-    super.token,
-    super.apiKey,
-  }) : _rest = CommentsClient(dio);
+  Comments({required super.dio, super.token, super.apiKey})
+    : _rest = CommentsClient(dio);
 
   /// Returns a list of comments that match the API request parameters.
   Future<CommentListResponse> list({
@@ -98,16 +95,15 @@ class Comments extends YouTubeApiHelper {
     /// This parameter indicates whether the API should return comments
     /// formatted as HTML or as plain text. The default value is html.
     TextFormat? textFormat = TextFormat.html,
-  }) =>
-      _rest.list(
-        apiKey,
-        accept,
-        'id,snippet',
-        id: ids.join(','),
-        maxResults: Util.maxResults(maxResults),
-        pageToken: pageToken,
-        textFormat: textFormat?.name,
-      );
+  }) => _rest.list(
+    apiKey,
+    accept,
+    'id,snippet',
+    id: ids.join(','),
+    maxResults: Util.maxResults(maxResults),
+    pageToken: pageToken,
+    textFormat: textFormat?.name,
+  );
 
   /// The [id] parameter specifies a comment ID for the resource that is being
   /// retrieved. In a comment resource, the id property specifies the comment's
@@ -121,14 +117,13 @@ class Comments extends YouTubeApiHelper {
     /// This parameter indicates whether the API should return comments
     /// formatted as HTML or as plain text. The default value is html.
     TextFormat? textFormat = TextFormat.html,
-  }) =>
-      _rest.list(
-        apiKey,
-        accept,
-        'id,snippet',
-        id: id,
-        textFormat: textFormat?.name,
-      );
+  }) => _rest.list(
+    apiKey,
+    accept,
+    'id,snippet',
+    id: id,
+    textFormat: textFormat?.name,
+  );
 
   /// The [parentId] parameter specifies the ID of the comment for which replies
   /// should be retrieved.
@@ -162,16 +157,15 @@ class Comments extends YouTubeApiHelper {
     /// This parameter indicates whether the API should return comments
     /// formatted as HTML or as plain text. The default value is html.
     TextFormat? textFormat = TextFormat.html,
-  }) =>
-      _rest.list(
-        apiKey,
-        accept,
-        'id,snippet',
-        parentId: parentId,
-        maxResults: Util.maxResults(maxResults),
-        pageToken: pageToken,
-        textFormat: textFormat?.name,
-      );
+  }) => _rest.list(
+    apiKey,
+    accept,
+    'id,snippet',
+    parentId: parentId,
+    maxResults: Util.maxResults(maxResults),
+    pageToken: pageToken,
+    textFormat: textFormat?.name,
+  );
 
   /// Creates a reply to an existing comment. Note: To create a top-level
   /// comment, use the commentThreads.insert method or commentThreads.add helper
@@ -185,12 +179,7 @@ class Comments extends YouTubeApiHelper {
     required Map<String, dynamic> body,
     String? onBehalfOfContentOwner,
   }) async =>
-      _rest.insert(
-        accept,
-        contentType,
-        buildParts(partList, part),
-        body,
-      );
+      _rest.insert(accept, contentType, buildParts(partList, part), body);
 
   /// Helper method that creates a new top-level comment.
   Future<Comment> add({
@@ -202,15 +191,11 @@ class Comments extends YouTubeApiHelper {
     /// updated. The original text is only returned to the authenticated user if
     /// they are the comment's author.
     required String textOriginal,
-  }) async =>
-      insert(
-        body: {
-          "snippet": {
-            "parentId": parentId,
-            "textOriginal": textOriginal,
-          }
-        },
-      );
+  }) async => insert(
+    body: {
+      "snippet": {"parentId": parentId, "textOriginal": textOriginal},
+    },
+  );
 
   /// Modifies a comment.
   Future<Comment> update({
@@ -223,26 +208,18 @@ class Comments extends YouTubeApiHelper {
     required Map<String, dynamic> body,
     String? onBehalfOfContentOwner,
   }) async =>
-      _rest.update(
-        accept,
-        contentType,
-        buildParts(partList, part),
-        body,
-      );
+      _rest.update(accept, contentType, buildParts(partList, part), body);
 
   /// Helper method to modify a comment.
   Future<Comment> change({
     required String commentId,
     required String textOriginal,
-  }) async =>
-      insert(
-        body: {
-          "id": commentId,
-          "snippet": {
-            "textOriginal": textOriginal,
-          }
-        },
-      );
+  }) async => insert(
+    body: {
+      "id": commentId,
+      "snippet": {"textOriginal": textOriginal},
+    },
+  );
 
   /// Sets the moderation status of one or more comments. The API request
   /// must be authorized by the owner of the channel or video associated
@@ -262,24 +239,18 @@ class Comments extends YouTubeApiHelper {
     /// Note: This parameter is only valid if the moderationStatus parameter is
     /// also set to rejected.
     bool? banAuthor,
-  }) async =>
-      _rest.setModerationStatus(
-        accept,
-        contentType,
-        'snippet',
-        moderationStatus.name,
-        moderationStatus == ModerationStatus.rejected ? banAuthor : null,
-      );
+  }) async => _rest.setModerationStatus(
+    accept,
+    contentType,
+    'snippet',
+    moderationStatus.name,
+    moderationStatus == ModerationStatus.rejected ? banAuthor : null,
+  );
 
   /// Deletes a comment.
   Future<void> delete({
     /// The [id] parameter specifies the comment ID for the resource that is being
     /// deleted.
     required String id,
-  }) async =>
-      _rest.delete(
-        accept,
-        contentType,
-        id,
-      );
+  }) async => _rest.delete(accept, contentType, id);
 }

@@ -27,13 +27,14 @@ class Subscription extends ResponseMetadata {
   /// The [SubscriberSnippet] object contains basic details about the subscriber.
   final SubscriberSnippet? subscriberSnippet;
 
-  Subscription(
-      {required super.kind,
-      required super.etag,
-      required this.id,
-      this.snippet,
-      this.contentDetails,
-      this.subscriberSnippet});
+  Subscription({
+    required super.kind,
+    required super.etag,
+    required this.id,
+    this.snippet,
+    this.contentDetails,
+    this.subscriberSnippet,
+  });
 
   factory Subscription.fromJson(Map<String, dynamic> json) =>
       _$SubscriptionFromJson(json);

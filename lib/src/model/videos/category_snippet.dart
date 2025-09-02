@@ -16,8 +16,11 @@ class CategorySnippet {
   ///Indicates whether videos can be associated with the category.
   final bool assignable;
 
-  CategorySnippet(
-      {this.channelId, required this.title, required this.assignable});
+  CategorySnippet({
+    this.channelId,
+    required this.title,
+    required this.assignable,
+  });
 
   factory CategorySnippet.fromJson(Map<String, dynamic> json) =>
       _$CategorySnippetFromJson(json);

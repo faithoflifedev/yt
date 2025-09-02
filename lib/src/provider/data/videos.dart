@@ -31,12 +31,13 @@ abstract class VideoClient {
   /// Uploads a video to YouTube.
   @POST('/upload/youtube/v3/videos')
   Future<VideoItem> upload(
-      @Header('Accept') String accept,
-      @Query('upload_id') String uploadId,
-      @Query('part') String parts,
-      @Body() File videoFile,
-      @Query('uploadType') String uploadType,
-      {@Query('notifySubscribers') bool? notifySubscribers});
+    @Header('Accept') String accept,
+    @Query('upload_id') String uploadId,
+    @Query('part') String parts,
+    @Body() File videoFile,
+    @Query('uploadType') String uploadType, {
+    @Query('notifySubscribers') bool? notifySubscribers,
+  });
 
   /// Retrieve the url used to upload the thumbnail image
   @POST('/upload/youtube/v3/videos')

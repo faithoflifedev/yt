@@ -8,7 +8,6 @@ import 'replies.dart';
 part 'snippet.g.dart';
 
 @JsonSerializable()
-
 /// The snippet object contains basic details about the comment thread. It also contains the thread's top-level comment, which is a comment resource.
 class Snippet {
   /// The YouTube channel that is associated with the comments in the thread. (The snippet.videoId property identifies the video.)

@@ -6,10 +6,9 @@ part of 'status.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-Status _$StatusFromJson(Map<String, dynamic> json) => Status(
-      privacyStatus: json['privacyStatus'] as String,
-    );
+Status _$StatusFromJson(Map<String, dynamic> json) =>
+    Status(privacyStatus: json['privacyStatus'] as String);
 
 Map<String, dynamic> _$StatusToJson(Status instance) => <String, dynamic>{
-      'privacyStatus': instance.privacyStatus,
-    };
+  'privacyStatus': instance.privacyStatus,
+};

@@ -7,16 +7,17 @@ part of 'cdn.dart';
 // **************************************************************************
 
 Cdn _$CdnFromJson(Map<String, dynamic> json) => Cdn(
-      ingestionType: json['ingestionType'] as String,
-      ingestionInfo:
-          IngestionInfo.fromJson(json['ingestionInfo'] as Map<String, dynamic>),
-      resolution: json['resolution'] as String,
-      frameRate: json['frameRate'] as String,
-    );
+  ingestionType: json['ingestionType'] as String,
+  ingestionInfo: IngestionInfo.fromJson(
+    json['ingestionInfo'] as Map<String, dynamic>,
+  ),
+  resolution: json['resolution'] as String,
+  frameRate: json['frameRate'] as String,
+);
 
 Map<String, dynamic> _$CdnToJson(Cdn instance) => <String, dynamic>{
-      'ingestionType': instance.ingestionType,
-      'ingestionInfo': instance.ingestionInfo.toJson(),
-      'resolution': instance.resolution,
-      'frameRate': instance.frameRate,
-    };
+  'ingestionType': instance.ingestionType,
+  'ingestionInfo': instance.ingestionInfo.toJson(),
+  'resolution': instance.resolution,
+  'frameRate': instance.frameRate,
+};

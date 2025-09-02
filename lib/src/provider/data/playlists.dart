@@ -19,37 +19,42 @@ abstract class PlaylistClient {
 
   ///Returns a collection of playlists that match the API request parameters. For example, you can retrieve all playlists that the authenticated user owns, or you can retrieve one or more playlists by their unique IDs.
   @GET('/playlists')
-  Future<PlaylistResponse> list(@Query('key') String? apiKey,
-      @Header('Accept') String accept, @Query('part') String parts,
-      {@Query('channelId') String? channelId,
-      @Query('id') String? id,
-      @Query('mine') bool? mine,
-      @Query('hl') int? hl,
-      @Query('maxResults') int? maxResults,
-      @Query('onBehalfOfContentOwner') String? onBehalfOfContentOwner,
-      @Query('onBehalfOfContentOwnerChannel')
-      String? onBehalfOfContentOwnerChannel,
-      @Query('pageToken') String? pageToken});
+  Future<PlaylistResponse> list(
+    @Query('key') String? apiKey,
+    @Header('Accept') String accept,
+    @Query('part') String parts, {
+    @Query('channelId') String? channelId,
+    @Query('id') String? id,
+    @Query('mine') bool? mine,
+    @Query('hl') int? hl,
+    @Query('maxResults') int? maxResults,
+    @Query('onBehalfOfContentOwner') String? onBehalfOfContentOwner,
+    @Query('onBehalfOfContentOwnerChannel')
+    String? onBehalfOfContentOwnerChannel,
+    @Query('pageToken') String? pageToken,
+  });
 
   ///Creates a playlist.
   @POST('/playlists')
   Future<Playlist> insert(
-      @Header('Accept') String accept,
-      @Header('Content-Type') String contentType,
-      @Query('part') String part,
-      @Body() Map<String, dynamic> body,
-      {@Query('onBehalfOfContentOwner') String? onBehalfOfContentOwner,
-      @Query('onBehalfOfContentOwnerChannel')
-      String? onBehalfOfContentOwnerChannel});
+    @Header('Accept') String accept,
+    @Header('Content-Type') String contentType,
+    @Query('part') String part,
+    @Body() Map<String, dynamic> body, {
+    @Query('onBehalfOfContentOwner') String? onBehalfOfContentOwner,
+    @Query('onBehalfOfContentOwnerChannel')
+    String? onBehalfOfContentOwnerChannel,
+  });
 
   ///Modifies a playlist. For example, you could change a playlist's title, description, or privacy status.
   @PUT('/playlists')
   Future<Playlist> update(
-      @Header('Accept') String accept,
-      @Header('Content-Type') String contentType,
-      @Query('part') String parts,
-      @Body() Map<String, dynamic> body,
-      {@Query('onBehalfOfContentOwner') String? onBehalfOfContentOwner});
+    @Header('Accept') String accept,
+    @Header('Content-Type') String contentType,
+    @Query('part') String parts,
+    @Body() Map<String, dynamic> body, {
+    @Query('onBehalfOfContentOwner') String? onBehalfOfContentOwner,
+  });
 
   ///Deletes a playlist
   @DELETE('/playlists')
