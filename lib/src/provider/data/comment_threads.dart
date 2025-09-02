@@ -28,11 +28,11 @@ abstract class CommentThreadsClient {
     @Query('textFormat') String? textFormat,
   });
 
-  // @POST('/commentThreads')
-  // Future<ChannelItem> insert(
-  //   @Header('Accept') String accept,
-  //   @Header('Content-Type') String contentType,
-  //   @Query('part') String parts,
-  //   @Body() Map<String, dynamic> body,
-  // );
+  @POST('/commentThreads')
+  Future<CommentThread> insert(
+    @Header('Accept') String accept,
+    @Header('Content-Type') String contentType,
+    @Query('part') String parts,
+    @Body() Map<String, dynamic> body,
+  );
 }

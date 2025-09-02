@@ -1,29 +1,27 @@
-import 'package:dio/dio.dart';
-import 'package:yt/src/help.dart';
+import 'package:yt/src/youtube_api_helper.dart';
 import 'package:yt/yt.dart';
 
 import 'provider/live/broadcast.dart';
 
 ///A liveBroadcast resource represents an event that will be streamed, via live video, on YouTube.
-class Broadcast extends YouTubeHelper {
-  final Dio dio;
-
+class Broadcast extends YouTubeApiHelper {
   final BroadcastClient _rest;
 
-  Broadcast(this.dio) : _rest = BroadcastClient(dio);
+  Broadcast({required super.dio}) : _rest = BroadcastClient(dio);
 
   ///Returns a list of YouTube broadcasts that match the API request parameters.
-  Future<LiveBroadcastResponse> list(
-      {String part = 'snippet,status,contentDetails',
-      List<String> partList = const [],
-      String? broadcastStatus,
-      String? broadcastType,
-      String? id,
-      int? maxResults,
-      bool? mine,
-      String? onBehalfOfContentOwner,
-      String? onBehalfOfContentOwnerChannel,
-      String? pageToken}) {
+  Future<LiveBroadcastResponse> list({
+    String part = 'snippet,status,contentDetails',
+    List<String> partList = const [],
+    String? broadcastStatus,
+    String? broadcastType,
+    String? id,
+    int? maxResults,
+    bool? mine,
+    String? onBehalfOfContentOwner,
+    String? onBehalfOfContentOwnerChannel,
+    String? pageToken,
+  }) {
     return _rest.list(accept, buildParts(partList, part),
         broadcastStatus: broadcastStatus,
         broadcastType: broadcastType,

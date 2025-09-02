@@ -57,7 +57,12 @@ class YoutubeRateVideosCommand extends YtHelperCommand {
     await initializeYt();
 
     try {
-      await videos.rate(id: argResults!['id'], rating: argResults!['rating']);
+      await videos.rate(
+        id: argResults!['id'],
+        rating: argResults!['rating'],
+      );
+
+      close();
     } on DioException catch (err) {
       throw UsageException('API usage error:', err.usage);
     }
@@ -159,19 +164,22 @@ Note: This parameter is supported for use in conjunction with the myRating param
 
     try {
       final videoListResponse = await videos.list(
-          part: argResults!['part'],
-          chart: argResults?['chart'],
-          id: argResults?['id'],
-          myRating: argResults?['my-rating'],
-          hl: argResults?['hl'],
-          maxHeight: maxHeight,
-          maxResults: int.parse(argResults!['max-results']),
-          maxWidth: maxWidth,
-          pageToken: argResults?['page-token'],
-          regionCode: argResults?['region-code'],
-          videoCategoryId: argResults?['video-category-id']);
+        part: argResults!['part'],
+        chart: argResults?['chart'],
+        id: argResults?['id'],
+        myRating: argResults?['my-rating'],
+        hl: argResults?['hl'],
+        maxHeight: maxHeight,
+        maxResults: int.parse(argResults!['max-results']),
+        maxWidth: maxWidth,
+        pageToken: argResults?['page-token'],
+        regionCode: argResults?['region-code'],
+        videoCategoryId: argResults?['video-category-id'],
+      );
 
       print(videoListResponse);
+
+      close();
     } on DioException catch (err) {
       throw UsageException('API usage error:', err.usage);
     }
@@ -221,11 +229,14 @@ Accepted Media MIME types: video/*, application/octet-stream''')
 
     try {
       final liveBroadcastItem = await videos.insert(
-          videoFile: File(argResults!['video-file']),
-          body: json.decode(argResults!['body']),
-          part: argResults!['part']);
+        videoFile: File(argResults!['video-file']),
+        body: json.decode(argResults!['body']),
+        part: argResults!['part'],
+      );
 
       print(liveBroadcastItem);
+
+      close();
     } on DioException catch (err) {
       throw UsageException('API usage error:', err.usage);
     }
@@ -254,6 +265,8 @@ class YoutubeDeleteVideosCommand extends YtHelperCommand {
 
     try {
       await videos.delete(id: argResults!['id']);
+
+      close();
     } on DioException catch (err) {
       throw UsageException('API usage error:', err.usage);
     }
@@ -336,11 +349,14 @@ class YoutubeGetRatingVideosCommand extends YtHelperCommand {
 
     try {
       final liveBroadcastItem = await broadcast.bind(
-          id: argResults!['id'],
-          part: argResults!['part'],
-          streamId: argResults!['stream-id']);
+        id: argResults!['id'],
+        part: argResults!['part'],
+        streamId: argResults!['stream-id'],
+      );
 
       print(liveBroadcastItem);
+
+      close();
     } on DioException catch (err) {
       throw UsageException('API usage error:', err.usage);
     }

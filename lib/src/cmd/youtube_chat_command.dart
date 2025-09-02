@@ -78,6 +78,8 @@ class YoutubeListChatCommand extends YtHelperCommand {
           profileImageSize: int.parse(argResults!['profile-image-size']));
 
       print(liveChatMessageListResponse);
+
+      close();
     } on DioException catch (err) {
       throw UsageException('API usage error:', err.usage);
     }
@@ -115,6 +117,8 @@ class YoutubeInsertChatCommand extends YtHelperCommand {
           body: json.decode(argResults!['body']), part: argResults!['part']);
 
       print(liveChatMessage);
+
+      close();
     } on DioException catch (err) {
       throw UsageException('API usage error:', err.usage);
     }
@@ -145,6 +149,8 @@ class YoutubeDeleteChatCommand extends YtHelperCommand {
 
     try {
       await chat.delete(id: argResults!['id']);
+
+      close();
     } on DioException catch (err) {
       throw UsageException('API usage error:', err.usage);
     }
@@ -187,6 +193,8 @@ class YoutubeAnswerChatCommand extends YtHelperCommand {
     try {
       await chat.answerBot(
           liveBroadcastItem: liveBroadcastItem, chatbot: chatbot);
+
+      close();
     } on DioException catch (err) {
       throw UsageException('API usage error:', err.usage);
     }

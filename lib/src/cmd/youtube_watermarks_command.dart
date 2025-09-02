@@ -74,19 +74,22 @@ class YoutubeSetWatermarksCommand extends YtHelperCommand {
       final success = await watermarks.set(
         channelId: argResults!['channel-id'],
         watermarksResource: WatermarksResource.fromFilePath(
-            timing: Timing(
-              type: argResults!['timing-type'],
-              offsetMs: int.parse(argResults!['offsetMs']),
-              durationMs: int.parse(argResults!['durationMs']),
-            ),
-            position: Position(
-              cornerPosition: argResults!['cornerPosition'],
-            ),
-            imageFileName: argResults!['file'],
-            targetChannelId: argResults!['channel-id']),
+          timing: Timing(
+            type: argResults!['timing-type'],
+            offsetMs: int.parse(argResults!['offsetMs']),
+            durationMs: int.parse(argResults!['durationMs']),
+          ),
+          position: Position(
+            cornerPosition: argResults!['cornerPosition'],
+          ),
+          imageFileName: argResults!['file'],
+          targetChannelId: argResults!['channel-id'],
+        ),
       );
 
       print(success);
+
+      close();
     } on DioException catch (err) {
       throw UsageException('API usage error:', err.usage);
     }
@@ -116,7 +119,10 @@ class YoutubeUnsetWatermarksCommand extends YtHelperCommand {
     try {
       final success =
           await watermarks.unset(channelId: argResults!['channel-id']);
+
       print(success);
+
+      close();
     } on DioException catch (err) {
       throw UsageException('API usage error:', err.usage);
     }

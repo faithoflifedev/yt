@@ -1,6 +1,5 @@
-import 'package:dio/dio.dart';
 import 'package:universal_io/io.dart';
-import 'package:yt/src/help.dart';
+import 'package:yt/src/youtube_api_helper.dart';
 import 'package:yt/yt.dart';
 
 import 'provider/data/thumbnails.dart';
@@ -14,12 +13,10 @@ import 'provider/data/thumbnails.dart';
 /// - Resources of the same type may still have different thumbnail image sizes for certain images depending on the resolution of the original image or content uploaded to YouTube. For example, an HD video may support higher resolution thumbnails than non-HD videos.
 /// - Each object that contains information about a thumbnail image size has a width property and a height property. However, the width and height properties may not be returned for that image.
 /// - If an uploaded thumbnail image does not match the required dimensions, the image is resized to match the correct size without changing its aspect ratio. The image is not cropped, but may include black bars so that the size is correct.
-class Thumbnails extends YouTubeHelper {
-  final Dio dio;
-
+class Thumbnails extends YouTubeApiHelper {
   final ThumbnailsClient _rest;
 
-  Thumbnails(this.dio) : _rest = ThumbnailsClient(dio);
+  Thumbnails({required super.dio}) : _rest = ThumbnailsClient(dio);
 
   ///Supply the [videoId] and retrieve the url used to upload the thumbnail image
   Future<ThumbnailsSetResponse> set(

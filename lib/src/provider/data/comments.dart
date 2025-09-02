@@ -22,13 +22,39 @@ abstract class CommentsClient {
     @Query('textFormat') String? textFormat,
   });
 
-  // @PUT('/channels')
-  // Future<ChannelItem> update(
-  //
-  //   @Header('Accept') String accept,
-  //   @Header('Content-Type') String contentType,
-  //   @Query('part') String parts,
-  //   @Body() Map<String, dynamic> body, {
-  //   @Query('onBehalfOfContentOwner') String? onBehalfOfContentOwner,
-  // });
+  /// Creates a reply to an existing comment.
+  @POST('/comments')
+  Future<Comment> insert(
+    @Header('Accept') String accept,
+    @Header('Content-Type') String contentType,
+    @Query('part') String part,
+    @Body() Map<String, dynamic> body,
+  );
+
+  /// Modifies a comment.
+  @PUT('/comments')
+  Future<Comment> update(
+    @Header('Accept') String accept,
+    @Header('Content-Type') String contentType,
+    @Query('part') String part,
+    @Body() Map<String, dynamic> body,
+  );
+
+  /// Modifies a comment.
+  @PUT('/comments/setModerationStatus')
+  Future<void> setModerationStatus(
+    @Header('Accept') String accept,
+    @Header('Content-Type') String contentType,
+    @Query('id') String part,
+    @Query('moderationStatus') String moderationStatus,
+    @Query('banAuthor') bool? banAuthor,
+  );
+
+  /// Deletes a comment.
+  @PUT('/comments')
+  Future<void> delete(
+    @Header('Accept') String accept,
+    @Header('Content-Type') String contentType,
+    @Query('id') String id,
+  );
 }

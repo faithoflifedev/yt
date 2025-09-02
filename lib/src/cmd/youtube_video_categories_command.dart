@@ -46,11 +46,14 @@ class YoutubeListVideoCategoriesCommand extends YtHelperCommand {
 
     try {
       final videoCategoryListResponse = await videoCategories.list(
-          id: argResults?['id'],
-          regionCode: argResults?['region-code'],
-          hl: argResults?['hl']);
+        id: argResults?['id'],
+        regionCode: argResults?['region-code'],
+        hl: argResults?['hl'],
+      );
 
       print(videoCategoryListResponse);
+
+      close();
     } on DioException catch (err) {
       throw UsageException('API usage error:', err.usage);
     }

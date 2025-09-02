@@ -57,11 +57,13 @@ class YoutubeSetThumbnailsCommand extends YtHelperCommand {
           mandatory: true,
           help:
               'The videoId parameter specifies a YouTube video ID for which the custom video thumbnail is being provided.')
-      ..addOption('file',
-          valueHelp: 'file name',
-          mandatory: true,
-          help:
-              'The file name that contains the thumbnail image that you are uploading.');
+      ..addOption(
+        'file',
+        valueHelp: 'file name',
+        mandatory: true,
+        help:
+            'The file name that contains the thumbnail image that you are uploading.',
+      );
   }
 
   @override
@@ -70,9 +72,15 @@ class YoutubeSetThumbnailsCommand extends YtHelperCommand {
 
     try {
       final thumbnailSetResponse = await thumbnails.set(
-          videoId: argResults!['video-id'],
-          thumbnail: File(argResults!['file']));
+        videoId: argResults!['video-id'],
+        thumbnail: File(
+          argResults!['file'],
+        ),
+      );
+
       print(thumbnailSetResponse);
+
+      close();
     } on DioException catch (err) {
       throw UsageException('API usage error:', err.usage);
     }

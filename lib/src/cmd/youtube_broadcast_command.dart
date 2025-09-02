@@ -77,6 +77,8 @@ class YoutubeTransitionBroadcastCommand extends YtHelperCommand {
           id: argResults?['id']);
 
       print(liveBroadcastItem);
+
+      close();
     } on DioException catch (err) {
       throw UsageException('API usage error:', err.usage);
     }
@@ -148,6 +150,8 @@ class YoutubeListBroadcastCommand extends YtHelperCommand {
       );
 
       print(liveBroadcastResponse);
+
+      close();
     } on DioException catch (err) {
       throw UsageException('API usage error:', err.usage);
     }
@@ -192,6 +196,8 @@ class YoutubeInsertBroadcastCommand extends YtHelperCommand {
           body: json.decode(body), part: argResults!['part']);
 
       print(liveBroadcastItem);
+
+      close();
     } on DioException catch (err) {
       throw UsageException('API usage error:', err.usage);
     }
@@ -220,6 +226,8 @@ class YoutubeDeleteBroadcastCommand extends YtHelperCommand {
 
     try {
       await broadcast.delete(id: argResults!['id']);
+
+      close();
     } on DioException catch (err) {
       throw UsageException('API usage error:', err.usage);
     }
@@ -268,6 +276,8 @@ Note that this method will override the existing values for all of the mutable p
           body: json.decode(body), part: argResults!['part']);
 
       print(liveBroadcastItem);
+
+      close();
     } on DioException catch (err) {
       throw UsageException('API usage error:', err.usage);
     }
@@ -313,6 +323,8 @@ class YoutubeBindBroadcastCommand extends YtHelperCommand {
           streamId: argResults!['stream-id']);
 
       print(liveBroadcastItem);
+
+      close();
     } on DioException catch (err) {
       throw UsageException('API usage error:', err.usage);
     }

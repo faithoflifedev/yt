@@ -1,4 +1,5 @@
 import 'package:args/command_runner.dart';
+import 'package:universal_io/io.dart';
 import 'package:yt/src/util/util.dart';
 import 'package:yt/yt.dart';
 
@@ -35,5 +36,11 @@ abstract class YtHelperCommand extends Command {
     _yt = Yt.withOAuth(
       logOptions: Util.convertToLogOptions(globalResults!['log-level']),
     );
+  }
+
+  void close() {
+    _yt.close();
+
+    exit(0);
   }
 }

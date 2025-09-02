@@ -3,6 +3,9 @@ import 'dart:convert';
 import 'package:loggy/loggy.dart';
 
 class Util {
+  /// the default maxResults for API responses from the YouTube Data API
+  static const responseMaxResults = 20;
+
   static LogOptions convertToLogOptions(String logLevel) {
     var logOptions = const LogOptions(LogLevel.off);
 
@@ -61,6 +64,12 @@ class Util {
 
   static final String accessCredentialsFilePath = '.yt/access_credentials.json';
 
+  static int maxResults(int? maxResults,
+          {int defaultValue = responseMaxResults}) =>
+      (maxResults != null && (maxResults < 1 || maxResults > 100))
+          ? defaultValue
+          : maxResults!;
+
   // static ClientId defaultClientId() =>
   //     clientIdFromFileSpec(defaultCredentialsFileSpec);
 
@@ -80,4 +89,17 @@ class Util {
   //     File('${Util.userHome}/.yt/access_credentials.json');
 }
 
-enum ListPosition { start, end }
+enum ListPosition {
+  start,
+  end,
+}
+
+/// This parameter indicates whether the API should return comments formatted as
+/// HTML or as plain text. The default value is html.
+enum TextFormat {
+  /// Returns the comments in HTML format. This is the default value.
+  html,
+
+  /// Returns the comments in plain text format.
+  plainText,
+}

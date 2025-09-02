@@ -1,8 +1,7 @@
 import 'package:csv/csv.dart';
-import 'package:dio/dio.dart';
 import 'package:fling_pickle/fling_pickle.dart';
 import 'package:universal_io/io.dart';
-import 'package:yt/src/help.dart';
+import 'package:yt/src/youtube_api_helper.dart';
 import 'package:yt/yt.dart';
 
 import 'provider/live/chat.dart';
@@ -10,41 +9,38 @@ import 'provider/live/chat.dart';
 /// A liveChatMessage resource represents a chat message in a YouTube live chat. The resource can contain details about several types of messages, including a newly posted text message or fan funding event.
 ///
 /// The live chat feature is enabled by default for live broadcasts and is available while the live event is active. (After the event ends, live chat is no longer available for that event.)
-class Chat extends YouTubeHelper {
-  final Dio dio;
-
+class Chat extends YouTubeApiHelper {
   final ChatClient _rest;
 
-  Chat(this.dio) : _rest = ChatClient(dio);
+  Chat({required super.dio}) : _rest = ChatClient(dio);
 
   ///Lists live chat messages for a specific chat.
-  Future<LiveChatMessageListResponse> list(
-      {required String liveChatId,
-      String part = 'snippet,status,contentDetails',
-      List<String> partList = const [],
-      String? hl,
-      int? maxResults,
-      String? pageToken,
-      int? profileImageSize}) async {
-    final String part = 'snippet,authorDetails';
-
-    return await _rest.list(
-      // _authHeader,
-      accept,
-      buildParts(partList, part),
-      liveChatId,
-      hl: hl,
-      maxResults: maxResults,
-      pageToken: pageToken,
-      profileImageSize: profileImageSize,
-    );
-  }
+  Future<LiveChatMessageListResponse> list({
+    required String liveChatId,
+    String part = 'snippet,authorDetails',
+    List<String> partList = const [],
+    String? hl,
+    int? maxResults,
+    String? pageToken,
+    int? profileImageSize,
+  }) async =>
+      await _rest.list(
+        // _authHeader,
+        accept,
+        buildParts(partList, part),
+        liveChatId,
+        hl: hl,
+        maxResults: maxResults,
+        pageToken: pageToken,
+        profileImageSize: profileImageSize,
+      );
 
   ///Adds a message to a live chat.
-  Future<LiveChatMessage> insert(
-      {required Map<String, dynamic> body,
-      String part = 'snippet,status,contentDetails',
-      List<String> partList = const []}) async {
+  Future<LiveChatMessage> insert({
+    required Map<String, dynamic> body,
+    String part = 'snippet,status,contentDetails',
+    List<String> partList = const [],
+  }) async {
     String part = 'snippet';
 
     if (body['snippet']['textMessageDetails']['messageText'] == '') {

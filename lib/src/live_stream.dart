@@ -1,16 +1,13 @@
-import 'package:dio/dio.dart';
-import 'package:yt/src/help.dart';
+import 'package:yt/src/youtube_api_helper.dart';
 import 'package:yt/yt.dart';
 
 import 'provider/live/stream.dart';
 
 ///A liveStream resource contains information about the video stream that you are transmitting to YouTube. The stream provides the content that will be broadcast to YouTube users. Once created, a [LiveStreamItem] resource can be bound to one or more [LiveBroadcastItem] resources.
-class LiveStream extends YouTubeHelper {
-  final Dio dio;
-
+class LiveStream extends YouTubeApiHelper {
   final StreamClient _rest;
 
-  LiveStream(this.dio) : _rest = StreamClient(dio);
+  LiveStream({required super.dio}) : _rest = StreamClient(dio);
 
   ///Returns a list of video streams that match the API request parameters.
   Future<LiveStreamListResponse> list(
@@ -44,15 +41,14 @@ class LiveStream extends YouTubeHelper {
     required Map<String, dynamic> body,
     String? onBehalfOfContentOwner,
     String? onBehalfOfContentOwnerChannel,
-  }) {
-    return _rest.insert(
-      // _authHeader,
-      accept,
-      contentType,
-      buildParts(partList, part),
-      body,
-    );
-  }
+  }) =>
+      _rest.insert(
+        // _authHeader,
+        accept,
+        contentType,
+        buildParts(partList, part),
+        body,
+      );
 
   ///Updates a video stream. If the properties that you want to change cannot be updated, then you need to create a new stream with the proper settings.
   Future<LiveStreamItem> update({

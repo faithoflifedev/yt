@@ -70,6 +70,8 @@ class YoutubeListStreamCommand extends YtHelperCommand {
       );
 
       print(liveStreamListResponse);
+
+      close();
     } on DioException catch (err) {
       throw UsageException('API usage error:', err.usage);
     }
@@ -109,6 +111,8 @@ class YoutubeInsertStreamCommand extends YtHelperCommand {
       );
 
       print(liveStreamItem);
+
+      close();
     } on DioException catch (err) {
       throw UsageException('API usage error:', err.usage);
     }
@@ -152,6 +156,8 @@ Note that this method will override the existing values for all of the mutable p
       );
 
       print(liveStreamItem);
+
+      close();
     } on DioException catch (err) {
       throw UsageException('API usage error:', err.usage);
     }
@@ -180,6 +186,8 @@ class YoutubeDeleteStreamCommand extends YtHelperCommand {
 
     try {
       await liveStream.delete(id: argResults!['id']);
+
+      close();
     } on DioException catch (err) {
       throw UsageException('API usage error:', err.usage);
     }

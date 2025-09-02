@@ -6,19 +6,18 @@ part of 'videos.dart';
 // RetrofitGenerator
 // **************************************************************************
 
-// ignore_for_file: unnecessary_brace_in_string_interps,no_leading_underscores_for_local_identifiers
+// ignore_for_file: unnecessary_brace_in_string_interps,no_leading_underscores_for_local_identifiers,unused_element,unnecessary_string_interpolations
 
 class _VideoClient implements VideoClient {
-  _VideoClient(
-    this._dio, {
-    this.baseUrl,
-  }) {
+  _VideoClient(this._dio, {this.baseUrl, this.errorLogger}) {
     baseUrl ??= 'https://www.googleapis.com';
   }
 
   final Dio _dio;
 
   String? baseUrl;
+
+  final ParseErrorLogger? errorLogger;
 
   @override
   Future<VideoListResponse> list(
@@ -55,25 +54,25 @@ class _VideoClient implements VideoClient {
     final _headers = <String, dynamic>{r'Accept': accept};
     _headers.removeWhere((k, v) => v == null);
     const Map<String, dynamic>? _data = null;
-    final _result = await _dio
-        .fetch<Map<String, dynamic>>(_setStreamType<VideoListResponse>(Options(
-      method: 'GET',
-      headers: _headers,
-      extra: _extra,
-    )
-            .compose(
-              _dio.options,
-              '/youtube/v3/videos',
-              queryParameters: queryParameters,
-              data: _data,
-            )
-            .copyWith(
-                baseUrl: _combineBaseUrls(
-              _dio.options.baseUrl,
-              baseUrl,
-            ))));
-    final value = VideoListResponse.fromJson(_result.data!);
-    return value;
+    final _options = _setStreamType<VideoListResponse>(
+      Options(method: 'GET', headers: _headers, extra: _extra)
+          .compose(
+            _dio.options,
+            '/youtube/v3/videos',
+            queryParameters: queryParameters,
+            data: _data,
+          )
+          .copyWith(baseUrl: _combineBaseUrls(_dio.options.baseUrl, baseUrl)),
+    );
+    final _result = await _dio.fetch<Map<String, dynamic>>(_options);
+    late VideoListResponse _value;
+    try {
+      _value = VideoListResponse.fromJson(_result.data!);
+    } on Object catch (e, s) {
+      errorLogger?.logError(e, s, _options);
+      rethrow;
+    }
+    return _value;
   }
 
   @override
@@ -95,27 +94,26 @@ class _VideoClient implements VideoClient {
     queryParameters.removeWhere((k, v) => v == null);
     final _headers = <String, dynamic>{r'Accept': accept};
     _headers.removeWhere((k, v) => v == null);
-    final _data =
-        Stream.fromIterable(videoFile.readAsBytesSync().map((i) => [i]));
-    final _result = await _dio
-        .fetch<Map<String, dynamic>>(_setStreamType<VideoItem>(Options(
-      method: 'POST',
-      headers: _headers,
-      extra: _extra,
-    )
-            .compose(
-              _dio.options,
-              '/upload/youtube/v3/videos',
-              queryParameters: queryParameters,
-              data: _data,
-            )
-            .copyWith(
-                baseUrl: _combineBaseUrls(
-              _dio.options.baseUrl,
-              baseUrl,
-            ))));
-    final value = VideoItem.fromJson(_result.data!);
-    return value;
+    final _data = videoFile.openRead();
+    final _options = _setStreamType<VideoItem>(
+      Options(method: 'POST', headers: _headers, extra: _extra)
+          .compose(
+            _dio.options,
+            '/upload/youtube/v3/videos',
+            queryParameters: queryParameters,
+            data: _data,
+          )
+          .copyWith(baseUrl: _combineBaseUrls(_dio.options.baseUrl, baseUrl)),
+    );
+    final _result = await _dio.fetch<Map<String, dynamic>>(_options);
+    late VideoItem _value;
+    try {
+      _value = VideoItem.fromJson(_result.data!);
+    } on Object catch (e, s) {
+      errorLogger?.logError(e, s, _options);
+      rethrow;
+    }
+    return _value;
   }
 
   @override
@@ -147,26 +145,24 @@ class _VideoClient implements VideoClient {
     _headers.removeWhere((k, v) => v == null);
     final _data = <String, dynamic>{};
     _data.addAll(body);
-    final _result =
-        await _dio.fetch(_setStreamType<HttpResponse<dynamic>>(Options(
-      method: 'POST',
-      headers: _headers,
-      extra: _extra,
-      contentType: contentType,
-    )
-            .compose(
-              _dio.options,
-              '/upload/youtube/v3/videos',
-              queryParameters: queryParameters,
-              data: _data,
-            )
-            .copyWith(
-                baseUrl: _combineBaseUrls(
-              _dio.options.baseUrl,
-              baseUrl,
-            ))));
-    final value = _result.data;
-    final httpResponse = HttpResponse(value, _result);
+    final _options = _setStreamType<HttpResponse<dynamic>>(
+      Options(
+        method: 'POST',
+        headers: _headers,
+        extra: _extra,
+        contentType: contentType,
+      )
+          .compose(
+            _dio.options,
+            '/upload/youtube/v3/videos',
+            queryParameters: queryParameters,
+            data: _data,
+          )
+          .copyWith(baseUrl: _combineBaseUrls(_dio.options.baseUrl, baseUrl)),
+    );
+    final _result = await _dio.fetch(_options);
+    final _value = _result.data;
+    final httpResponse = HttpResponse(_value, _result);
     return httpResponse;
   }
 
@@ -189,57 +185,45 @@ class _VideoClient implements VideoClient {
     _headers.removeWhere((k, v) => v == null);
     final _data = <String, dynamic>{};
     _data.addAll(body);
-    final _result = await _dio
-        .fetch<Map<String, dynamic>>(_setStreamType<VideoItem>(Options(
-      method: 'PUT',
-      headers: _headers,
-      extra: _extra,
-    )
-            .compose(
-              _dio.options,
-              '/youtube/v3/videos',
-              queryParameters: queryParameters,
-              data: _data,
-            )
-            .copyWith(
-                baseUrl: _combineBaseUrls(
-              _dio.options.baseUrl,
-              baseUrl,
-            ))));
-    final value = VideoItem.fromJson(_result.data!);
-    return value;
+    final _options = _setStreamType<VideoItem>(
+      Options(method: 'PUT', headers: _headers, extra: _extra)
+          .compose(
+            _dio.options,
+            '/youtube/v3/videos',
+            queryParameters: queryParameters,
+            data: _data,
+          )
+          .copyWith(baseUrl: _combineBaseUrls(_dio.options.baseUrl, baseUrl)),
+    );
+    final _result = await _dio.fetch<Map<String, dynamic>>(_options);
+    late VideoItem _value;
+    try {
+      _value = VideoItem.fromJson(_result.data!);
+    } on Object catch (e, s) {
+      errorLogger?.logError(e, s, _options);
+      rethrow;
+    }
+    return _value;
   }
 
   @override
-  Future<void> rate(
-    String accept,
-    String id,
-    String rating,
-  ) async {
+  Future<void> rate(String accept, String id, String rating) async {
     final _extra = <String, dynamic>{};
-    final queryParameters = <String, dynamic>{
-      r'id': id,
-      r'rating': rating,
-    };
+    final queryParameters = <String, dynamic>{r'id': id, r'rating': rating};
     final _headers = <String, dynamic>{r'Accept': accept};
     _headers.removeWhere((k, v) => v == null);
     const Map<String, dynamic>? _data = null;
-    await _dio.fetch<void>(_setStreamType<void>(Options(
-      method: 'POST',
-      headers: _headers,
-      extra: _extra,
-    )
-        .compose(
-          _dio.options,
-          '/youtube/v3/videos/rate',
-          queryParameters: queryParameters,
-          data: _data,
-        )
-        .copyWith(
-            baseUrl: _combineBaseUrls(
-          _dio.options.baseUrl,
-          baseUrl,
-        ))));
+    final _options = _setStreamType<void>(
+      Options(method: 'POST', headers: _headers, extra: _extra)
+          .compose(
+            _dio.options,
+            '/youtube/v3/videos/rate',
+            queryParameters: queryParameters,
+            data: _data,
+          )
+          .copyWith(baseUrl: _combineBaseUrls(_dio.options.baseUrl, baseUrl)),
+    );
+    await _dio.fetch<void>(_options);
   }
 
   @override
@@ -257,25 +241,25 @@ class _VideoClient implements VideoClient {
     final _headers = <String, dynamic>{r'Accept': accept};
     _headers.removeWhere((k, v) => v == null);
     const Map<String, dynamic>? _data = null;
-    final _result = await _dio.fetch<Map<String, dynamic>>(
-        _setStreamType<VideoGetRatingResponse>(Options(
-      method: 'GET',
-      headers: _headers,
-      extra: _extra,
-    )
-            .compose(
-              _dio.options,
-              '/youtube/v3/videos/getRating',
-              queryParameters: queryParameters,
-              data: _data,
-            )
-            .copyWith(
-                baseUrl: _combineBaseUrls(
-              _dio.options.baseUrl,
-              baseUrl,
-            ))));
-    final value = VideoGetRatingResponse.fromJson(_result.data!);
-    return value;
+    final _options = _setStreamType<VideoGetRatingResponse>(
+      Options(method: 'GET', headers: _headers, extra: _extra)
+          .compose(
+            _dio.options,
+            '/youtube/v3/videos/getRating',
+            queryParameters: queryParameters,
+            data: _data,
+          )
+          .copyWith(baseUrl: _combineBaseUrls(_dio.options.baseUrl, baseUrl)),
+    );
+    final _result = await _dio.fetch<Map<String, dynamic>>(_options);
+    late VideoGetRatingResponse _value;
+    try {
+      _value = VideoGetRatingResponse.fromJson(_result.data!);
+    } on Object catch (e, s) {
+      errorLogger?.logError(e, s, _options);
+      rethrow;
+    }
+    return _value;
   }
 
   @override
@@ -286,29 +270,24 @@ class _VideoClient implements VideoClient {
   }) async {
     final _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{
-      r'onBehalfOfContentOwner': onBehalfOfContentOwner
+      r'onBehalfOfContentOwner': onBehalfOfContentOwner,
     };
     queryParameters.removeWhere((k, v) => v == null);
     final _headers = <String, dynamic>{r'Accept': accept};
     _headers.removeWhere((k, v) => v == null);
     final _data = <String, dynamic>{};
     _data.addAll(body.toJson());
-    await _dio.fetch<void>(_setStreamType<void>(Options(
-      method: 'POST',
-      headers: _headers,
-      extra: _extra,
-    )
-        .compose(
-          _dio.options,
-          '/youtube/v3/videos/reportAbuse',
-          queryParameters: queryParameters,
-          data: _data,
-        )
-        .copyWith(
-            baseUrl: _combineBaseUrls(
-          _dio.options.baseUrl,
-          baseUrl,
-        ))));
+    final _options = _setStreamType<void>(
+      Options(method: 'POST', headers: _headers, extra: _extra)
+          .compose(
+            _dio.options,
+            '/youtube/v3/videos/reportAbuse',
+            queryParameters: queryParameters,
+            data: _data,
+          )
+          .copyWith(baseUrl: _combineBaseUrls(_dio.options.baseUrl, baseUrl)),
+    );
+    await _dio.fetch<void>(_options);
   }
 
   @override
@@ -326,22 +305,17 @@ class _VideoClient implements VideoClient {
     final _headers = <String, dynamic>{r'Accept': accept};
     _headers.removeWhere((k, v) => v == null);
     const Map<String, dynamic>? _data = null;
-    await _dio.fetch<void>(_setStreamType<void>(Options(
-      method: 'DELETE',
-      headers: _headers,
-      extra: _extra,
-    )
-        .compose(
-          _dio.options,
-          '/youtube/v3/videos',
-          queryParameters: queryParameters,
-          data: _data,
-        )
-        .copyWith(
-            baseUrl: _combineBaseUrls(
-          _dio.options.baseUrl,
-          baseUrl,
-        ))));
+    final _options = _setStreamType<void>(
+      Options(method: 'DELETE', headers: _headers, extra: _extra)
+          .compose(
+            _dio.options,
+            '/youtube/v3/videos',
+            queryParameters: queryParameters,
+            data: _data,
+          )
+          .copyWith(baseUrl: _combineBaseUrls(_dio.options.baseUrl, baseUrl)),
+    );
+    await _dio.fetch<void>(_options);
   }
 
   RequestOptions _setStreamType<T>(RequestOptions requestOptions) {
@@ -357,10 +331,7 @@ class _VideoClient implements VideoClient {
     return requestOptions;
   }
 
-  String _combineBaseUrls(
-    String dioBaseUrl,
-    String? baseUrl,
-  ) {
+  String _combineBaseUrls(String dioBaseUrl, String? baseUrl) {
     if (baseUrl == null || baseUrl.trim().isEmpty) {
       return dioBaseUrl;
     }

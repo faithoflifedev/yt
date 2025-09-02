@@ -1,18 +1,16 @@
-import 'package:dio/dio.dart';
-import 'package:yt/src/help.dart';
+import 'package:yt/src/youtube_api_helper.dart';
 import 'package:yt/yt.dart';
 
 import 'provider/data/playlist_items.dart';
 
-class PlaylistItems extends YouTubeHelper {
-  final String? token;
-  final String? apiKey;
-  final Dio dio;
-
+class PlaylistItems extends YouTubeApiHelper {
   final PlaylistItemsClient _rest;
 
-  PlaylistItems({required this.dio, this.token, this.apiKey})
-      : _rest = PlaylistItemsClient(dio);
+  PlaylistItems({
+    required super.dio,
+    super.token,
+    super.apiKey,
+  }) : _rest = PlaylistItemsClient(dio);
 
   ///Returns a collection of playlists that match the API request parameters. For example, you can retrieve all playlists that the authenticated user owns, or you can retrieve one or more playlists by their unique IDs.
   Future<PlaylistItemListResponse> list(
@@ -44,14 +42,13 @@ class PlaylistItems extends YouTubeHelper {
     required Map<String, dynamic> body,
     String? onBehalfOfContentOwner,
     String? onBehalfOfContentOwnerChannel,
-  }) async {
-    return await _rest.insert(
-      accept,
-      contentType,
-      buildParts(partList, part),
-      body,
-    );
-  }
+  }) async =>
+      await _rest.insert(
+        accept,
+        contentType,
+        buildParts(partList, part),
+        body,
+      );
 
   ///Modifies a playlist. For example, you could change a playlist's title, description, or privacy status.
   Future<Playlist> update({

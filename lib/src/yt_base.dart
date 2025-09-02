@@ -90,15 +90,24 @@ class Yt with UiLoggy {
     );
   }
 
-  static Yt withKey(String apiKey) {
+  static Yt withApiKey(String apiKey,
+      {Map<String, String>? additionalHeaders}) {
     final yt = Yt();
 
     yt.setModules(apiKey: apiKey);
+
+    if (additionalHeaders != null) {
+      dio.options.headers.addAll(additionalHeaders);
+    }
 
     dio.interceptors.addAll(_interceptors);
 
     return yt;
   }
+
+  @Deprecated('Use withApiKey instead')
+  static Yt withKey(String apiKey, {Map<String, String>? additionalHeaders}) =>
+      withApiKey(apiKey, additionalHeaders: additionalHeaders);
 
   static Yt withOAuth(
       {ClientId? oAuthClientId,
@@ -168,18 +177,18 @@ class Yt with UiLoggy {
   void setModules({bool? useTokenAuth, String? apiKey}) {
     if (useTokenAuth != null && useTokenAuth) {
       /// A liveBroadcast resource represents an event that will be streamed, via live video, on YouTube.
-      _broadcast = Broadcast(dio);
+      _broadcast = Broadcast(dio: dio);
 
       /// A liveChatMessage resource represents a chat message in a YouTube live chat. The resource can contain details about several types of messages, including a newly posted text message or fan funding event.
       ///
       /// The live chat feature is enabled by default for live broadcasts and is available while the live event is active. (After the event ends, live chat is no longer available for that event.)
-      _chat = Chat(dio);
+      _chat = Chat(dio: dio);
 
       ///A liveStream resource contains information about the video stream that you are transmitting to YouTube. The stream provides the content that will be broadcast to YouTube users. Once created, a [LiveStreamItem] resource can be bound to one or more [LiveBroadcastItem] resources.
-      _liveStream = LiveStream(dio);
+      _liveStream = LiveStream(dio: dio);
 
       /// A subscription resource contains information about a YouTube user subscription. A subscription notifies a user when new videos are added to a channel or when another user takes one of several actions on YouTube, such as uploading a video, rating a video, or commenting on a video.
-      _subscriptions = Subscriptions(dio);
+      _subscriptions = Subscriptions(dio: dio);
 
       /// A [Thumbnail] resource identifies different thumbnail image sizes associated with a resource. Please note the following characteristics of thumbnail images:
       ///
@@ -190,30 +199,39 @@ class Yt with UiLoggy {
       /// - Resources of the same type may still have different thumbnail image sizes for certain images depending on the resolution of the original image or content uploaded to YouTube. For example, an HD video may support higher resolution thumbnails than non-HD videos.
       /// - Each object that contains information about a thumbnail image size has a width property and a height property. However, the width and height properties may not be returned for that image.
       /// - If an uploaded thumbnail image does not match the required dimensions, the image is resized to match the correct size without changing its aspect ratio. The image is not cropped, but may include black bars so that the size is correct.
-      _thumbnails = Thumbnails(dio);
+      _thumbnails = Thumbnails(dio: dio);
 
       /// A video resource represents a YouTube video.
-      _videos = Videos(dio);
+      _videos = Videos(dio: dio);
 
       /// A videoCategory resource identifies a category that has been or could be associated with uploaded videos.
-      _videoCategories = VideoCategories(dio);
+      _videoCategories = VideoCategories(dio: dio);
 
       /// A [Watermark] resource identifies an image that displays during playbacks of
       /// a specified channel's videos. You can also specify a target channel to which
       /// the image will link as well as timing details that determine when the
       /// watermark appears during video playbacks and the length of time it is
       /// visible.
-      _watermarks = Watermarks(dio);
+      _watermarks = Watermarks(dio: dio);
     }
 
     /// A channel resource contains information about a YouTube channel.
-    _channels = Channels(apiKey: apiKey, dio: dio);
+    _channels = Channels(
+      apiKey: apiKey,
+      dio: dio,
+    );
 
     /// A comment resource contains information about a single YouTube comment. A comment resource can represent a comment about either a video or a channel. In addition, the comment could be a top-level comment or a reply to a top-level comment.
-    _comments = Comments(apiKey: apiKey, dio: dio);
+    _comments = Comments(
+      apiKey: apiKey,
+      dio: dio,
+    );
 
     /// A commentThread resource contains information about a YouTube comment thread, which comprises a top-level comment and replies, if any exist, to that comment. A commentThread resource can represent comments about either a video or a channel.
-    _commentThreads = CommentThreads(apiKey: apiKey, dio: dio);
+    _commentThreads = CommentThreads(
+      apiKey: apiKey,
+      dio: dio,
+    );
 
     /// A playlist resource represents a YouTube playlist. A playlist is a collection of videos that can be viewed sequentially and shared with other users. By default, playlists are publicly visible to other users, but playlists can be public or private.
     ///
@@ -224,14 +242,25 @@ class Yt with UiLoggy {
     /// To be more specific, these lists are associated with a channel, which is a collection of a person, group, or company's videos, playlists, and other YouTube information. You can retrieve the playlist IDs for each of these lists from the channel resource for a given channel.
     ///
     /// You can then use the playlistItems.list method to retrieve any of those lists. You can also add or remove items from those lists by calling the playlistItems.insert and playlistItems.delete methods.
-    _playlists = Playlists(apiKey: apiKey, dio: dio);
+    _playlists = Playlists(
+      apiKey: apiKey,
+      dio: dio,
+    );
 
     /// A playlistItem resource identifies another resource, such as a video, that is included in a playlist. In addition, the playlistItem resource contains details about the included resource that pertain specifically to how that resource is used in that playlist.
     ///
     /// YouTube also uses a playlist to identify a channel's list of uploaded videos, with each playlistItem in that list representing one uploaded video. You can retrieve the playlist ID for that list from the channel resource for a given channel. You can then use the playlistItems.list method to the list.
-    _playlistItems = PlaylistItems(apiKey: apiKey, dio: dio);
+    _playlistItems = PlaylistItems(
+      apiKey: apiKey,
+      dio: dio,
+    );
 
     /// A search result contains information about a YouTube video, channel, or playlist that matches the search parameters specified in an API request. While a search result points to a uniquely identifiable resource, like a video, it does not have its own persistent data.
-    _search = Search(apiKey: apiKey, dio: dio);
+    _search = Search(
+      apiKey: apiKey,
+      dio: dio,
+    );
   }
+
+  void close() => dio.close();
 }

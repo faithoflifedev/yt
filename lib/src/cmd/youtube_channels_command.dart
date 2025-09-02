@@ -61,6 +61,8 @@ auditDetails, brandingSettings, contentDetails, contentOwnerDetails, id, localiz
           id: argResults?['id']);
 
       print(channelResponse);
+
+      close();
     } on DioException catch (err) {
       throw UsageException('API usage error:', err.usage);
     }
@@ -103,6 +105,8 @@ Note that this method overrides the existing values for all of the mutable prope
           body: json.decode(argResults!['body']), part: argResults!['part']);
 
       print(channelItem);
+
+      close();
     } on DioException catch (err) {
       throw UsageException('API usage error:', err.usage);
     }

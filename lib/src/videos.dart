@@ -1,18 +1,15 @@
-import 'package:dio/dio.dart';
 import 'package:universal_io/io.dart';
-import 'package:yt/src/help.dart';
+import 'package:yt/src/youtube_api_helper.dart';
 import 'package:yt/src/util/util.dart';
 import 'package:yt/yt.dart';
 
 import 'provider/data/videos.dart';
 
 /// Returns a list of [VideoItem]s that match the API request parameters.
-class Videos extends YouTubeHelper {
-  final Dio dio;
-
+class Videos extends YouTubeApiHelper {
   final VideoClient _rest;
 
-  Videos(this.dio) : _rest = VideoClient(dio);
+  Videos({required super.dio}) : _rest = VideoClient(dio);
 
   /// Uploads a [VideoItem] to YouTube and optionally sets the video's metadata.
   Future<VideoListResponse> list({
@@ -29,23 +26,22 @@ class Videos extends YouTubeHelper {
     String? pageToken,
     String? regionCode,
     String? videoCategoryId,
-  }) async {
-    return await _rest.list(
-      accept,
-      buildParts(partList, part),
-      chart: chart,
-      id: id,
-      myRating: myRating,
-      hl: hl,
-      maxHeight: maxHeight,
-      maxResults: maxResults,
-      maxWidth: maxWidth,
-      onBehalfOfContentOwner: onBehalfOfContentOwner,
-      pageToken: pageToken,
-      regionCode: regionCode,
-      videoCategoryId: videoCategoryId,
-    );
-  }
+  }) async =>
+      await _rest.list(
+        accept,
+        buildParts(partList, part),
+        chart: chart,
+        id: id,
+        myRating: myRating,
+        hl: hl,
+        maxHeight: maxHeight,
+        maxResults: maxResults,
+        maxWidth: maxWidth,
+        onBehalfOfContentOwner: onBehalfOfContentOwner,
+        pageToken: pageToken,
+        regionCode: regionCode,
+        videoCategoryId: videoCategoryId,
+      );
 
   /// Uploads a video to YouTube and optionally sets the video's metadata.
   Future<VideoItem> insert({

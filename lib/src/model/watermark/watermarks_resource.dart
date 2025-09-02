@@ -76,7 +76,9 @@ class WatermarksResource {
   @override
   String toString() => jsonEncode(toJson());
 
-  static List<int> imageBytesToList(imageBytes) => List.from(imageBytes);
+  static List<int> imageBytesToList(Uint8List imageBytes) =>
+      List.from(imageBytes);
 
-  static Uint8List stringToUint8List(value) => Uint8List.fromList(value);
+  static Uint8List stringToUint8List(List<int> value) =>
+      Uint8List.fromList(value);
 }

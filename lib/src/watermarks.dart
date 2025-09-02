@@ -1,5 +1,4 @@
-import 'package:dio/dio.dart';
-import 'package:yt/src/help.dart';
+import 'package:yt/src/youtube_api_helper.dart';
 
 import 'provider/data/watermarks.dart';
 
@@ -8,12 +7,10 @@ import 'provider/data/watermarks.dart';
 /// the image will link as well as timing details that determine when the
 /// watermark appears during video playbacks and the length of time it is
 /// visible.
-class Watermarks extends YouTubeHelper {
-  final Dio dio;
-
+class Watermarks extends YouTubeApiHelper {
   final WatermarksClient _rest;
 
-  Watermarks(this.dio) : _rest = WatermarksClient(dio);
+  Watermarks({required super.dio}) : _rest = WatermarksClient(dio);
 
   /// Uploads a watermark image to YouTube and sets it for a channel.
   ///

@@ -1,18 +1,16 @@
-import 'package:dio/dio.dart';
-import 'package:yt/src/help.dart';
+import 'package:yt/src/youtube_api_helper.dart';
 import 'package:yt/yt.dart';
 
 import 'provider/data/channels.dart';
 
-class Channels extends YouTubeHelper {
-  final String? token;
-  final String? apiKey;
-  final Dio dio;
-
+class Channels extends YouTubeApiHelper {
   final ChannelClient _rest;
 
-  Channels({required this.dio, this.token, this.apiKey})
-      : _rest = ChannelClient(dio);
+  Channels({
+    required super.dio,
+    super.token,
+    super.apiKey,
+  }) : _rest = ChannelClient(dio);
 
   /// Returns a collection of zero or more channel resources that match the request criteria.
   Future<ChannelResponse> list(

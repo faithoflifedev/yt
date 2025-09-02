@@ -1,5 +1,4 @@
-import 'package:dio/dio.dart';
-import 'package:yt/src/help.dart';
+import 'package:yt/src/youtube_api_helper.dart';
 import 'package:yt/yt.dart';
 
 import 'provider/data/playlists.dart';
@@ -13,13 +12,13 @@ import 'provider/data/playlists.dart';
 ///To be more specific, these lists are associated with a channel, which is a collection of a person, group, or company's videos, playlists, and other YouTube information. You can retrieve the playlist IDs for each of these lists from the channel resource for a given channel.
 ///
 ///You can then use the [list()] method to retrieve any of those lists. You can also add or remove items from those lists by calling the [insert()] and [delete()] methods.
-class Playlists extends YouTubeHelper {
-  final String? apiKey;
-  final Dio dio;
-
+class Playlists extends YouTubeApiHelper {
   final PlaylistClient _rest;
 
-  Playlists({required this.dio, this.apiKey}) : _rest = PlaylistClient(dio);
+  Playlists({
+    required super.dio,
+    super.apiKey,
+  }) : _rest = PlaylistClient(dio);
 
   ///Returns a collection of playlists that match the API request parameters.
   ///For example, you can retrieve all playlists that the authenticated user

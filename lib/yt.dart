@@ -3,7 +3,7 @@
 ///
 ///The YouTube Data API lets you incorporate functions normally executed on the
 ///YouTube website into your own website or application.
-library yt;
+library;
 
 // export 'package:dio_cache_interceptor/dio_cache_interceptor.dart'
 //     show CachePolicy;
@@ -84,6 +84,7 @@ export 'src/yt_base.dart';
 
 export 'src/util/authorization_exception.dart';
 export 'src/util/emoji_formatter.dart';
+export 'src/util/enum.dart';
 export 'src/util/extras.dart';
 export 'src/util/logging_interceptors.dart';
 export 'src/util/phrase_match.dart';
