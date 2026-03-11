@@ -1,5 +1,5 @@
 name: yt_cli
-version: 2.2.6+2
+version: 2.2.6+3
 description: A command-line interface for YouTube.
 repository: https://github.com/faithoflifedev/yt
 homepage: https://github.com/faithoflifedev/yt
@@ -20,4 +20,4 @@ dependencies:
   dio: ^5.9.2
   googleapis_auth: ^2.2.0
   universal_io: ^2.3.1
-  yt: ^2.2.6+2
+  yt: ^2.2.6+3

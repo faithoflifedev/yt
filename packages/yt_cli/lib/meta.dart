@@ -6,5 +6,5 @@ library;
 import 'dart:convert' show json;
 
 final pubSpec = json.decode(
-  '{"description":"A command-line interface for YouTube.","homepage":"https://github.com/faithoflifedev/yt","documentation":"null","repository":"https://github.com/faithoflifedev/yt","issueTracker":"null","name":"yt_cli","publish_to":"null","version":"2.2.6+2"}',
+  '{"description":"A command-line interface for YouTube.","homepage":"https://github.com/faithoflifedev/yt","documentation":"null","repository":"https://github.com/faithoflifedev/yt","issueTracker":"null","name":"yt_cli","publish_to":"null","version":"2.2.6+3"}',
 );

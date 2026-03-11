@@ -3,7 +3,7 @@ import 'package:yt/meta.dart';
 
 class YoutubeVersionCommand extends Command {
   @override
-  String get description => 'Display the package name and version';
+  String get description => 'Display the package name and version.';
 
   @override
   String get name => 'version';
