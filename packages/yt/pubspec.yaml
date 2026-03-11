@@ -13,7 +13,6 @@ environment:
 resolution: workspace
 
 dependencies:
-  args: ^2.7.0
   csv: ^7.2.0
   dio: ^5.9.2
   fling_pickle: ^0.4.3
