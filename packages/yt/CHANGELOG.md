@@ -1,3 +1,6 @@
+## 2.2.6+3
+
+* README updates
 ## 2.2.6+2
 
 * dependency updates
