@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1, user-scalable=no">
+  <meta name="description" content="API docs for the YoutubeUpdateVideosCommand.new constructor from Class YoutubeUpdateVideosCommand from the yt library, for the Dart programming language.">
+  <title>YoutubeUpdateVideosCommand.new constructor - YoutubeUpdateVideosCommand - yt library - Dart API</title>
+
+
+  
+  <link rel="preconnect" href="https://fonts.gstatic.com">
+  <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono:ital,wght@0,300;0,400;0,500;0,700;1,400&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" rel="stylesheet">
+  
+  <link rel="stylesheet" href="../../static-assets/github.css?v1">
+  <link rel="stylesheet" href="../../static-assets/styles.css?v1">
+  <link rel="icon" href="../../static-assets/favicon.png?v1">
+  
+</head>
+
+<body data-base-href="../../" data-using-base-href="false" class="light-theme">
+<div id="overlay-under-drawer"></div>
+<header id="title">
+  <span id="sidenav-left-toggle" class="material-symbols-outlined" role="button" tabindex="0">menu</span>
+  <ol class="breadcrumbs gt-separated dark hidden-xs">
+    <li><a href="../../index.html">yt</a></li>
+    <li><a href="../../yt/">yt.dart</a></li>
+    <li><a href="../../yt/YoutubeUpdateVideosCommand-class.html">YoutubeUpdateVideosCommand</a></li>
+    <li class="self-crumb">YoutubeUpdateVideosCommand.new constructor</li>
+  </ol>
+  <div class="self-name">YoutubeUpdateVideosCommand.new</div>
+  <form class="search navbar-right" role="search">
+    <input type="text" id="search-box" autocomplete="off" disabled class="form-control typeahead" placeholder="Loading search...">
+  </form>
+  <button class="toggle" id="theme-button" title="Toggle between light and dark mode" aria-label="Light and dark mode toggle">
+    <span id="dark-theme-button" class="material-symbols-outlined" aria-hidden="true">
+      dark_mode
+    </span>
+    <span id="light-theme-button" class="material-symbols-outlined" aria-hidden="true">
+      light_mode
+    </span>
+  </button>
+</header>
+<main>
+  <div
+      id="dartdoc-main-content"
+      class="main-content"
+      data-above-sidebar="yt&#47;YoutubeUpdateVideosCommand-class-sidebar.html"
+      data-below-sidebar="">
+      <div>
+<h1><span class="kind-constructor">YoutubeUpdateVideosCommand</span> constructor 
+</h1></div>
+
+    <section class="multi-line-signature">
+      
+      <span class="name ">YoutubeUpdateVideosCommand</span>(<wbr>)
+    </section>
+    
+
+
+    
+<section class="summary source-code" id="source">
+  <h2><span>Implementation</span></h2>
+  <pre class="language-dart"><code class="language-dart">YoutubeUpdateVideosCommand() {
+  argParser
+    ..addOption(
+      &#39;part&#39;,
+      defaultsTo: &#39;snippet,contentDetails,status&#39;,
+      help:
+          &#39;&#39;&#39;The part parameter serves two purposes in this operation. It identifies the properties that the write operation will set as well as the properties that the API response will include.
+
+Note that this method will override the existing values for all of the mutable properties that are contained in any parts that the parameter value specifies. For example, a video&#39;s privacy setting is contained in the status part. As such, if your request is updating a private video, and the request&#39;s part parameter value includes the status part, the video&#39;s privacy setting will be updated to whatever value the request body specifies. If the request body does not specify a value, the existing privacy setting will be removed and the video will revert to the default privacy setting.
+
+In addition, not all parts contain properties that can be set when inserting or updating a video. For example, the statistics object encapsulates statistics that YouTube calculates for a video and does not contain values that you can set or modify. If the parameter value specifies a part that does not contain mutable values, that part will still be included in the API response.
+
+The following list contains the part names that you can include in the parameter value:
+contentDetails, fileDetails, id, liveStreamingDetails, localizations, player, processingDetails, recordingDetails, snippet, statistics, status, suggestions, topicDetails&#39;&#39;&#39;,
+    )
+    ..addOption(
+      &#39;body&#39;,
+      mandatory: true,
+      help:
+          &#39;Provide a video resource [https:&#47;&#47;developers.google.com&#47;youtube&#47;v3&#47;docs&#47;videos#resource] in the request body.&#39;,
+    );
+}</code></pre>
+</section>
+
+
+  </div> <!-- /.main-content -->
+  <div id="dartdoc-sidebar-left" class="sidebar sidebar-offcanvas-left">
+    <!-- The search input and breadcrumbs below are only responsively visible at low resolutions. -->
+<header id="header-search-sidebar" class="hidden-l">
+  <form class="search-sidebar" role="search">
+    <input type="text" id="search-sidebar" autocomplete="off" disabled class="form-control typeahead" placeholder="Loading search...">
+  </form>
+</header>
+<ol class="breadcrumbs gt-separated dark hidden-l" id="sidebar-nav">
+    <li><a href="../../index.html">yt</a></li>
+    <li><a href="../../yt/">yt</a></li>
+    <li><a href="../../yt/YoutubeUpdateVideosCommand-class.html">YoutubeUpdateVideosCommand</a></li>
+    <li class="self-crumb">YoutubeUpdateVideosCommand.new constructor</li>
+</ol>
+
+    <h5>YoutubeUpdateVideosCommand class</h5>
+    <div id="dartdoc-sidebar-left-content"></div>
+  </div><!--/.sidebar-offcanvas-left-->
+  <div id="dartdoc-sidebar-right" class="sidebar sidebar-offcanvas-right">
+  </div><!--/.sidebar-offcanvas-->
+</main>
+<footer>
+  <span class="no-break">
+    yt
+      2.2.6+1
+  </span>
+  
+</footer>
+
+
+<script src="../../static-assets/highlight.pack.js?v1"></script>
+<script src="../../static-assets/docs.dart.js"></script>
+
+</body>
+</html>
+

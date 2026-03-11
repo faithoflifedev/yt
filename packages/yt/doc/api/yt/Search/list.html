@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1, user-scalable=no">
+  <meta name="description" content="API docs for the list method from the Search class, for the Dart programming language.">
+  <title>list method - Search class - yt library - Dart API</title>
+
+
+  
+  <link rel="preconnect" href="https://fonts.gstatic.com">
+  <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono:ital,wght@0,300;0,400;0,500;0,700;1,400&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" rel="stylesheet">
+  
+  <link rel="stylesheet" href="../../static-assets/github.css?v1">
+  <link rel="stylesheet" href="../../static-assets/styles.css?v1">
+  <link rel="icon" href="../../static-assets/favicon.png?v1">
+  
+</head>
+
+<body data-base-href="../../" data-using-base-href="false" class="light-theme">
+<div id="overlay-under-drawer"></div>
+<header id="title">
+  <span id="sidenav-left-toggle" class="material-symbols-outlined" role="button" tabindex="0">menu</span>
+  <ol class="breadcrumbs gt-separated dark hidden-xs">
+    <li><a href="../../index.html">yt</a></li>
+    <li><a href="../../yt/">yt.dart</a></li>
+    <li><a href="../../yt/Search-class.html">Search</a></li>
+    <li class="self-crumb">list method</li>
+  </ol>
+  <div class="self-name">list</div>
+  <form class="search navbar-right" role="search">
+    <input type="text" id="search-box" autocomplete="off" disabled class="form-control typeahead" placeholder="Loading search...">
+  </form>
+  <button class="toggle" id="theme-button" title="Toggle between light and dark mode" aria-label="Light and dark mode toggle">
+    <span id="dark-theme-button" class="material-symbols-outlined" aria-hidden="true">
+      dark_mode
+    </span>
+    <span id="light-theme-button" class="material-symbols-outlined" aria-hidden="true">
+      light_mode
+    </span>
+  </button>
+</header>
+<main>
+<div
+    id="dartdoc-main-content"
+    class="main-content"
+    data-above-sidebar="yt&#47;Search-class-sidebar.html"
+    data-below-sidebar="">
+    <div>
+<h1><span class="kind-method">list</span> method 
+</h1></div>
+
+    <section class="multi-line-signature">
+      
+<span class="returntype"><a href="https://api.dart.dev/stable/3.9.0/dart-core/Future-class.html">Future</a><span class="signature">&lt;<wbr><span class="type-parameter"><a href="../../yt/SearchListResponse-class.html">SearchListResponse</a></span>&gt;</span></span>
+<span class="name ">list</span>(<wbr>{<ol class="parameter-list"> <li><span class="parameter" id="list-param-part"><span class="type-annotation"><a href="https://api.dart.dev/stable/3.9.0/dart-core/String-class.html">String</a></span> <span class="parameter-name">part</span> = <span class="default-value">&#39;snippet&#39;</span>, </span></li>
+<li><span class="parameter" id="list-param-partList"><span class="type-annotation"><a href="https://api.dart.dev/stable/3.9.0/dart-core/List-class.html">List</a><span class="signature">&lt;<wbr><span class="type-parameter"><a href="https://api.dart.dev/stable/3.9.0/dart-core/String-class.html">String</a></span>&gt;</span></span> <span class="parameter-name">partList</span> = <span class="default-value">const []</span>, </span></li>
+<li><span class="parameter" id="list-param-channelId"><span class="type-annotation"><a href="https://api.dart.dev/stable/3.9.0/dart-core/String-class.html">String</a>?</span> <span class="parameter-name">channelId</span>, </span></li>
+<li><span class="parameter" id="list-param-channelType"><span class="type-annotation"><a href="https://api.dart.dev/stable/3.9.0/dart-core/String-class.html">String</a>?</span> <span class="parameter-name">channelType</span>, </span></li>
+<li><span class="parameter" id="list-param-eventType"><span class="type-annotation"><a href="https://api.dart.dev/stable/3.9.0/dart-core/String-class.html">String</a>?</span> <span class="parameter-name">eventType</span>, </span></li>
+<li><span class="parameter" id="list-param-forContentOwner"><span class="type-annotation"><a href="https://api.dart.dev/stable/3.9.0/dart-core/bool-class.html">bool</a>?</span> <span class="parameter-name">forContentOwner</span>, </span></li>
+<li><span class="parameter" id="list-param-forDeveloper"><span class="type-annotation"><a href="https://api.dart.dev/stable/3.9.0/dart-core/bool-class.html">bool</a>?</span> <span class="parameter-name">forDeveloper</span>, </span></li>
+<li><span class="parameter" id="list-param-forMine"><span class="type-annotation"><a href="https://api.dart.dev/stable/3.9.0/dart-core/bool-class.html">bool</a>?</span> <span class="parameter-name">forMine</span>, </span></li>
+<li><span class="parameter" id="list-param-location"><span class="type-annotation"><a href="https://api.dart.dev/stable/3.9.0/dart-core/String-class.html">String</a>?</span> <span class="parameter-name">location</span>, </span></li>
+<li><span class="parameter" id="list-param-locationRadius"><span class="type-annotation"><a href="https://api.dart.dev/stable/3.9.0/dart-core/String-class.html">String</a>?</span> <span class="parameter-name">locationRadius</span>, </span></li>
+<li><span class="parameter" id="list-param-maxResults"><span class="type-annotation"><a href="https://api.dart.dev/stable/3.9.0/dart-core/int-class.html">int</a>?</span> <span class="parameter-name">maxResults</span>, </span></li>
+<li><span class="parameter" id="list-param-onBehalfOfContentOwner"><span class="type-annotation"><a href="https://api.dart.dev/stable/3.9.0/dart-core/String-class.html">String</a>?</span> <span class="parameter-name">onBehalfOfContentOwner</span>, </span></li>
+<li><span class="parameter" id="list-param-order"><span class="type-annotation"><a href="https://api.dart.dev/stable/3.9.0/dart-core/String-class.html">String</a>?</span> <span class="parameter-name">order</span>, </span></li>
+<li><span class="parameter" id="list-param-pageToken"><span class="type-annotation"><a href="https://api.dart.dev/stable/3.9.0/dart-core/String-class.html">String</a>?</span> <span class="parameter-name">pageToken</span>, </span></li>
+<li><span class="parameter" id="list-param-publishedAfter"><span class="type-annotation"><a href="https://api.dart.dev/stable/3.9.0/dart-core/String-class.html">String</a>?</span> <span class="parameter-name">publishedAfter</span>, </span></li>
+<li><span class="parameter" id="list-param-publishedBefore"><span class="type-annotation"><a href="https://api.dart.dev/stable/3.9.0/dart-core/String-class.html">String</a>?</span> <span class="parameter-name">publishedBefore</span>, </span></li>
+<li><span class="parameter" id="list-param-q"><span class="type-annotation"><a href="https://api.dart.dev/stable/3.9.0/dart-core/String-class.html">String</a>?</span> <span class="parameter-name">q</span>, </span></li>
+<li><span class="parameter" id="list-param-regionCode"><span class="type-annotation"><a href="https://api.dart.dev/stable/3.9.0/dart-core/String-class.html">String</a>?</span> <span class="parameter-name">regionCode</span>, </span></li>
+<li><span class="parameter" id="list-param-relevanceLanguage"><span class="type-annotation"><a href="https://api.dart.dev/stable/3.9.0/dart-core/String-class.html">String</a>?</span> <span class="parameter-name">relevanceLanguage</span>, </span></li>
+<li><span class="parameter" id="list-param-safeSearch"><span class="type-annotation"><a href="https://api.dart.dev/stable/3.9.0/dart-core/String-class.html">String</a>?</span> <span class="parameter-name">safeSearch</span>, </span></li>
+<li><span class="parameter" id="list-param-topicId"><span class="type-annotation"><a href="https://api.dart.dev/stable/3.9.0/dart-core/String-class.html">String</a>?</span> <span class="parameter-name">topicId</span>, </span></li>
+<li><span class="parameter" id="list-param-type"><span class="type-annotation"><a href="https://api.dart.dev/stable/3.9.0/dart-core/String-class.html">String</a>?</span> <span class="parameter-name">type</span>, </span></li>
+<li><span class="parameter" id="list-param-videoCaption"><span class="type-annotation"><a href="https://api.dart.dev/stable/3.9.0/dart-core/String-class.html">String</a>?</span> <span class="parameter-name">videoCaption</span>, </span></li>
+<li><span class="parameter" id="list-param-videoCategoryId"><span class="type-annotation"><a href="https://api.dart.dev/stable/3.9.0/dart-core/String-class.html">String</a>?</span> <span class="parameter-name">videoCategoryId</span>, </span></li>
+<li><span class="parameter" id="list-param-videoDefinition"><span class="type-annotation"><a href="https://api.dart.dev/stable/3.9.0/dart-core/String-class.html">String</a>?</span> <span class="parameter-name">videoDefinition</span>, </span></li>
+<li><span class="parameter" id="list-param-videoDimension"><span class="type-annotation"><a href="https://api.dart.dev/stable/3.9.0/dart-core/String-class.html">String</a>?</span> <span class="parameter-name">videoDimension</span>, </span></li>
+<li><span class="parameter" id="list-param-videoDuration"><span class="type-annotation"><a href="https://api.dart.dev/stable/3.9.0/dart-core/String-class.html">String</a>?</span> <span class="parameter-name">videoDuration</span>, </span></li>
+<li><span class="parameter" id="list-param-videoEmbeddable"><span class="type-annotation"><a href="https://api.dart.dev/stable/3.9.0/dart-core/String-class.html">String</a>?</span> <span class="parameter-name">videoEmbeddable</span>, </span></li>
+<li><span class="parameter" id="list-param-videoLicense"><span class="type-annotation"><a href="https://api.dart.dev/stable/3.9.0/dart-core/String-class.html">String</a>?</span> <span class="parameter-name">videoLicense</span>, </span></li>
+<li><span class="parameter" id="list-param-videoSyndicated"><span class="type-annotation"><a href="https://api.dart.dev/stable/3.9.0/dart-core/String-class.html">String</a>?</span> <span class="parameter-name">videoSyndicated</span>, </span></li>
+<li><span class="parameter" id="list-param-videoType"><span class="type-annotation"><a href="https://api.dart.dev/stable/3.9.0/dart-core/String-class.html">String</a>?</span> <span class="parameter-name">videoType</span>, </span></li>
+</ol>})
+
+      
+
+    </section>
+    
+<section class="desc markdown">
+  <p>Returns a collection of search results that match the query parameters specified in the API request. By default, a search result set identifies matching video, channel, and <a href="../../yt/Playlist-class.html">Playlist</a> resources, but you can also configure queries to only retrieve a specific type of resource.</p>
+</section>
+
+
+    
+<section class="summary source-code" id="source">
+  <h2><span>Implementation</span></h2>
+  <pre class="language-dart"><code class="language-dart">Future&lt;SearchListResponse&gt; list({
+  String part = &#39;snippet&#39;,
+  List&lt;String&gt; partList = const [],
+  String? channelId,
+  String? channelType,
+  String? eventType,
+  bool? forContentOwner,
+  bool? forDeveloper,
+  bool? forMine,
+  String? location,
+  String? locationRadius,
+  int? maxResults,
+  String? onBehalfOfContentOwner,
+  String? order,
+  String? pageToken,
+  String? publishedAfter,
+  String? publishedBefore,
+  String? q,
+  String? regionCode,
+  String? relevanceLanguage,
+  String? safeSearch,
+  String? topicId,
+  String? type,
+  String? videoCaption,
+  String? videoCategoryId,
+  String? videoDefinition,
+  String? videoDimension,
+  String? videoDuration,
+  String? videoEmbeddable,
+  String? videoLicense,
+  String? videoSyndicated,
+  String? videoType,
+}) async =&gt; _rest.list(
+  apiKey,
+  accept,
+  buildParts(partList, part),
+  channelId: channelId,
+  channelType: channelType,
+  eventType: eventType,
+  forContentOwner: forContentOwner,
+  forDeveloper: forDeveloper,
+  forMine: forMine,
+  location: location,
+  locationRadius: locationRadius,
+  maxResults: maxResults,
+  onBehalfOfContentOwner: onBehalfOfContentOwner,
+  order: order,
+  pageToken: pageToken,
+  publishedAfter: publishedAfter,
+  publishedBefore: publishedBefore,
+  q: q,
+  regionCode: regionCode,
+  relevanceLanguage: relevanceLanguage,
+  safeSearch: safeSearch,
+  topicId: topicId,
+  type: type,
+  videoCaption: videoCaption,
+  videoCategoryId: videoCategoryId,
+  videoDefinition: videoDefinition,
+  videoDimension: videoDimension,
+  videoDuration: videoDuration,
+  videoEmbeddable: videoEmbeddable,
+  videoLicense: videoLicense,
+  videoSyndicated: videoSyndicated,
+  videoType: videoType,
+);</code></pre>
+</section>
+
+
+  </div> <!-- /.main-content -->
+  <div id="dartdoc-sidebar-left" class="sidebar sidebar-offcanvas-left">
+    <!-- The search input and breadcrumbs below are only responsively visible at low resolutions. -->
+<header id="header-search-sidebar" class="hidden-l">
+  <form class="search-sidebar" role="search">
+    <input type="text" id="search-sidebar" autocomplete="off" disabled class="form-control typeahead" placeholder="Loading search...">
+  </form>
+</header>
+<ol class="breadcrumbs gt-separated dark hidden-l" id="sidebar-nav">
+    <li><a href="../../index.html">yt</a></li>
+    <li><a href="../../yt/">yt</a></li>
+    <li><a href="../../yt/Search-class.html">Search</a></li>
+    <li class="self-crumb">list method</li>
+</ol>
+
+    <h5>Search class</h5>
+    <div id="dartdoc-sidebar-left-content"></div>
+  </div><!--/.sidebar-offcanvas-->
+  <div id="dartdoc-sidebar-right" class="sidebar sidebar-offcanvas-right">
+</div><!--/.sidebar-offcanvas-->
+</main>
+<footer>
+  <span class="no-break">
+    yt
+      2.2.6+1
+  </span>
+  
+</footer>
+
+
+<script src="../../static-assets/highlight.pack.js?v1"></script>
+<script src="../../static-assets/docs.dart.js"></script>
+
+</body>
+</html>
+

@@ -1,0 +1,329 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1, user-scalable=no">
+  <meta name="description" content="API docs for the YoutubeListSearchCommand.new constructor from Class YoutubeListSearchCommand from the yt library, for the Dart programming language.">
+  <title>YoutubeListSearchCommand.new constructor - YoutubeListSearchCommand - yt library - Dart API</title>
+
+
+  
+  <link rel="preconnect" href="https://fonts.gstatic.com">
+  <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono:ital,wght@0,300;0,400;0,500;0,700;1,400&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" rel="stylesheet">
+  
+  <link rel="stylesheet" href="../../static-assets/github.css?v1">
+  <link rel="stylesheet" href="../../static-assets/styles.css?v1">
+  <link rel="icon" href="../../static-assets/favicon.png?v1">
+  
+</head>
+
+<body data-base-href="../../" data-using-base-href="false" class="light-theme">
+<div id="overlay-under-drawer"></div>
+<header id="title">
+  <span id="sidenav-left-toggle" class="material-symbols-outlined" role="button" tabindex="0">menu</span>
+  <ol class="breadcrumbs gt-separated dark hidden-xs">
+    <li><a href="../../index.html">yt</a></li>
+    <li><a href="../../yt/">yt.dart</a></li>
+    <li><a href="../../yt/YoutubeListSearchCommand-class.html">YoutubeListSearchCommand</a></li>
+    <li class="self-crumb">YoutubeListSearchCommand.new constructor</li>
+  </ol>
+  <div class="self-name">YoutubeListSearchCommand.new</div>
+  <form class="search navbar-right" role="search">
+    <input type="text" id="search-box" autocomplete="off" disabled class="form-control typeahead" placeholder="Loading search...">
+  </form>
+  <button class="toggle" id="theme-button" title="Toggle between light and dark mode" aria-label="Light and dark mode toggle">
+    <span id="dark-theme-button" class="material-symbols-outlined" aria-hidden="true">
+      dark_mode
+    </span>
+    <span id="light-theme-button" class="material-symbols-outlined" aria-hidden="true">
+      light_mode
+    </span>
+  </button>
+</header>
+<main>
+  <div
+      id="dartdoc-main-content"
+      class="main-content"
+      data-above-sidebar="yt&#47;YoutubeListSearchCommand-class-sidebar.html"
+      data-below-sidebar="">
+      <div>
+<h1><span class="kind-constructor">YoutubeListSearchCommand</span> constructor 
+</h1></div>
+
+    <section class="multi-line-signature">
+      
+      <span class="name ">YoutubeListSearchCommand</span>(<wbr>)
+    </section>
+    
+
+
+    
+<section class="summary source-code" id="source">
+  <h2><span>Implementation</span></h2>
+  <pre class="language-dart"><code class="language-dart">YoutubeListSearchCommand() {
+  argParser
+    ..addOption(
+      &#39;part&#39;,
+      defaultsTo: &#39;snippet&#39;,
+      help:
+          &#39;The part parameter specifies a comma-separated list of one or more search resource properties that the API response will include. Set the parameter value to snippet.&#39;,
+    )
+    ..addOption(
+      &#39;for-mine&#39;,
+      help:
+          &#39;This parameter can only be used in a properly authorized request. The forMine parameter restricts the search to only retrieve videos owned by the authenticated user. If you set this parameter to true, then the type parameter\&#39;s value must also be set to video. In addition, none of the following other parameters can be set in the same request: videoDefinition, videoDimension, videoDuration, videoLicense, videoEmbeddable, videoSyndicated, videoType.&#39;,
+    )
+    ..addOption(
+      &#39;related-to-video-id&#39;,
+      valueHelp: &#39;YouTube video id&#39;,
+      help:
+          &#39;&#39;&#39;The relatedToVideoId parameter retrieves a list of videos that are related to the video that the parameter value identifies. The parameter value must be set to a YouTube video ID and, if you are using this parameter, the type parameter must be set to video.
+
+Note that if the relatedToVideoId parameter is set, the only other supported parameters are part, maxResults, pageToken, regionCode, relevanceLanguage, safeSearch, type (which must be set to video), and fields.&#39;&#39;&#39;,
+    )
+    ..addOption(
+      &#39;channel-id&#39;,
+      help:
+          &#39;&#39;&#39;The channelId parameter indicates that the API response should only contain resources created by the channel.
+
+Note: Search results are constrained to a maximum of 500 videos if your request specifies a value for the channelId parameter and sets the type parameter value to video, but it does not also set one of the forContentOwner, forDeveloper, or forMine filters.&#39;&#39;&#39;,
+      valueHelp: &#39;YouTube channel id&#39;,
+    )
+    ..addOption(
+      &#39;channel-type&#39;,
+      valueHelp: &#39;Channel type&#39;,
+      allowed: [&#39;any&#39;, &#39;show&#39;],
+      allowedHelp: {
+        &#39;any&#39;: &#39;Return all channels.&#39;,
+        &#39;show&#39;: &#39;Only retrieve shows.&#39;,
+      },
+      help:
+          &#39;The channelType parameter lets you restrict a search to a particular type of channel.&#39;,
+    )
+    ..addOption(
+      &#39;event-type&#39;,
+      valueHelp: &#39;Event type&#39;,
+      allowed: [&#39;completed&#39;, &#39;live&#39;, &#39;upcoming&#39;],
+      allowedHelp: {
+        &#39;completed&#39;: &#39;Only include completed broadcasts.&#39;,
+        &#39;live&#39;: &#39;Only include active broadcasts.&#39;,
+        &#39;upcoming&#39;: &#39;Only include upcoming broadcasts.&#39;,
+      },
+      help:
+          &#39;The eventType parameter restricts a search to broadcast events. If you specify a value for this parameter, you must also set the type parameter\&#39;s value to video.&#39;,
+    )
+    ..addOption(
+      &#39;max-results&#39;,
+      defaultsTo: &#39;5&#39;,
+      valueHelp: &#39;number&#39;,
+      help:
+          &#39;The maxResults parameter specifies the maximum number of items that should be returned in the result set. Acceptable values are 0 to 50, inclusive. The default value is 5.&#39;,
+    )
+    ..addOption(
+      &#39;order&#39;,
+      allowed: [
+        &#39;date&#39;,
+        &#39;rating&#39;,
+        &#39;relevance&#39;,
+        &#39;title&#39;,
+        &#39;videoCount&#39;,
+        &#39;viewCount&#39;,
+      ],
+      allowedHelp: {
+        &#39;date&#39;:
+            &#39;Resources are sorted in reverse chronological order based on the date they were created.&#39;,
+        &#39;rating&#39;: &#39;Resources are sorted from highest to lowest rating.&#39;,
+        &#39;relevance&#39;:
+            &#39;Resources are sorted based on their relevance to the search query. This is the default value for this parameter.&#39;,
+        &#39;title&#39;: &#39;Resources are sorted alphabetically by title.&#39;,
+        &#39;videoCount&#39;:
+            &#39;Channels are sorted in descending order of their number of uploaded videos.&#39;,
+        &#39;viewCount&#39;:
+            &#39;Resources are sorted from highest to lowest number of views. For live broadcasts, videos are sorted by number of concurrent viewers while the broadcasts are ongoing.&#39;,
+      },
+    )
+    ..addOption(
+      &#39;page-token&#39;,
+      valueHelp: &#39;token&#39;,
+      help:
+          &#39;The pageToken parameter identifies a specific page in the result set that should be returned. In an API response, the nextPageToken and prevPageToken properties identify other pages that could be retrieved.&#39;,
+    )
+    ..addOption(
+      &#39;published-after&#39;,
+      valueHelp: &#39;date&#39;,
+      help:
+          &#39;The publishedAfter parameter indicates that the API response should only contain resources created at or after the specified time. The value is an RFC 3339 formatted date-time value (1970-01-01T00:00:00Z).&#39;,
+    )
+    ..addOption(
+      &#39;published-before&#39;,
+      valueHelp: &#39;date&#39;,
+      help:
+          &#39;The publishedBefore parameter indicates that the API response should only contain resources created before or at the specified time. The value is an RFC 3339 formatted date-time value (1970-01-01T00:00:00Z).&#39;,
+    )
+    ..addOption(
+      &#39;q&#39;,
+      valueHelp: &#39;search term&#39;,
+      help: &#39;&#39;&#39;The q parameter specifies the query term to search for.
+
+Your request can also use the Boolean NOT (-) and OR (|) operators to exclude videos or to find videos that are associated with one of several search terms. For example, to search for videos matching either &quot;boating&quot; or &quot;sailing&quot;, set the q parameter value to boating|sailing. Similarly, to search for videos matching either &quot;boating&quot; or &quot;sailing&quot; but not &quot;fishing&quot;, set the q parameter value to boating|sailing -fishing. Note that the pipe character must be URL-escaped when it is sent in your API request. The URL-escaped value for the pipe character is %7C.&#39;&#39;&#39;,
+    )
+    ..addOption(
+      &#39;safe-search&#39;,
+      help:
+          &#39;The safeSearch parameter indicates whether the search results should include restricted content as well as standard content.&#39;,
+      allowed: [&#39;moderate&#39;, &#39;none&#39;, &#39;strict&#39;],
+      allowedHelp: {
+        &#39;moderate&#39;:
+            &#39;YouTube will filter some content from search results and, at the least, will filter content that is restricted in your locale. Based on their content, search results could be removed from search results or demoted in search results. This is the default parameter value.&#39;,
+        &#39;none&#39;: &#39;YouTube will not filter the search result set.&#39;,
+        &#39;strict&#39;:
+            &#39;YouTube will try to exclude all restricted content from the search result set. Based on their content, search results could be removed from search results or demoted in search results.&#39;,
+      },
+    )
+    ..addOption(
+      &#39;type&#39;,
+      defaultsTo: &#39;video&#39;,
+      help:
+          &#39;The type parameter restricts a search query to only retrieve a particular type of resource. The value is a comma-separated list of resource types. The default value is video,channel,playlist.&#39;,
+    )
+    ..addOption(
+      &#39;video-caption&#39;,
+      help:
+          &#39;The videoCaption parameter indicates whether the API should filter video search results based on whether they have captions. If you specify a value for this parameter, you must also set the type parameter\&#39;s value to video.&#39;,
+      allowed: [&#39;any&#39;, &#39;closedCaption&#39;, &#39;none&#39;],
+      allowedHelp: {
+        &#39;any&#39;: &#39;Do not filter results based on caption availability.&#39;,
+        &#39;closedCaption&#39;: &#39;Only include videos that have captions.&#39;,
+        &#39;none&#39;: &#39;Only include videos that do not have captions.&#39;,
+      },
+    )
+    ..addOption(
+      &#39;video-category-id&#39;,
+      help:
+          &#39;The videoCategoryId parameter filters video search results based on their category. If you specify a value for this parameter, you must also set the type parameter\&#39;s value to video.&#39;,
+    )
+    ..addOption(
+      &#39;video-definition&#39;,
+      help:
+          &#39;The videoDefinition parameter lets you restrict a search to only include either high definition (HD) or standard definition (SD) videos. HD videos are available for playback in at least 720p, though higher resolutions, like 1080p, might also be available. If you specify a value for this parameter, you must also set the type parameter\&#39;s value to video.&#39;,
+      allowed: [&#39;any&#39;, &#39;high&#39;, &#39;standard&#39;],
+      allowedHelp: {
+        &#39;any&#39;: &#39;Return all videos, regardless of their resolution.&#39;,
+        &#39;high&#39;: &#39;Only retrieve HD videos.&#39;,
+        &#39;standard&#39;: &#39;Only retrieve videos in standard definition.&#39;,
+      },
+    )
+    ..addOption(
+      &#39;video-dimension&#39;,
+      help:
+          &#39;The videoDimension parameter lets you restrict a search to only retrieve 2D or 3D videos. If you specify a value for this parameter, you must also set the type parameter\&#39;s value to video.&#39;,
+      allowed: [&#39;2d&#39;, &#39;3d&#39;, &#39;any&#39;],
+      allowedHelp: {
+        &#39;2d&#39;: &#39;Restrict search results to exclude 3D videos.&#39;,
+        &#39;3d&#39;: &#39;Restrict search results to only include 3D videos.&#39;,
+        &#39;any&#39;:
+            &#39;Include both 3D and non-3D videos in returned results. This is the default value.&#39;,
+      },
+    )
+    ..addOption(
+      &#39;video-duration&#39;,
+      help:
+          &#39;The videoDuration parameter filters video search results based on their duration. If you specify a value for this parameter, you must also set the type parameter\&#39;s value to video.&#39;,
+      allowed: [&#39;any&#39;, &#39;long&#39;, &#39;medium&#39;, &#39;short&#39;],
+      allowedHelp: {
+        &#39;any&#39;:
+            &#39;Do not filter video search results based on their duration. This is the default value.&#39;,
+        &#39;long&#39;: &#39;Only include videos longer than 20 minutes.&#39;,
+        &#39;medium&#39;:
+            &#39;Only include videos that are between four and 20 minutes long (inclusive).&#39;,
+        &#39;short&#39;: &#39;Only include videos that are less than four minutes long.&#39;,
+      },
+    )
+    ..addOption(
+      &#39;video-embeddable&#39;,
+      help:
+          &#39;The videoEmbeddable parameter lets you to restrict a search to only videos that can be embedded into a webpage. If you specify a value for this parameter, you must also set the type parameter\&#39;s value to video.&#39;,
+      allowed: [&#39;any&#39;, &#39;true&#39;],
+      allowedHelp: {
+        &#39;any&#39;: &#39;Return all videos, embeddable or not.&#39;,
+        &#39;true&#39;: &#39;Only retrieve embeddable videos.&#39;,
+      },
+    )
+    ..addOption(
+      &#39;video-license&#39;,
+      help:
+          &#39;The videoLicense parameter filters search results to only include videos with a particular license. YouTube lets video uploaders choose to attach either the Creative Commons license or the standard YouTube license to each of their videos. If you specify a value for this parameter, you must also set the type parameter\&#39;s value to video.&#39;,
+      allowed: [&#39;any&#39;, &#39;creativeCommon&#39;, &#39;youtube&#39;],
+      allowedHelp: {
+        &#39;any&#39;:
+            &#39;Return all videos, regardless of which license they have, that match the query parameters.&#39;,
+        &#39;creativeCommon&#39;:
+            &#39;Only return videos that have a Creative Commons license. Users can reuse videos with this license in other videos that they create.&#39;,
+        &#39;youtube&#39;:
+            &#39;Only return videos that have the standard YouTube license.&#39;,
+      },
+    )
+    ..addOption(
+      &#39;video-syndicated&#39;,
+      help:
+          &#39;The videoSyndicated parameter lets you to restrict a search to only videos that can be played outside youtube.com. If you specify a value for this parameter, you must also set the type parameter\&#39;s value to video.&#39;,
+      allowed: [&#39;any&#39;, &#39;true&#39;],
+      allowedHelp: {
+        &#39;any&#39;: &#39;Return all videos, syndicated or not.&#39;,
+        &#39;true&#39;: &#39;Only retrieve syndicated videos.&#39;,
+      },
+    )
+    ..addOption(
+      &#39;video-type&#39;,
+      valueHelp: &#39;type&#39;,
+      help:
+          &#39;The videoType parameter lets you restrict a search to a particular type of videos. If you specify a value for this parameter, you must also set the type parameter\&#39;s value to video.&#39;,
+      allowed: [&#39;any&#39;, &#39;episode&#39;, &#39;movie&#39;],
+      allowedHelp: {
+        &#39;any&#39;: &#39;Return all videos.&#39;,
+        &#39;episode&#39;: &#39;Only retrieve episodes of shows.&#39;,
+        &#39;movie&#39;: &#39;Only retrieve movies.&#39;,
+      },
+    );
+}</code></pre>
+</section>
+
+
+  </div> <!-- /.main-content -->
+  <div id="dartdoc-sidebar-left" class="sidebar sidebar-offcanvas-left">
+    <!-- The search input and breadcrumbs below are only responsively visible at low resolutions. -->
+<header id="header-search-sidebar" class="hidden-l">
+  <form class="search-sidebar" role="search">
+    <input type="text" id="search-sidebar" autocomplete="off" disabled class="form-control typeahead" placeholder="Loading search...">
+  </form>
+</header>
+<ol class="breadcrumbs gt-separated dark hidden-l" id="sidebar-nav">
+    <li><a href="../../index.html">yt</a></li>
+    <li><a href="../../yt/">yt</a></li>
+    <li><a href="../../yt/YoutubeListSearchCommand-class.html">YoutubeListSearchCommand</a></li>
+    <li class="self-crumb">YoutubeListSearchCommand.new constructor</li>
+</ol>
+
+    <h5>YoutubeListSearchCommand class</h5>
+    <div id="dartdoc-sidebar-left-content"></div>
+  </div><!--/.sidebar-offcanvas-left-->
+  <div id="dartdoc-sidebar-right" class="sidebar sidebar-offcanvas-right">
+  </div><!--/.sidebar-offcanvas-->
+</main>
+<footer>
+  <span class="no-break">
+    yt
+      2.2.6+1
+  </span>
+  
+</footer>
+
+
+<script src="../../static-assets/highlight.pack.js?v1"></script>
+<script src="../../static-assets/docs.dart.js"></script>
+
+</body>
+</html>
+

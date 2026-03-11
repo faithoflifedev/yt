@@ -1,0 +1,19 @@
+name: yt_cli
+version: 2.2.6+2
+description: A command-line interface for YouTube.
+repository: https://github.com/faithoflifedev/yt
+homepage: https://github.com/faithoflifedev/yt
+
+funding:
+  - https://www.buymeacoffee.com/faithoflif2
+
+environment:
+  sdk: ">=3.10.0 <4.0.0"
+
+executables:
+  yt:
+
+resolution: workspace
+
+dependencies:
+  yt: ^2.2.6+1
